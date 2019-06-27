@@ -66,15 +66,34 @@ UDPSocket::~UDPSocket() {
 }
 
 
-void sendMessage() {
+void sendMessage(char c[]) {
 
-    char buffer[BUFSIZE];
+
+    int clientlen;
+    socklen_t clilen;
+
+    char buffer[BUFSIZE] = c;
+    // This send() function sends the 13 bytes of the string to the new socket
+    printf("send hello world to sockfd\n");
+    printf("sockfd: %d\n", sockfd);
+    clilen = sizeof(out_addr);
+	   bzero(buffer,256);
+    sprintf(buffer, "hi! says port %d", portown);
+	   //strcpy(buffer, "Sending a message from goddamn port but do not have fucking int");
+    n = sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
+    bzero(buffer,256);
+
+
 
 }
-
-void receiveMessage() {
+char* receiveMessage() {
 
 	char buffer[BUFSIZE];
+    int n = recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
+    if (n > 0) {
+        printf("Here is the message: %s\n",buffer);
+    }
+    memset(buffer, BUFSIZE, sizeof(buffer)); // TODO?? BUFSIZE, sizeofbuffer?
 
 }
 

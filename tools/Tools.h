@@ -8,11 +8,9 @@
 #ifndef TOOLS_H_
 #define TOOLS_H_
 
-#include <sys/time.h>
-
 class Tools {
 
-	static long int getms(timeval tp);
+	static long int getms();
 	static void error(const char *msg);
 
 };

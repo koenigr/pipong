@@ -14,8 +14,8 @@ public:
 	UDPSocket(int port);
 
 public:
-	void sendMessage();
-	void receiveMessage();
+	void sendMessage(char c[]);
+	char* receiveMessage();
 
 
 private:
