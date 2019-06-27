@@ -10,6 +10,7 @@
 
 class Tools {
 
+public:
 	static long int getms();
 	static void error(const char *msg);
 

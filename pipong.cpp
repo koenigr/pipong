@@ -12,7 +12,7 @@ AddressManager am;
 
 int main(int argc, char *argv[])
 {
-	am = new AddressManager;
+	am = new AddressManager();
 
     if (argc < 3) {
         fprintf(stderr,"usage %s hostname portown portout\n", argv[0]);

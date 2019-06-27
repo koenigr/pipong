@@ -16,26 +16,26 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#include "tools/Tools.h"
+#include "../tools/Tools.h"
 
 #define BUFSIZE 1024
 #define ADDRESS = INADDR_ANY;
 
-int sockfd;
-int port;
+int own_sockfd;
+int own_port;
 struct sockaddr_in own_addr;
 
 
-UDPSocket::UDPSocket(int port) {
+UDPSocket::UDPSocket(int own_port) {
 
 	printf("Create socket\n");
 
-    sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-    if (sockfd < 0)
+    own_sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+    if (own_sockfd < 0)
        Tools::error("ERROR opening socket");
 
 	int broadcast=1;
- 	setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST,
+ 	setsockopt(own_sockfd, SOL_SOCKET, SO_BROADCAST,
       (void *) &broadcast, sizeof(broadcast));
 
     printf("Socket created.\n");
@@ -43,7 +43,7 @@ UDPSocket::UDPSocket(int port) {
     bzero((char *) &own_addr, sizeof(own_addr));
     own_addr.sin_family = AF_INET;
     own_addr.sin_addr.s_addr = INADDR_ANY;
-    own_addr.sin_port = htons(port);
+    own_addr.sin_port = htons(own_port);
 
 
 
@@ -53,7 +53,7 @@ UDPSocket::UDPSocket(int port) {
     // bind() passes file descriptor, the address structure,
     // and the length of the address structure
     // This bind() call will bind  the socket to the current IP address on port, portno
-    if (bind(sockfd, (struct sockaddr *) &own_addr,
+    if (bind(own_sockfd, (struct sockaddr *) &own_addr,
              sizeof(own_addr)) < 0)
              Tools::error("ERROR on binding");
 
@@ -62,25 +62,23 @@ UDPSocket::UDPSocket(int port) {
 
 UDPSocket::~UDPSocket() {
 
-    close(sockfd);
+    close(own_sockfd);
 }
 
 
-void sendMessage(char c[]) {
+void sendMessage(char c[], struct sockaddr_in out_addr) {
 
+
+    printf("send hello world to sockfd\n");
 
     int clientlen;
     socklen_t clilen;
 
-    char buffer[BUFSIZE] = c;
-    // This send() function sends the 13 bytes of the string to the new socket
-    printf("send hello world to sockfd\n");
-    printf("sockfd: %d\n", sockfd);
+    char buffer[BUFSIZE] = c[];
     clilen = sizeof(out_addr);
-	   bzero(buffer,256);
-    sprintf(buffer, "hi! says port %d", portown);
-	   //strcpy(buffer, "Sending a message from goddamn port but do not have fucking int");
-    n = sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
+	bzero(buffer,256);
+    sprintf(buffer, "hi! says port %d", own_port); // TODO: send c
+    int n = sendto(own_sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
     bzero(buffer,256);
 
 
@@ -88,22 +86,19 @@ void sendMessage(char c[]) {
 }
 char* receiveMessage() {
 
+	sockaddr_in recv_addr;
+
+	socklen_t clilen;
 	char buffer[BUFSIZE];
-    int n = recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
+    int n = recvfrom(own_sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
     if (n > 0) {
         printf("Here is the message: %s\n",buffer);
     }
     memset(buffer, BUFSIZE, sizeof(buffer)); // TODO?? BUFSIZE, sizeofbuffer?
 
-}
-
-
-void print_address() {
-	// now get it back and print it
-    char str[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, &(own_addr.sin_addr), str, INET_ADDRSTRLEN);
-    printf("Address: %s\n", str);
-    printf("Read portno %d\n", port);
+    return &buffer;
 
 }
+
+
 

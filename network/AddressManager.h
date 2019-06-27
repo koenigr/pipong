@@ -13,6 +13,7 @@ public:
 	AddressManager();
 	virtual ~AddressManager();
 	struct sockaddr_in broadcastAddr(int port);
+	void print_address(struct sockaddr_in addr);
 };
 
 #endif /* NETWORK_ADDRESSMANAGER_H_ */
