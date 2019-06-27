@@ -13,6 +13,9 @@ public:
 	AddressManager();
 	virtual ~AddressManager();
 	struct sockaddr_in broadcastAddr(int port);
+	void print_infos();
+
+private:
 	void print_address(struct sockaddr_in addr);
 };
 

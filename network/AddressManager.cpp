@@ -44,3 +44,7 @@ void print_address(struct sockaddr_in addr) {
     inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
     printf("Address: %s\n", str);
 }
+
+void print_infos() {
+	printf("AddressManager lebe hoch\n");
+}
