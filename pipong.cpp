@@ -38,6 +38,7 @@ void init(int argc, char* argv[]) {
 sockaddr_in receive_messages() {
 
 	char buffer[BUFSIZE];
+
 	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
 
 	return recv_addr;
@@ -51,7 +52,14 @@ void find_peers() {
 
 	while(am.getNumOfParticipants() == 0) { // TODO loop until key press to proceed. Display all participants
 
-		receive_messages();
+		// TODO: Wie erkennen, dass Versuch Verbindung und NUR dann hinzufügen?
+		sockaddr_in recv = receive_messages();
+	    char str[INET_ADDRSTRLEN];
+	    inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
+
+		//if (strcmp(str, "255.127.0.0") != 0 && strcmp(str, "0.0.0.0") != 0 ) {
+			//am.addParticipant(recv);
+		//}
 
 		if ((ms_then - ms_start) > 1000) {
 
@@ -65,8 +73,8 @@ void find_peers() {
 
 	}
 
-
-
+	char message[] = "New Participant ";
+	Tools::print_address(am.getParticipant(0), message);
 
 }
 
@@ -81,7 +89,7 @@ void update_game_state() {
 }
 
 void deploy_game_state() {
-	char message[] = "Hello you!";
+	char message[] = "Gamestate changed";
 	pi_socket.sendMessage(message, am.getBroadcastAddr());
 }
 
@@ -102,7 +110,7 @@ int main(int argc, char *argv[])
 
     while(true) {
 
-    	// receive_messages();
+    	//receive_messages();
 
     	process_input();
 
@@ -110,7 +118,7 @@ int main(int argc, char *argv[])
 
     	if ((ms_then - ms_start) > 1000) {
 
-    		// deploy_game_state();
+    		//deploy_game_state();
     		ms_start = Tools::getms();
 
     	}

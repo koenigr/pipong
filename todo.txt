@@ -1,2 +1,3 @@
 struct or similar for predefined messages
 how handle disconnection of peers?
+was ist 255.127.0.0, ... warum senden die Nachrichten ohne Inhalt?
