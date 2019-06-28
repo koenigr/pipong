@@ -70,15 +70,19 @@ sockaddr_in AddressManager::getBroadcastAddr() {
     return broadcast_addr;
 }
 
-void addParticipant(sockaddr_in participant) {
+void AddressManager::addParticipant(sockaddr_in participant) {
 	// TODO check if valid
 	participants.push_back(participant);
 	printf("Number of participants: %lu", participants.size());
 }
 
-sockaddr_in getParticipant(int pos) {
+sockaddr_in AddressManager::getParticipant(int pos) {
 	// TODO check that participant exists
 	return participants[pos];
+}
+
+int AddressManager::getNumOfParticipants() {
+	return participants.size();
 }
 
 

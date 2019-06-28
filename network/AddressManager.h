@@ -20,6 +20,9 @@ public:
 	sockaddr_in getBroadcastAddr();
 	sockaddr_in getOwnAddr();
 	void print_infos();
+	void addParticipant(sockaddr_in participant);
+	sockaddr_in getParticipant(int pos);
+	int getNumOfParticipants();
 
 private:
 };

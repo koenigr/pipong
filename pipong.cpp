@@ -35,6 +35,14 @@ void init(int argc, char* argv[]) {
     printf("Initialization complete\n");
 }
 
+void find_peers() {
+	while(am.getNumOfParticipants() == 0) {
+
+		char message[] = "I want to connect";
+
+	}
+}
+
 void receive_messages() {
 
 	char buffer[BUFSIZE];
@@ -69,12 +77,14 @@ int main(int argc, char *argv[])
 
 	init(argc, argv);
 
+	find_peers();
+
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
     while(true) {
 
-    	receive_messages();
+    	//receive_messages();
 
     	process_input();
 
@@ -82,7 +92,7 @@ int main(int argc, char *argv[])
 
     	if ((ms_then - ms_start) > 1000) {
 
-    		deploy_game_state();
+    		// deploy_game_state();
     		ms_start = Tools::getms();
 
     	}
