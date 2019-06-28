@@ -18,7 +18,7 @@ public:
 	UDPSocket();
 
 public:
-	void init(int port);
+	void init(sockaddr_in own_addr);
 	void sendMessage(char* c, sockaddr_in out_addr);
 	sockaddr_in receiveMessage(char* c);
 

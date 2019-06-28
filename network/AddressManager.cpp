@@ -13,25 +13,41 @@
 
 #include "../tools/Tools.h"
 
-AddressManager::AddressManager() {
-	// TODO Auto-generated constructor stub
 
-}
+int own_port;
+struct sockaddr_in own_addr2; //TODO warum geht das nicht, wenn es own_addr heißt?
+struct sockaddr_in broadcast_addr;
+sockaddr_in participants[3];
 
-AddressManager::~AddressManager() {
-	// TODO Auto-generated destructor stub
-}
+AddressManager::AddressManager() {}
 
+AddressManager::~AddressManager() {}
 
 void AddressManager::print_infos() {
 	printf("AddressManager lebe hoch\n");
 }
 
-sockaddr_in AddressManager::broadcastAddr(int port) {
+void AddressManager::createOwnAddr(int port) {
+
+	own_port = port;
+
+    bzero((char *) &own_addr2, sizeof(own_addr2));
+    own_addr2.sin_family = AF_INET;
+    own_addr2.sin_addr.s_addr = INADDR_ANY;
+    own_addr2.sin_port = htons(own_port);
+
+    printf("Address set\n");
+}
+
+sockaddr_in AddressManager::getOwnAddr() {
+
+    return own_addr2;
+}
+
+void AddressManager::createBroadcastAddr(int port) {
 
 	printf("Create broadcast address\n");
 
-    struct sockaddr_in broadcast_addr;
 
     bzero((char *) &broadcast_addr, sizeof(broadcast_addr));
     broadcast_addr.sin_family = AF_INET;
@@ -42,8 +58,21 @@ sockaddr_in AddressManager::broadcastAddr(int port) {
 
     printf("broadcast address created\n");
 
+}
+
+sockaddr_in AddressManager::getBroadcastAddr() {
+
     return broadcast_addr;
+}
+
+void addParticipant(sockaddr_in participant) {
 
 }
+
+sockaddr_in getParticipant(int pos) {
+	// TODO check that participant exists
+	return participants[pos];
+}
+
 
 

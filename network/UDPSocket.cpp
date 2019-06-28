@@ -21,7 +21,6 @@
 
 
 int own_sockfd;
-int own_port;
 struct sockaddr_in own_addr;
 
 
@@ -32,9 +31,9 @@ UDPSocket::~UDPSocket() {
     close(own_sockfd);
 }
 
-void UDPSocket::init(int port) {
+void UDPSocket::init(sockaddr_in addr) {
 
-	own_port = port;
+	own_addr = addr;
 
 	printf("Create socket\n");
 
@@ -50,14 +49,6 @@ void UDPSocket::init(int port) {
 
     printf("Socket created.\n");
 
-    bzero((char *) &own_addr, sizeof(own_addr));
-    own_addr.sin_family = AF_INET;
-    own_addr.sin_addr.s_addr = INADDR_ANY;
-    own_addr.sin_port = htons(own_port);
-
-
-
-    printf("Address set\n");
 
     // bind(int fd, struct sockaddr *local_addr, socklen_t addr_length)
     // bind() passes file descriptor, the address structure,

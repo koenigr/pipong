@@ -15,7 +15,10 @@ class AddressManager {
 public:
 	AddressManager();
 	virtual ~AddressManager();
-	sockaddr_in broadcastAddr(int port);
+	void createBroadcastAddr(int port);
+	void createOwnAddr(int port);
+	sockaddr_in getBroadcastAddr();
+	sockaddr_in getOwnAddr();
 	void print_infos();
 
 private:

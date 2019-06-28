@@ -13,7 +13,6 @@
 
 AddressManager am;
 UDPSocket pi_socket;
-struct sockaddr_in broadcast_addr;
 
 void init(int argc, char* argv[]) {
 
@@ -29,10 +28,11 @@ void init(int argc, char* argv[]) {
     int port_self = atoi(argv[1]);
     int port_out = atoi(argv[2]);
 
-    pi_socket.init(port_self);
+    am.createOwnAddr(port_self);
+    pi_socket.init(am.getOwnAddr());
 
-    broadcast_addr = am.broadcastAddr(port_out);
-    Tools::print_address(broadcast_addr);
+    am.createBroadcastAddr(port_out);
+    Tools::print_address(am.getBroadcastAddr());
 
     printf("Initialization complete\n");
 }
@@ -42,6 +42,23 @@ void receive_messages() {
 	char buffer[BUFSIZE];
 	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
 	Tools::print_address(recv_addr);
+
+}
+
+void process_input() {
+
+}
+
+void update_game_state() {
+
+}
+
+void deploy_game_state() {
+	char message[] = "Hello you!";
+	pi_socket.sendMessage(message, am.getBroadcastAddr());
+}
+
+void display() {
 
 }
 
@@ -56,16 +73,22 @@ int main(int argc, char *argv[])
 
     while(true) {
 
+    	receive_messages();
+
+    	process_input();
+
+    	update_game_state();
 
     	if ((ms_then - ms_start) > 1000) {
 
-    		char message[] = "Hello you!";
-    		pi_socket.sendMessage(message, broadcast_addr);
-
+    		deploy_game_state();
     		ms_start = Tools::getms();
 
     	}
     	ms_then = Tools::getms();
+
+    	display();
+
     }
 
     return 0;
