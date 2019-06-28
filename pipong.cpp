@@ -38,10 +38,12 @@ void init(int argc, char* argv[]) {
 void receive_messages() {
 
 	char buffer[BUFSIZE];
-	char m[] = "Receive ";
-	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
-	Tools::print_address(recv_addr, m);
 
+
+	//struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
+
+
+	pi_socket.receiveMessage(buffer);
 }
 
 void process_input() {

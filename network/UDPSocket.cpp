@@ -88,6 +88,9 @@ sockaddr_in UDPSocket::receiveMessage(char * buffer_out) {
 
         strncpy(buffer_out, buffer, BUFSIZE);
         buffer_out[BUFSIZE - 1] = '\0';
+
+    	char m[] = "Receive ";
+        Tools::print_address(recv_addr, m);
     }
 
     return recv_addr;
