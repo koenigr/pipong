@@ -3,15 +3,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/socket.h>
+
+#include "Parameters.h"
 
 #include "network/UDPSocket.h"
 #include "tools/Tools.h"
 #include "network/AddressManager.h"
 
 AddressManager am;
+UDPSocket pi_socket;
+struct sockaddr_in broadcast_addr;
 
-int main(int argc, char *argv[])
-{
+void init(int argc, char* argv[]) {
+
+	printf("Initialize PiPong\n");
+
 	am.print_infos();
 
     if (argc < 3) {
@@ -22,22 +29,45 @@ int main(int argc, char *argv[])
     int port_self = atoi(argv[1]);
     int port_out = atoi(argv[2]);
 
+    pi_socket.init(port_self);
 
-    UDPSocket pi_socket(port_self);
-    struct sockaddr_in recv_addr = am.broadcastAddr(port_out);
+    broadcast_addr = am.broadcastAddr(port_out);
+    Tools::print_address(broadcast_addr);
+
+    printf("Initialization complete\n");
+}
+
+void receive_messages() {
+
+	char buffer[BUFSIZE];
+	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
+	Tools::print_address(recv_addr);
+
+}
+
+
+int main(int argc, char *argv[])
+{
+
+	init(argc, argv);
 
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
     while(true) {
-    	char * buffer = pi_socket.receiveMessage();
+
 
     	if ((ms_then - ms_start) > 1000) {
-    		pi_socket.sendMessage("hjkhk");
+
+    		char message[] = "Hello you!";
+    		pi_socket.sendMessage(message, broadcast_addr);
+
     		ms_start = Tools::getms();
+
     	}
     	ms_then = Tools::getms();
     }
 
     return 0;
 }
+

@@ -8,14 +8,19 @@
 #ifndef NETWORK_UDPSOCKET_H_
 #define NETWORK_UDPSOCKET_H_
 
+#include <arpa/inet.h>
+
+
+
 class UDPSocket {
 public:
 	virtual ~UDPSocket();
-	UDPSocket(int port);
+	UDPSocket();
 
 public:
-	void sendMessage(char c[]);
-	char* receiveMessage();
+	void init(int port);
+	void sendMessage(char* c, sockaddr_in out_addr);
+	sockaddr_in receiveMessage(char* c);
 
 
 private:

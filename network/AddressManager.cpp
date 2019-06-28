@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../tools/Tools.h"
 
 AddressManager::AddressManager() {
 	// TODO Auto-generated constructor stub
@@ -21,30 +22,28 @@ AddressManager::~AddressManager() {
 	// TODO Auto-generated destructor stub
 }
 
-struct sockaddr_in broadcastAddr(int port) {
+
+void AddressManager::print_infos() {
+	printf("AddressManager lebe hoch\n");
+}
+
+sockaddr_in AddressManager::broadcastAddr(int port) {
+
+	printf("Create broadcast address\n");
 
     struct sockaddr_in broadcast_addr;
-
 
     bzero((char *) &broadcast_addr, sizeof(broadcast_addr));
     broadcast_addr.sin_family = AF_INET;
     broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
     broadcast_addr.sin_port = htons(port);
 
-    print_address(broadcast_addr);
+    Tools::print_address(broadcast_addr);
+
+    printf("broadcast address created\n");
 
     return broadcast_addr;
 
 }
 
 
-
-void print_address(struct sockaddr_in addr) {
-    char str[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
-    printf("Address: %s\n", str);
-}
-
-void print_infos() {
-	printf("AddressManager lebe hoch\n");
-}

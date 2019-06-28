@@ -8,15 +8,17 @@
 #ifndef NETWORK_ADDRESSMANAGER_H_
 #define NETWORK_ADDRESSMANAGER_H_
 
+#include <arpa/inet.h>
+
+
 class AddressManager {
 public:
 	AddressManager();
 	virtual ~AddressManager();
-	struct sockaddr_in broadcastAddr(int port);
+	sockaddr_in broadcastAddr(int port);
 	void print_infos();
 
 private:
-	void print_address(struct sockaddr_in addr);
 };
 
 #endif /* NETWORK_ADDRESSMANAGER_H_ */

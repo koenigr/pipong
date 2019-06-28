@@ -17,22 +17,32 @@
 #include <netinet/in.h>
 
 #include "../tools/Tools.h"
+#include "../Parameters.h"
 
-#define BUFSIZE 1024
-#define ADDRESS = INADDR_ANY;
 
 int own_sockfd;
 int own_port;
 struct sockaddr_in own_addr;
 
 
-UDPSocket::UDPSocket(int own_port) {
+UDPSocket::UDPSocket() {}
+
+UDPSocket::~UDPSocket() {
+
+    close(own_sockfd);
+}
+
+void UDPSocket::init(int port) {
+
+	own_port = port;
 
 	printf("Create socket\n");
 
     own_sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
     if (own_sockfd < 0)
-       Tools::error("ERROR opening socket");
+    {
+    	Tools::error("ERROR opening socket");
+    }
 
 	int broadcast=1;
  	setsockopt(own_sockfd, SOL_SOCKET, SO_BROADCAST,
@@ -55,36 +65,27 @@ UDPSocket::UDPSocket(int own_port) {
     // This bind() call will bind  the socket to the current IP address on port, portno
     if (bind(own_sockfd, (struct sockaddr *) &own_addr,
              sizeof(own_addr)) < 0)
-             Tools::error("ERROR on binding");
+    	Tools::error("ERROR on binding");
 
     printf("Socket bound\n");
 }
 
-UDPSocket::~UDPSocket() {
 
-    close(own_sockfd);
-}
+void UDPSocket::sendMessage(char* c, sockaddr_in out_addr) {
 
+    printf("Send message to out_addr\n");
 
-void sendMessage(char c[], struct sockaddr_in out_addr) {
+    char buffer[BUFSIZE];
+    strncpy(buffer, c, BUFSIZE);
+    buffer[BUFSIZE - 1] = '\0';
 
+    int n = sendto(own_sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, sizeof(out_addr));
 
-    printf("send hello world to sockfd\n");
-
-    int clientlen;
-    socklen_t clilen;
-
-    char buffer[BUFSIZE] = c[];
-    clilen = sizeof(out_addr);
-	bzero(buffer,256);
-    sprintf(buffer, "hi! says port %d", own_port); // TODO: send c
-    int n = sendto(own_sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
-    bzero(buffer,256);
-
-
+    printf("Message sent from port %d to port %d with return code %d\n", ntohs(own_addr.sin_port), ntohs(out_addr.sin_port), n);
 
 }
-char* receiveMessage() {
+
+sockaddr_in UDPSocket::receiveMessage(char * buffer_out) {
 
 	sockaddr_in recv_addr;
 
@@ -96,9 +97,10 @@ char* receiveMessage() {
     }
     memset(buffer, BUFSIZE, sizeof(buffer)); // TODO?? BUFSIZE, sizeofbuffer?
 
-    return &buffer;
+    strncpy(buffer_out, buffer, BUFSIZE);
+    buffer_out[BUFSIZE - 1] = '\0';
 
+    return recv_addr;
 }
-
 
 
