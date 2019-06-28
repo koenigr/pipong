@@ -13,7 +13,7 @@ class Tools {
 public:
 	static long int getms();
 	static void error(const char *msg);
-	static void print_address(struct sockaddr_in addr);
+	static void print_address(struct sockaddr_in addr, char message[]);
 
 };
 

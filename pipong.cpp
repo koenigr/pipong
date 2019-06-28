@@ -29,10 +29,8 @@ void init(int argc, char* argv[]) {
     int port_out = atoi(argv[2]);
 
     am.createOwnAddr(port_self);
-    pi_socket.init(am.getOwnAddr());
-
     am.createBroadcastAddr(port_out);
-    Tools::print_address(am.getBroadcastAddr());
+    pi_socket.init(am.getOwnAddr());
 
     printf("Initialization complete\n");
 }
@@ -40,8 +38,9 @@ void init(int argc, char* argv[]) {
 void receive_messages() {
 
 	char buffer[BUFSIZE];
+	char m[] = "Receive ";
 	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
-	Tools::print_address(recv_addr);
+	Tools::print_address(recv_addr, m);
 
 }
 

@@ -30,10 +30,10 @@ void Tools::error(const char *msg) // @suppress("Unused static function")
 
 
 
-void Tools::print_address(struct sockaddr_in addr) {
+void Tools::print_address(struct sockaddr_in addr, char message[]) {
 
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
-    printf("Address: %s\n", str);
+    printf("%s Address: %s\n",message, str);
 
 }

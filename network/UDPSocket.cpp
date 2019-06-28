@@ -79,17 +79,16 @@ void UDPSocket::sendMessage(char* c, sockaddr_in out_addr) {
 sockaddr_in UDPSocket::receiveMessage(char * buffer_out) {
 
 	sockaddr_in recv_addr;
-
 	socklen_t clilen;
 	char buffer[BUFSIZE];
-    int n = recvfrom(own_sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
+
+	int n = recvfrom(own_sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
     if (n > 0) {
         printf("Here is the message: %s\n",buffer);
-    }
-    memset(buffer, BUFSIZE, sizeof(buffer)); // TODO?? BUFSIZE, sizeofbuffer?
 
-    strncpy(buffer_out, buffer, BUFSIZE);
-    buffer_out[BUFSIZE - 1] = '\0';
+        strncpy(buffer_out, buffer, BUFSIZE);
+        buffer_out[BUFSIZE - 1] = '\0';
+    }
 
     return recv_addr;
 }
