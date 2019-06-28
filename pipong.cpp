@@ -35,24 +35,42 @@ void init(int argc, char* argv[]) {
     printf("Initialization complete\n");
 }
 
-void find_peers() {
-	while(am.getNumOfParticipants() == 0) {
-
-		char message[] = "I want to connect";
-
-	}
-}
-
-void receive_messages() {
+sockaddr_in receive_messages() {
 
 	char buffer[BUFSIZE];
+	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
 
+	return recv_addr;
 
-	//struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
-
-
-	pi_socket.receiveMessage(buffer);
 }
+
+void find_peers() {
+
+    long int ms_start = Tools::getms();
+    long int ms_then = Tools::getms();
+
+	while(am.getNumOfParticipants() == 0) { // TODO loop until key press to proceed. Display all participants
+
+		receive_messages();
+
+		if ((ms_then - ms_start) > 1000) {
+
+			char message[] = "I want to connect";
+			pi_socket.sendMessage(message, am.getBroadcastAddr());
+
+			ms_start = Tools::getms();
+
+		}
+		ms_then = Tools::getms();
+
+	}
+
+
+
+
+}
+
+
 
 void process_input() {
 
@@ -84,7 +102,7 @@ int main(int argc, char *argv[])
 
     while(true) {
 
-    	//receive_messages();
+    	// receive_messages();
 
     	process_input();
 

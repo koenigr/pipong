@@ -1,0 +1,2 @@
+struct or similar for predefined messages
+how handle disconnection of peers?
