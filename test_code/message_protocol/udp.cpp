@@ -1,3 +1,4 @@
+// test for message protocol
 
 /* The port number is passed as an argument */
 #include <arpa/inet.h>
