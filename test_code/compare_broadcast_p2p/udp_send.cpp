@@ -44,13 +44,14 @@ void create_broadcast(sockaddr_in &addr, int port) {
     addr.sin_port = htons(port);
 }
 
-void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
+int send_message(sockaddr_in out_addr, int sockfd, char message[]) {
 	char buffer[BUFSIZE];
     memset(buffer, 0, BUFSIZE);
     socklen_t clilen = sizeof(out_addr);
     strcpy(buffer, message);
     printf("Send message: %s\n", buffer);
-    sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
+    int n = sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
+    return n;
 }
 
 int main(int argc, char *argv[])
@@ -64,7 +65,7 @@ int main(int argc, char *argv[])
      struct sockaddr_in broadcast_addr;
      struct sockaddr_in direct_addr;
      struct timeval tp;
-     int loop_count = 100;
+     int loop_count = 10;
      int sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0) 
         error("ERROR opening socket");
@@ -93,16 +94,21 @@ int main(int argc, char *argv[])
      {
      // SEND BROADCAST
      long int start_total_time = getms(tp);
+     printf("start_total_time: %lu\n", start_total_time);
      long int ms_start = getms(tp);
+     printf("ms_start: %lu\n", ms_start);
      long int ms_then = getms(tp);
+     printf("ms_then: %lu\n", ms_then);
 
-     for (int i = 0; i < loop_count; i++) {
+     for (int i = 0; i < loop_count;) {
        if ((ms_then - ms_start) > 1000) {
     	   // SEND
     	   char m[BUFSIZE];
     	   sprintf(m, "Hi! says port %d", portown);
-    	   send_message(broadcast_addr, sockfd, m);
+    	   int n = send_message(broadcast_addr, sockfd, m);
+    	   printf("Message sent with return code %d\n", n);
            ms_start = getms(tp);
+           i++;
        }
        ms_then = getms(tp);
      }
@@ -121,23 +127,25 @@ int main(int argc, char *argv[])
      long int start_total_time = getms(tp);
      long int ms_start = getms(tp);
      long int ms_then = getms(tp);
-     for (int i = 0; i < loop_count; i++) {
+     for (int i = 0; i < loop_count;) {
        if ((ms_then - ms_start) > 1000) {
     	   // SEND
     	   char m[BUFSIZE];
     	   sprintf(m, "Hi! says port %d", portown);
-    	   send_message(direct_addr, sockfd, m);
+    	   int n = send_message(direct_addr, sockfd, m);
+    	   printf("Message sent with return code %d\n", n);
            ms_start = getms(tp);
+           i++;
        }
        ms_then = getms(tp);
      }
 
      long int end_total_time = getms(tp);
 
-     printf("Sending to direct addresses finished after %ld\n", end_total_time - start_total_time);
+     printf("Sending to direct addresses finished after %lu\n", end_total_time - start_total_time);
      }
 
-     printf("Total package count: %d", 2 * loop_count);
+     printf("Total package count: %d\n", 2 * loop_count);
 
      close(sockfd);
      return 0; 
