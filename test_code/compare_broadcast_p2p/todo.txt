@@ -1,0 +1,4 @@
+How to measure time for receiving messages? 
+	eg create array or compute average duration 
+
+test this on pi

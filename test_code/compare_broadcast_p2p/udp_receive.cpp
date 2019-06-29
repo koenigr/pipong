@@ -56,13 +56,11 @@ void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
 int main(int argc, char *argv[])
 {
      int sockfd;
-     int portown;
-     int portout;
+     int portown = 3333;
      int clientlen;
      socklen_t clilen;
      char buffer[BUFSIZE];
      struct sockaddr_in own_addr;
-     struct sockaddr_in out_addr;
      struct sockaddr_in recv_addr;
      struct timeval tp;
 
@@ -80,38 +78,29 @@ int main(int argc, char *argv[])
 
      print_addr(own_addr, portown);
 
-     create_broadcast(out_addr, portout);
-
-     print_addr(out_addr, portout);
-
      if (bind(sockfd, (struct sockaddr *) &own_addr,
               sizeof(own_addr)) < 0)
               error("ERROR on binding");
 
      // RECEIVE
      long int ms_start = getms(tp);
-     long int ms_then = getms(tp);
 
      printf("Read socket\n");
+
+     int message_count = 0;
      while(true) {
 
         if (recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen) > 0) {
             printf("Receive message: %s\n",buffer);
+            message_count++;
         }
         memset(buffer, 0, BUFSIZE);
 
-       if ((ms_then - ms_start) > 1000) {
-
-    	   // SEND
-    	   char m[BUFSIZE];
-    	   sprintf(m, "Hi! says port %d", portown);
-    	   send_message(out_addr, sockfd, m);
-
-           ms_start = getms(tp);
-       }
-
-       ms_then = getms(tp);;
      }
+
+     long int ms_then = getms(tp);
+
+     printf("Received %d messages after %lu", message_count, ms_then - ms_start);
 
      close(sockfd);
      return 0; 
