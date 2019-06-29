@@ -13,3 +13,7 @@
 
 Points points;
 Ball ball;
+Player p1;
+Player p2;
+Player p3;
+Player p4;

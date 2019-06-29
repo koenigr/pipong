@@ -7,12 +7,11 @@
 
 #include "Player.h"
 
+int playerPos;
+
 Player::Player() {
-	// TODO Auto-generated constructor stub
-
+	playerPos = 0;
 }
 
-Player::~Player() {
-	// TODO Auto-generated destructor stub
-}
+Player::~Player() {}
 
