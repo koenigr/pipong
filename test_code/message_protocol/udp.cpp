@@ -10,16 +10,13 @@
 #include <netinet/in.h>
 #include <sys/time.h>
 
-
 #define BUFSIZE 1024
-
 
 void error(const char *msg)
 {
     perror(msg);
     exit(1);
 }
-
 
 long int getms(timeval tp) {  
      gettimeofday(&tp, NULL);
@@ -33,12 +30,31 @@ void print_addr(sockaddr_in addr, int port) {
     printf("Read portno %d\n", port);
 }
 
+void create_addr(sockaddr_in &addr, int port) {
+    bzero((char *) &addr, sizeof(addr));
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = INADDR_ANY;
+    addr.sin_port = htons(port);
+}
+
+void create_broadcast(sockaddr_in &addr, int port) {
+    bzero((char *) &addr, sizeof(addr));
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = INADDR_BROADCAST;
+    addr.sin_port = htons(port);
+}
+
+void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
+	char buffer[BUFSIZE];
+    memset(buffer, 0, BUFSIZE);
+    socklen_t clilen = sizeof(out_addr);
+    strcpy(buffer, message);
+    printf("Send message: %s\n", buffer);
+    sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
+}
 
 int main(int argc, char *argv[])
 {
-
-     printf("set variables\n");
-
      int sockfd;
      int portown;
      int portout;
@@ -48,12 +64,11 @@ int main(int argc, char *argv[])
      struct sockaddr_in own_addr;
      struct sockaddr_in out_addr;
      struct sockaddr_in recv_addr;
-     int n;
      struct timeval tp;
 
-     printf("create socket\n");
+     printf("Create socket\n");
      if (argc < 3) {
-        fprintf(stderr,"usage %s hostname portown portout\n", argv[0]);
+        fprintf(stderr,"Usage %s hostname portown portout\n", argv[0]);
         exit(0);
      }
 
@@ -68,20 +83,13 @@ int main(int argc, char *argv[])
   	 setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST,
         (void *) &broadcast, sizeof(broadcast));
 
-     printf("socket created. Set more values\n");
+     printf("Socket created.\n");
 
-
-     bzero((char *) &own_addr, sizeof(own_addr));
-     own_addr.sin_family = AF_INET;
-     own_addr.sin_addr.s_addr = INADDR_ANY;
-     own_addr.sin_port = htons(portown);
+     create_addr(own_addr, portown);
 
      print_addr(own_addr, portown);
 
-     bzero((char *) &out_addr, sizeof(out_addr));
-     out_addr.sin_family = AF_INET;
-	 out_addr.sin_addr.s_addr = INADDR_BROADCAST;
-     out_addr.sin_port = htons(portout);
+     create_broadcast(out_addr, portout);
 
      print_addr(out_addr, portout);
 
@@ -93,29 +101,23 @@ int main(int argc, char *argv[])
      long int ms_start = getms(tp);
      long int ms_then = getms(tp);
 
-     printf("read socket\n");
+     printf("Read socket\n");
      while(true) {
 
-        n = recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
-        if (n > 0) {
-            printf("Here is the message: %s\n",buffer);
+        if (recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen) > 0) {
+            printf("Receive message: %s\n",buffer);
         }
-        memset(buffer, BUFSIZE, sizeof(buffer));
+        memset(buffer, 0, BUFSIZE);
 
        if ((ms_then - ms_start) > 1000) {
 
     	   // SEND
-           printf("send hello world to sockfd\n");
-           printf("sockfd: %d\n", sockfd);
-           clilen = sizeof(out_addr);
-		   bzero(buffer,256);
-           sprintf(buffer, "hi! says port %d", portown);
-           n = sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, clilen);
-           bzero(buffer,256);
+    	   char m[BUFSIZE];
+    	   sprintf(m, "Hi! says port %d", portown);
+    	   send_message(out_addr, sockfd, m);
 
            ms_start = getms(tp);
        }
-
 
        ms_then = getms(tp);;
      }
