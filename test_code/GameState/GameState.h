@@ -8,7 +8,11 @@
 #ifndef TEST_CODE_GAMESTATE_GAMESTATE_H_
 #define TEST_CODE_GAMESTATE_GAMESTATE_H_
 
+#include "Player.h"
+
 class GameState {
+public:
+	void GameState::decrPoint(Player p);
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

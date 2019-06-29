@@ -12,6 +12,7 @@ class Player {
 public:
 	Player();
 	virtual ~Player();
+	int Player::decrPoints();
 };
 
 #endif /* TEST_CODE_GAMESTATE_PLAYER_H_ */

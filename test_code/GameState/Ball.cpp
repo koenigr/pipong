@@ -17,6 +17,8 @@ struct direction {
 	int y;
 };
 
+int velocity;
+
 ball_pos pos;
 direction dir;
 
@@ -25,6 +27,7 @@ Ball::Ball() {
 	pos.y = 0;
 	dir.x = 0;
 	dir.y = 0;
+	velocity = 1; // TODO
 }
 
 Ball::~Ball() {}
