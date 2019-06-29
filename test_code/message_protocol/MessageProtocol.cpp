@@ -11,16 +11,28 @@
 enum Type {REQUEST, RESPONSE, GAMESTATE};
 
 struct connect_request {
-		Type message_type = Type::REQUEST;
+	Type message_type = Type::REQUEST;
 };
 
 struct connect_response {
-	enum Type message_type;
+	Type message_type = Type::RESPONSE;
 
 };
 
 struct gamestate {
-	enum Type message_type;
+	Type message_type = Type::GAMESTATE;
 
 };
+
+void getConnectRequestJSON() {
+
+}
+
+void getConnectResponseJSON() {
+
+}
+
+void getGamestateJSON() {
+
+}
 
