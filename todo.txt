@@ -4,3 +4,4 @@ was ist 255.127.0.0, ... warum senden die Nachrichten ohne Inhalt?
 Was genau wird in Bewegung des Paddels umgesetzt? Gibt es Unterschiede in der Geschwindigkeit?
 Wo ist (0,0) auf dem Feld?
 Was sind die Regeln? Bekommen die drei anderen einen Punkt? Oder werden Punkte abgezogen?
+Lohnt es sich, ein Protokoll zu schreiben? JSON zu benutzen? Oder einfach Werte schicken?
