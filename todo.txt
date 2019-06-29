@@ -1,3 +1,5 @@
 struct or similar for predefined messages
 how handle disconnection of peers?
 was ist 255.127.0.0, ... warum senden die Nachrichten ohne Inhalt?
+Was genau wird in Bewegung des Paddels umgesetzt? Gibt es Unterschiede in der Geschwindigkeit?
+Wo ist (0,0) auf dem Feld?
