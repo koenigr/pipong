@@ -55,27 +55,17 @@ void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
 
 int main(int argc, char *argv[])
 {
-     int sockfd;
-     int portown;
-     int portout;
+     int portown = 2222;
+     int portout = 3333;
      int clientlen;
      socklen_t clilen;
      char buffer[BUFSIZE];
      struct sockaddr_in own_addr;
-     struct sockaddr_in out_addr;
-     struct sockaddr_in recv_addr;
+     struct sockaddr_in broadcast_addr;
+     struct sockaddr_in direct_addr;
      struct timeval tp;
-
-     printf("Create socket\n");
-     if (argc < 3) {
-        fprintf(stderr,"Usage %s hostname portown portout\n", argv[0]);
-        exit(0);
-     }
-
-     portown = atoi(argv[1]);
-     portout = atoi(argv[2]);
-
-     sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+     int loop_count = 100;
+     int sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0) 
         error("ERROR opening socket");
 
@@ -86,41 +76,68 @@ int main(int argc, char *argv[])
      printf("Socket created.\n");
 
      create_addr(own_addr, portown);
-
      print_addr(own_addr, portown);
 
-     create_broadcast(out_addr, portout);
+     create_broadcast(broadcast_addr, portout);
+     print_addr(broadcast_addr, portout);
 
-     print_addr(out_addr, portout);
+     create_addr(direct_addr, portout);
+     print_addr(direct_addr, portout);
 
      if (bind(sockfd, (struct sockaddr *) &own_addr,
               sizeof(own_addr)) < 0)
               error("ERROR on binding");
 
-     // RECEIVE
+     printf("Start sending to broadcast address\n");
+
+     {
+     // SEND BROADCAST
+     long int start_total_time = getms(tp);
      long int ms_start = getms(tp);
      long int ms_then = getms(tp);
 
-     printf("Read socket\n");
-     while(true) {
-
-        if (recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen) > 0) {
-            printf("Receive message: %s\n",buffer);
-        }
-        memset(buffer, 0, BUFSIZE);
-
+     for (int i = 0; i < loop_count; i++) {
        if ((ms_then - ms_start) > 1000) {
-
     	   // SEND
     	   char m[BUFSIZE];
     	   sprintf(m, "Hi! says port %d", portown);
-    	   send_message(out_addr, sockfd, m);
-
+    	   send_message(broadcast_addr, sockfd, m);
            ms_start = getms(tp);
        }
-
        ms_then = getms(tp);
      }
+
+     long int end_total_time = getms(tp);
+
+     printf("Sending to broadcast address finished after %ld\n", end_total_time - start_total_time);
+     }
+
+     usleep(5000000);
+
+     printf("Start sending to direct addresses\n");
+
+     {
+     // SEND DIRECT
+     long int start_total_time = getms(tp);
+     long int ms_start = getms(tp);
+     long int ms_then = getms(tp);
+     for (int i = 0; i < loop_count; i++) {
+       if ((ms_then - ms_start) > 1000) {
+    	   // SEND
+    	   char m[BUFSIZE];
+    	   sprintf(m, "Hi! says port %d", portown);
+    	   send_message(direct_addr, sockfd, m);
+           ms_start = getms(tp);
+       }
+       ms_then = getms(tp);
+     }
+
+     long int end_total_time = getms(tp);
+
+     printf("Sending to direct addresses finished after %ld\n", end_total_time - start_total_time);
+     }
+
+     printf("Total package count: %d", 2 * loop_count);
 
      close(sockfd);
      return 0; 

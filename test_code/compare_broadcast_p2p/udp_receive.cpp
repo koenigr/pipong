@@ -66,15 +66,6 @@ int main(int argc, char *argv[])
      struct sockaddr_in recv_addr;
      struct timeval tp;
 
-     printf("Create socket\n");
-     if (argc < 3) {
-        fprintf(stderr,"Usage %s hostname portown portout\n", argv[0]);
-        exit(0);
-     }
-
-     portown = atoi(argv[1]);
-     portout = atoi(argv[2]);
-
      sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0) 
         error("ERROR opening socket");
