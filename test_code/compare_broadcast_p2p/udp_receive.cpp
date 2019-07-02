@@ -31,14 +31,14 @@ void print_addr(sockaddr_in addr, int port) {
 }
 
 void create_addr(sockaddr_in &addr, int port) {
-    bzero((char *) &addr, sizeof(addr));
+    memset((char *) &addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(port);
 }
 
 void create_broadcast(sockaddr_in &addr, int port) {
-    bzero((char *) &addr, sizeof(addr));
+    memset((char *) &addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = INADDR_BROADCAST;
     addr.sin_port = htons(port);
