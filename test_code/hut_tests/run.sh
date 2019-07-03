@@ -1,8 +1,22 @@
+
 #!/bin/bash
 
-echo "Compiling LCDTest"
-g++ LCDTest.cpp Canvas.cpp Print.cpp OLEDDisplay.cpp -lmraa -pthread -std=c++11 -o LCDTest
+#flags
+FLAG="-Wunused-parameter -Wall"
 
+if [ $# -gt 1 ]; then
 
-echo "Run LCDTest"
-./LCDTest
+	MAIN_CLASS=$1
+
+	if [$# -eq 1]; then
+		echo "Compiling $MAIN_CLASS"
+		g++ $MAIN_CLASS.cpp Canvas.cpp Print.cpp OLEDDisplay.cpp $FLAG -lmraa -pthread -std=c++11 -o $MAIN_CLASS
+	fi
+
+	echo "Run $MAIN_CLASS"
+	./$MAIN_CLASS
+else
+
+	echo "Usage: ./run.sh <class_name> <compile>"
+
+fi
