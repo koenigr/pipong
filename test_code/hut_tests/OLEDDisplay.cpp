@@ -134,6 +134,7 @@ void OLEDDisplay::refreshDisplay() {
 		std::chrono::steady_clock::time_point t = std::chrono::steady_clock::now();
 		//TODO check for error
 		spi.transfer(data, NULL, bufsize);
+		//TODO move line one up?
 		refreshCond.notify_all();
 		std::this_thread::sleep_until(t + std::chrono::microseconds(16666));
 		refreshLock.lock();
