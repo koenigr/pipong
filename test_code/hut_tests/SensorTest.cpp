@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <mraa.h>
 
-#include "../OLEDDisplay.h"
+#include "OLEDDisplay.h"
 
 #define US_OFF  1
 #define US_ON   0
@@ -76,7 +76,7 @@ void runUS() {
 #define MPU_ACCEL_CONFIG_2 0x1D
 #define MPU_INT_PIN_CFG    0x37
 #define MPU_ACCEL_OUT      0x3B
-#define MPU_TEMP_OUT       0x41
+// #define MPU_TEMP_OUT	   0x41
 #define MPU_GYRO_OUT       0x43
 #define MPU_PWR_MGMT_1     0x6B
 #define MPU_PWR_MGMT_2     0x6C
@@ -123,13 +123,17 @@ static inline uint16_t decodeU16LE(uint8_t *buf) {
 }
 
 void getAccel(mraa_i2c_context i2c, double *data) {
-	uint8_t buf[6];
+	uint8_t buf[2];
 	memset(buf, 0, sizeof(buf));
-	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 6);
+	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
 	data[0] = decodeS16BE(buf + 0) * f;
-	data[1] = decodeS16BE(buf + 2) * f;
-	data[2] = decodeS16BE(buf + 4) * f;
+	if (data[0] > 0.0) {
+		printf("move left\n");
+	}
+	else if (data[0] < 0.0) {
+		printf("move right\n");
+	}
 }
 
 #define BME280_REGISTER_CONTROL_HUM 0xF2
@@ -168,19 +172,6 @@ void initBME280(mraa_i2c_context i2c) {
 	dig_T3 = decodeS16LE(buf+4);
 }
 
-int32_t getTemp(mraa_i2c_context i2c) {
-	uint8_t buf[8];
-	memset(buf, 0, sizeof(buf));
-	mraa_i2c_read_bytes_data(i2c, BME280_REGISTER_DATA, buf, 8);
-	return (buf[3] << 12) | (buf[4] << 4) | (buf[5] >> 4);
-}
-
-double compTemp(int32_t adc_T) {
-	double diff = adc_T * (1.0/16384) - dig_T1 * (1.0/1024);
-	double var1 = diff * dig_T2;
-	double var2 = diff * diff * (1.0/64) * dig_T3;
-	return (var1 + var2) * (5.0/25600);
-}
 
 #define BT_ON "X"
 #define BT_OFF "O"
@@ -240,8 +231,6 @@ int main(void) {
 		getAccel(i2c, accel);
 
 		mraa_i2c_address(i2c, ADDR_BME);
-		int32_t temp = getTemp(i2c);
-		double ctemp = compTemp(temp);
 
 		sprintf(buf, "\n"
 				"            %s\n"
@@ -250,13 +239,10 @@ int main(void) {
 				"\n"
 				"US Dist:%7.2fcm\n"
 				"\n"
-				"      X:%7.2fg\n"
-				"Accel Y:%7.2fg\n"
-				"      Z:%7.2fg\n"
-				"\n"
-				"Temp:   %7.2f\370C", up ? BT_ON : BT_OFF, lt ? BT_ON : BT_OFF,
+				"Accel  X:%7.2fg\n"
+				, up ? BT_ON : BT_OFF, lt ? BT_ON : BT_OFF,
 				ct ? BT_ON : BT_OFF, rt ? BT_ON : BT_OFF, dn ? BT_ON : BT_OFF,
-				us_dist.load(), accel[0], accel[1], accel[2], ctemp);
+				us_dist.load(), accel[0]);
 		disp.print(buf);
 		disp.flush();
 	}
