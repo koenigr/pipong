@@ -27,6 +27,9 @@ int Y_MAX = 127;
 int L_WIDTH = 50;
 int B_RAD = 10;
 
+float TRESHHOLD = 0.1;
+int move = 0;
+
 // SENSORS
 #define US_OFF  1
 #define US_ON   0
@@ -166,12 +169,23 @@ void getAccel(mraa_i2c_context i2c, double *data) {
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
 	data[0] = decodeS16BE(buf + 0) * f;
-	if (data[0] > 0.0) {
-		printf("move left\n");
+
+//	printf("%f\n", data[0]);
+//	printf("%f\n", TRESHHOLD);
+
+	if (data[0] > TRESHHOLD) {
+		move = -1;
+//		printf("move left\n");
 	}
-	else if (data[0] < 0.0) {
-		printf("move right\n");
+	else if (data[0] < -TRESHHOLD) {
+		move = 1;
+//		printf("move right\n");
 	}
+	else {
+		move = 0;
+		printf("NO MOVE");
+	}
+
 }
 
 void initBME280(mraa_i2c_context i2c) {
@@ -313,19 +327,25 @@ int main(void) {
 	printf("Starting\n");
 
 	int i = 0;
+
+	int player_pos = 60;
+
     while(true) {
 
     	int mv = sin(i)*20;
     	compute_ball_pos();
 
     	disp.clearScreen();
-		disp.setCursor(0, 0);
+	disp.setCursor(0, 0);
 
-		ball(b_pos.posX, b_pos.posY);
+	ball(b_pos.posX, b_pos.posY);
+
+
+	player_pos += move*3;
+	line_p4(player_pos);
     	line_p1(60 + mv);
     	line_p2(60 + mv);
     	line_p3(60 + mv);
-    	line_p4(60 + mv);
 
     	// SENSORS
 
