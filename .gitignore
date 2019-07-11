@@ -2,7 +2,6 @@
 .metadata/
 .project
 .settings/
-PiPong
 ..gitignore.swp
 test_code/message_protocol/udp
 test_code/udp_connection/udp
