@@ -30,10 +30,10 @@ void print_addr(sockaddr_in addr, int port) {
     printf("Read portno %d\n", port);
 }
 
-void create_addr(sockaddr_in &addr, int port) {
+void create_addr(const char* inetaddr, sockaddr_in &addr, int port) {
     memset((char *) &addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = INADDR_ANY;
+    addr.sin_addr.s_addr = inet_addr(inetaddr);
     addr.sin_port = htons(port);
 }
 
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 
      printf("Socket created.\n");
 
-     create_addr(own_addr, portown);
+     create_addr("10.1.1.20", own_addr, portown);
 
      print_addr(own_addr, portown);
 
