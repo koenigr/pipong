@@ -23,6 +23,11 @@ long int getms(timeval tp) {
      return tp.tv_sec * 1000 + tp.tv_usec / 1000;
 }
 
+long int getmicrosec(timeval tp) {
+    gettimeofday(&tp, NULL);
+    return tp.tv_usec;
+}
+
 void print_addr(sockaddr_in addr, int port) {
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
@@ -107,7 +112,8 @@ int main(int argc, char *argv[])
        if ((ms_then - ms_start) > 1000) {
     	   // SEND
     	   char m[BUFSIZE];
-    	   sprintf(m, "Hi! says port %d", portown);
+           long int microsec = getmicrosec(tp);
+    	   sprintf(m, "%lu", microsec);
     	   int n = send_message(broadcast_addr, sockfd, m);
     	   printf("Message sent with return code %d\n", n);
            ms_start = getms(tp);
@@ -134,7 +140,8 @@ int main(int argc, char *argv[])
        if ((ms_then - ms_start) > 1000) {
     	   // SEND
     	   char m[BUFSIZE];
-    	   sprintf(m, "Hi! says port %d", portown);
+           long int microsec = getmicrosec(tp);
+    	   sprintf(m, "%lu", microsec);
     	   int n = send_message(direct_addr, sockfd, m);
     	   printf("Message sent with return code %d\n", n);
            ms_start = getms(tp);
