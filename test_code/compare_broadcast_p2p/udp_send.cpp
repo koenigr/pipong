@@ -77,13 +77,13 @@ int main(int argc, char *argv[])
 
      printf("Socket created.\n");
 
-     create_addr("10.0.0.10", own_addr, portown);
+     create_addr("10.1.1.10", own_addr, portown);
      print_addr(own_addr, portown);
 
      create_broadcast(broadcast_addr, portout);
      print_addr(broadcast_addr, portout);
 
-     create_addr("10.0.0.20", direct_addr, portout);
+     create_addr("10.1.1.20", direct_addr, portout);
      print_addr(direct_addr, portout);
 
      if (bind(sockfd, (struct sockaddr *) &own_addr,
