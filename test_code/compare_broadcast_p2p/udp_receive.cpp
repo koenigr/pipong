@@ -33,7 +33,8 @@ void print_addr(sockaddr_in addr, int port) {
 void create_addr(const char* inetaddr, sockaddr_in &addr, int port) {
     memset((char *) &addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr(inetaddr);
+//    addr.sin_addr.s_addr = inet_addr(inetaddr);
+    addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(port);
 }
 
@@ -45,7 +46,7 @@ void create_broadcast(sockaddr_in &addr, int port) {
 }
 
 void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
-	char buffer[BUFSIZE];
+    char buffer[BUFSIZE];
     memset(buffer, 0, BUFSIZE);
     socklen_t clilen = sizeof(out_addr);
     strcpy(buffer, message);
@@ -68,9 +69,14 @@ int main(int argc, char *argv[])
      if (sockfd < 0) 
         error("ERROR opening socket");
 
- 	 int broadcast=1;
-  	 setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST,
-        (void *) &broadcast, sizeof(broadcast));
+     int broadcast=1;
+     if(setsockopt(sockfd,SOL_SOCKET,SO_BROADCAST,&broadcast,sizeof(broadcast)) < 0)
+     {
+
+        printf("Error in setting Broadcast option");
+        return 0;
+
+     }
 
      printf("Socket created.\n");
 
