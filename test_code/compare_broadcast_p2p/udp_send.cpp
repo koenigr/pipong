@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/time.h>
@@ -18,7 +18,7 @@ void error(const char *msg)
     exit(1);
 }
 
-long int getms(timeval tp) {  
+long int getms(timeval tp) {
      gettimeofday(&tp, NULL);
      return tp.tv_sec * 1000 + tp.tv_usec / 1000;
 }
@@ -30,10 +30,11 @@ void print_addr(sockaddr_in addr, int port) {
     printf("Read portno %d\n", port);
 }
 
-void create_addr(sockaddr_in &addr, int port) {
+void create_addr(const char* inetaddr, sockaddr_in &addr, int port) {
     bzero((char *) &addr, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = INADDR_ANY;
+    // addr.sin_addr.s_addr = INADDR_ANY;
+    addr.sin_addr.s_addr = inet_addr(inetaddr);
     addr.sin_port = htons(port);
 }
 
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
      struct timeval tp;
      int loop_count = 10;
      int sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-     if (sockfd < 0) 
+     if (sockfd < 0)
         error("ERROR opening socket");
 
  	 int broadcast=1;
@@ -76,13 +77,13 @@ int main(int argc, char *argv[])
 
      printf("Socket created.\n");
 
-     create_addr(own_addr, portown);
+     create_addr("10.0.0.10", own_addr, portown);
      print_addr(own_addr, portown);
 
      create_broadcast(broadcast_addr, portout);
      print_addr(broadcast_addr, portout);
 
-     create_addr(direct_addr, portout);
+     create_addr("10.0.0.20", direct_addr, portout);
      print_addr(direct_addr, portout);
 
      if (bind(sockfd, (struct sockaddr *) &own_addr,
