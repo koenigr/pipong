@@ -5,10 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/time.h>
+
+#include <fstream>
+#include <iostream>
 
 #define BUFSIZE 1024
 
@@ -18,7 +21,7 @@ void error(const char *msg)
     exit(1);
 }
 
-long int getms(timeval tp) {  
+long int getms(timeval tp) {
      gettimeofday(&tp, NULL);
      return tp.tv_sec * 1000 + tp.tv_usec / 1000;
 }
@@ -65,8 +68,15 @@ int main(int argc, char *argv[])
      struct sockaddr_in recv_addr;
      struct timeval tp;
 
+     if (argc < 2) {
+       printf("Usage: udp_receive <filename>");
+     }
+
+// TODO
+     //char filename = 
+
      sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-     if (sockfd < 0) 
+     if (sockfd < 0)
         error("ERROR opening socket");
 
      int broadcast=1;
@@ -93,12 +103,22 @@ int main(int argc, char *argv[])
 
      printf("Read socket\n");
 
+
      int message_count = 0;
      while(true) {
 
         if (recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen) > 0) {
+
+            std::ofstream out("receive.txt", std::ios::app);
+
+
             printf("Receive message: %s\n",buffer);
+            out << buffer;
+            out << "\n";
             message_count++;
+
+        out.close();
+
         }
         memset(buffer, 0, BUFSIZE);
 
