@@ -26,6 +26,11 @@ long int getms(timeval tp) {
      return tp.tv_sec * 1000 + tp.tv_usec / 1000;
 }
 
+long int getmicrosec(timeval tp) {
+    gettimeofday(&tp, NULL);
+    return tp.tv_usec;
+}
+
 void print_addr(sockaddr_in addr, int port) {
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
@@ -80,6 +85,8 @@ int main(int argc, char *argv[])
         error("ERROR opening socket");
 
      int broadcast=1;
+
+
      if(setsockopt(sockfd,SOL_SOCKET,SO_BROADCAST,&broadcast,sizeof(broadcast)) < 0)
      {
 
@@ -105,14 +112,21 @@ int main(int argc, char *argv[])
 
 
      int message_count = 0;
+
+
      while(true) {
 
         if (recvfrom(sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen) > 0) {
+
+            long int ref = getmicrosec(tp);
 
             std::ofstream out("receive.txt", std::ios::app);
 
 
             printf("Receive message: %s\n",buffer);
+
+            out << ref;
+	    out << "\t";
             out << buffer;
             out << "\n";
             message_count++;
