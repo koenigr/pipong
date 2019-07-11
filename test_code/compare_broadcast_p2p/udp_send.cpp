@@ -41,7 +41,7 @@ void create_addr(const char* inetaddr, sockaddr_in &addr, int port) {
 void create_broadcast(sockaddr_in &addr, int port) {
     bzero((char *) &addr, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr("255.255.255.0");
+    addr.sin_addr.s_addr = inet_addr("10.1.1.255");
     //addr.sin_addr.s_addr = INADDR_BROADCAST;
     addr.sin_port = htons(port);
 }
