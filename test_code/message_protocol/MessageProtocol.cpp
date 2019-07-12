@@ -7,32 +7,32 @@
 
 #include "MessageProtocol.h"
 #include "Parameters.h"
+#include "Request.h"
+#include "Response.h"
+#include "Gamestate.h"
 
 enum Type {REQUEST, RESPONSE, GAMESTATE};
 
-struct connect_request {
-	Type message_type = Type::REQUEST;
-};
+Request rqst;
+Response rsp;
+Gamestate gmst;
 
-struct connect_response {
-	Type message_type = Type::RESPONSE;
-
-};
-
-struct gamestate {
-	Type message_type = Type::GAMESTATE;
-
-};
-
-void getConnectRequestJSON() {
+MessageProtocol::MessageProtocol() {
 
 }
 
-void getConnectResponseJSON() {
+void MessageProtocol::createRequest(char* ip_addr[], int port) {
+  char * request[] = Request(char* ip_addr[], int port);
+}
+
+void MessageProtocol::createResponse() {
 
 }
 
-void getGamestateJSON() {
+void MessageProtocol::createGamestate() {
 
 }
+
+//TODO first check message type, then return fitting object
+
 
