@@ -15,7 +15,7 @@ public:
 
 	void createRequest(char out_str[], char ip_addr[], int port);
 
-	void createResponse();
+	void createResponse(char out_str[], char ip_addr[], int port);
 
 	void createGamestate();
 

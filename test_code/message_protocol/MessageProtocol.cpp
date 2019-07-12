@@ -11,7 +11,7 @@
 #include "Response.h"
 #include "Gamestate.h"
 
-enum Type {REQUEST, RESPONSE, GAMESTATE};
+enum Type {REQUEST, RESPONSE, GAMESTATE}; //TODO ??
 
 Request rqst;
 Response rsp;
@@ -22,8 +22,8 @@ void MessageProtocol::createRequest(char out_str[], char ip_addr[], int port) {
   Request(out_str, ip_addr, port);
 }
 
-void MessageProtocol::createResponse() {
-
+void MessageProtocol::createResponse(char out_str[], char ip_addr[], int port) {
+  Response(out_str, ip_addr, port);
 }
 
 void MessageProtocol::createGamestate() {
