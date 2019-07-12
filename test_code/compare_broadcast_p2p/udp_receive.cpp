@@ -75,10 +75,17 @@ int main(int argc, char *argv[])
 
      if (argc < 2) {
        printf("Usage: udp_receive <filename>");
-     }
+     }// TODO
 
-// TODO
-     //char filename = 
+     const std::string own_ip;
+     std::ifstream nameFileout;
+
+     nameFileout.open("own_ip.txt");
+     while (std::getline(nameFileout, own_ip))
+     {
+       std::cout << own_ip;
+     }
+     nameFileout.close();
 
      sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0)
@@ -97,7 +104,7 @@ int main(int argc, char *argv[])
 
      printf("Socket created.\n");
 
-     create_addr("10.1.1.20", own_addr, portown);
+     create_addr((const char* )own_ip, own_addr, portown);
 
      print_addr(own_addr, portown);
 
