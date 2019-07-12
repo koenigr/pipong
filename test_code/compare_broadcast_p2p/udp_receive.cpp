@@ -1,5 +1,3 @@
-
-/* The port number is passed as an argument */
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +12,8 @@
 #include <iostream>
 
 #define BUFSIZE 1024
+#define PORT 2222
+#define CONFIG_FILE "own_ip.txt"
 
 void error(const char *msg)
 {
@@ -65,27 +65,31 @@ void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
 int main(int argc, char *argv[])
 {
      int sockfd;
-     int portown = 3333;
+     int portown = PORT;
      int clientlen;
      socklen_t clilen;
      char buffer[BUFSIZE];
      struct sockaddr_in own_addr;
      struct sockaddr_in recv_addr;
      struct timeval tp;
+     std::string log_filename;
+     const std::string own_ip;
+     std::ifstream config_file_stream;
+
 
      if (argc < 2) {
-       printf("Usage: udp_receive <filename>");
-     }// TODO
+       printf("Usage: udp_receive <log_filename>\n");
+       exit 1;
+     }
 
-     const std::string own_ip;
-     std::ifstream nameFileout;
+     log_filename = argv[1];
 
-     nameFileout.open("own_ip.txt");
-     while (std::getline(nameFileout, own_ip))
+     config_file_stream.open(CONFIG_FILE);
+     while (std::getline(config_file_stream, own_ip))
      {
        std::cout << own_ip;
      }
-     nameFileout.close();
+     config_file_stream.close();
 
      sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0)
@@ -97,8 +101,8 @@ int main(int argc, char *argv[])
      if(setsockopt(sockfd,SOL_SOCKET,SO_BROADCAST,&broadcast,sizeof(broadcast)) < 0)
      {
 
-        printf("Error in setting Broadcast option");
-        return 0;
+        printf("Error in setting Broadcast option\n");
+        return 1;
 
      }
 
@@ -108,9 +112,11 @@ int main(int argc, char *argv[])
 
      print_addr(own_addr, portown);
 
-     if (bind(sockfd, (struct sockaddr *) &own_addr,
-              sizeof(own_addr)) < 0)
-              error("ERROR on binding");
+     if (bind(sockfd, (struct sockaddr *) &own_addr, sizeof(own_addr)) < 0) {
+         error("ERROR on binding");
+         exit 1;
+     }
+
 
      // RECEIVE
      long int ms_start = getms(tp);
