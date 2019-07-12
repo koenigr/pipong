@@ -1,4 +1,4 @@
-#include "Gamestate.h"
+#include "GamestateMsg.h"
 #include "MessageProtocol.h"
 #include "Parameters.h"
 #include "Request.h"

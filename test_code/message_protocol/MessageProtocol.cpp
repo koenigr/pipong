@@ -6,16 +6,17 @@
  */
 
 #include "MessageProtocol.h"
+
+#include "GamestateMsg.h"
 #include "Parameters.h"
 #include "Request.h"
 #include "Response.h"
-#include "Gamestate.h"
 
 enum Type {REQUEST, RESPONSE, GAMESTATE}; //TODO ??
 
 Request rqst;
 Response rsp;
-Gamestate gmst;
+GamestateMsg gmst;
 
 
 void MessageProtocol::createRequest(char out_str[], char ip_addr[], int port) {
