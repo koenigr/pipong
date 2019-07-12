@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
      config_file_stream.open(CONFIG_FILE);
      while (std::getline(config_file_stream, own_ip))
      {
-       std::cout << own_ip;
+       std::cout << own_ip; // TODO not necessary for receive
      }
      config_file_stream.close();
 
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
 
      printf("Socket created.\n");
 
-     create_addr((const char* )own_ip, own_addr, portown);
+     create_addr("10.1.1.17", own_addr, portown);
 
      print_addr(own_addr, portown);
 
