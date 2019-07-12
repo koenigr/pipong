@@ -73,13 +73,13 @@ int main(int argc, char *argv[])
      struct sockaddr_in recv_addr;
      struct timeval tp;
      std::string log_filename;
-     const std::string own_ip;
+     std::string own_ip;
      std::ifstream config_file_stream;
 
 
      if (argc < 2) {
        printf("Usage: udp_receive <log_filename>\n");
-       exit 1;
+       exit(1);
      }
 
      log_filename = argv[1];
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
      if (bind(sockfd, (struct sockaddr *) &own_addr, sizeof(own_addr)) < 0) {
          error("ERROR on binding");
-         exit 1;
+         exit(1);
      }
 
 
