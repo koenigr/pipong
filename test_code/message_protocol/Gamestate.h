@@ -2,7 +2,7 @@
 #define TEST_CODE_MESSAGE_PROTOCOL_GAMESTATE_H_
 
 
-class GAMESTATE {
+class Gamestate {
 };
 
 #endif /* TEST_CODE_MESSAGE_PROTOCOL_GAMESTATE_H_ */

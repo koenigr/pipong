@@ -17,12 +17,9 @@ Request rqst;
 Response rsp;
 Gamestate gmst;
 
-MessageProtocol::MessageProtocol() {
 
-}
-
-void MessageProtocol::createRequest(char* ip_addr[], int port) {
-  char * request[] = Request(char* ip_addr[], int port);
+void MessageProtocol::createRequest(char out_str[], char ip_addr[], int port) {
+  Request(out_str, ip_addr, port);
 }
 
 void MessageProtocol::createResponse() {

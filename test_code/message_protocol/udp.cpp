@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/time.h>
@@ -19,7 +19,7 @@ void error(const char *msg)
     exit(1);
 }
 
-long int getms(timeval tp) {  
+long int getms(timeval tp) {
      gettimeofday(&tp, NULL);
      return tp.tv_sec * 1000 + tp.tv_usec / 1000;
 }
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
      portout = atoi(argv[2]);
 
      sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-     if (sockfd < 0) 
+     if (sockfd < 0)
         error("ERROR opening socket");
 
  	 int broadcast=1;
@@ -124,5 +124,5 @@ int main(int argc, char *argv[])
      }
 
      close(sockfd);
-     return 0; 
+     return 0;
 }
