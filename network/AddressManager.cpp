@@ -73,7 +73,7 @@ sockaddr_in AddressManager::getBroadcastAddr() {
 void AddressManager::addParticipant(sockaddr_in participant) {
 	// TODO check if valid
 	participants.push_back(participant);
-	printf("Number of participants: %lu", participants.size());
+    printf("Number of participants: %u", participants.size());
 }
 
 sockaddr_in AddressManager::getParticipant(int pos) {

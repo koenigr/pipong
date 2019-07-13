@@ -9,3 +9,4 @@ test_code/compare_broadcast_p2p/udp_send
 test_code/compare_broadcast_p2p/udp_receive
 test_code/hut_tests/SensorTest
 test_code/mraa_hello/PiPong/mraa_hello
+pipong.creator.user
