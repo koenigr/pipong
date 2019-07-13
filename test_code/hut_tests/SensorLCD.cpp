@@ -168,7 +168,7 @@ void getAccel(mraa_i2c_context i2c, double *data) {
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
-    printf("f: %f:", f);
+    printf("f: %f\n", f);
     data[0] = decodeS16BE(buf + 0) * f;
     printf("acceleration inside: %7.2f\n", data[0]);
 }
@@ -318,6 +318,9 @@ int main(void) {
 
 	int player_pos = 60;
 
+
+    double accel[1];
+
     while(true) {
 
         draw();
@@ -337,7 +340,6 @@ int main(void) {
 		mraa_i2c_address(i2c, ADDR_MPU);
 		mraa_i2c_address(i2c, ADDR_BME);
 
-        double accel[1];
         getAccel(i2c, accel);
         printf("acceleration outside: %f\n", accel[0]);
 
