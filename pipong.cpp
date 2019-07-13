@@ -20,8 +20,8 @@ void init() {
     printf("Initialize PiPong\n");
 
     am.print_infos();
-    am.createOwnAddr(port);
-    am.createBroadcastAddr(port);
+    am.createOwnAddr();
+    am.createBroadcastAddr();
     pi_socket.init(am.getOwnAddr());
 
     printf("Initialization complete\n");
@@ -57,7 +57,7 @@ void find_peers() {
 
             MessageProtocol mp;
             char request[BUFSIZE];
-            mp.createRequest(request, am.getOwnAddr(), port);
+            mp.createRequest(request, inet_ntoa(am.getOwnAddr().sin_addr));
             pi_socket.sendMessage(request, am.getBroadcastAddr());
 
             ms_start = Tools::getms();

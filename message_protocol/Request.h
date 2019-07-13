@@ -8,7 +8,7 @@ public:
 
 	Request();
 
-	Request(char out_str[], char ip_addr[], int port);
+	Request(char out_str[], char ip_addr[]);
 };
 
 #endif /* TEST_CODE_MESSAGE_PROTOCOL_REQUEST_H_ */

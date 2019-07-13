@@ -6,6 +6,6 @@ char req[] = "REQ";
 
 Request::Request() {}
 
-Request::Request(char out_str[], char ip_addr[], int port) {
-    sprintf(out_str, "%s %s %d", req,  ip_addr, port);
+Request::Request(char out_str[], char ip_addr[]) {
+    sprintf(out_str, "%s %s", req,  ip_addr);
 }

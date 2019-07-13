@@ -13,9 +13,9 @@ class MessageProtocol {
 
 public:
 
-	void createRequest(char out_str[], char ip_addr[], int port);
+	void createRequest(char out_str[], char ip_addr[]);
 
-	void createResponse(char out_str[], char ip_addr[], int port);
+	void createResponse(char out_str[], char ip_addr[]);
 
 	void createGamestate();
 

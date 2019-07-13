@@ -30,12 +30,10 @@ void AddressManager::print_infos() {
 
 void AddressManager::createOwnAddr() {
 
-	own_port = port;
-
     bzero((char *) &own_addr2, sizeof(own_addr2));
     own_addr2.sin_family = AF_INET;
     own_addr2.sin_addr.s_addr = INADDR_ANY;
-    own_addr2.sin_port = htons(own_port);
+    own_addr2.sin_port = htons(port);
 
     char m[] = "Own ";
     Tools::print_address(own_addr2, m);
