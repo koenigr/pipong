@@ -15,7 +15,7 @@
 #include "../tools/Tools.h"
 
 
-int own_port;
+int port = 2222;
 struct sockaddr_in own_addr2; //TODO warum geht das nicht, wenn es own_addr heißt?
 struct sockaddr_in broadcast_addr;
 std::vector<sockaddr_in> participants;
@@ -28,7 +28,7 @@ void AddressManager::print_infos() {
 	printf("AddressManager lebe hoch\n");
 }
 
-void AddressManager::createOwnAddr(int port) {
+void AddressManager::createOwnAddr() {
 
 	own_port = port;
 
@@ -48,7 +48,7 @@ sockaddr_in AddressManager::getOwnAddr() {
     return own_addr2;
 }
 
-void AddressManager::createBroadcastAddr(int port) {
+void AddressManager::createBroadcastAddr() {
 
 	printf("Create broadcast address\n");
 

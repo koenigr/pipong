@@ -13,7 +13,6 @@
 
 AddressManager am;
 UDPSocket pi_socket;
-int port = 2222;
 
 void init() {
 
@@ -55,8 +54,10 @@ void find_peers() {
 
         if ((ms_then - ms_start) > 1000) {
 
-            char message[] = "I want to connect";
-            pi_socket.sendMessage(message, am.getBroadcastAddr());
+            MessageProtocol mp;
+            char request[BUFSIZE];
+            mp.createRequest(request, am.getOwnAddr(), port);
+            pi_socket.sendMessage(request, am.getBroadcastAddr());
 
             ms_start = Tools::getms();
 

@@ -4,8 +4,6 @@
 #include "Request.h"
 #include "Parameters.h"
 
-#define BUFSIZE 1024
-
 int main() {
 
 	MessageProtocol mp;
