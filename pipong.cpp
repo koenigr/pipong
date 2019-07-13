@@ -13,6 +13,7 @@
 #include "message_protocol/MessageProtocol.h"
 
 AddressManager am;
+MessageProtocol mp;
 UDPSocket pi_socket;
 
 void init() {
@@ -55,9 +56,10 @@ void find_peers() {
 
         if ((ms_then - ms_start) > 1000) {
 
-            MessageProtocol mp;
             char request[BUFSIZE];
-            mp.createRequest(request, inet_ntoa(am.getOwnAddr().sin_addr));
+            char own_addr[];
+            strcpy(own_addr, inet_ntoa(am.getOwnAddr().sin_addr));
+            mp.createRequest(request, own_addr);
             pi_socket.sendMessage(request, am.getBroadcastAddr());
 
             ms_start = Tools::getms();
