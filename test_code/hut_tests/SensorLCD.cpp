@@ -169,6 +169,7 @@ void getAccel(mraa_i2c_context i2c, double data[]) {
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
     data[0] = decodeS16BE(buf + 0) * f;
+    printf("acceleration inside: %f\n", data[0]);
 }
 
 void initBME280(mraa_i2c_context i2c) {
@@ -337,6 +338,7 @@ int main(void) {
 
         double accel[1];
         getAccel(i2c, accel);
+        printf("acceleration outside: %f\n", accel[0]);
 
 		sprintf(buf, "\n"
 				"            %s\n"
