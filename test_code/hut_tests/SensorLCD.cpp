@@ -168,6 +168,7 @@ void getAccel(mraa_i2c_context i2c, double *data) {
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
+    printf("f: %f:", f);
     data[0] = decodeS16BE(buf + 0) * f;
     printf("acceleration inside: %7.2f\n", data[0]);
 }
