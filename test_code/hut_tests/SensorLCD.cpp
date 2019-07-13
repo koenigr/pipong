@@ -163,12 +163,12 @@ static inline uint16_t decodeU16LE(uint8_t *buf) {
 	return (buf[1] << 8) | buf[0];
 }
 
-void getAccel(mraa_i2c_context i2c, double * data) {
+void getAccel(mraa_i2c_context i2c, double data[]) {
 	uint8_t buf[2];
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
-    data = decodeS16BE(buf + 0) * f;
+    data[0] = decodeS16BE(buf + 0) * f;
 }
 
 void initBME280(mraa_i2c_context i2c) {
@@ -318,8 +318,9 @@ int main(void) {
 
     while(true) {
 
-             draw();
-    	// SENSORS
+        draw();
+
+        // SENSORS
 
 		up = !mraa_gpio_read(bt_up);
 		lt = !mraa_gpio_read(bt_lt);
@@ -331,11 +332,11 @@ int main(void) {
 		mraa_gpio_write(led2, ct);
 		mraa_gpio_write(led3, dn || rt);
 
-        double * accel;
-        getAccel(i2c, accel);
-
 		mraa_i2c_address(i2c, ADDR_MPU);
 		mraa_i2c_address(i2c, ADDR_BME);
+
+        double accel[1];
+        getAccel(i2c, accel);
 
 		sprintf(buf, "\n"
 				"            %s\n"
@@ -347,7 +348,7 @@ int main(void) {
 				"Accel  X:%7.2fg\n"
 				, up ? BT_ON : BT_OFF, lt ? BT_ON : BT_OFF,
 				ct ? BT_ON : BT_OFF, rt ? BT_ON : BT_OFF, dn ? BT_ON : BT_OFF,
-				us_dist.load(), accel);
+                us_dist.load(), accel[0]);
 	//	disp.print(buf);
     	// SENSORS
 
@@ -360,13 +361,13 @@ int main(void) {
         ball(b_pos.posX, b_pos.posY);
 
 
-        player_pos = getPlayerPos(accel);
+        player_pos = getPlayerPos(accel[0]);
         line_p4(player_pos);
         line_p1(60 + mv);
         line_p2(60 + mv);
         line_p3(60 + mv);
 
-                disp.print(buf);
+        disp.print(buf);
 		usleep(100000);
 		i += 1;
     }
