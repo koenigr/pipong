@@ -163,29 +163,13 @@ static inline uint16_t decodeU16LE(uint8_t *buf) {
 	return (buf[1] << 8) | buf[0];
 }
 
-void getAccel(mraa_i2c_context i2c, double *data) {
+double getAccel(mraa_i2c_context i2c, double data) {
 	uint8_t buf[2];
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
-	data[0] = decodeS16BE(buf + 0) * f;
-
-//	printf("%f\n", data[0]);
-//	printf("%f\n", TRESHHOLD);
-
-	if (data[0] > TRESHHOLD) {
-		move = -1;
-//		printf("move left\n");
-	}
-	else if (data[0] < -TRESHHOLD) {
-		move = 1;
-//		printf("move right\n");
-	}
-	else {
-		move = 0;
-		printf("NO MOVE");
-	}
-
+    data = decodeS16BE(buf + 0) * f;
+    return data;
 }
 
 void initBME280(mraa_i2c_context i2c) {
@@ -285,6 +269,10 @@ void line_p4(int pos) {
 
 }
 
+int getPlayerPos(double accel) {
+  return 50 + 3*(accel + 5);
+}
+
 
 int main(void) {
 
@@ -318,7 +306,7 @@ int main(void) {
 	std::thread t_us(runUS);
 
 	int up, lt, ct, rt, dn;
-	double accel[3];
+    double accel;
 
 	// SENSORS
 
@@ -332,20 +320,6 @@ int main(void) {
 
     while(true) {
 
-    	int mv = sin(i)*20;
-    	compute_ball_pos();
-
-    	disp.clearScreen();
-	disp.setCursor(0, 0);
-
-	ball(b_pos.posX, b_pos.posY);
-
-
-	player_pos += move*3;
-	line_p4(player_pos);
-    	line_p1(60 + mv);
-    	line_p2(60 + mv);
-    	line_p3(60 + mv);
 
     	// SENSORS
 
@@ -360,8 +334,6 @@ int main(void) {
 		mraa_gpio_write(led3, dn || rt);
 
 		mraa_i2c_address(i2c, ADDR_MPU);
-		getAccel(i2c, accel);
-
 		mraa_i2c_address(i2c, ADDR_BME);
 
 		sprintf(buf, "\n"
@@ -378,6 +350,20 @@ int main(void) {
 		disp.print(buf);
     	// SENSORS
 
+        int mv = sin(i)*20;
+        compute_ball_pos();
+
+        disp.clearScreen();
+        disp.setCursor(0, 0);
+
+        ball(b_pos.posX, b_pos.posY);
+
+
+        player_pos = getPlayerPos(getAccel(i2c, accel););
+        line_p4(player_pos);
+        line_p1(60 + mv);
+        line_p2(60 + mv);
+        line_p3(60 + mv);
 
 		draw();
 		usleep(100000);
