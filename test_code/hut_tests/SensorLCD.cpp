@@ -163,13 +163,13 @@ static inline uint16_t decodeU16LE(uint8_t *buf) {
 	return (buf[1] << 8) | buf[0];
 }
 
-double getAccel(mraa_i2c_context i2c, double data) {
+double getAccel(mraa_i2c_context i2c) {
 	uint8_t buf[2];
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
-    data = decodeS16BE(buf + 0) * f;
-    return data;
+        double data = decodeS16BE(buf + 0) * f;
+        return data;
 }
 
 void initBME280(mraa_i2c_context i2c) {
@@ -306,7 +306,6 @@ int main(void) {
 	std::thread t_us(runUS);
 
 	int up, lt, ct, rt, dn;
-    double accel;
 
 	// SENSORS
 
@@ -320,7 +319,7 @@ int main(void) {
 
     while(true) {
 
-
+             draw();
     	// SENSORS
 
 		up = !mraa_gpio_read(bt_up);
@@ -333,6 +332,8 @@ int main(void) {
 		mraa_gpio_write(led2, ct);
 		mraa_gpio_write(led3, dn || rt);
 
+		double accel = getAccel(i2c);
+
 		mraa_i2c_address(i2c, ADDR_MPU);
 		mraa_i2c_address(i2c, ADDR_BME);
 
@@ -341,13 +342,13 @@ int main(void) {
 				"Buttons:  %s %s %s\n"
 				"            %s\n"
 				"\n"
-				"US Dist:%7.2fcm\n"
+				"US Dist:%7.2fcm\n" // TODO remove dist
 				"\n"
 				"Accel  X:%7.2fg\n"
 				, up ? BT_ON : BT_OFF, lt ? BT_ON : BT_OFF,
 				ct ? BT_ON : BT_OFF, rt ? BT_ON : BT_OFF, dn ? BT_ON : BT_OFF,
-				us_dist.load(), accel[0]);
-		disp.print(buf);
+				us_dist.load(), accel);
+	//	disp.print(buf);
     	// SENSORS
 
         int mv = sin(i)*20;
@@ -359,13 +360,13 @@ int main(void) {
         ball(b_pos.posX, b_pos.posY);
 
 
-        player_pos = getPlayerPos(getAccel(i2c, accel););
+        player_pos = getPlayerPos(accel);
         line_p4(player_pos);
         line_p1(60 + mv);
         line_p2(60 + mv);
         line_p3(60 + mv);
 
-		draw();
+                disp.print(buf);
 		usleep(100000);
 		i += 1;
     }
