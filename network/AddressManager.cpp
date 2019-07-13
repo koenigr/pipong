@@ -55,7 +55,7 @@ void AddressManager::createBroadcastAddr(int port) {
 
     bzero((char *) &broadcast_addr, sizeof(broadcast_addr));
     broadcast_addr.sin_family = AF_INET;
-    broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
+    broadcast_addr.sin_addr.s_addr = inet_addr("10.1.1.255");
     broadcast_addr.sin_port = htons(port);
 
     char m[] = "Broadcast ";
