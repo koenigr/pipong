@@ -163,13 +163,12 @@ static inline uint16_t decodeU16LE(uint8_t *buf) {
 	return (buf[1] << 8) | buf[0];
 }
 
-double getAccel(mraa_i2c_context i2c) {
+void getAccel(mraa_i2c_context i2c, double * data) {
 	uint8_t buf[2];
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
 	double f = 2.0 / 32768.0;
-        double data = decodeS16BE(buf + 0) * f;
-        return data;
+    data = decodeS16BE(buf + 0) * f;
 }
 
 void initBME280(mraa_i2c_context i2c) {
@@ -332,7 +331,8 @@ int main(void) {
 		mraa_gpio_write(led2, ct);
 		mraa_gpio_write(led3, dn || rt);
 
-		double accel = getAccel(i2c);
+        double * accel;
+        getAccel(i2c, accel);
 
 		mraa_i2c_address(i2c, ADDR_MPU);
 		mraa_i2c_address(i2c, ADDR_BME);
