@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
      struct sockaddr_in broadcast_addr;
      struct sockaddr_in direct_addr;
      struct timeval tp;
-     int loop_count = 10;
+     int loop_count = 500;
      int sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0)
         error("ERROR opening socket");
