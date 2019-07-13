@@ -15,9 +15,9 @@ AddressManager am;
 UDPSocket pi_socket;
 int port = 2222;
 
-void init(int argc, char* argv[]) {
+void init() {
 
-	printf("Initialize PiPong\n");
+    printf("Initialize PiPong\n");
 
     am.print_infos();
     am.createOwnAddr(port);
@@ -89,10 +89,10 @@ void display() {
 }
 
 
-int main(int argc, char *argv[])
+int main()
 {
 
-	init(argc, argv);
+	init();
 
 	find_peers();
 
