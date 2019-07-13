@@ -12,7 +12,7 @@
 
 class GameState {
 public:
-	void GameState::decrPoint(Player p);
+	void decrPoint(Player p);
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */
