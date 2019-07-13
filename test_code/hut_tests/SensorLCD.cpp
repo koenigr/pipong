@@ -163,7 +163,7 @@ static inline uint16_t decodeU16LE(uint8_t *buf) {
 	return (buf[1] << 8) | buf[0];
 }
 
-void getAccel(mraa_i2c_context i2c, double data[]) {
+void getAccel(mraa_i2c_context i2c, double *data) {
 	uint8_t buf[2];
 	memset(buf, 0, sizeof(buf));
 	mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
