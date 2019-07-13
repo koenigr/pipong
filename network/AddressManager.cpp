@@ -50,7 +50,6 @@ void AddressManager::createBroadcastAddr() {
 
 	printf("Create broadcast address\n");
 
-
     bzero((char *) &broadcast_addr, sizeof(broadcast_addr));
     broadcast_addr.sin_family = AF_INET;
     broadcast_addr.sin_addr.s_addr = inet_addr("10.1.1.255");
