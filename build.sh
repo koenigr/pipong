@@ -1,4 +1,8 @@
 #!/bin/bash
 
-g++ pipong.cpp network/*.cpp tools/*.cpp -o PiPong -std=c++11 -Wall -Wextra -Werror -Wpedantic
+g++ pipong.cpp \
+    network/*.cpp \
+    tools/*.cpp \
+    message_protocol/*.cpp \
+    -o PiPong -std=c++11 -Wall -Wextra -Werror -Wpedantic
 
