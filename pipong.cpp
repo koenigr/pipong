@@ -10,6 +10,7 @@
 #include "network/UDPSocket.h"
 #include "tools/Tools.h"
 #include "network/AddressManager.h"
+#include "message_protocol/MessageProtocol.h"
 
 AddressManager am;
 UDPSocket pi_socket;
