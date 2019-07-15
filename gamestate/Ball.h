@@ -11,7 +11,8 @@
 class Ball {
 public:
 	Ball();
-	void toString(char ball_str[]);
+    std::string toString();
+    float increaseVel();
 	virtual ~Ball();
 };
 

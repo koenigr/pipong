@@ -5,41 +5,33 @@
  *      Author: koenigr
  */
 #include <stdio.h>
+#include <string.h>
 
 #include "Ball.h"
 
-
-struct ball_pos {
-	int x;
-	int y;
-};
-
-struct direction {
-	int x;
-	int y;
-};
-
-int velocity;
-
-ball_pos pos;
-direction dir;
+// position
+int pos_x;
+int pos_y;
+// velocity
+float dir_x;
+float dir_y;
 
 Ball::Ball() {
-	pos.x = 0;
-	pos.y = 0;
-	dir.x = 0;
-	dir.y = 0;
-	velocity = 1; // TODO
+    pos_x = 0;
+    pos_y = 0;
+    vel_x = 1.0;
+    vel_y = 1.0;
 }
 
 Ball::~Ball() {}
 
-void Ball::toString(char ball_str[]) {
-//    if (sizeof(ball_str)/sizeof(ball_str[0]) < 6) {
-//        printf("Array to small!!\n");
-//        exit(1);
-//    }
-    ball_str[0] = (char) pos.x;
-    ball_str[1] = (char) pos.y;
+float Ball::increaseVel() {
+
+}
+
+
+std::string toString() {
+  return std::to_string(pos_x) + std::string(" ") + std::toString(pos_y)
+          + std::string(" ") +std::to_string(vel_x) + std::string(" ") + std::toString(vel_y);
 }
 
