@@ -25,13 +25,15 @@ Ball::Ball() {
 
 Ball::~Ball() {}
 
-float Ball::increaseVel() {
-
+float* Ball::increaseVel() {
+  float vel[2];
+  vel[0] = vel_x;
+  vel[1] = vel_y;
+  return vel;
 }
 
-
-std::string toString() {
-  return std::to_string(pos_x) + std::string(" ") + std::toString(pos_y)
+std::string Ball::toString() {
+  return std::to_string(pos_x) + std::string(" ") + std::to_string(pos_y)
           + std::string(" ") +std::to_string(vel_x) + std::string(" ") + std::to_string(vel_y);
 }
 

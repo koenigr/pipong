@@ -8,10 +8,12 @@
 #ifndef TEST_CODE_GAMESTATE_PLAYER_H_
 #define TEST_CODE_GAMESTATE_PLAYER_H_
 
+#include <string>
+
 class Player {
 public:
 	Player();
- 	void toString(char player_str[]);
+    std::string toString();
 	virtual ~Player();
 	int decrPoints();
 };

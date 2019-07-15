@@ -9,7 +9,7 @@
 
 #include "Ball.h"
 #include "Player.h"
-#include <string.h>
+#include <string>
 #include <stdio.h>
 
 Ball ball;
@@ -22,6 +22,11 @@ int GameState::decrPoint(Player p) {
 	return p.decrPoints();
 }
 
-void GameState::toString(char gmst_str[]) {
-    snprintf(gmst_str, 3, "jjj");
+std::string GameState::toString(){
+    return ball.toString() + std::string(" ") + p1.toString() + std::string(" ") + p2.toString() + std::string(" ")
+             + p3.toString() + std::string(" ") + p4.toString();
+}
+
+void parseGameStateFromString(std::string gamestateAsString) {
+
 }

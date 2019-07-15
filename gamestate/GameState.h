@@ -9,11 +9,12 @@
 #define TEST_CODE_GAMESTATE_GAMESTATE_H_
 
 #include "Player.h"
+#include <string>
 
 class GameState {
 public:
 	int decrPoint(Player p);
-        void toString(char gmst_str[]);
+        std::string toString();
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

@@ -6,6 +6,7 @@
  */
 
 #include "Player.h"
+#include <string>
 
 int playerPos;
 int points;
@@ -22,3 +23,6 @@ int Player::decrPoints() {
 	return points;
 }
 
+std::string Player::toString() {
+    return std::to_string(playerPos) + std::string(" ") + std::to_string(points);
+}
