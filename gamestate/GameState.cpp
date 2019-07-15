@@ -21,10 +21,6 @@ void GameState::decrPoint(Player p) {
 	int points = p.decrPoints();
 }
 
-void GameState::getBallToString(char ball_str[]) {
-     ball.toString(ball_str);
-}
-
-void GameState::getPlayerToString(char player_str[]) {
-    strlcpy(player_str, "kjhgkjh");
+void GameState::toString(char gmst_str[]) {
+    strlcpy(gmst_str, "jjj", 3);
 }
