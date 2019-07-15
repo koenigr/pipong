@@ -13,6 +13,8 @@
 class GameState {
 public:
 	void decrPoint(Player p);
+    void getBallToString(char ball_str[]);
+    void getPlayerToString(char player_str[]);
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

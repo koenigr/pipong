@@ -32,3 +32,12 @@ Ball::Ball() {
 
 Ball::~Ball() {}
 
+void Ball::toString(char ball_str[]) {
+    if (sizeof(ball_str)/sizeof(ball_str[0]) < 6) {
+        printf("Array to small!!\n");
+        exit(1);
+    }
+    ball_str[0] = (char)ball_pos.x;
+    ball_str[1] = (char)ball_pos.y;
+}
+
