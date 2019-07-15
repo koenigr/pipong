@@ -5,5 +5,5 @@ g++ pipong.cpp \
     tools/*.cpp \
     message_protocol/*.cpp \
     gamestate/*.cpp \
-    -o PiPong -std=c++11 -Wall -Wextra -Werror -Wpedantic
-
+    -o PiPong -std=c++11 -Wall -Wextra -Wpedantic 
+#-Werror
