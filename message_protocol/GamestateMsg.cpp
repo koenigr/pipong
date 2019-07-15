@@ -10,5 +10,7 @@ char gmstMsg[] = "GMST";
 GamestateMsg::GamestateMsg() {}
 
 GamestateMsg::GamestateMsg(char out_str[], GameState gamestate) {
-    sprintf(out_str, "%s", gmstMsg);
+    char gmst_str[];
+    gamestate.toString(gmst_str);
+    sprintf(out_str, "%s %s", gmstMsg, gmst_str);
 }
