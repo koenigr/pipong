@@ -14,5 +14,6 @@
 #define PARAMETERS_H_
 
 #define BUFSIZE 1024
+#define GAMESTATE_SIZE 10
 
 #endif /* PARAMETERS_H_ */

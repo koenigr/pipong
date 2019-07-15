@@ -11,6 +11,7 @@
 class Player {
 public:
 	Player();
+ 	void toString(char player_str[]);
 	virtual ~Player();
 	int decrPoints();
 };
