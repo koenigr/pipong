@@ -2,7 +2,7 @@
 #include "GamestateMsg.h"
 #include <string.h>
 
-#include "../GameState/GameState.h"
+#include "../gamestate/GameState.h"
 
 
 char gmstMsg[] = "GMST";

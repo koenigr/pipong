@@ -8,7 +8,7 @@
 #include "MessageProtocol.h"
 
 #include "GamestateMsg.h"
-#include "Parameters.h"
+#include ../"Parameters.h"
 #include "Request.h"
 #include "Response.h"
 
