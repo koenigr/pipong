@@ -28,13 +28,11 @@ void init() {
     printf("Initialization complete\n");
 }
 
-sockaddr_in receive_messages() {
+void receive_messages(sockaddr_in* recv) {
 
 	char buffer[BUFSIZE];
 
-	struct sockaddr_in recv_addr = pi_socket.receiveMessage(buffer);
-
-	return recv_addr;
+    *recv = pi_socket.receiveMessage(buffer);
 
 }
 
@@ -46,7 +44,8 @@ void find_peers() {
     while(am.getNumOfParticipants() == 0) { // TODO loop until key press to proceed. Display all participants
 
         // TODO: Wie erkennen, dass Versuch Verbindung und NUR dann hinzufügen?
-        sockaddr_in recv = receive_messages();
+        sockaddr_in * recv;
+        receive_messages(recv);
         char str[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
 
