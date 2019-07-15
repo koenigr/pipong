@@ -10,6 +10,7 @@
 #include "Ball.h"
 #include "Player.h"
 #include <string.h>
+#include <stdio.h>
 
 Ball ball;
 Player p1; // TODO var
@@ -17,10 +18,10 @@ Player p2;
 Player p3;
 Player p4;
 
-void GameState::decrPoint(Player p) {
-	int points = p.decrPoints();
+int GameState::decrPoint(Player p) {
+	return p.decrPoints();
 }
 
 void GameState::toString(char gmst_str[]) {
-    strlcpy(gmst_str, "jjj", 3);
+    snprintf(gmst_str, 3, "jjj");
 }

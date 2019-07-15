@@ -4,8 +4,10 @@
  *  Created on: 29.06.2019
  *      Author: koenigr
  */
+#include <stdio.h>
 
 #include "Ball.h"
+
 
 struct ball_pos {
 	int x;
@@ -33,11 +35,11 @@ Ball::Ball() {
 Ball::~Ball() {}
 
 void Ball::toString(char ball_str[]) {
-    if (sizeof(ball_str)/sizeof(ball_str[0]) < 6) {
-        printf("Array to small!!\n");
-        exit(1);
-    }
-    ball_str[0] = (char)ball_pos.x;
-    ball_str[1] = (char)ball_pos.y;
+//    if (sizeof(ball_str)/sizeof(ball_str[0]) < 6) {
+//        printf("Array to small!!\n");
+//        exit(1);
+//    }
+    ball_str[0] = (char) pos.x;
+    ball_str[1] = (char) pos.y;
 }
 

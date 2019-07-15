@@ -11,6 +11,7 @@
 class Ball {
 public:
 	Ball();
+	void toString(char ball_str[]);
 	virtual ~Ball();
 };
 
