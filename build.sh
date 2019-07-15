@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 g++ pipong.cpp \
     network/*.cpp \
     tools/*.cpp \
