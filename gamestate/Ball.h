@@ -8,6 +8,8 @@
 #ifndef TEST_CODE_GAMESTATE_BALL_H_
 #define TEST_CODE_GAMESTATE_BALL_H_
 
+#include <string>
+
 class Ball {
 public:
 	Ball();

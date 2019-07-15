@@ -5,7 +5,7 @@
  *      Author: koenigr
  */
 #include <stdio.h>
-#include <string.h>
+#include <string>
 
 #include "Ball.h"
 
@@ -13,8 +13,8 @@
 int pos_x;
 int pos_y;
 // velocity
-float dir_x;
-float dir_y;
+float vel_x;
+float vel_y;
 
 Ball::Ball() {
     pos_x = 0;
@@ -32,6 +32,6 @@ float Ball::increaseVel() {
 
 std::string toString() {
   return std::to_string(pos_x) + std::string(" ") + std::toString(pos_y)
-          + std::string(" ") +std::to_string(vel_x) + std::string(" ") + std::toString(vel_y);
+          + std::string(" ") +std::to_string(vel_x) + std::string(" ") + std::to_string(vel_y);
 }
 
