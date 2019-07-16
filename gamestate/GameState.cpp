@@ -6,10 +6,10 @@
  */
 
 #include "GameState.h"
-
 #include "Ball.h"
 #include "Player.h"
 #include <string>
+
 #include <stdio.h>
 
 Ball ball;

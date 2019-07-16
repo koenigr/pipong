@@ -21,11 +21,45 @@ int main() {
 
 	// RESPONSE TESTS
 
-//	char response[RESPONSE_SIZE];
+    char response[RESPONSE_SIZE];
 
-//    mp.createResponse(response, ip);
-//	printf("created response: %s\n", response);
-//	printf("response length: %lu\n", strlen(response));
+    mp.createResponse(response, ip);
+    printf("created response: %s\n", response);
+    printf("response length: %lu\n", strlen(response));
+
+    // PLAYER TESTS
+
+    char response[RESPONSE_SIZE];
+
+    mp.createResponse(response, ip);
+    printf("created response: %s\n", response);
+    printf("response length: %lu\n", strlen(response));
+
+    // BALL TESTS
+
+    char response[RESPONSE_SIZE];
+
+    mp.createResponse(response, ip);
+    printf("created response: %s\n", response);
+    printf("response length: %lu\n", strlen(response));
+
+    // COLLISION TESTS
+
+    char response[RESPONSE_SIZE];
+
+    mp.createResponse(response, ip);
+    printf("created response: %s\n", response);
+    printf("response length: %lu\n", strlen(response));
+
+    // FINISH TESTS
+
+    char response[RESPONSE_SIZE];
+
+    mp.createResponse(response, ip);
+    printf("created response: %s\n", response);
+    printf("response length: %lu\n", strlen(response));
+
+
 
 	// GAMESTATE TESTS
 
