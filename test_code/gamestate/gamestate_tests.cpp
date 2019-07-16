@@ -5,6 +5,7 @@ GameState gm;
 
 int main() {
 
-    gm.init(2);
+    int player_self = 2;
+    gm.init(player_selfs);
 
 }

@@ -8,7 +8,7 @@ public:
 
 	Response();
 
-	Response(char out_str[], char ip_addr[]);
+    void createResponse(char out_str[], int player_self);
 };
 
 #endif /* TEST_CODE_MESSAGE_PROTOCOL_RESPONSE_H_ */

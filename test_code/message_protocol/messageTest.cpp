@@ -1,8 +1,6 @@
-#include "GamestateMsg.h"
-#include "MessageProtocol.h"
-#include "Parameters.h"
-#include "Request.h"
-#include "Parameters.h"
+#include "../../message_protocol/MessageProtocol.h"
+#include "../../message_protocol/Request.h"
+#include "../../Parameters.h"
 
 #define BUFSIZE 1024
 
@@ -15,7 +13,7 @@ int main() {
 
 	// REQUEST TESTS
 
-    char request[2];
+    char request[REQUEST_SIZE];
 
     mp.createRequest(request, player_self);
 	printf("created request: %s\n", request);
@@ -23,11 +21,11 @@ int main() {
 
 	// RESPONSE TESTS
 
-	char response[BUFSIZE];
+//	char response[RESPONSE_SIZE];
 
-    mp.createResponse(response, ip);
-	printf("created response: %s\n", response);
-	printf("response length: %lu\n", strlen(response));
+//    mp.createResponse(response, ip);
+//	printf("created response: %s\n", response);
+//	printf("response length: %lu\n", strlen(response));
 
 	// GAMESTATE TESTS
 

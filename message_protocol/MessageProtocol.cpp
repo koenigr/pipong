@@ -7,24 +7,19 @@
 
 #include "MessageProtocol.h"
 
-#include "GamestateMsg.h"
 #include "../Parameters.h"
 #include "Request.h"
 #include "Response.h"
 
-enum Type {REQUEST, RESPONSE, GAMESTATE}; //TODO ??
-
-Request rqst;
-Response rsp;
-GamestateMsg gmst;
-
+Request req;
+Response res;
 
 void MessageProtocol::createRequest(char out_str[], int player_self) {
-  rqst.createRequest(out_str, player_self);
+  req.createRequest(out_str, player_self);
 }
 
-void MessageProtocol::createResponse(char out_str[], char ip_addr[]) {
-  Response(out_str, ip_addr);
+void MessageProtocol::createResponse(char out_str[], int player_self) {
+  res.createResponse(out_str, player_self);
 }
 
 void MessageProtocol::createGamestate() {
