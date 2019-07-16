@@ -8,7 +8,7 @@ public:
 
 	Request();
 
-	Request(char out_str[], char ip_addr[]);
+    Request::createRequest(char out_str[], int player_self);
 };
 
 #endif /* TEST_CODE_MESSAGE_PROTOCOL_REQUEST_H_ */

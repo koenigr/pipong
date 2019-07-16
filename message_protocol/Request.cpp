@@ -6,6 +6,6 @@ char req[] = "REQ";
 
 Request::Request() {}
 
-Request::Request(char out_str[], char ip_addr[]) {
+Request::Request(char out_str[], int player_self) {
     sprintf(out_str, "%s %s", req,  ip_addr);
 }
