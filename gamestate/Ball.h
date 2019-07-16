@@ -12,9 +12,12 @@
 
 class Ball {
 public:
-	Ball();
-    std::string toString();
-    float *increaseVel();
+    Ball();
+    void increaseVel();
+    int getPosX();
+    int getPosY();
+    int getVelX();
+    int getVelY();
 	virtual ~Ball();
 };
 

@@ -13,20 +13,20 @@
 #include <stdio.h>
 
 Ball ball;
-Player p1; // TODO var
-Player p2;
-Player p3;
-Player p4;
 
-int GameState::decrPoint(Player p) {
-	return p.decrPoints();
+Player player_arr[4];
+int player_self;
+
+GameState::GameState() {}
+
+void GameState::init(int player_no) {
+    printf("Player points: %d\n", player_arr[0].getPlayerPoints());
+    player_self = player_no;
 }
 
-std::string GameState::toString(){
-    return ball.toString() + std::string(" ") + p1.toString() + std::string(" ") + p2.toString() + std::string(" ")
-             + p3.toString() + std::string(" ") + p4.toString();
+// A player knows only his own point in the main loop
+int GameState::decrPoint() {
+    return player_arr[player_self].decrPoints();
 }
 
-void parseGameStateFromString(std::string gamestateAsString) {
 
-}

@@ -12,10 +12,11 @@
 
 class Player {
 public:
-	Player();
-    std::string toString();
+    Player();
 	virtual ~Player();
 	int decrPoints();
+    int getPlayerPos();
+    int getPlayerPoints();
 };
 
 #endif /* TEST_CODE_GAMESTATE_PLAYER_H_ */

@@ -23,6 +23,12 @@ int Player::decrPoints() {
 	return points;
 }
 
-std::string Player::toString() {
-    return std::to_string(playerPos) + std::string(" ") + std::to_string(points);
+int Player::getPlayerPos() {
+    return playerPos;
 }
+
+int Player::getPlayerPoints() {
+    return points;
+}
+
+

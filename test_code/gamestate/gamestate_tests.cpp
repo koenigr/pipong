@@ -5,6 +5,6 @@ GameState gm;
 
 int main() {
 
-std::cout << "Gamestate: " << gm.toString();
+    gm.init(2);
 
 }

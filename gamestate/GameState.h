@@ -13,8 +13,9 @@
 
 class GameState {
 public:
-	int decrPoint(Player p);
-        std::string toString();
+    GameState();
+    void init(int player_self);
+    int decrPoint();
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */
