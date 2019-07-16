@@ -19,8 +19,8 @@ Response rsp;
 GamestateMsg gmst;
 
 
-void MessageProtocol::createRequest(char out_str[], int player_self) {
-  Request(out_str, player_self);
+void MessageProtocol::createRequest(int out_str[], int player_self) {
+  rqst.createRequest(out_str, player_self);
 }
 
 void MessageProtocol::createResponse(char out_str[], char ip_addr[]) {

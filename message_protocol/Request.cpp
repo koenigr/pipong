@@ -1,11 +1,14 @@
-#include "stdio.h"
 #include "Request.h"
 #include <string.h>
+#include <stdio.h>
+
+#include "Opcode.h"
 
 char req[] = "REQ";
 
 Request::Request() {}
 
-Request::Request(char out_str[], int player_self) {
-    sprintf(out_str, "%s %s", req,  ip_addr);
+void Request::createRequest(int out_arr[], int player_self) {
+    out_arr[0] = REQUEST;
+    out_arr[1] = player_self;
 }

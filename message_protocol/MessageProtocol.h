@@ -13,7 +13,7 @@ class MessageProtocol {
 
 public:
 
-    void createRequest(char out_str[], int player_self);
+    void createRequest(int out_str[], int player_self);
 
 	void createResponse(char out_str[], char ip_addr[]);
 

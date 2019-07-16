@@ -11,12 +11,13 @@ int main() {
 	MessageProtocol mp;
 	char ip[] = "10.1.1.20";
 	int port = 2222;
+    int player_self = 2;
 
 	// REQUEST TESTS
 
-	char request[BUFSIZE];
+    int request[2];
 
-	mp.createRequest(request, ip, port);
+    mp.createRequest(request, player_self);
 	printf("created request: %s\n", request);
 	printf("request length: %lu\n", strlen(request));
 
@@ -24,7 +25,7 @@ int main() {
 
 	char response[BUFSIZE];
 
-	mp.createResponse(response, ip, port);
+    mp.createResponse(response, ip);
 	printf("created response: %s\n", response);
 	printf("response length: %lu\n", strlen(response));
 

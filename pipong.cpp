@@ -11,18 +11,27 @@
 #include "tools/Tools.h"
 #include "network/AddressManager.h"
 #include "message_protocol/MessageProtocol.h"
+#include "gamestate/GameState.h"
+#include "states/State.h"
 
 AddressManager am;
 MessageProtocol mp;
 UDPSocket pi_socket;
+GameState gs;
+int player_self;
+State state;
+
 
 void init() {
 
     printf("Initialize PiPong\n");
 
+    gs.init(player_self);
+
     am.print_infos();
     am.createOwnAddr();
     am.createBroadcastAddr();
+
     pi_socket.init(am.getOwnAddr());
 
     printf("Initialization complete\n");
@@ -47,7 +56,7 @@ void find_peers() {
         sockaddr_in * recv;
         receive_messages(recv);
         char str[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
+        inet_ntop(AF_INET, &(recv->sin_addr), str, INET_ADDRSTRLEN);
 
         //if (strcmp(str, "255.127.0.0") != 0 && strcmp(str, "0.0.0.0") != 0 ) {
             //am.addParticipant(recv);
@@ -90,8 +99,14 @@ void display() {
 }
 
 
-int main()
-{
+int main(int argc, char* argv[]) {
+
+    if(argc < 2) {
+        printf("Usage: ./PiPong <player_no>");
+        exit(1);
+    }
+
+    player_self = atoi(argv[1]);
 
 	init();
 
@@ -119,6 +134,8 @@ int main()
 //    	display();
 
 //    }
+
+    state.showPoints();
 
     return 0;
 }
