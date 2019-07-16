@@ -5,9 +5,6 @@
 class Response {
 
 public:
-
-	Response();
-
     void createResponse(char out_str[], int player_self);
 };
 

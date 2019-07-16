@@ -5,9 +5,6 @@
 class Request {
 
 public:
-
-	Request();
-
     void createRequest(char out_arr[], int player_self);
 };
 

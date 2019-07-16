@@ -29,39 +29,34 @@ int main() {
 
     // PLAYER TESTS
 
-    char response[RESPONSE_SIZE];
+    char player_state[PLAYER_SIZE];
 
-    mp.createResponse(response, ip);
-    printf("created response: %s\n", response);
-    printf("response length: %lu\n", strlen(response));
+    mp.createPlayerState(player_state, ip);
+    printf("created player_state: %s\n", player_state);
+    printf("player_state length: %lu\n", strlen(player_state));
 
-    // BALL TESTS
+//    // BALL TESTS
 
-    char response[RESPONSE_SIZE];
+//    char response[RESPONSE_SIZE];
 
-    mp.createResponse(response, ip);
-    printf("created response: %s\n", response);
-    printf("response length: %lu\n", strlen(response));
+//    mp.createResponse(response, ip);
+//    printf("created response: %s\n", response);
+//    printf("response length: %lu\n", strlen(response));
 
     // COLLISION TESTS
 
-    char response[RESPONSE_SIZE];
+    char collision[COLLISION_SIZE];
 
-    mp.createResponse(response, ip);
-    printf("created response: %s\n", response);
-    printf("response length: %lu\n", strlen(response));
+    mp.createCollision(collision, ip);
+    printf("created collision: %s\n", collision);
+    printf("collision length: %lu\n", strlen(collision));
 
     // FINISH TESTS
 
-    char response[RESPONSE_SIZE];
+    char finish[FINISH_SIZE];
 
-    mp.createResponse(response, ip);
-    printf("created response: %s\n", response);
-    printf("response length: %lu\n", strlen(response));
-
-
-
-	// GAMESTATE TESTS
-
+    mp.createFinish(finish, ip);
+    printf("created finish: %s\n", finish);
+    printf("finish length: %lu\n", strlen(finish));
 
 }
