@@ -1,3 +1,9 @@
 #!/bin/bash
 
-g++ messageTest.cpp MessageProtocol.cpp Request.cpp Response.cpp GamestateMsg.cpp ../GameState/GameState.cpp -o MessageTest -std=c++11
+clear
+
+g++ messageTest.cpp ../../message_protocol/MessageProtocol.cpp ../../message_protocol/Request.cpp ../../message_protocol/Response.cpp  ../../gamestate/GameState.cpp -o MessageTest -std=c++11
+
+if [ $? -eq 0 ]; then
+    ./MessageTest
+fi
