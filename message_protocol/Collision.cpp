@@ -1,7 +1,11 @@
 #include "stdio.h"
 #include "Collision.h"
-#include <string.h>
+#include <string>
 
-void Collision::createCollision(char out_str[], int player_self){
-    sprintf(out_str, "%c", player_self);
+#include "../Parameters.h"
+
+void Collision::createCollision(char out_arr[], int player_self){
+    out_arr[0] = COLLISION + '0';
+    out_arr[1] = '\0';
+  // TODO
 }

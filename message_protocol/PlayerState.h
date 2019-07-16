@@ -1,12 +1,13 @@
 #ifndef PLAYERSTATE_H
 #define PLAYERSTATE_H
 
+#include "../gamestate/GameState.h"
 
 class PlayerState
 {
 
 public:
-    void createPlayerState(char out_str[], int player_self);
+    void createPlayerState(GameState gs, char out_arr[], int player_self);
 };
 
 #endif // PLAYERSTATE_H

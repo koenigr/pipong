@@ -5,7 +5,7 @@
 class Response {
 
 public:
-    void createResponse(char out_str[], int player_self);
+    void createResponse(char out_arr[], int player_self);
 };
 
 #endif /* TEST_CODE_MESSAGE_PROTOCOL_RESPONSE_H_ */

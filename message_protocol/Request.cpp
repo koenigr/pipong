@@ -7,4 +7,5 @@
 void Request::createRequest(char out_arr[], int player_self) {
     out_arr[0] = REQUEST + '0';
     out_arr[1] = player_self + '0';
+    out_arr[2] = '\0';
 }

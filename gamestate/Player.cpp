@@ -10,10 +10,12 @@
 
 int playerPos;
 int points;
+int sequence; // TODO!!!!!
 
 Player::Player() {
 	playerPos = 0;
 	points = 5;
+    sequence = 3;
 }
 
 Player::~Player() {}
@@ -29,6 +31,10 @@ int Player::getPlayerPos() {
 
 int Player::getPlayerPoints() {
     return points;
+}
+
+int Player::getSequenceNo() {
+    return sequence;
 }
 
 

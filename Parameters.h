@@ -16,12 +16,12 @@
 #define BUFSIZE 1024
 
 // message sizes
-#define REQUEST_SIZE 2
-#define RESPONSE_SIZE 0
-#define PLAYER_SIZE 0
-#define BALL_SIZE 0
-#define COLLISION_SIZE 0
-#define FINISH_SIZE 0
+#define REQUEST_SIZE 3
+#define RESPONSE_SIZE 3
+#define PLAYER_SIZE 5 // TODO
+#define BALL_SIZE 2  // TODO
+#define COLLISION_SIZE 2 // TODO
+#define FINISH_SIZE 4
 
 // Opcodes
 #define REQUEST 0

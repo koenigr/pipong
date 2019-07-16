@@ -5,7 +5,7 @@
 class Collision
 {   
 public:
-    void createCollision(char out_str[], int player_self);
+    void createCollision(char out_arr[], int player_self);
 };
 
 #endif // COLLISION_H

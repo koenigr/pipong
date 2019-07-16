@@ -17,6 +17,7 @@ public:
 	int decrPoints();
     int getPlayerPos();
     int getPlayerPoints();
+    int getSequenceNo();
 };
 
 #endif /* TEST_CODE_GAMESTATE_PLAYER_H_ */
