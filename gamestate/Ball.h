@@ -18,6 +18,8 @@ public:
     int getPosY();
     int getVelX();
     int getVelY();
+    int setPosX(int posX);
+    int setPosY(int posY);
 	virtual ~Ball();
 };
 

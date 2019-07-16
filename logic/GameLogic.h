@@ -12,10 +12,9 @@ class GameLogic {
 public:
 	GameLogic();
 	virtual ~GameLogic();
-	void GameLogic::updateBall();
-	void GameLogic::checkForPaddleCollision();
-	void GameLogic::checkForScoringZoneCollision();
-	void GameLogic::checkForWallCollision();
+    void updateBall(GameState gs);
+    bool checkForPaddleCollision(GameState gs);
+    bool checkForScoringZoneCollision(GameState gs);
 };
 
 #endif /* LOGIC_GAMELOGIC_H_ */

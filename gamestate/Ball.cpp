@@ -44,3 +44,13 @@ int Ball::getVelX() {
 int Ball::getVelY() {
     return vel_y;
 }
+
+int Ball::setPosX(int posX) {
+    pos_x = posX;
+    return pos_x;
+}
+
+int Ball::setPosY(int posY) {
+    pos_y = posY;
+    return pos_y;
+}

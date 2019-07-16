@@ -8,15 +8,19 @@
 #ifndef TEST_CODE_GAMESTATE_GAMESTATE_H_
 #define TEST_CODE_GAMESTATE_GAMESTATE_H_
 
-#include "Player.h"
 #include <string>
+
+#include "Player.h"
+#include "Ball.h"
 
 class GameState {
 public:
     GameState();
     void init(int player_self);
     int decrPoint();
+    Player getSelf();
     Player getPlayer(int i);
+    Ball getBall();
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */
