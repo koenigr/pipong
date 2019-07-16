@@ -16,6 +16,7 @@ public:
     GameState();
     void init(int player_self);
     int decrPoint();
+    Player getPlayer(int i);
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

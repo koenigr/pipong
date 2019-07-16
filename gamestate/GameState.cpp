@@ -29,4 +29,7 @@ int GameState::decrPoint() {
     return player_arr[player_self].decrPoints();
 }
 
+Player GameState::getPlayer(int i) {
+    return player_arr[i];
+}
 

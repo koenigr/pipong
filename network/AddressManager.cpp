@@ -9,11 +9,13 @@
 
 #include <arpa/inet.h>
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <vector>
+#include <cstring>
 
 #include "../tools/Tools.h"
 
+std::string addr_arr[4] = {"10.1.1.10", "10.1.1.20", "10.1.1.16", "10.1.1.17"};
 
 int port = 2222;
 struct sockaddr_in own_addr2; //TODO warum geht das nicht, wenn es own_addr heißt?
@@ -30,7 +32,7 @@ void AddressManager::print_infos() {
 
 void AddressManager::createOwnAddr() {
 
-    bzero((char *) &own_addr2, sizeof(own_addr2));
+    memset((char *) &own_addr2, 0, sizeof(own_addr2));
     own_addr2.sin_family = AF_INET;
     own_addr2.sin_addr.s_addr = INADDR_ANY;
     own_addr2.sin_port = htons(port);
