@@ -15,7 +15,7 @@ int main() {
 
 	// REQUEST TESTS
 
-    int request[2];
+    char request[2];
 
     mp.createRequest(request, player_self);
 	printf("created request: %s\n", request);

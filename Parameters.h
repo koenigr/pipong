@@ -14,6 +14,21 @@
 #define PARAMETERS_H_
 
 #define BUFSIZE 1024
-#define GAMESTATE_SIZE 10
+
+// message sizes
+#define REQUEST_SIZE 2
+#define RESPONSE_SIZE 0
+#define PLAYER_SIZE 0
+#define BALL_SIZE 0
+#define COLLISION_SIZE 0
+#define FINISH_SIZE 0
+
+// Opcodes
+#define REQUEST 0
+#define RESPONSE 1
+#define PLAYER 2
+#define BALL 3
+#define COLLISION 4
+#define FINISH 5
 
 #endif /* PARAMETERS_H_ */

@@ -8,7 +8,7 @@ char req[] = "REQ";
 
 Request::Request() {}
 
-void Request::createRequest(int out_arr[], int player_self) {
+void Request::createRequest(char out_arr[], int player_self) {
     out_arr[0] = REQUEST;
     out_arr[1] = player_self;
 }
