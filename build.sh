@@ -7,7 +7,6 @@ g++ pipong.cpp \
     tools/*.cpp \
     message_protocol/*.cpp \
     gamestate/*.cpp \
-#    test_code/*.cpp \
     display/*.cpp \
     logic/*.cpp \
     states/*.cpp \

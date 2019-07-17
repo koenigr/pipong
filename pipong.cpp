@@ -64,8 +64,8 @@ void find_peers() {
 
         if ((ms_then - ms_start) > 1000) {
 
-            char request[BUFSIZE];
-            mp.createRequest(request, inet_ntoa(am.getOwnAddr().sin_addr));
+            char request[REQUEST_SIZE];
+            mp.createRequest(request, player_self);
             pi_socket.sendMessage(request, am.getBroadcastAddr());
 
             ms_start = Tools::getms();

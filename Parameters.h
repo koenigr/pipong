@@ -24,7 +24,8 @@
 #define FINISH_SIZE 4
 
 // Opcodes
-#define REQUEST 0
+
+#define MSGTYPE_REQUEST 0
 #define RESPONSE 1
 #define PLAYER 2
 #define BALL 3

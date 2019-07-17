@@ -6,6 +6,7 @@
 #include "../gamestate/GameState.h"
 
 void PlayerState::createPlayerState(GameState gs, char out_arr[], int player_self){
+    // TODO general header
     out_arr[0] = PLAYER + '0';
     out_arr[1] = player_self + '0';
     out_arr[2] = gs.getPlayer(player_self).getSequenceNo() + '0'; // TODO passt nicht in ein char
