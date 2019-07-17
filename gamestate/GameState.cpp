@@ -16,11 +16,11 @@ Ball ball;
 
 Player player_arr[4];
 int player_self;
+unsigned int sequence_no = 0;
 
 GameState::GameState() {}
 
 void GameState::init(int player_no) {
-    printf("Player points: %d\n", player_arr[0].getPlayerPoints());
     player_self = player_no;
 }
 
@@ -40,3 +40,17 @@ Player GameState::getPlayer(int i) {
 Ball GameState::getBall() {
     return ball;
 }
+
+unsigned int GameState::getSequenceNo() {
+    return sequence_no;
+}
+
+unsigned int GameState::incrSequenceNo() {
+    sequence_no += 1;
+    return sequence_no;
+}
+
+int GameState::getPlayerNo() {
+    return player_self;
+}
+

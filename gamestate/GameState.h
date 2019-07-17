@@ -21,6 +21,9 @@ public:
     Player getSelf();
     Player getPlayer(int i);
     Ball getBall();
+    unsigned int getSequenceNo();
+    unsigned int incrSequenceNo();
+    int getPlayerNo();
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

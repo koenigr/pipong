@@ -14,27 +14,27 @@ class MessageProtocol {
 
 public:
 
-    void createRequest(char out_str[], int player_self);
+    std::string createRequest(GameState gs);
 
-    void createResponse(char out_str[], int player_self);
+    std::string createResponse(GameState gs);
 
-    void createPlayerState(GameState gs, char out_str[], int player_self);
+    std::string createPlayerState(GameState gs);
 
-    void createCollision(char out_str[], int player_state);
+    std::string createCollision(GameState gs);
 
-    void createFinish(GameState gs, char out_str[], int player_state);
+    std::string createFinish(GameState gs);
 
-    void evalMessage(char in_str[]);
+    void evalMessage(std::string message);
 
-    void evalRequest(char in_str[]);
+    void evalRequest(std::string message);
 
-    void evalResponse(char in_str[]);
+    void evalResponse(std::string message);
 
-    void evalPlayerState(char in_str[]);
+    void evalPlayerState(std::string message);
 
-    void evalCollision(char in_str[]);
+    void evalCollision(std::string message);
 
-    void evalFinish(char in_str[]);
+    void evalFinish(std::string message);
 
 };
 

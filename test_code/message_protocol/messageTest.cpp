@@ -1,7 +1,7 @@
 #include "../../message_protocol/MessageProtocol.h"
-#include "../../message_protocol/Request.h"
-#include "../../Parameters.h"
 #include "../../gamestate/GameState.h"
+
+#include <iostream>
 
 #define BUFSIZE 1024
 
@@ -11,53 +11,49 @@ int main() {
     GameState gs;
     int player_self = 2;
 
+    gs.init(player_self);
+
 	// REQUEST TESTS
 
-    char request[REQUEST_SIZE];
+    std::string request = mp.createRequest(gs);
+    std::cout << "created request: " << request << "\n";
+    std::cout << "request length: " << request.length() << "\n";
+    mp.evalMessage(request.substr(7));
 
-    mp.createRequest(request, player_self);
-	printf("created request: %s\n", request);
-    printf("request length: %lu\n", sizeof(request));
+    gs.incrSequenceNo();
 
 	// RESPONSE TESTS
 
-    char response[RESPONSE_SIZE];
-    printf("response size 1: %lu\n", sizeof(response));
+    std::string response = mp.createResponse(gs);
+    std::cout << "created response: " << response << "\n";
+    std::cout << "response length: " << response.length() << "\n";
+    mp.evalMessage(response.substr(7));
 
-    mp.createResponse(response, player_self);
-    printf("created response: %s\n", response);
-    printf("response length: %lu\n", sizeof(response));
+    gs.incrSequenceNo();
 
     // PLAYER TESTS
 
-    char player_state[PLAYER_SIZE];
+    std::string player_state = mp.createPlayerState(gs);
+    std::cout << "created player_state: " << player_state << "\n";
+    std::cout << "player_state length: " << player_state.length() << "\n";
+    mp.evalMessage(player_state.substr(7));
 
-    mp.createPlayerState(gs, player_state, player_self);
-    printf("created player_state: %s\n", player_state);
-    printf("player_state length: %lu\n", sizeof(player_state));
-
-//    // BALL TESTS
-
-//    char response[RESPONSE_SIZE];
-
-//    mp.createResponse(response, ip);
-//    printf("created response: %s\n", response);
-//    printf("response length: %lu\n", sizeof(response));
+    gs.incrSequenceNo();
 
     // COLLISION TESTS
 
-    char collision[COLLISION_SIZE];
+    std::string collision = mp.createCollision(gs);
+    std::cout << "created collision: " << collision << "\n";
+    std::cout << "collision length: " << collision.length() << "\n";
+    mp.evalMessage(collision.substr(7));
 
-    mp.createCollision(collision, player_self);
-    printf("created collision: %s\n", collision);
-    printf("collision length: %lu\n", sizeof(collision));
+    gs.incrSequenceNo();
 
     // FINISH TESTS
 
-    char finish[FINISH_SIZE];
-
-    mp.createFinish(gs, finish, player_self);
-    printf("created finish: %s\n", finish);
-    printf("finish length: %lu\n", sizeof(finish));
+    std::string finish = mp.createFinish(gs);
+    std::cout << "created finish: " << finish << "\n";
+    std::cout << "finish length: " << finish.length() << "\n";
+    mp.evalMessage(finish.substr(7));
 
 }
