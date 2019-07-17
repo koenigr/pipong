@@ -20,7 +20,7 @@ int main() {
     std::cout << "request length: " << request.length() << "\n";
     mp.evalMessage(request.substr(7));
 
-    gs.incrSequenceNo();
+    gs.incrFrameNo();
 
 	// RESPONSE TESTS
 
@@ -29,7 +29,7 @@ int main() {
     std::cout << "response length: " << response.length() << "\n";
     mp.evalMessage(response.substr(7));
 
-    gs.incrSequenceNo();
+    gs.incrFrameNo();
 
     // PLAYER TESTS
 
@@ -38,7 +38,7 @@ int main() {
     std::cout << "player_state length: " << player_state.length() << "\n";
     mp.evalMessage(player_state.substr(7));
 
-    gs.incrSequenceNo();
+    gs.incrFrameNo();
 
     // COLLISION TESTS
 
@@ -47,7 +47,7 @@ int main() {
     std::cout << "collision length: " << collision.length() << "\n";
     mp.evalMessage(collision.substr(7));
 
-    gs.incrSequenceNo();
+    gs.incrFrameNo();
 
     // FINISH TESTS
 

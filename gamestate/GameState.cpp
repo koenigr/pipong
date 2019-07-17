@@ -16,7 +16,7 @@ Ball ball;
 
 Player player_arr[4];
 int player_self;
-unsigned int sequence_no = 0;
+unsigned int frame_no = 0;
 
 GameState::GameState() {}
 
@@ -41,13 +41,13 @@ Ball GameState::getBall() {
     return ball;
 }
 
-unsigned int GameState::getSequenceNo() {
-    return sequence_no;
+unsigned int GameState::getFrameNo() {
+    return frame_no;
 }
 
-unsigned int GameState::incrSequenceNo() {
-    sequence_no += 1;
-    return sequence_no;
+unsigned int GameState::incrFrameNo() {
+    frame_no += 1;
+    return frame_no;
 }
 
 int GameState::getPlayerNo() {

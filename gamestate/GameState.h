@@ -21,8 +21,8 @@ public:
     Player getSelf();
     Player getPlayer(int i);
     Ball getBall();
-    unsigned int getSequenceNo();
-    unsigned int incrSequenceNo();
+    unsigned int getFrameNo();
+    unsigned int incrFrameNo();
     int getPlayerNo();
 };
 
