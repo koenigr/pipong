@@ -18,6 +18,7 @@ public:
     int getPlayerPos();
     int getPlayerPoints();
     int getSequenceNo();
+    std::string toString();
 };
 
 #endif /* TEST_CODE_GAMESTATE_PLAYER_H_ */

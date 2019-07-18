@@ -8,6 +8,8 @@
 #ifndef LOGIC_GAMELOGIC_H_
 #define LOGIC_GAMELOGIC_H_
 
+#include "../gamestate/GameState.h"
+
 class GameLogic {
 public:
 	GameLogic();

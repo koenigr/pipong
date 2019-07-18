@@ -18,7 +18,7 @@ int main() {
     std::string request = mp.createRequest(gs);
     std::cout << "created request: " << request << "\n";
     std::cout << "request length: " << request.length() << "\n";
-    mp.evalMessage(request.substr(7));
+    mp.evalMessage(request);
 
     gs.incrFrameNo();
 
@@ -27,7 +27,7 @@ int main() {
     std::string response = mp.createResponse(gs);
     std::cout << "created response: " << response << "\n";
     std::cout << "response length: " << response.length() << "\n";
-    mp.evalMessage(response.substr(7));
+    mp.evalMessage(response);
 
     gs.incrFrameNo();
 
@@ -36,7 +36,7 @@ int main() {
     std::string player_state = mp.createPlayerState(gs);
     std::cout << "created player_state: " << player_state << "\n";
     std::cout << "player_state length: " << player_state.length() << "\n";
-    mp.evalMessage(player_state.substr(7));
+    mp.evalMessage(player_state);
 
     gs.incrFrameNo();
 
@@ -45,7 +45,7 @@ int main() {
     std::string collision = mp.createCollision(gs);
     std::cout << "created collision: " << collision << "\n";
     std::cout << "collision length: " << collision.length() << "\n";
-    mp.evalMessage(collision.substr(7));
+    mp.evalMessage(collision);
 
     gs.incrFrameNo();
 
@@ -54,6 +54,6 @@ int main() {
     std::string finish = mp.createFinish(gs);
     std::cout << "created finish: " << finish << "\n";
     std::cout << "finish length: " << finish.length() << "\n";
-    mp.evalMessage(finish.substr(7));
+    mp.evalMessage(finish);
 
 }

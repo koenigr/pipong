@@ -20,6 +20,7 @@ public:
     int getVelY();
     int setPosX(int posX);
     int setPosY(int posY);
+    std::string toString();
 	virtual ~Ball();
 };
 

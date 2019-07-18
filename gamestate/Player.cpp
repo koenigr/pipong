@@ -6,19 +6,22 @@
  */
 
 #include "Player.h"
+#include "../Parameters.h"
+
 #include <string>
 
 int playerPos;
 int points;
-int sequence; // TODO!!!!!
+int player_sequence; // TODO!!!!!
 
 Player::Player() {
 	playerPos = 0;
-	points = 5;
-    sequence = 3;
+    points = INIT_PLAYER_POINTS;
+    player_sequence = 3; // TODO!!!!
 }
 
 Player::~Player() {}
+
 
 int Player::decrPoints() {
 	points -= 1;
@@ -34,7 +37,18 @@ int Player::getPlayerPoints() {
 }
 
 int Player::getSequenceNo() {
-    return sequence;
+    return player_sequence;
+}
+
+std::string Player::toString() {
+
+    std::string player_to_string = "Player";
+
+    player_to_string += " position: " + std::to_string(playerPos);
+    player_to_string += " points: " + std::to_string(points);
+    player_to_string += " sequence: " + std::to_string(player_sequence);
+
+    return player_to_string;
 }
 
 

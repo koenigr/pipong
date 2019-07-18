@@ -54,3 +54,15 @@ int Ball::setPosY(int posY) {
     pos_y = posY;
     return pos_y;
 }
+
+std::string Ball::toString() {
+
+    std::string ball_to_string = "Ball";
+
+    ball_to_string += " posX: " + std::to_string(pos_x);
+    ball_to_string += " posY: " + std::to_string(pos_y);
+    ball_to_string += " velX: " + std::to_string(vel_x);
+    ball_to_string += " velY: " + std::to_string(vel_y);
+
+    return ball_to_string;
+}

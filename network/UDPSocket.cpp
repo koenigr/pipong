@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -22,9 +23,7 @@
 
 int own_sockfd;
 struct sockaddr_in own_addr;
-
-
-UDPSocket::UDPSocket() {}
+sockaddr_in recv_addr;
 
 UDPSocket::~UDPSocket() {
 
@@ -76,22 +75,32 @@ void UDPSocket::sendMessage(char* c, sockaddr_in out_addr) {
 
 }
 
-sockaddr_in UDPSocket::receiveMessage(char * buffer_out) {
+std::string UDPSocket::receiveMessage() {
 
-	sockaddr_in recv_addr;
+    // std::cout << "\nUDPSocket starts receiving message...\n";
+
 	socklen_t clilen;
-	char buffer[BUFSIZE];
+    char buffer[BUFSIZE];
 
-	int n = recvfrom(own_sockfd,buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
+    int n = recvfrom(own_sockfd, buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
     if (n > 0) {
-        printf("Here is the message: %s\n",buffer);
 
-        strncpy(buffer_out, buffer, BUFSIZE);
-        buffer_out[BUFSIZE - 1] = '\0';
-
-    	char m[] = "Receive ";
-        Tools::print_address(recv_addr, m);
+//        // TODO: was soll hier passieren?
+//        printf("Here is the message: %s\n", buffer);
+//        char m[] = "Receive address ";
+//        Tools::print_address(recv_addr, m);
     }
+
+    std::string out(buffer);
+
+    // std::cout << "\nUDPSocket receiving complete\n";
+
+    return out;
+}
+
+sockaddr_in UDPSocket::getAddressOfReceivedMsg() {
+
+    // std::cout << "\nReturning address of received message...\n";
 
     return recv_addr;
 }

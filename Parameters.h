@@ -12,4 +12,6 @@
 
 #define FRAMERATE 30
 
+#define INIT_PLAYER_POINTS 5
+
 #endif /* PARAMETERS_H_ */

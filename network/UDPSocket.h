@@ -9,19 +9,16 @@
 #define NETWORK_UDPSOCKET_H_
 
 #include <arpa/inet.h>
-
-
+#include <string>
 
 class UDPSocket {
-public:
-	virtual ~UDPSocket();
-	UDPSocket();
 
 public:
+    virtual ~UDPSocket();
 	void init(sockaddr_in own_addr);
 	void sendMessage(char* c, sockaddr_in out_addr);
-	sockaddr_in receiveMessage(char* c);
-
+    std::string receiveMessage();
+    sockaddr_in getAddressOfReceivedMsg();
 
 private:
 	void print_address();
