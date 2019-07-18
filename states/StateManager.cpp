@@ -18,11 +18,11 @@ void StateManager::receive_messages(UDPSocket pi_socket, MessageProtocol mp) {
     std::string message = pi_socket.receiveMessage();
     mp.evalMessage(message);
     recv = pi_socket.getAddressOfReceivedMsg();
-
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
-    // std::cout << "Sender address: " << str << "\n";
 
+
+    // std::cout << "Sender address: " << str << "\n";
     // std::cout << "Message received\n";
 }
 
@@ -76,18 +76,22 @@ void StateManager::init(int player_self, GameState gs, AddressManager am, UDPSoc
 
 void StateManager::findPeers(AddressManager am, UDPSocket pi_socket, MessageProtocol mp, GameState gs) {
 
-    std::cout << "\nWaiting for peers...\n";
+    //std::cout << "\nWaiting for peers...\n";
 
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
     while(am.getNumOfParticipants() == 0) {
 
+        //std::cout << "Entered while-loop\n";
+
         StateManager::receive_messages(pi_socket, mp);
 
         if ((ms_then - ms_start) > 1000) {
 
             std::string request = mp.createRequest(gs);
+            std::cout << "find peers request: " << request << "\n";
+            Tools::print_address(am.getBroadcastAddr(), "findPeers broadcast addr: ");
             pi_socket.sendMessage((char *)request.c_str(), am.getBroadcastAddr());
 
             ms_start = Tools::getms();

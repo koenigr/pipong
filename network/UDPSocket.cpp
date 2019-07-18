@@ -26,7 +26,6 @@ struct sockaddr_in own_addr;
 sockaddr_in recv_addr;
 
 UDPSocket::~UDPSocket() {
-
     close(own_sockfd);
 }
 
@@ -63,16 +62,23 @@ void UDPSocket::init(sockaddr_in addr) {
 
 void UDPSocket::sendMessage(char* c, sockaddr_in out_addr) {
 
-    printf("Send message to out_addr\n");
+    std::cout << "UDPSocket::sendMessage start...\n";
 
     char buffer[BUFSIZE];
     strncpy(buffer, c, BUFSIZE);
     buffer[BUFSIZE - 1] = '\0';
 
-    int n = sendto(own_sockfd, buffer, strlen(buffer), 0, (struct sockaddr *)&out_addr, sizeof(out_addr));
+    std::cout << "Message: " << buffer << "\n";
 
-    printf("Message sent from port %d to port %d with return code %d\n", ntohs(own_addr.sin_port), ntohs(out_addr.sin_port), n);
+    char buffer2[BUFSIZE] = "hallo";
 
+    Tools::print_address(out_addr, "UPDSocket::sendMessage: ");
+    int n = sendto(own_sockfd, buffer2, strlen(buffer2), 0, (struct sockaddr *)&out_addr, sizeof(out_addr));
+    std::cout << "Error no: " << errno << "\n";
+    std::cout << EBADF; // An invalid descriptor was specified.
+    std::cout << "Message sent from port " << std::to_string(ntohs(own_addr.sin_port)) << " to port " << std::to_string(ntohs(out_addr.sin_port)) << " with return code " << std::to_string(n) <<"\n";
+
+    std::cout << "UDPSocket::sendMessage end\n";
 }
 
 std::string UDPSocket::receiveMessage() {
@@ -86,16 +92,16 @@ std::string UDPSocket::receiveMessage() {
     if (n > 0) {
 
 //        // TODO: was soll hier passieren?
-//        printf("Here is the message: %s\n", buffer);
-//        char m[] = "Receive address ";
-//        Tools::print_address(recv_addr, m);
+        printf("Here is the message: %s\n", buffer);
+        char m[] = "Receive address ";
+        Tools::print_address(recv_addr, m);
     }
 
-    std::string out(buffer);
+    std::string out_str(buffer);
 
     // std::cout << "\nUDPSocket receiving complete\n";
 
-    return out;
+    return out_str;
 }
 
 sockaddr_in UDPSocket::getAddressOfReceivedMsg() {

@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <cstring>
+#include <iostream>
 
 #include "../tools/Tools.h"
 
@@ -21,10 +22,6 @@ int port = 2222;
 struct sockaddr_in own_addr2; //TODO warum geht das nicht, wenn es own_addr heißt?
 struct sockaddr_in broadcast_addr;
 std::vector<sockaddr_in> participants;
-
-AddressManager::AddressManager() {}
-
-AddressManager::~AddressManager() {}
 
 void AddressManager::print_infos() {
 	printf("AddressManager lebe hoch\n");
@@ -40,7 +37,7 @@ void AddressManager::createOwnAddr() {
     char m[] = "Own ";
     Tools::print_address(own_addr2, m);
 
-    printf("Address set\n");
+    std::cout << "Address set\n";
 }
 
 sockaddr_in AddressManager::getOwnAddr() {
@@ -54,7 +51,8 @@ void AddressManager::createBroadcastAddr() {
 
     bzero((char *) &broadcast_addr, sizeof(broadcast_addr));
     broadcast_addr.sin_family = AF_INET;
-    broadcast_addr.sin_addr.s_addr = inet_addr("10.1.1.255");
+    // broadcast_addr.sin_addr.s_addr = inet_addr("10.1.1.255");
+    broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
     broadcast_addr.sin_port = htons(port);
 
     char m[] = "Broadcast ";
@@ -81,6 +79,9 @@ sockaddr_in AddressManager::getParticipant(int pos) {
 }
 
 int AddressManager::getNumOfParticipants() {
+
+    //std::cout << "Checking number of participants\n";
+
 	return participants.size();
 }
 

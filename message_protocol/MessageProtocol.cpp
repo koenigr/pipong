@@ -22,15 +22,17 @@ std::string finish_type = "FIN";
 
 std::string MessageProtocol::createRequest(GameState gs) {
 
-    std::cout << "\nStarting to create request...\n";
+    std::cout << "\nMessageProtocol::createRequest start...\n";
 
     std::string request = main_header;
     request += delimiter + request_type;
     request += delimiter + "FRAME " + std::to_string(gs.getFrameNo());
     request += delimiter + "PLAYERNO " + std::to_string(gs.getPlayerNo());
-    return request;
 
-    std::cout << "Request creation completed\n";
+    std::cout << "Request: " << request << "\n";
+    std::cout << "MessageProtocol::createRequest end\n";
+
+    return request;
 }
 
 std::string MessageProtocol::createResponse(GameState gs) {
@@ -108,8 +110,6 @@ void MessageProtocol::evalMessage(std::string message) {
             exit(1);
         }
     }
-
-    std::cout << "\n\n";
 }
 
 void MessageProtocol::evalRequest(std::string message) {

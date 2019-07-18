@@ -8,12 +8,14 @@
 #ifndef TOOLS_H_
 #define TOOLS_H_
 
+#include <string>
+
 class Tools {
 
 public:
 	static long int getms();
 	static void error(const char *msg);
-	static void print_address(struct sockaddr_in addr, char message[]);
+    static void print_address(struct sockaddr_in addr, std::string message);
 
 };
 
