@@ -19,6 +19,7 @@ public:
 	void sendMessage(char* c, sockaddr_in out_addr);
     std::string receiveMessage();
     sockaddr_in getAddressOfReceivedMsg();
+    int getSockFD();
 
 private:
 	void print_address();

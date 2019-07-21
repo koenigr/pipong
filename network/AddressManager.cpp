@@ -23,6 +23,11 @@ struct sockaddr_in own_addr2; //TODO warum geht das nicht, wenn es own_addr heiÃ
 struct sockaddr_in broadcast_addr;
 std::vector<sockaddr_in> participants;
 
+
+AddressManager::~AddressManager() {
+    std::cout << "Address manager destructor calles\n";
+}
+
 void AddressManager::print_infos() {
 	printf("AddressManager lebe hoch\n");
 }

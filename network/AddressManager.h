@@ -13,6 +13,7 @@
 
 class AddressManager {
 public:
+    ~AddressManager();
 	void createBroadcastAddr();
 	void createOwnAddr();
 	sockaddr_in getBroadcastAddr();

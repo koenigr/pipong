@@ -15,7 +15,7 @@
 
 class GameState {
 public:
-    GameState();
+    ~GameState();
     void init(int player_self);
     int decrPoint();
     Player getSelf();
@@ -24,6 +24,8 @@ public:
     unsigned int getFrameNo();
     unsigned int incrFrameNo();
     int getPlayerNo();
+    int getRound();
+    int incrRound();
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

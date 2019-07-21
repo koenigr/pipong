@@ -10,7 +10,7 @@
 
 // PRIVATE
 
-void StateManager::receive_messages(UDPSocket pi_socket, MessageProtocol mp) {
+void StateManager::receive_messages(UDPSocket &pi_socket, MessageProtocol mp) {
 
     // std::cout << "\nReceive message\n";
 
@@ -59,7 +59,7 @@ void StateManager::display() {
 
 // PUBLIC
 
-void StateManager::init(int player_self, GameState gs, AddressManager am, UDPSocket pi_socket ) {
+void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPSocket &pi_socket ) {
 
     std::cout << "\nInitializing PiPong\n";
 
@@ -83,9 +83,11 @@ void StateManager::findPeers(AddressManager am, UDPSocket pi_socket, MessageProt
 
     while(am.getNumOfParticipants() == 0) {
 
-        //std::cout << "Entered while-loop\n";
+        // std::cout << "Entered while-loop\n";
 
         StateManager::receive_messages(pi_socket, mp);
+
+        // std::cout << "Again in while loop\n";
 
         if ((ms_then - ms_start) > 1000) {
 

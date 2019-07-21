@@ -18,8 +18,11 @@ Ball ball;
 Player player_arr[4];
 int player_self;
 unsigned int frame_no = 0;
+int round = 1;
 
-GameState::GameState() {}
+GameState::~GameState() {
+    std::cout << "GameState destructor called\n";
+}
 
 void GameState::init(int player_no) {
 
@@ -66,5 +69,13 @@ unsigned int GameState::incrFrameNo() {
 
 int GameState::getPlayerNo() {
     return player_self;
+}
+
+int getRound() {
+    return round;
+}
+
+int incrRound() {
+    return round;
 }
 
