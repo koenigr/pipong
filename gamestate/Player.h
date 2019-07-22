@@ -19,6 +19,9 @@ public:
     int getPlayerPos();
     int getPlayerPoints();
     int getSequenceNo();
+    int getLeftEnd();
+    int getRightEnd();
+    int getPlayerNo();
     std::string toString();
 };
 

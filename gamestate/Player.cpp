@@ -60,12 +60,15 @@ std::string Player::toString() {
     return player_to_string;
 }
 
-int getLeftEnd() {
+int Player::getLeftEnd() {
 
 }
 
-int getRightEnd() {
+int Player::getRightEnd() {
 
 }
 
+int Player::getPlayerNo() {
+    return player_no;
+}
 
