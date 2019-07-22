@@ -10,7 +10,7 @@
 
 // PRIVATE
 
-void StateManager::receive_messages(UDPSocket &pi_socket, MessageProtocol mp) {
+void StateManager::receive_messages(UDPSocket &pi_socket, MessageProtocol &mp) {
 
     // std::cout << "\nReceive message\n";
 
@@ -40,7 +40,7 @@ void StateManager::update_game_state() {
     std::cout << "Gamestate updatint completed\n";
 }
 
-void StateManager::deploy_game_state(AddressManager am, UDPSocket pi_socket) {
+void StateManager::deploy_game_state(AddressManager &am, UDPSocket &pi_socket) {
 
     std::cout << "\nStart deploying gamestate..\n";
 
@@ -50,7 +50,7 @@ void StateManager::deploy_game_state(AddressManager am, UDPSocket pi_socket) {
     std::cout << "Deploying gamestate completed\n";
 }
 
-void StateManager::display() {
+void StateManager::display(int player_self, GameState &gs) {
 
     std::cout << "\nStart display...\n";
 
@@ -74,7 +74,7 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
     std::cout << "PiPong Initialization complete\n\n";
 }
 
-void StateManager::findPeers(AddressManager am, UDPSocket pi_socket, MessageProtocol mp, GameState gs) {
+void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessageProtocol &mp, GameState &gs) {
 
     //std::cout << "\nWaiting for peers...\n";
 
@@ -111,7 +111,7 @@ void StateManager::findPeers(AddressManager am, UDPSocket pi_socket, MessageProt
 }
 
 
-void StateManager::mainLoop(int player_self, AddressManager am, MessageProtocol mp, UDPSocket pi_socket, GameState gs) {
+void StateManager::mainLoop(int player_self, AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 

@@ -25,13 +25,9 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    std::cout << "socketfd before: " << pi_socket.getSockFD() << "\n";
-
     int player_self = atoi(argv[1]);
 
     state_manager.init(player_self, gs, am, pi_socket);
-
-    std::cout << "socketfd after: " << pi_socket.getSockFD() << "\n";
 
     state_manager.findPeers(am, pi_socket, mp, gs);
 

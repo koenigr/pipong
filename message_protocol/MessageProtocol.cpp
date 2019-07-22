@@ -26,7 +26,7 @@ std::string MessageProtocol::createRequest(GameState gs) {
 
     std::string request = main_header;
     request += delimiter + request_type;
-    request += delimiter + "FRAME " + std::to_string(gs.getFrameNo());
+    request += delimiter + "FRAME " + std::to_string(gs.getFrameNo()); // TODO: fixed size for number
     request += delimiter + "PLAYERNO " + std::to_string(gs.getPlayerNo());
 
     std::cout << "Request: " << request << "\n";

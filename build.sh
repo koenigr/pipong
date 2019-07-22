@@ -14,5 +14,5 @@ g++ pipong.cpp \
 #-Werror
 
 if [ $? -eq 0 ]; then
-  ./PiPong 2
+  ./PiPong $1
 fi

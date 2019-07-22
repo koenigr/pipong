@@ -52,11 +52,11 @@ int GameState::decrPoint() {
     return player_arr[player_self]->decrPoints();
 }
 
-Player GameState::getSelf() {
+Player* GameState::getSelf() {
     return player_arr[player_self];
 }
 
-Player GameState::getPlayer(int i) {
+Player* GameState::getPlayer(int i) {
     return player_arr[i];
 }
 

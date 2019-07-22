@@ -13,8 +13,9 @@
 class Player {
 public:
     Player();
-	virtual ~Player();
-	int decrPoints();
+    virtual ~Player();
+    void init(int player_this, int player_self);
+    int decrPoints();
     int getPlayerPos();
     int getPlayerPoints();
     int getSequenceNo();

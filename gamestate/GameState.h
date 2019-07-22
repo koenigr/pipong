@@ -18,8 +18,8 @@ public:
     ~GameState();
     void init(int player_self);
     int decrPoint();
-    Player getSelf();
-    Player getPlayer(int i);
+    Player *getSelf();
+    Player *getPlayer(int i);
     Ball getBall();
     unsigned int getFrameNo();
     unsigned int incrFrameNo();
