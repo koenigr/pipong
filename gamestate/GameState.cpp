@@ -98,6 +98,7 @@ void GameState::checkForPaddleCollision() {
 }
 
 void GameState::checkForScoringZoneCollision() {
+    // TODO: move it to state manager
  // ResetBall
 }
 

@@ -23,7 +23,7 @@ public:
     int getPosY() const;
     float getAngle() const;
     float getVelocity() const;
-    void resetBall();
+    void resetBall(const int seed);
     int setPosX(int posX);
     int setPosY(int posY);
     float incrVelocity();

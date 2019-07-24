@@ -8,6 +8,7 @@
 #include <string>
 #include <math.h>
 #include <iostream>
+#include <cstdlib>
 
 #include "Ball.h"
 #include "../Parameters.h"
@@ -39,9 +40,10 @@ float Ball::getVelocity() const {
     return velocity;
 }
 
-void Ball::resetBall() {
+void Ball::resetBall(const int seed) {
     pos_x = DISPLAY_SIZE / 2;
     pos_y = DISPLAY_SIZE / 2;
+    angle = srand(seed); // TODO
 }
 
 float Ball::incrVelocity() {
