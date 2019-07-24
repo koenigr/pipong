@@ -24,10 +24,9 @@
 
 UDPSocket::~UDPSocket() {
     std::cout << "CLOSING SOCKETFD!!!!\n";
-    close(own_sockfd);
 }
 
-void UDPSocket::init(sockaddr_in addr) {
+void UDPSocket::init(sockaddr_in& addr) {
 
     std::cout << "\nInitializing UDPSocket\n";
 
@@ -62,7 +61,7 @@ void UDPSocket::init(sockaddr_in addr) {
 }
 
 
-void UDPSocket::sendMessage(char* c, const sockaddr_in out_addr) const {
+void UDPSocket::sendMessage(char* c, const sockaddr_in &out_addr) const {
 
     std::cout << "\nUDPSocket::sendMessage start...\n";
 

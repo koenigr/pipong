@@ -11,7 +11,7 @@
 
 // PRIVATE
 
-void StateManager::receive_messages(const UDPSocket pi_socket, const MessageProtocol mp) {
+void StateManager::receive_messages(const UDPSocket &pi_socket, const MessageProtocol mp) {
 
     // std::cout << "\nReceive message\n";
 
@@ -41,7 +41,7 @@ void StateManager::update_game_state() {
     std::cout << "Gamestate updatint completed\n";
 }
 
-void StateManager::deploy_game_state(const AddressManager am, const UDPSocket pi_socket) {
+void StateManager::deploy_game_state(const AddressManager am, const UDPSocket &pi_socket) {
 
     std::cout << "\nStart deploying gamestate..\n";
 
@@ -82,15 +82,17 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
-   for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 50; i++) {
 
-        // std::cout << "Entered while-loop\n";
+        std::cout << "Entered while-loop\n";
 
         StateManager::receive_messages(pi_socket, mp);
 
-        // std::cout << "Again in while loop\n";
+        std::cout << "Again in while loop\n";
 
         if ((ms_then - ms_start) > 1000) {
+
+            std::cout << "Entered if-loop\n";
 
             std::string request = mp.createRequest(gs);
             std::cout << "find peers request: " << request << "\n";
@@ -104,8 +106,10 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
 
     }
 
-    char message[] = "New Participant ";
-    Tools::print_address(am.getParticipant(0), message);
+//    std::cout << "Left for-loop\n";
+//    char message[] = "New Participant ";
+//    std::cout << "Char message created: " << message << "\n";
+//    Tools::print_address(am.getParticipant(0), message);
 
     std::cout << "Peer connection completed\n";
 
