@@ -11,6 +11,8 @@
 #include <string>
 
 class Tools {
+private:
+    struct timeval tp;
 
 public:
 	static long int getms();

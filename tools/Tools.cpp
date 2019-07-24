@@ -14,7 +14,6 @@
 #include <string>
 #include <iostream>
 
-struct timeval tp;
 
 long int Tools::getms()  // @suppress("Unused static function")
 {

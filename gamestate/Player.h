@@ -11,6 +11,13 @@
 #include <string>
 
 class Player {
+private:
+    int playerPos;
+    int points;
+    int player_sequence;// TODO!!!!! long unsigned int?
+    // player displayed at 0=x_axis or 1=y_axis
+    int x_axis;
+    int player_no;
 public:
     Player();
     virtual ~Player();

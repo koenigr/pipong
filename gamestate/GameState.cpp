@@ -13,13 +13,6 @@
 #include <stdio.h>
 #include <iostream>
 
-Ball ball;
-
-Player* player_arr[4];
-int player_self;
-unsigned int frame_no = 0;
-int round = 1;
-
 GameState::~GameState() {
     std::cout << "!!!!!!!!!!!!!!!    GameState destructor called\n";
 }
@@ -77,11 +70,11 @@ int GameState::getPlayerNo() {
     return player_self;
 }
 
-int getRound() {
+int GameState::getRound() {
     return round;
 }
 
-int incrRound() {
+int GameState::incrRound() {
     return round;
 }
 

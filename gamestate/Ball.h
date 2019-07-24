@@ -11,6 +11,14 @@
 #include <string>
 
 class Ball {
+private:
+    // position
+    int pos_x;
+    int pos_y;
+    // velocity
+    float vel_x;
+    float vel_y;
+
 public:
     Ball();
     void increaseVel();

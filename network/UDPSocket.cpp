@@ -21,9 +21,6 @@
 #include "../Parameters.h"
 
 
-int own_sockfd;
-struct sockaddr_in own_addr;
-sockaddr_in recv_addr;
 
 UDPSocket::~UDPSocket() {
     std::cout << "CLOSING SOCKETFD!!!!\n";

@@ -10,15 +10,8 @@
 #include <iostream>
 #include <string>
 
-std::string main_header = "PIPONG";
-std::string delimiter = ":";
-std::string request_type = "REQ";
-std::string response_type = "RSP";
-std::string player_state_type = "PST";
-std::string collision_type = "COL";
-std::string finish_type = "FIN";
-
 // TODO test for corrupt messages
+
 
 std::string MessageProtocol::createRequest(GameState gs) {
 

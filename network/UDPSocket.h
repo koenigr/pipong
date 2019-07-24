@@ -12,6 +12,12 @@
 #include <string>
 
 class UDPSocket {
+private:
+    int own_sockfd;
+    struct sockaddr_in own_addr;
+    sockaddr_in recv_addr;
+
+    void print_address();
 
 public:
     virtual ~UDPSocket();
@@ -21,8 +27,6 @@ public:
     sockaddr_in getAddressOfReceivedMsg();
     int getSockFD();
 
-private:
-	void print_address();
 };
 
 #endif /* NETWORK_UDPSOCKET_H_ */

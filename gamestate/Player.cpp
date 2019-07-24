@@ -11,13 +11,6 @@
 #include <string>
 #include <iostream>
 
-int playerPos;
-int points;
-int player_sequence;// TODO!!!!! long unsigned int?
-// player displayed at 0=x_axis or 1=y_axis
-int x_axis;
-int player_no;
-
 Player::Player() {}
 
 void Player::init(int player_this, int player_self) {

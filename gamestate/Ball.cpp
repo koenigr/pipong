@@ -9,13 +9,6 @@
 
 #include "Ball.h"
 
-// position
-int pos_x;
-int pos_y;
-// velocity
-float vel_x;
-float vel_y;
-
 Ball::Ball() {
     pos_x = 0;
     pos_y = 0;

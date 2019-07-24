@@ -14,6 +14,12 @@
 #include "Ball.h"
 
 class GameState {
+private:
+    Ball ball;
+    Player* player_arr[4];
+    int player_self;
+    unsigned int frame_no = 0;
+    int round = 1;
 public:
     ~GameState();
     void init(int player_self);
