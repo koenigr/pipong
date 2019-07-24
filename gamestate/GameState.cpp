@@ -14,7 +14,7 @@
 #include <iostream>
 
 GameState::~GameState() {
-    std::cout << "!!!!!!!!!!!!!!!    GameState destructor called\n";
+    //std::cout << "!!!!!!!!!!!!!!!    GameState destructor called\n";
 }
 
 void GameState::init(int player_no) {
@@ -43,19 +43,19 @@ int GameState::decrPoint() {
     return player_arr[player_self].decrPoints();
 }
 
-Player GameState::getSelf() {
+Player GameState::getSelf() const {
     return player_arr[player_self];
 }
 
-Player GameState::getPlayer(int i) {
+Player GameState::getPlayer(int i) const {
     return player_arr[i];
 }
 
-Ball GameState::getBall() {
+Ball GameState::getBall() const {
     return ball;
 }
 
-unsigned int GameState::getFrameNo() {
+unsigned int GameState::getFrameNo() const {
     return frame_no;
 }
 
@@ -64,15 +64,20 @@ unsigned int GameState::incrFrameNo() {
     return frame_no;
 }
 
-int GameState::getPlayerNo() {
+int GameState::getPlayerNo() const {
     return player_self;
 }
 
-int GameState::getRound() {
+int GameState::getRound() const {
     return round;
 }
 
 int GameState::incrRound() {
     return round;
+}
+
+std::string GameState::toString() const {
+    std::string gs_str = "FrameNo: " + std::to_string(getFrameNo());
+    return gs_str;
 }
 

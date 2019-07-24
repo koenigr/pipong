@@ -26,15 +26,15 @@ public:
     virtual ~Player();
     void init(int player_this, int player_self);
     int decrPoints();
-    int getPlayerPos();
-    int getPlayerPoints();
-    int getSequenceNo();
-    int getLeftEndX();
-    int getRightEndX();
-    int getLeftEndY();
-    int getRightEndY();
-    int getPlayerNo();
-    std::string toString();
+    int getPlayerPos() const;
+    int getPlayerPoints() const;
+    int getSequenceNo() const;
+    int getLeftEndX() const;
+    int getRightEndX() const;
+    int getLeftEndY() const;
+    int getRightEndY() const;
+    int getPlayerNo() const;
+    std::string toString() const;
 };
 
 #endif /* TEST_CODE_GAMESTATE_PLAYER_H_ */

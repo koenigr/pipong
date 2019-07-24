@@ -31,19 +31,19 @@ int Player::decrPoints() {
 	return points;
 }
 
-int Player::getPlayerPos() {
+int Player::getPlayerPos() const {
     return playerPos;
 }
 
-int Player::getPlayerPoints() {
+int Player::getPlayerPoints() const {
     return points;
 }
 
-int Player::getSequenceNo() {
+int Player::getSequenceNo() const {
     return player_sequence;
 }
 
-std::string Player::toString() {
+std::string Player::toString() const {
 
     std::string player_to_string = "Player " + std::to_string(player_no);
     player_to_string += " position: " + std::to_string(playerPos);
@@ -59,27 +59,27 @@ std::string Player::toString() {
     return player_to_string;
 }
 
-int Player::getLeftEndX() {
+int Player::getLeftEndX() const {
     return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis)*(x_axis);
 }
 
-int Player::getRightEndX() {
+int Player::getRightEndX() const {
     return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis)*(x_axis);
 }
 
-int Player::getLeftEndY() {
+int Player::getLeftEndY() const {
     return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis)*(!x_axis);
 }
 
-int Player::getRightEndY() {
+int Player::getRightEndY() const {
     return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis)*(!x_axis);
 }
 
-int Player::getPlayerNo() {
+int Player::getPlayerNo() const {
     return player_no;
 }
 

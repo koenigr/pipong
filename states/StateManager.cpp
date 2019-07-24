@@ -29,16 +29,19 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, const MessagePro
 
 void StateManager::process_input() {
 
-    std::cout << "\nStart processing input...\n";
+    //std::cout << "\nStart processing input...\n";
 
-    std::cout << "Input processing completed\n";
+    //std::cout << "Input processing completed\n";
 }
 
-void StateManager::update_game_state() {
+void StateManager::update_game_state(GameState &gs) {
 
     std::cout << "\nStart updating gamestate...\n";
 
-    std::cout << "Gamestate updatint completed\n";
+    gs.incrFrameNo();
+    std::cout << gs.toString() << "\n";
+
+    std::cout << "Gamestate updating completed\n";
 }
 
 void StateManager::deploy_game_state(const AddressManager am, const UDPSocket &pi_socket) {
@@ -84,15 +87,15 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
 
     for (int i = 0; i < 50; i++) {
 
-        std::cout << "Entered while-loop\n";
+        //std::cout << "Entered while-loop\n";
 
         StateManager::receive_messages(pi_socket, mp);
 
-        std::cout << "Again in while loop\n";
+        //std::cout << "Again in while loop\n";
 
-        if ((ms_then - ms_start) > 1000) {
+        if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-            std::cout << "Entered if-loop\n";
+            //std::cout << "Entered if-loop\n";
 
             std::string request = mp.createRequest(gs);
             std::cout << "find peers request: " << request << "\n";
@@ -120,37 +123,30 @@ void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &
 
     std::cout << "\nStarting game...\n";
 
-    //    long int ms_start = Tools::getms();
-    //    long int ms_then = Tools::getms();
+    long int ms_start = Tools::getms();
+    long int ms_then = Tools::getms();
 
-    //    while(true) {
+    int i = 0;
+    while(i < 10) {
 
-    //    	//receive_messages();
+    //receive_messages();
 
-    //    	process_input();
+    process_input();
 
-    //    	update_game_state();
 
-    //    	if ((ms_then - ms_start) > 1000) {
+        if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-    //    		//deploy_game_state();
-    //    		ms_start = Tools::getms();
 
-    //    	}
-    //    	ms_then = Tools::getms();
+            update_game_state(gs);
+            //deploy_game_state();
+            display(gs);
+            ms_start = Tools::getms();
+            i++;
 
-    //    	display();
+        }
+        ms_then = Tools::getms();
 
-    //    }
-
-//    bool LOOP = true;
-
-//    while (LOOP) {
-
-//        if ( gs.getPlayer(player_self).getPlayerPoints() == 0) {
-//            LOOP = false;
-//        }
-//    }
+    }
 
     std::cout << "Game finished\n";
 }

@@ -24,14 +24,15 @@ public:
     ~GameState();
     void init(int player_self);
     int decrPoint();
-    Player getSelf();
-    Player getPlayer(int i);
-    Ball getBall();
-    unsigned int getFrameNo();
+    Player getSelf() const;
+    Player getPlayer(int i) const;
+    Ball getBall() const;
+    unsigned int getFrameNo() const;
     unsigned int incrFrameNo();
-    int getPlayerNo();
-    int getRound();
+    int getPlayerNo() const;
+    int getRound() const;
     int incrRound();
+    std::string toString() const;
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */
