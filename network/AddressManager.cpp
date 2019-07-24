@@ -19,26 +19,32 @@ AddressManager::~AddressManager() {
     std::cout << "Address manager destructor calles\n";
 }
 
-void AddressManager::print_infos() {
-	printf("AddressManager lebe hoch\n");
+void AddressManager::init() {
+
+    std::cout << "\nInitializing AddressManager\n";
+
+    createOwnAddr();
+    createBroadcastAddr();
+
+    std::cout << "AddressManager Initialization completed\n\n";
 }
 
 void AddressManager::createOwnAddr() {
 
-    memset((char *) &own_addr2, 0, sizeof(own_addr2));
-    own_addr2.sin_family = AF_INET;
-    own_addr2.sin_addr.s_addr = INADDR_ANY;
-    own_addr2.sin_port = htons(port);
+    memset((char *) &own_addr, 0, sizeof(own_addr));
+    own_addr.sin_family = AF_INET;
+    own_addr.sin_addr.s_addr = INADDR_ANY;
+    own_addr.sin_port = htons(port);
 
     char m[] = "Own ";
-    Tools::print_address(own_addr2, m);
+    Tools::print_address(own_addr, m);
 
     std::cout << "Address set\n";
 }
 
 sockaddr_in AddressManager::getOwnAddr() {
 
-    return own_addr2;
+    return own_addr;
 }
 
 void AddressManager::createBroadcastAddr() {

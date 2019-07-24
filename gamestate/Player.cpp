@@ -19,6 +19,7 @@ void Player::init(int player_this, int player_self) {
     player_sequence = 3; // TODO!!!
     player_no = player_this;
     x_axis = (player_no + player_self) % 2;
+    oth_axis = ((player_no + player_self) % 4) > 1;
     std::cout << "Axis: " << std::to_string(x_axis) << "\n";
 }
 
@@ -49,16 +50,33 @@ std::string Player::toString() {
     player_to_string += " points: " + std::to_string(points);
     player_to_string += " sequence: " + std::to_string(player_sequence);
     player_to_string += " axis: " + std::to_string(x_axis);
+    player_to_string += " oth_axis: " + std::to_string(oth_axis);
+    player_to_string += " (" + std::to_string(getLeftEndX());
+    player_to_string += "," + std::to_string(getLeftEndY());
+    player_to_string += "),(" + std::to_string(getRightEndX());
+    player_to_string += "," + std::to_string(getRightEndY()) + ")";
 
     return player_to_string;
 }
 
-int Player::getLeftEnd() {
-
+int Player::getLeftEndX() {
+    return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(!x_axis)
+            +DISPLAY_SIZE*(oth_axis)*(x_axis);
 }
 
-int Player::getRightEnd() {
+int Player::getRightEndX() {
+    return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(!x_axis)
+            +DISPLAY_SIZE*(oth_axis)*(x_axis);
+}
 
+int Player::getLeftEndY() {
+    return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(x_axis)
+            +DISPLAY_SIZE*(oth_axis)*(!x_axis);
+}
+
+int Player::getRightEndY() {
+    return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(x_axis)
+            +DISPLAY_SIZE*(oth_axis)*(!x_axis);
 }
 
 int Player::getPlayerNo() {

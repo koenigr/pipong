@@ -65,9 +65,7 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
 
     gs.init(player_self);
 
-    am.print_infos();
-    am.createOwnAddr();
-    am.createBroadcastAddr();
+    am.init();
 
     pi_socket.init(am.getOwnAddr());
 
@@ -76,7 +74,7 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
 
 void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessageProtocol &mp, GameState &gs) {
 
-    //std::cout << "\nWaiting for peers...\n";
+    std::cout << "\nWaiting for peers...\n";
 
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();

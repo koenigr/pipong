@@ -11,9 +11,10 @@
 // General
 #define BUFSIZE 1024
 #define FRAMERATE 30
+#define DISPLAY_SIZE 127
 
 // Player
 #define INIT_PLAYER_POINTS 5
-#define PADDLE_WIDTH
+#define PADDLE_WIDTH 10
 
 #endif /* PARAMETERS_H_ */

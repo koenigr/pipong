@@ -17,15 +17,17 @@ private:
     std::string addr_arr[4] = {"10.1.1.10", "10.1.1.20", "10.1.1.16", "10.1.1.17"};
 
     int port = 2222;
-    struct sockaddr_in own_addr2; //TODO warum geht das nicht, wenn es own_addr heißt?
+    struct sockaddr_in own_addr;
     struct sockaddr_in broadcast_addr;
     std::vector<sockaddr_in> participants;
+
+    void createBroadcastAddr();
+    void createOwnAddr();
 
 
 public:
     ~AddressManager();
-	void createBroadcastAddr();
-	void createOwnAddr();
+    void init();
 	sockaddr_in getBroadcastAddr();
 	sockaddr_in getOwnAddr();
 	void print_infos();

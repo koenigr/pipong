@@ -29,6 +29,8 @@ UDPSocket::~UDPSocket() {
 
 void UDPSocket::init(sockaddr_in addr) {
 
+    std::cout << "\nInitializing UDPSocket\n";
+
 	own_addr = addr;
 
     std::cout << "Create socket\n";
@@ -55,6 +57,8 @@ void UDPSocket::init(sockaddr_in addr) {
     	Tools::error("ERROR on binding");
 
     printf("Socket bound\n");
+
+    std::cout << "UDPSocket Initialization completed\n\n";
 }
 
 
