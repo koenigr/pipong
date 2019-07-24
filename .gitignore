@@ -6,6 +6,8 @@ PiPong
 ..gitignore.swp
 test_code/message_protocol/udp
 test_code/array_tests/PlayerTest
+test_code/array_tests/ObjectTest
+test_code/ball_tests/BallTest
 test_code/message_protocol/MessageTest
 test_code/udp_connection/udp
 test_code/compare_broadcast_p2p/udp_send

@@ -61,7 +61,7 @@ void UDPSocket::init(const sockaddr_in& addr) {
 }
 
 
-void UDPSocket::sendMessage(std::string c, const sockaddr_in &out_addr) const {
+void UDPSocket::sendMessage(const std::string c, const sockaddr_in &out_addr) const {
 
     std::cout << "\nUDPSocket::sendMessage start...\n";
 

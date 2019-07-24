@@ -6,56 +6,73 @@
  */
 #include <stdio.h>
 #include <string>
+#include <math.h>
+#include <iostream>
 
 #include "Ball.h"
+#include "../Parameters.h"
 
 Ball::Ball() {
-    pos_x = 0;
-    pos_y = 0;
-    vel_x = 1.0;
-    vel_y = 1.0;
+    pos_x = DISPLAY_SIZE / 2;
+    pos_y = DISPLAY_SIZE / 2;
+    angle = 36.4; // TODO init random angle
+    velocity = INIT_VELOCITY;
 }
 
 Ball::~Ball() {}
 
-void Ball::increaseVel() {
-
-}
-
-int Ball::getPosX() {
+// The ball position is internally stored as float but must be returned as int
+int Ball::getPosX() const {
     return pos_x;
 }
 
-int Ball::getPosY() {
+// The ball position is internally stored as float but must be returned as int
+int Ball::getPosY() const {
     return pos_y;
 }
 
-int Ball::getVelX() {
-    return vel_x;
+float Ball::getAngle() const {
+    return angle;
 }
 
-int Ball::getVelY() {
-    return vel_y;
+float Ball::getVelocity() const {
+    return velocity;
 }
 
-int Ball::setPosX(int posX) {
-    pos_x = posX;
-    return pos_x;
+void Ball::resetBall() {
+    pos_x = DISPLAY_SIZE / 2;
+    pos_y = DISPLAY_SIZE / 2;
 }
 
-int Ball::setPosY(int posY) {
-    pos_y = posY;
-    return pos_y;
+float Ball::incrVelocity() {
+    velocity += VELOCITY_INCR;
+    return velocity;
 }
 
-std::string Ball::toString() {
+float Ball::setAngle(float new_angle) {
+    angle = new_angle;
+    return angle;
+}
+
+void Ball::reflectBall() {
+
+}
+
+void Ball::updateBall() { // TODO: little deviation?
+    pos_x += velocity * sin(angle * PI / 180.0);
+    pos_y += velocity * cos(angle * PI / 180.0);
+//    std::cout << "Ball::updateBall() " << pos_x << "," << pos_y << std::endl;
+}
+
+
+std::string Ball::toString() const {
 
     std::string ball_to_string = "Ball";
 
     ball_to_string += " posX: " + std::to_string(pos_x);
     ball_to_string += " posY: " + std::to_string(pos_y);
-    ball_to_string += " velX: " + std::to_string(vel_x);
-    ball_to_string += " velY: " + std::to_string(vel_y);
+    ball_to_string += " angle: " + std::to_string(angle);
+    ball_to_string += " velocity: " + std::to_string(velocity);
 
     return ball_to_string;
 }

@@ -12,23 +12,25 @@
 
 class Ball {
 private:
-    // position
-    int pos_x;
-    int pos_y;
-    // velocity
-    float vel_x;
-    float vel_y;
+    float pos_x;
+    float pos_y;
+    float angle;
+    float velocity;
 
 public:
     Ball();
-    void increaseVel();
-    int getPosX();
-    int getPosY();
-    int getVelX();
-    int getVelY();
+    int getPosX() const;
+    int getPosY() const;
+    float getAngle() const;
+    float getVelocity() const;
+    void resetBall();
     int setPosX(int posX);
     int setPosY(int posY);
-    std::string toString();
+    float incrVelocity();
+    float setAngle(float new_angle);
+    void updateBall();
+    void reflectBall();
+    std::string toString() const;
 	virtual ~Ball();
 };
 

@@ -13,6 +13,11 @@ void Display::drawPlayer(const GameState gs) {
     }
 }
 
+void Display::drawBall(const GameState gs) {
+    std::cout << "Ball " << gs.getBall().toString() << std::endl;
+}
+
 void Display::drawGameState(const GameState gs) {
     drawPlayer(gs);
+    drawBall(gs);
 }

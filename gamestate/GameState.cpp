@@ -81,3 +81,27 @@ std::string GameState::toString() const {
     return gs_str;
 }
 
+void GameState::updateBall() {
+    // TODO
+    // if ...
+    ball.updateBall();
+    // if checkPaddleCollision: reflectBall
+    // if checkScoringZone: ResetBall
+}
+
+bool GameState::checkForPaddleCollision() {
+    return true;
+}
+
+bool GameState::checkForScoringZoneCollision() {
+    return false;
+}
+
+void GameState::newRound() {
+    // TODO
+    // incr ROund
+    // new angle ...
+    ball.resetBall();
+    ball.incrVelocity();
+}
+

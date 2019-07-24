@@ -20,6 +20,10 @@ private:
     int player_self;
     unsigned int frame_no = 0;
     int round = 1;
+
+    bool checkForPaddleCollision();
+    bool checkForScoringZoneCollision();
+
 public:
     ~GameState();
     void init(int player_self);
@@ -33,6 +37,8 @@ public:
     int getRound() const;
     int incrRound();
     std::string toString() const;
+    void updateBall();
+    void newRound();
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */
