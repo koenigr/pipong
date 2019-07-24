@@ -44,12 +44,13 @@ void StateManager::update_game_state(GameState &gs) {
     std::cout << "Gamestate updating completed\n";
 }
 
-void StateManager::deploy_game_state(const AddressManager am, const UDPSocket &pi_socket) {
+void StateManager::deploy_game_state(const MessageProtocol mp, const GameState gs, const AddressManager am, const UDPSocket pi_socket) {
 
     std::cout << "\nStart deploying gamestate..\n";
 
-    char message[] = "Gamestate changed";
-    pi_socket.sendMessage(message, am.getBroadcastAddr());
+    std::string player_state_msg = mp.createPlayerState(gs);
+    std::cout << "Player state message: " << player_state_msg;
+    pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
 
     std::cout << "Deploying gamestate completed\n";
 }
@@ -131,14 +132,13 @@ void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &
 
     //receive_messages();
 
-    process_input();
 
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-
+            process_input(); // ??
             update_game_state(gs);
-            //deploy_game_state();
+            deploy_game_state(mp, gs, am, pi_socket);
             display(gs);
             ms_start = Tools::getms();
             i++;

@@ -22,7 +22,7 @@ private:
 public:
     virtual ~UDPSocket();
     void init(const sockaddr_in &own_addr);
-    void sendMessage(char* c, const sockaddr_in &out_addr) const;
+    void sendMessage(const std::string c, const sockaddr_in &out_addr) const;
     std::string receiveMessage() const;
     sockaddr_in getAddressOfReceivedMsg() const;
     int getSockFD();

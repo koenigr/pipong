@@ -61,12 +61,12 @@ void UDPSocket::init(const sockaddr_in& addr) {
 }
 
 
-void UDPSocket::sendMessage(char* c, const sockaddr_in &out_addr) const {
+void UDPSocket::sendMessage(std::string c, const sockaddr_in &out_addr) const {
 
     std::cout << "\nUDPSocket::sendMessage start...\n";
 
     char buffer[BUFSIZE];
-    strncpy(buffer, c, BUFSIZE);
+    strncpy(buffer, c.c_str(), BUFSIZE);
     buffer[BUFSIZE - 1] = '\0';
 
     // std::cout << "Message: " << buffer << "\n";

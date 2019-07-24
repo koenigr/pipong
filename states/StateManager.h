@@ -17,7 +17,7 @@ private:
     void receive_messages(const UDPSocket &pi_socket, const MessageProtocol mp);
     void process_input();
     void update_game_state(GameState &gs);
-    void deploy_game_state(const AddressManager am, const UDPSocket &pi_socket);
+    void deploy_game_state(const MessageProtocol mp, const GameState gs, const AddressManager am, const UDPSocket pi_socket);
     void display(const GameState gs);
 
 };
