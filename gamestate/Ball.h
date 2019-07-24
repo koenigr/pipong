@@ -27,9 +27,9 @@ public:
     int setPosX(int posX);
     int setPosY(int posY);
     float incrVelocity();
-    float setAngle(float new_angle);
+    float setAngle(int player_self, float new_angle);
     void updateBall();
-    void reflectBall();
+    void reflectBall(int side);
     std::string toString() const;
 	virtual ~Ball();
 };

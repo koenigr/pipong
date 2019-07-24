@@ -17,6 +17,7 @@
 // Ball
 #define INIT_VELOCITY 0.5 // pixel per frame
 #define VELOCITY_INCR 0.5
+#define BALL_WIDTH 5
 
 // Player
 #define INIT_PLAYER_POINTS 5

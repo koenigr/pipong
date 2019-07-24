@@ -9,6 +9,7 @@
 #include "Ball.h"
 #include "Player.h"
 #include <string>
+#include "../Parameters.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -26,6 +27,8 @@ void GameState::init(int player_no) {
     player_arr[1].init(1, player_self);
     player_arr[2].init(2, player_self);
     player_arr[3].init(3, player_self);
+
+    ball.setAngle(player_self, 26.4);
 
     std::cout << "player self: " << player_self << "\n";
     std::cout << "frame number: " << frame_no << "\n";
@@ -82,19 +85,20 @@ std::string GameState::toString() const {
 }
 
 void GameState::updateBall() {
-    // TODO
-    // if ...
+    checkForPaddleCollision();
+    checkForScoringZoneCollision();
     ball.updateBall();
-    // if checkPaddleCollision: reflectBall
-    // if checkScoringZone: ResetBall
 }
 
-bool GameState::checkForPaddleCollision() {
-    return true;
+void GameState::checkForPaddleCollision() {
+    if(ball.getPosY() - BALL_WIDTH <= 1) ball.reflectBall(0);
+    else if(ball.getPosY() + BALL_WIDTH >= 126) ball.reflectBall(1);
+    else if(ball.getPosX() - BALL_WIDTH <= 1) ball.reflectBall(2);
+    else if(ball.getPosX() + BALL_WIDTH >= 126) ball.reflectBall(3);
 }
 
-bool GameState::checkForScoringZoneCollision() {
-    return false;
+void GameState::checkForScoringZoneCollision() {
+ // ResetBall
 }
 
 void GameState::newRound() {

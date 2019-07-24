@@ -49,13 +49,56 @@ float Ball::incrVelocity() {
     return velocity;
 }
 
-float Ball::setAngle(float new_angle) {
+float Ball::setAngle(int player_self, float new_angle) {
     angle = new_angle;
+    switch (player_self) {
+    case 0:
+        angle += 0.0;
+        break;
+    case 1:
+        angle += 180.0;
+        break;
+    case 2:
+        angle += 270.0;
+        break;
+    case 3:
+        angle += 90.0;
+        break;
+    default:
+        std::cout << "Invalid player number\n";
+        exit(1);
+    }
+
+    angle = fmod(angle, 360);
     return angle;
 }
 
-void Ball::reflectBall() {
 
+/*
+ * +-1-+
+ * |   |
+ * 2   3
+ * |   |
+ * +-0-+
+ */
+void Ball::reflectBall(int side) {
+    switch (side) {
+    case 0:
+        angle = fmod(360 + 180 - angle, 360);
+        break;
+    case 1:
+        angle = fmod(360 + 180 - angle, 360);
+        break;
+    case 2:
+        angle = fmod(360 - angle, 360);
+        break;
+    case 3:
+        angle = fmod(360 - angle, 360);
+        break;
+    default:
+        std::cout << "Invalid side\n";
+        exit(1);
+    }
 }
 
 void Ball::updateBall() { // TODO: little deviation?

@@ -21,8 +21,8 @@ private:
     unsigned int frame_no = 0;
     int round = 1;
 
-    bool checkForPaddleCollision();
-    bool checkForScoringZoneCollision();
+    void checkForPaddleCollision();
+    void checkForScoringZoneCollision();
 
 public:
     ~GameState();
