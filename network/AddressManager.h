@@ -28,7 +28,7 @@ private:
 public:
     ~AddressManager();
     void init();
-	sockaddr_in getBroadcastAddr();
+    sockaddr_in getBroadcastAddr() const;
 	sockaddr_in getOwnAddr();
 	void print_infos();
 	void addParticipant(sockaddr_in participant);

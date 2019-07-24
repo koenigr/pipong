@@ -23,27 +23,27 @@ private:
 
 public:
 
-    std::string createRequest(GameState gs);
+    std::string createRequest(GameState gs) const;
 
-    std::string createResponse(GameState gs);
+    std::string createResponse(GameState gs) const;
 
-    std::string createPlayerState(GameState gs);
+    std::string createPlayerState(GameState gs) const;
 
-    std::string createCollision(GameState gs);
+    std::string createCollision(GameState gs) const;
 
-    std::string createFinish(GameState gs);
+    std::string createFinish(GameState gs) const;
 
-    void evalMessage(std::string message);
+    void evalMessage(std::string message) const;
 
-    void evalRequest(std::string message);
+    void evalRequest(std::string message) const;
 
-    void evalResponse(std::string message);
+    void evalResponse(std::string message) const;
 
-    void evalPlayerState(std::string message);
+    void evalPlayerState(std::string message) const;
 
-    void evalCollision(std::string message);
+    void evalCollision(std::string message) const;
 
-    void evalFinish(std::string message);
+    void evalFinish(std::string message) const;
 
 };
 

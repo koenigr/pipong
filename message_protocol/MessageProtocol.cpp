@@ -11,9 +11,10 @@
 #include <string>
 
 // TODO test for corrupt messages
+// TODO static?
 
 
-std::string MessageProtocol::createRequest(GameState gs) {
+std::string MessageProtocol::createRequest(GameState gs) const {
 
     std::cout << "\nMessageProtocol::createRequest start...\n";
 
@@ -28,7 +29,7 @@ std::string MessageProtocol::createRequest(GameState gs) {
     return request;
 }
 
-std::string MessageProtocol::createResponse(GameState gs) {
+std::string MessageProtocol::createResponse(GameState gs) const {
 
     std::cout << "\nStarting to create response...\n";
 
@@ -41,7 +42,7 @@ std::string MessageProtocol::createResponse(GameState gs) {
     std::cout << "Response creation completed\n";
 }
 
-std::string MessageProtocol::createPlayerState(GameState gs) {
+std::string MessageProtocol::createPlayerState(GameState gs) const {
 
     std::cout << "\nStarting to create playerState message...\n";
 
@@ -55,7 +56,7 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
     std::cout << "Player_state creation completed\n";
 }
 
-std::string MessageProtocol::createCollision(GameState gs) {
+std::string MessageProtocol::createCollision(GameState gs) const {
 
     std::cout << "\nStarting to create collision message...\n";
 
@@ -69,7 +70,7 @@ std::string MessageProtocol::createCollision(GameState gs) {
     std::cout << "Collision creation completed\n";
 }
 
-std::string MessageProtocol::createFinish(GameState gs) {
+std::string MessageProtocol::createFinish(GameState gs) const {
 
     std::cout << "\nStarting to create finish message...\n";
 
@@ -84,7 +85,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
 }
 
 
-void MessageProtocol::evalMessage(std::string message) {
+void MessageProtocol::evalMessage(std::string message) const {
 
     if (message.size() > 10 && message.substr(0, 6) == main_header) {
 
@@ -105,7 +106,7 @@ void MessageProtocol::evalMessage(std::string message) {
     }
 }
 
-void MessageProtocol::evalRequest(std::string message) {
+void MessageProtocol::evalRequest(std::string message) const {
     std::string submsg = message;
 
     if (submsg.size() < 6 || submsg.substr(0,6) != "FRAME ") {
@@ -129,7 +130,7 @@ void MessageProtocol::evalRequest(std::string message) {
     std::cout << "PlayerNo " << playerNo;
 }
 
-void MessageProtocol::evalResponse(std::string message) {
+void MessageProtocol::evalResponse(std::string message) const {
     std::string submsg = message;
     submsg = submsg.substr(6);
     std::string frame = submsg.substr(0, submsg.find(delimiter));
@@ -140,7 +141,7 @@ void MessageProtocol::evalResponse(std::string message) {
     std::cout << "PlayerNo " << playerNo;
 }
 
-void MessageProtocol::evalPlayerState(std::string message) {
+void MessageProtocol::evalPlayerState(std::string message) const {
     std::string submsg = message;
     submsg = submsg.substr(6);
     std::string frame = submsg.substr(0, submsg.find(delimiter));
@@ -154,7 +155,7 @@ void MessageProtocol::evalPlayerState(std::string message) {
     std::cout << "Position " << position << "\n";
 }
 
-void MessageProtocol::evalCollision(std::string message) {
+void MessageProtocol::evalCollision(std::string message) const {
     std::string submsg = message;
     submsg = submsg.substr(6);
     std::string frame = submsg.substr(0, submsg.find(delimiter));
@@ -165,7 +166,7 @@ void MessageProtocol::evalCollision(std::string message) {
     std::cout << "PlayerNo " << playerNo << "\n";
 }
 
-void MessageProtocol::evalFinish(std::string message) {
+void MessageProtocol::evalFinish(std::string message) const {
     std::string submsg = message;
     submsg = submsg.substr(6);
     std::string frame = submsg.substr(0, submsg.find(delimiter));

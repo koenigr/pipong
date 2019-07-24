@@ -5,12 +5,13 @@
 #include "../message_protocol/MessageProtocol.h"
 #include "../gamestate/GameState.h"
 #include "../Parameters.h"
+#include "../display/Display.h"
 
 #include <iostream>
 
 // PRIVATE
 
-void StateManager::receive_messages(UDPSocket &pi_socket, MessageProtocol &mp) {
+void StateManager::receive_messages(const UDPSocket pi_socket, const MessageProtocol mp) {
 
     // std::cout << "\nReceive message\n";
 
@@ -40,7 +41,7 @@ void StateManager::update_game_state() {
     std::cout << "Gamestate updatint completed\n";
 }
 
-void StateManager::deploy_game_state(AddressManager &am, UDPSocket &pi_socket) {
+void StateManager::deploy_game_state(const AddressManager am, const UDPSocket pi_socket) {
 
     std::cout << "\nStart deploying gamestate..\n";
 
@@ -50,9 +51,11 @@ void StateManager::deploy_game_state(AddressManager &am, UDPSocket &pi_socket) {
     std::cout << "Deploying gamestate completed\n";
 }
 
-void StateManager::display(int player_self, GameState &gs) {
+void StateManager::display(const GameState gs) {
 
     std::cout << "\nStart display...\n";
+
+    Display::drawGameState(gs);
 
     std::cout << "Display completed\n";
 }
@@ -79,7 +82,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
-    while(am.getNumOfParticipants() == 0) {
+   for (int i = 0; i < 50; i++) {
 
         // std::cout << "Entered while-loop\n";
 
@@ -109,7 +112,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
 }
 
 
-void StateManager::mainLoop(int player_self, AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs) {
+void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
@@ -136,14 +139,14 @@ void StateManager::mainLoop(int player_self, AddressManager &am, MessageProtocol
 
     //    }
 
-    bool LOOP = true;
+//    bool LOOP = true;
 
-    while (LOOP) {
+//    while (LOOP) {
 
-        if ( gs.getPlayer(player_self).getPlayerPoints() == 0) {
-            LOOP = false;
-        }
-    }
+//        if ( gs.getPlayer(player_self).getPlayerPoints() == 0) {
+//            LOOP = false;
+//        }
+//    }
 
     std::cout << "Game finished\n";
 }

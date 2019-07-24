@@ -62,7 +62,7 @@ void UDPSocket::init(sockaddr_in addr) {
 }
 
 
-void UDPSocket::sendMessage(char* c, sockaddr_in out_addr) {
+void UDPSocket::sendMessage(char* c, const sockaddr_in out_addr) const {
 
     std::cout << "\nUDPSocket::sendMessage start...\n";
 
@@ -84,7 +84,7 @@ void UDPSocket::sendMessage(char* c, sockaddr_in out_addr) {
     std::cout << "UDPSocket::sendMessage end\n";
 }
 
-std::string UDPSocket::receiveMessage() {
+std::string UDPSocket::receiveMessage() const {
 
     // std::cout << "\nUDPSocket starts receiving message...\n";
 
@@ -108,7 +108,7 @@ std::string UDPSocket::receiveMessage() {
     return out_str;
 }
 
-sockaddr_in UDPSocket::getAddressOfReceivedMsg() {
+sockaddr_in UDPSocket::getAddressOfReceivedMsg() const {
 
     // std::cout << "\nReturning address of received message...\n";
 

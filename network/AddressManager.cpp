@@ -64,7 +64,7 @@ void AddressManager::createBroadcastAddr() {
 
 }
 
-sockaddr_in AddressManager::getBroadcastAddr() {
+sockaddr_in AddressManager::getBroadcastAddr() const {
 
     return broadcast_addr;
 }

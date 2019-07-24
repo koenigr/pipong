@@ -5,9 +5,10 @@
 
 class Display
 {
+private:
+    static void drawPlayer(int player_no, GameState gs);
 public:
-    Display();
-    void drawPlayer(int player_no, GameState gs);
+    static void drawGameState(GameState gs);
 };
 
 #endif // DISPLAY_H

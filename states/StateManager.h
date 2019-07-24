@@ -10,15 +10,15 @@ class StateManager
 public:
     void init(int player_self, GameState &gs, AddressManager &am, UDPSocket &pi_socket );
     void findPeers(AddressManager &am, UDPSocket &pi_socket, MessageProtocol &mp, GameState &gs);
-    void mainLoop(int player_self, AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs);
+    void mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs);
     void showPoints();
 
 private:
-    void receive_messages(UDPSocket &pi_socket, MessageProtocol &mp);
+    void receive_messages(const UDPSocket pi_socket, const MessageProtocol mp);
     void process_input();
     void update_game_state();
-    void deploy_game_state(AddressManager &am, UDPSocket &pi_socket);
-    void display(int player_self, GameState &gs);
+    void deploy_game_state(const AddressManager am, const UDPSocket pi_socket);
+    void display(const GameState gs);
 
 };
 

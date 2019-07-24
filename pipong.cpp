@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 
     state_manager.findPeers(am, pi_socket, mp, gs);
 
-    state_manager.mainLoop(player_self, am, mp, pi_socket, gs);
+    state_manager.mainLoop(am, mp, pi_socket, gs);
 
     state_manager.showPoints();
 
