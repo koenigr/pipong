@@ -25,6 +25,9 @@
 #define REMAIN "%[\001-\377]"
 #define FRAME "FRAME "
 #define PLAYERNO "PLAYERNO "
+#define POSITION "POSITION "
+#define POINTS "POINTS "
+#define SEQNO "SEQNO "
 
 
 std::string MessageProtocol::createRequest(GameState gs) {
@@ -34,8 +37,8 @@ std::string MessageProtocol::createRequest(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << REQUEST_TYPE
-        << DELIMITER << "FRAME " << gs.getFrameNo()
-        << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
+        << DELIMITER << FRAME << gs.getFrameNo()
+        << DELIMITER << PLAYERNO << gs.getPlayerNo();
 
     std::string request = x.str();
 
@@ -52,7 +55,7 @@ std::string MessageProtocol::createResponse(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << FRAME << gs.getFrameNo()
-        << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
+        << DELIMITER << PLAYERNO << gs.getPlayerNo();
 
     std::string response = x.str();
 
@@ -68,10 +71,10 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << PLAYER_STATE_TYPE
-        << DELIMITER << "FRAME " << gs.getFrameNo()
-        << DELIMITER << "PLAYERNO " << gs.getPlayerNo()
-        << DELIMITER << "POSITION " << gs.getSelf().getPlayerPos()
-        << DELIMITER << "POINTS " << gs.getSelf().getPlayerPoints();
+        << DELIMITER << FRAME << gs.getFrameNo()
+        << DELIMITER << PLAYERNO << gs.getPlayerNo()
+        << DELIMITER << POSITION << gs.getSelf().getPlayerPos()
+        << DELIMITER << POINTS << gs.getSelf().getPlayerPoints();
 
     std::string player_state = x.str();
 
@@ -87,8 +90,8 @@ std::string MessageProtocol::createCollision(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER  << COLLISION_TYPE
-        << DELIMITER << "FRAME " << gs.getFrameNo()
-        << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
+        << DELIMITER << FRAME << gs.getFrameNo()
+        << DELIMITER << PLAYERNO << gs.getPlayerNo();
     // TODO random angle
 
     std::string collision = x.str();
@@ -105,9 +108,9 @@ std::string MessageProtocol::createFinish(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << FINISH_TYPE
-        << DELIMITER << "SEQNO " << gs.getFrameNo()
-        << DELIMITER << "PLAYERNO " << gs.getPlayerNo()
-        << DELIMITER << "POINTS " << gs.getSelf().getPlayerPoints();
+        << DELIMITER << SEQNO << gs.getFrameNo()
+        << DELIMITER << PLAYERNO << gs.getPlayerNo()
+        << DELIMITER << POINTS << gs.getSelf().getPlayerPoints();
 
     std::string finish = x.str();
 
@@ -157,9 +160,9 @@ void MessageProtocol::evalRequest(std::string message) {
         std::cout << "fr " << frame << std::endl;
         std::cout << "pn " << player_no << std::endl;
         std::cout << "rm " << rm << std::endl;
+        // TODO evaluate information
     }
 
-    // TODO evaluate information
 }
 
 void MessageProtocol::evalResponse(std::string message) {
