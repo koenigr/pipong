@@ -16,7 +16,7 @@
 
 
 AddressManager::~AddressManager() {
-    std::cout << "Address manager destructor calles\n";
+    std::cout << "Address manager destructor called\n";
 }
 
 void AddressManager::init() {

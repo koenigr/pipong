@@ -12,38 +12,38 @@
 
 class MessageProtocol {
 private:
-    std::string main_header = "PIPONG";
-    std::string delimiter = ":";
-    std::string request_type = "REQ";
-    std::string response_type = "RSP";
-    std::string player_state_type = "PST";
-    std::string collision_type = "COL";
-    std::string finish_type = "FIN";
+    static std::string main_header;
+    static std::string delimiter;
+    static std::string request_type;
+    static std::string response_type;
+    static std::string player_state_type;
+    static std::string collision_type;
+    static std::string finish_type;
 
 
 public:
 
-    std::string createRequest(GameState gs) const;
+    static std::string createRequest(GameState gs);
 
-    std::string createResponse(GameState gs) const;
+    static std::string createResponse(GameState gs);
 
-    std::string createPlayerState(GameState gs) const;
+    static std::string createPlayerState(GameState gs);
 
-    std::string createCollision(GameState gs) const;
+    static std::string createCollision(GameState gs);
 
-    std::string createFinish(GameState gs) const;
+    static std::string createFinish(GameState gs);
 
-    void evalMessage(std::string message) const;
+    static void evalMessage(int actual_state, std::string message);
 
-    void evalRequest(std::string message) const;
+    static void evalRequest(std::string message);
 
-    void evalResponse(std::string message) const;
+    static void evalResponse(std::string message);
 
-    void evalPlayerState(std::string message) const;
+    static void evalPlayerState(std::string message);
 
-    void evalCollision(std::string message) const;
+    static void evalCollision(std::string message);
 
-    void evalFinish(std::string message) const;
+    static void evalFinish(std::string message);
 
 };
 

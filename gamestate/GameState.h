@@ -12,6 +12,7 @@
 
 #include "Player.h"
 #include "Ball.h"
+#include "../Parameters.h"
 
 class GameState {
 private:
@@ -20,6 +21,7 @@ private:
     int player_self;
     unsigned int frame_no = 0;
     int round = 1;
+    unsigned int countdown = COUNTDOWN;
 
     void checkForPaddleCollision();
     void checkForScoringZoneCollision();
@@ -27,6 +29,8 @@ private:
 public:
     ~GameState();
     void init(int player_self);
+    unsigned int getCountdown();
+    void setCountdown(const unsigned int cd);
     int decrPoint();
     Player getSelf() const;
     Player getPlayer(int i) const;

@@ -1,6 +1,5 @@
 // test sending and receiving gamestates
 
-/* The port number is passed as an argument */
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +9,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/time.h>
+
+#include "../../gamestate/GameState.h"
 
 #define BUFSIZE 1024
 
@@ -57,8 +58,7 @@ void send_message(sockaddr_in out_addr, int sockfd, char message[]) {
 int main(int argc, char *argv[])
 {
      int sockfd;
-     int portown;
-     int portout;
+     int port;
      int clientlen;
      socklen_t clilen;
      char buffer[BUFSIZE];
@@ -66,15 +66,13 @@ int main(int argc, char *argv[])
      struct sockaddr_in out_addr;
      struct sockaddr_in recv_addr;
      struct timeval tp;
+     GameState gs;
+
+     gs.init(0);
 
      printf("Create socket\n");
-     if (argc < 3) {
-        fprintf(stderr,"Usage %s hostname portown portout\n", argv[0]);
-        exit(0);
-     }
 
-     portown = atoi(argv[1]);
-     portout = atoi(argv[2]);
+     port = 2222;
 
      sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
      if (sockfd < 0) 
@@ -86,13 +84,13 @@ int main(int argc, char *argv[])
 
      printf("Socket created.\n");
 
-     create_addr(own_addr, portown);
+     create_addr(own_addr, port);
 
-     print_addr(own_addr, portown);
+     print_addr(own_addr, port);
 
-     create_broadcast(out_addr, portout);
+     create_broadcast(out_addr, port);
 
-     print_addr(out_addr, portout);
+     print_addr(out_addr, port);
 
      if (bind(sockfd, (struct sockaddr *) &own_addr,
               sizeof(own_addr)) < 0)
@@ -114,7 +112,7 @@ int main(int argc, char *argv[])
 
     	   // SEND
     	   char m[BUFSIZE];
-    	   sprintf(m, "Hi! says port %d", portown);
+           sprintf(m, "Hi! says port %d", port);
     	   send_message(out_addr, sockfd, m);
 
            ms_start = getms(tp);

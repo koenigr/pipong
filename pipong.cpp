@@ -21,7 +21,7 @@ StateManager state_manager;
 int main(int argc, char* argv[]) {
 
     if(argc < 2) {
-        printf("Usage: ./PiPong <player_no>");
+        std::cout << "Usage: ./PiPong <player_no>\n";
         exit(1);
     }
 
@@ -31,9 +31,9 @@ int main(int argc, char* argv[]) {
 
     state_manager.findPeers(am, pi_socket, mp, gs);
 
-    state_manager.mainLoop(am, mp, pi_socket, gs);
+    // state_manager.mainLoop(am, mp, pi_socket, gs);
 
-    state_manager.showPoints();
+    // state_manager.showPoints();
 
     return 0;
 }

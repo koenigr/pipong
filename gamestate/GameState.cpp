@@ -42,6 +42,14 @@ void GameState::init(int player_no) {
     std::cout << "Gamestate Initialization completed\n\n";
 }
 
+unsigned int GameState::getCountdown() {
+    return countdown;
+}
+
+void GameState::setCountdown(const unsigned int cd) {
+    countdown = cd;
+}
+
 // A player knows only his own point in the main loop
 int GameState::decrPoint() {
     return player_arr[player_self].decrPoints();

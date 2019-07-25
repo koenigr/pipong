@@ -61,15 +61,15 @@ std::string Player::toString() const {
 
 int Player::getLeftEndX() const { // TODO wrong order
     if (!active) {
-        return DISPLAY_SIZE*(oth_axis)*(x_axis);
+        return DISPLAY_SIZE*(oth_axis && x_axis);
     }
     return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(!x_axis)
-            +DISPLAY_SIZE*(oth_axis)*(x_axis);
+            +DISPLAY_SIZE*(oth_axis && x_axis);
 }
 
 int Player::getRightEndX() const {
     if (!active) {
-        return DISPLAY_SIZE*!(!oth_axis*x_axis);
+        return DISPLAY_SIZE*!(!oth_axis && x_axis);
     }
     return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis)*(x_axis);
@@ -80,12 +80,12 @@ int Player::getLeftEndY() const {
         return DISPLAY_SIZE*(oth_axis)*(!x_axis);
     }
     return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(x_axis)
-            +DISPLAY_SIZE*(oth_axis)*(!x_axis);
+            +DISPLAY_SIZE*(oth_axis && !x_axis);
 }
 
 int Player::getRightEndY() const {
     if (!active) {
-        return DISPLAY_SIZE*!((!oth_axis)*(!x_axis));
+        return DISPLAY_SIZE*!((!oth_axis && !x_axis));
     }
     return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis)*(!x_axis);

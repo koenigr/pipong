@@ -34,12 +34,12 @@ void Tools::error(const char *msg) // @suppress("Unused static function")
 
 void Tools::print_address(struct sockaddr_in addr, std::string message) {
 
-    std::cout << "Tools::print_address start...\n";
+    // std::cout << "Tools::print_address start...\n";
 
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
     std::cout << "Address: " << message << str << "\n";
 
-    std::cout << "Tools::print_address end\n";
+    //std::cout << "Tools::print_address end\n";
 
 }

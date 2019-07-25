@@ -8,7 +8,6 @@ g++ pipong.cpp \
     message_protocol/*.cpp \
     gamestate/*.cpp \
     display/*.cpp \
-    logic/*.cpp \
     states/*.cpp \
     -o PiPong -std=c++11 -Wall -Wextra -Wpedantic 
 #-Werror

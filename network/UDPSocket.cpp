@@ -89,6 +89,7 @@ std::string UDPSocket::receiveMessage() const {
 
 	socklen_t clilen;
     char buffer[BUFSIZE];
+    memset(buffer, 0, sizeof(buffer));
 
     int n = recvfrom(own_sockfd, buffer, 255, 0, (struct sockaddr *)&recv_addr, &clilen);
     if (n > 0) {

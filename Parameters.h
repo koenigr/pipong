@@ -10,9 +10,10 @@
 
 // General
 #define BUFSIZE 1024
-#define FRAMERATE 30
+#define FRAMERATE 1
 #define DISPLAY_SIZE 127
 #define PI 3.14159265
+#define COUNTDOWN 20
 
 // Ball
 #define INIT_VELOCITY 0.5 // pixel per frame

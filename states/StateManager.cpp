@@ -17,7 +17,7 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, const MessagePro
 
     sockaddr_in recv;
     std::string message = pi_socket.receiveMessage();
-    mp.evalMessage(message);
+    mp.evalMessage(actual_state, message);
     recv = pi_socket.getAddressOfReceivedMsg();
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
@@ -72,6 +72,8 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
 
     gs.init(player_self);
 
+    actual_state = 0;
+
     am.init();
 
     pi_socket.init(am.getOwnAddr());
@@ -86,22 +88,21 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
-    for (int i = 0; i < 50; i++) {
+    while(gs.getCountdown() > 0) {
 
-        //std::cout << "Entered while-loop\n";
-
-        StateManager::receive_messages(pi_socket, mp);
-
-        //std::cout << "Again in while loop\n";
+        receive_messages(pi_socket, mp);
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
-
-            //std::cout << "Entered if-loop\n";
 
             std::string request = mp.createRequest(gs);
             std::cout << "find peers request: " << request << "\n";
             Tools::print_address(am.getBroadcastAddr(), "findPeers broadcast addr: ");
             pi_socket.sendMessage((char *)request.c_str(), am.getBroadcastAddr());
+
+            // TODO send response to all active peers
+
+            std::cout << "Countdown: " << gs.getCountdown() << std::endl;
+            gs.setCountdown(gs.getCountdown()-1);
 
             ms_start = Tools::getms();
 
@@ -123,6 +124,8 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
 void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
+
+    actual_state = 1;
 
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
@@ -152,6 +155,8 @@ void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &
 }
 
 void StateManager::showPoints() {
+
+    actual_state = 2;
 
     std::cout << "\nShow points\n";
     /*  send FSH
