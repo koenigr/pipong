@@ -11,13 +11,13 @@
 
 // PRIVATE
 
-void StateManager::receive_messages(const UDPSocket &pi_socket, const MessageProtocol mp) {
+void StateManager::receive_messages(const UDPSocket &pi_socket) {
 
     // std::cout << "\nReceive message\n";
 
     sockaddr_in recv;
     std::string message = pi_socket.receiveMessage();
-    mp.evalMessage(actual_state, message);
+    MessageProtocol::evalMessage(actual_state, message);
     recv = pi_socket.getAddressOfReceivedMsg();
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
@@ -44,11 +44,11 @@ void StateManager::update_game_state(GameState &gs) {
     std::cout << "Gamestate updating completed\n";
 }
 
-void StateManager::deploy_game_state(const MessageProtocol mp, const GameState gs, const AddressManager am, const UDPSocket pi_socket) {
+void StateManager::deploy_game_state(const GameState gs, const AddressManager am, const UDPSocket pi_socket) {
 
     std::cout << "\nStart deploying gamestate..\n";
 
-    std::string player_state_msg = mp.createPlayerState(gs);
+    std::string player_state_msg = MessageProtocol::createPlayerState(gs);
     std::cout << "Player state message: " << player_state_msg;
     pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
 
@@ -81,7 +81,7 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
     std::cout << "PiPong Initialization complete\n\n";
 }
 
-void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessageProtocol &mp, GameState &gs) {
+void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nWaiting for peers...\n";
 
@@ -90,11 +90,11 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
 
     while(gs.getCountdown() > 0) {
 
-        receive_messages(pi_socket, mp);
+        receive_messages(pi_socket);
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-            std::string request = mp.createRequest(gs);
+            std::string request = MessageProtocol::createRequest(gs);
             std::cout << "find peers request: " << request << "\n";
             Tools::print_address(am.getBroadcastAddr(), "findPeers broadcast addr: ");
             pi_socket.sendMessage((char *)request.c_str(), am.getBroadcastAddr());
@@ -121,7 +121,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, MessagePr
 }
 
 
-void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &pi_socket, GameState &gs) {
+void StateManager::mainLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
@@ -141,7 +141,7 @@ void StateManager::mainLoop(AddressManager &am, MessageProtocol &mp, UDPSocket &
 
             process_input(); // ??
             update_game_state(gs);
-            deploy_game_state(mp, gs, am, pi_socket);
+            deploy_game_state(gs, am, pi_socket);
             display(gs);
             ms_start = Tools::getms();
             i++;

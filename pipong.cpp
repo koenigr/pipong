@@ -13,7 +13,6 @@
 #include "states/StateManager.h"
 
 AddressManager am;
-MessageProtocol mp;
 UDPSocket pi_socket;
 GameState gs;
 StateManager state_manager;
@@ -29,9 +28,9 @@ int main(int argc, char* argv[]) {
 
     state_manager.init(player_self, gs, am, pi_socket);
 
-    state_manager.findPeers(am, pi_socket, mp, gs);
+    state_manager.findPeers(am, pi_socket, gs);
 
-    // state_manager.mainLoop(am, mp, pi_socket, gs);
+    // state_manager.mainLoop(am, pi_socket, gs);
 
     // state_manager.showPoints();
 
