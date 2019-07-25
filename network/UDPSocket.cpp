@@ -28,14 +28,11 @@ UDPSocket::~UDPSocket() {
 
 void UDPSocket::init(const sockaddr_in& addr) {
 
-    std::cout << "\nInitializing UDPSocket\n";
+    std::cout << "\nUDPSocket::init() start...\n";
 
 	own_addr = addr;
-
-    std::cout << "Create socket\n";
-
     own_sockfd =  socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-    std::cout << own_sockfd << "\n";
+
     if (own_sockfd < 0)
     {
     	Tools::error("ERROR opening socket");
@@ -43,21 +40,16 @@ void UDPSocket::init(const sockaddr_in& addr) {
 
 	int broadcast=1;
     int sockop = setsockopt(own_sockfd, SOL_SOCKET, SO_BROADCAST, (void *) &broadcast, sizeof(broadcast));
+    if (sockop != 0) {
+        std::cout << "Errno: " << errno << std::endl;
+        Tools::error("ERROR on setsockopt");
+    }
 
-    std::cout << "Socket " << own_sockfd << " created.\n";
-    std::cout << "Return of sockopt: " << sockop << "\n";
+    if (bind(own_sockfd, (struct sockaddr *) &own_addr, sizeof(own_addr)) < 0) {
+        Tools::error("ERROR on binding");
+    }
 
-    // bind(int fd, struct sockaddr *local_addr, socklen_t addr_length)
-    // bind() passes file descriptor, the address structure,
-    // and the length of the address structure
-    // This bind() call will bind  the socket to the current IP address on port, portno
-    if (bind(own_sockfd, (struct sockaddr *) &own_addr,
-             sizeof(own_addr)) < 0)
-    	Tools::error("ERROR on binding");
-
-    printf("Socket bound\n");
-
-    std::cout << "UDPSocket Initialization completed\n\n";
+    std::cout << "UDPSocket ::init() end\n\n";
 }
 
 

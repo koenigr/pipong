@@ -21,7 +21,7 @@ GameState::~GameState() {
 
 void GameState::init(int player_no) {
 
-    std::cout << "\nInitializing Gamestate\n";
+    std::cout << "\nGameState::init() start...\n";
 
     player_self = player_no;
     player_arr[0].init(0, player_self);
@@ -31,15 +31,9 @@ void GameState::init(int player_no) {
 
     ball.setAngle(player_self, 26.4);
 
-    std::cout << "player self: " << player_self << "\n";
-    std::cout << "frame number: " << frame_no << "\n";
-    std::cout << "ball: " << ball.toString() << "\n";
-    std::cout <<  player_arr[0].toString() << "\n";
-    std::cout <<  player_arr[1].toString() << "\n";
-    std::cout <<  player_arr[2].toString() << "\n";
-    std::cout <<  player_arr[3].toString() << "\n";
+    // std::cout << toString() << std::endl;
 
-    std::cout << "Gamestate Initialization completed\n\n";
+    std::cout << "Gamestate::init() end\n\n";
 }
 
 unsigned int GameState::getCountdown() {
@@ -90,7 +84,8 @@ int GameState::incrRound() {
 
 std::string GameState::toString() const {
     std::stringstream x;
-    x << "FrameNo: " << getFrameNo() << "\n";
+    x << "PlayerSelf: " << player_self << std::endl;
+    x << "FrameNo: " << getFrameNo() << std::endl;
     x << ball.toString() << std::endl;
     x << player_arr[0].toString() << std::endl;
     x << player_arr[1].toString() << std::endl;

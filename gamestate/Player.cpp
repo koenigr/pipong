@@ -22,7 +22,6 @@ void Player::init(int player_this, int player_self) {
     player_no = player_this;
     x_axis = (player_no + player_self) % 2;
     oth_axis = ((player_no + player_self) % 4) > 1;
-    std::cout << "Axis: " << std::to_string(x_axis) << "\n";
     active = true;
 }
 
