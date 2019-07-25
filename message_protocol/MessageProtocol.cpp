@@ -28,6 +28,7 @@
 #define POSITION "POSITION "
 #define POINTS "POINTS "
 #define SEQNO "SEQNO "
+#define COUNTDOWN_IDENT "COUNTDOWN "
 
 
 std::string MessageProtocol::createRequest(GameState gs) {
@@ -55,7 +56,8 @@ std::string MessageProtocol::createResponse(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << FRAME << gs.getFrameNo()
-        << DELIMITER << PLAYERNO << gs.getPlayerNo();
+        << DELIMITER << PLAYERNO << gs.getPlayerNo()
+        << DELIMITER << COUNTDOWN_IDENT  << gs.getCountdown();
 
     std::string response = x.str();
 
@@ -166,14 +168,27 @@ void MessageProtocol::evalRequest(std::string message) {
 }
 
 void MessageProtocol::evalResponse(std::string message) {
-    std::string submsg = message;
-    submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(11);
-    std::string playerNo = submsg;
 
-    std::cout << "Frame " << frame << "\n";
-    std::cout << "PlayerNo " << playerNo;
+    std::cout << "MessageProtocol::evalResponse()\n";
+    std::cout << message << std::endl;
+
+    int frame;
+    int player_no;
+    unsigned int countdown;
+    char rm[BUFSIZE];
+    memset(rm, 0, BUFSIZE);
+
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER COUNTDOWN_IDENT "%u" REMAIN, &frame, &player_no, &countdown, rm);
+
+    if (r >= 3) {
+        std::cout << "r " << r << std::endl;
+        std::cout << "fr " << frame << std::endl;
+        std::cout << "pn " << player_no << std::endl;
+        std::cout << "cd " << countdown << std::endl;
+        std::cout << "rm " << rm << std::endl;
+        // TODO evaluate information
+    }
+
 }
 
 void MessageProtocol::evalPlayerState(std::string message) {
