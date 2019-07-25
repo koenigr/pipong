@@ -11,15 +11,6 @@
 #include "../gamestate/GameState.h"
 
 class MessageProtocol {
-private:
-    static std::string main_header;
-    static std::string delimiter;
-    static std::string request_type;
-    static std::string response_type;
-    static std::string player_state_type;
-    static std::string collision_type;
-    static std::string finish_type;
-
 
 public:
 

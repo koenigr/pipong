@@ -10,24 +10,26 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <stdio.h>
 
-std::string MessageProtocol::main_header = "PIPONG";
-std::string MessageProtocol::delimiter = ":";
-std::string MessageProtocol::request_type = "REQ";
-std::string MessageProtocol::response_type = "RSP";
-std::string MessageProtocol::player_state_type = "PST";
-std::string MessageProtocol::collision_type = "COL";
-std::string MessageProtocol::finish_type = "FIN";
+#define MAIN_HEADER "PIPONG"
+#define DELIMITER ":"
+#define REQUEST_TYPE "REQ"
+#define RESPONSE_TYPE "RSP"
+#define PLAYER_STATE_TYPE "PST"
+#define COLLISION_TYPE "COL"
+#define FINISH_TYPE "FIN"
+
 
 std::string MessageProtocol::createRequest(GameState gs) {
 
     //std::cout << "\nMessageProtocol::createRequest() start...\n";
 
     std::stringstream x;
-    x   << main_header
-        << delimiter << request_type
-        << delimiter << "FRAME " << gs.getFrameNo()
-        << delimiter << "PLAYERNO " << gs.getPlayerNo();
+    x   << MAIN_HEADER
+        << DELIMITER << REQUEST_TYPE
+        << DELIMITER << "FRAME " << gs.getFrameNo()
+        << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
 
     std::string request = x.str();
 
@@ -39,73 +41,93 @@ std::string MessageProtocol::createRequest(GameState gs) {
 
 std::string MessageProtocol::createResponse(GameState gs) {
 
-    std::cout << "\nStarting to create response...\n";
+    //std::cout << "\nStarting to create response...\n";
 
-    std::string response = main_header;
-    response += delimiter + response_type;
-    response += delimiter + "FRAME " + std::to_string(gs.getFrameNo());
-    response += delimiter + "PLAYERNO " + std::to_string(gs.getPlayerNo());
+    std::stringstream x;
+    x   << MAIN_HEADER
+        << DELIMITER << RESPONSE_TYPE
+        << DELIMITER << "FRAME " << gs.getFrameNo()
+        << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
+
+    std::string response = x.str();
+
+    //std::cout << "Response creation completed\n";
+
     return response;
-
-    std::cout << "Response creation completed\n";
 }
 
 std::string MessageProtocol::createPlayerState(GameState gs) {
 
-    std::cout << "\nStarting to create playerState message...\n";
+    //std::cout << "\nStarting to create playerState message...\n";
 
-    std::string player_state = main_header;
-    player_state += delimiter + player_state_type;
-    player_state += delimiter + "FRAME " + std::to_string(gs.getFrameNo());
-    player_state += delimiter + "PLAYERNO " + std::to_string(gs.getPlayerNo());
-    player_state += delimiter + "POSITION " + std::to_string(gs.getSelf().getPlayerPos());
-    player_state += delimiter + "POINTS " + std::to_string(gs.getSelf().getPlayerPoints());
+    std::stringstream x;
+    x   << MAIN_HEADER
+        << DELIMITER << PLAYER_STATE_TYPE
+        << DELIMITER << "FRAME " << gs.getFrameNo()
+        << DELIMITER << "PLAYERNO " << gs.getPlayerNo()
+        << DELIMITER << "POSITION " << gs.getSelf().getPlayerPos()
+        << DELIMITER << "POINTS " << gs.getSelf().getPlayerPoints();
+
+    std::string player_state = x.str();
+
+    //std::cout << "Player_state creation completed\n";
+
     return player_state;
-
-    std::cout << "Player_state creation completed\n";
 }
 
 std::string MessageProtocol::createCollision(GameState gs) {
 
-    std::cout << "\nStarting to create collision message...\n";
+    //std::cout << "\nStarting to create collision message...\n";
 
-    std::string collision = main_header;
-    collision += delimiter + collision_type;
-    collision += delimiter + "FRAME " + std::to_string(gs.getFrameNo());
-    collision += delimiter + "PLAYERNO " + std::to_string(gs.getPlayerNo());
+    std::stringstream x;
+    x   << MAIN_HEADER
+        << DELIMITER  << COLLISION_TYPE
+        << DELIMITER << "FRAME " << gs.getFrameNo()
+        << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
     // TODO random angle
-    return collision;
 
-    std::cout << "Collision creation completed\n";
+    std::string collision = x.str();
+
+    //std::cout << "Collision creation completed\n";
+
+    return collision;
 }
 
 std::string MessageProtocol::createFinish(GameState gs) {
 
-    std::cout << "\nStarting to create finish message...\n";
+    //std::cout << "\nStarting to create finish message...\n";
 
-    std::string finish = main_header;
-    finish += delimiter + finish_type;
-    finish += delimiter + "SEQNO " + std::to_string(gs.getFrameNo());
-    finish += delimiter + "PLAYERNO " + std::to_string(gs.getPlayerNo());
-    finish += delimiter + "POINTS " + std::to_string(gs.getSelf().getPlayerPoints());
+    std::stringstream x;
+    x   << MAIN_HEADER
+        << DELIMITER << FINISH_TYPE
+        << DELIMITER << "SEQNO " << gs.getFrameNo()
+        << DELIMITER << "PLAYERNO " << gs.getPlayerNo()
+        << DELIMITER << "POINTS " << gs.getSelf().getPlayerPoints();
+
+    std::string finish = x.str();
+
+    //std::cout << "Finish creation completed\n";
+
     return finish;
-
-    std::cout << "Finish creation completed\n";
 }
 
 
 void MessageProtocol::evalMessage(int actual_state, std::string message) {
 
-    if (message.size() > 10 && message.substr(0, 6) == main_header) {
+    char tp[4];
+    char rm[BUFSIZE];
+    int r = sscanf(message.c_str(), MAIN_HEADER DELIMITER "%3s" DELIMITER "%[\001-\377]", tp, rm);
 
-        std::string type = message.substr(7, 3);
-        std::string msg = message.substr(11);
+    if (r == 2) {
 
-        if (type == request_type && actual_state == 0) evalRequest(msg);
-        else if (type == response_type && actual_state == 0) evalResponse(msg);
-        else if (type == player_state_type && actual_state == 1) evalPlayerState(msg);
-        else if (type == collision_type && actual_state == 1) evalCollision(msg);
-        else if (type == finish_type && (actual_state == 1 || actual_state == 2)) evalFinish(msg);
+        std::string type(tp);
+        std::string remaining(rm);
+
+        if (type == REQUEST_TYPE && actual_state == 0) evalRequest(remaining);
+        else if (type == RESPONSE_TYPE && actual_state == 0) evalResponse(remaining);
+        else if (type == PLAYER_STATE_TYPE && actual_state == 1) evalPlayerState(remaining);
+        else if (type == COLLISION_TYPE && actual_state == 1) evalCollision(remaining);
+        else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) evalFinish(remaining);
         else {
             std::cout << "Wrong message type";
             exit(1);
@@ -114,6 +136,8 @@ void MessageProtocol::evalMessage(int actual_state, std::string message) {
 }
 
 void MessageProtocol::evalRequest(std::string message) {
+
+    std::cout << "evalReq\n";
     std::string submsg = message;
 
     if (submsg.size() < 6 || submsg.substr(0,6) != "FRAME ") {
@@ -121,8 +145,8 @@ void MessageProtocol::evalRequest(std::string message) {
         exit(1);
     }
     submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(delimiter));
-    submsg = submsg.substr(submsg.find(delimiter) + 1);
+    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
+    submsg = submsg.substr(submsg.find(DELIMITER) + 1);
 
     std::cout << submsg << " " << submsg.size() << "\n";
 
@@ -140,7 +164,7 @@ void MessageProtocol::evalRequest(std::string message) {
 void MessageProtocol::evalResponse(std::string message) {
     std::string submsg = message;
     submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(delimiter));
+    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
     submsg = submsg.substr(11);
     std::string playerNo = submsg;
 
@@ -151,9 +175,9 @@ void MessageProtocol::evalResponse(std::string message) {
 void MessageProtocol::evalPlayerState(std::string message) {
     std::string submsg = message;
     submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(delimiter));
+    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
     submsg = submsg.substr(11);
-    std::string playerNo = submsg.substr(0, submsg.find(delimiter));
+    std::string playerNo = submsg.substr(0, submsg.find(DELIMITER));
     submsg = submsg.substr(12);
     std::string position = submsg;
 
@@ -165,7 +189,7 @@ void MessageProtocol::evalPlayerState(std::string message) {
 void MessageProtocol::evalCollision(std::string message) {
     std::string submsg = message;
     submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(delimiter));
+    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
     submsg = submsg.substr(11);
     std::string playerNo = submsg;
 
@@ -176,9 +200,9 @@ void MessageProtocol::evalCollision(std::string message) {
 void MessageProtocol::evalFinish(std::string message) {
     std::string submsg = message;
     submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(delimiter));
+    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
     submsg = submsg.substr(11);
-    std::string playerNo = submsg.substr(0, submsg.find(delimiter));
+    std::string playerNo = submsg.substr(0, submsg.find(DELIMITER));
     submsg = submsg.substr(9);
     std::string points = submsg;
 

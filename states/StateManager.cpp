@@ -95,13 +95,12 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
             std::string request = MessageProtocol::createRequest(gs);
-            std::cout << "find peers request: " << request << "\n";
-            Tools::print_address(am.getBroadcastAddr(), "findPeers broadcast addr: ");
             pi_socket.sendMessage((char *)request.c_str(), am.getBroadcastAddr());
 
             // TODO send response to all active peers
 
             std::cout << "Countdown: " << gs.getCountdown() << std::endl;
+
             gs.setCountdown(gs.getCountdown()-1);
 
             ms_start = Tools::getms();
