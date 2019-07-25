@@ -21,6 +21,8 @@ private:
     // other axis is at 0=0 or 1=DISPLAY_SIZE
     int oth_axis;
     int player_no;
+    bool active;
+
 public:
     Player();
     virtual ~Player();
@@ -34,6 +36,7 @@ public:
     int getLeftEndY() const;
     int getRightEndY() const;
     int getPlayerNo() const;
+    bool setPlayerActive(bool isActive);
     std::string toString() const;
 };
 

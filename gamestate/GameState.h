@@ -38,7 +38,8 @@ public:
     int incrRound();
     std::string toString() const;
     void updateBall();
-    void newRound();
+    void newRound(const int seed);
+    void setPlayerActive(const bool isActive, const int player_no);
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

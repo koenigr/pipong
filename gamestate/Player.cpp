@@ -13,6 +13,8 @@
 
 Player::Player() {}
 
+Player::~Player() {}
+
 void Player::init(int player_this, int player_self) {
     playerPos = 0;
     points = INIT_PLAYER_POINTS;
@@ -21,10 +23,8 @@ void Player::init(int player_this, int player_self) {
     x_axis = (player_no + player_self) % 2;
     oth_axis = ((player_no + player_self) % 4) > 1;
     std::cout << "Axis: " << std::to_string(x_axis) << "\n";
+    active = true;
 }
-
-Player::~Player() {}
-
 
 int Player::decrPoints() {
 	points -= 1;
@@ -59,22 +59,34 @@ std::string Player::toString() const {
     return player_to_string;
 }
 
-int Player::getLeftEndX() const {
+int Player::getLeftEndX() const { // TODO wrong order
+    if (!active) {
+        return DISPLAY_SIZE*(oth_axis)*(x_axis);
+    }
     return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis)*(x_axis);
 }
 
 int Player::getRightEndX() const {
+    if (!active) {
+        return DISPLAY_SIZE*!(!oth_axis*x_axis);
+    }
     return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis)*(x_axis);
 }
 
 int Player::getLeftEndY() const {
+    if (!active) {
+        return DISPLAY_SIZE*(oth_axis)*(!x_axis);
+    }
     return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis)*(!x_axis);
 }
 
 int Player::getRightEndY() const {
+    if (!active) {
+        return DISPLAY_SIZE*!((!oth_axis)*(!x_axis));
+    }
     return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis)*(!x_axis);
 }
@@ -83,3 +95,7 @@ int Player::getPlayerNo() const {
     return player_no;
 }
 
+bool Player::setPlayerActive(bool isActive) {
+    active = isActive;
+    return active;
+}

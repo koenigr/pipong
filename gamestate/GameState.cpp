@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
 
 GameState::~GameState() {
     //std::cout << "!!!!!!!!!!!!!!!    GameState destructor called\n";
@@ -80,8 +81,15 @@ int GameState::incrRound() {
 }
 
 std::string GameState::toString() const {
-    std::string gs_str = "FrameNo: " + std::to_string(getFrameNo());
-    return gs_str;
+    std::stringstream x;
+    x << "FrameNo: " << getFrameNo() << "\n";
+    x << ball.toString() << std::endl;
+    x << player_arr[0].toString() << std::endl;
+    x << player_arr[1].toString() << std::endl;
+    x << player_arr[2].toString() << std::endl;
+    x << player_arr[3].toString() << std::endl;
+    std::string s = x.str();
+    return s;
 }
 
 void GameState::updateBall() {
@@ -102,11 +110,13 @@ void GameState::checkForScoringZoneCollision() {
  // ResetBall
 }
 
-void GameState::newRound() {
+void GameState::newRound(const int seed) {
     // TODO
-    // incr ROund
-    // new angle ...
-    ball.resetBall();
+    incrRound();
+    ball.resetBall(seed);
     ball.incrVelocity();
 }
 
+void GameState::setPlayerActive(const bool isActive, const int player_no) {
+    player_arr[player_no].setPlayerActive(isActive);
+}

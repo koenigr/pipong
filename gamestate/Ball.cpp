@@ -8,7 +8,7 @@
 #include <string>
 #include <math.h>
 #include <iostream>
-#include <cstdlib>
+#include <stdlib.h>
 
 #include "Ball.h"
 #include "../Parameters.h"
@@ -43,7 +43,8 @@ float Ball::getVelocity() const {
 void Ball::resetBall(const int seed) {
     pos_x = DISPLAY_SIZE / 2;
     pos_y = DISPLAY_SIZE / 2;
-    angle = srand(seed); // TODO
+    srand(seed);
+    angle = rand() * 360.0 / RAND_MAX;
 }
 
 float Ball::incrVelocity() {
