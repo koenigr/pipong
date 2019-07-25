@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <stdio.h>
+#include <cstring>
 
 #define MAIN_HEADER "PIPONG"
 #define DELIMITER ":"
@@ -19,6 +20,11 @@
 #define PLAYER_STATE_TYPE "PST"
 #define COLLISION_TYPE "COL"
 #define FINISH_TYPE "FIN"
+
+#define INT " %d"
+#define REMAIN "%[\001-\377]"
+#define FRAME "FRAME "
+#define PLAYERNO "PLAYERNO "
 
 
 std::string MessageProtocol::createRequest(GameState gs) {
@@ -45,8 +51,7 @@ std::string MessageProtocol::createResponse(GameState gs) {
 
     std::stringstream x;
     x   << MAIN_HEADER
-        << DELIMITER << RESPONSE_TYPE
-        << DELIMITER << "FRAME " << gs.getFrameNo()
+        << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << "PLAYERNO " << gs.getPlayerNo();
 
     std::string response = x.str();
@@ -116,7 +121,7 @@ void MessageProtocol::evalMessage(int actual_state, std::string message) {
 
     char tp[4];
     char rm[BUFSIZE];
-    int r = sscanf(message.c_str(), MAIN_HEADER DELIMITER "%3s" DELIMITER "%[\001-\377]", tp, rm);
+    int r = sscanf(message.c_str(), MAIN_HEADER DELIMITER "%3s" DELIMITER REMAIN, tp, rm);
 
     if (r == 2) {
 
@@ -137,28 +142,24 @@ void MessageProtocol::evalMessage(int actual_state, std::string message) {
 
 void MessageProtocol::evalRequest(std::string message) {
 
-    std::cout << "evalReq\n";
-    std::string submsg = message;
+    std::cout << "MessageProtocol::evalRequest()\n";
+    std::cout << message << std::endl;
 
-    if (submsg.size() < 6 || submsg.substr(0,6) != "FRAME ") {
-        std::cout << "request message corrupted: " << submsg << "\n";
-        exit(1);
+    int frame;
+    int player_no;
+    char rm[BUFSIZE];
+    memset(rm, 0, BUFSIZE);
+
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+
+    if (r >= 2) {
+        std::cout << "r " << r << std::endl;
+        std::cout << "fr " << frame << std::endl;
+        std::cout << "pn " << player_no << std::endl;
+        std::cout << "rm " << rm << std::endl;
     }
-    submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(submsg.find(DELIMITER) + 1);
 
-    std::cout << submsg << " " << submsg.size() << "\n";
-
-    if (submsg.size() < 10 || submsg.substr(0,9) != "PLAYERNO ") {
-        std::cout << "request message corrupted: " << submsg.substr(0,9) << "\n";
-        exit(1);
-    }
-    submsg = submsg.substr(9);
-    std::string playerNo = submsg;
-
-    //std::cout << "Frame " << frame << "\n";
-    //std::cout << "PlayerNo " << playerNo;
+    // TODO evaluate information
 }
 
 void MessageProtocol::evalResponse(std::string message) {
