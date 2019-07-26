@@ -36,7 +36,7 @@ public:
     Player getPlayer(int i) const;
     Ball getBall() const;
     unsigned int getFrameNo() const;
-    unsigned int incrFrameNo();
+    unsigned int incrFrameNo(int actual_state);
     int getPlayerNo() const;
     int getRound() const;
     int incrRound();

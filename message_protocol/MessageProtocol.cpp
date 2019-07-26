@@ -37,7 +37,6 @@ std::string MessageProtocol::createRequest(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << REQUEST_TYPE
-        << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << PLAYERNO << gs.getPlayerNo();
 
     std::string request = x.str();
@@ -55,7 +54,6 @@ std::string MessageProtocol::createResponse(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << RESPONSE_TYPE
-        << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << PLAYERNO << gs.getPlayerNo()
         << DELIMITER << COUNTDOWN_IDENT  << gs.getCountdown();
 
@@ -126,7 +124,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
 }
 
 
-void MessageProtocol::evalMessage(int actual_state, std::string message) {
+void MessageProtocol::evalMessage(int actual_state, std::string message, GameState& gs) {
 
     char tp[4];
     char rm[BUFSIZE];
@@ -137,11 +135,11 @@ void MessageProtocol::evalMessage(int actual_state, std::string message) {
         std::string type(tp);
         std::string remaining(rm);
 
-        if (type == REQUEST_TYPE && actual_state == 0) evalRequest(remaining);
-        else if (type == RESPONSE_TYPE && actual_state == 0) evalResponse(remaining);
-        else if (type == PLAYER_STATE_TYPE && actual_state == 1) evalPlayerState(remaining);
-        else if (type == COLLISION_TYPE && actual_state == 1) evalCollision(remaining);
-        else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) evalFinish(remaining);
+        if (type == REQUEST_TYPE && actual_state == 0) evalRequest(remaining, gs);
+        else if (type == RESPONSE_TYPE && actual_state == 0) evalResponse(remaining, gs);
+        else if (type == PLAYER_STATE_TYPE && actual_state == 1) evalPlayerState(remaining, gs);
+        else if (type == COLLISION_TYPE && actual_state == 1) evalCollision(remaining, gs);
+        else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) evalFinish(remaining, gs);
         else {
             std::cout << "Wrong message type";
             exit(1);
@@ -149,44 +147,41 @@ void MessageProtocol::evalMessage(int actual_state, std::string message) {
     }
 }
 
-void MessageProtocol::evalRequest(std::string message) {
+void MessageProtocol::evalRequest(std::string message, GameState& gs) {
 
     std::cout << "MessageProtocol::evalRequest()\n";
     std::cout << message << std::endl;
 
-    int frame;
     int player_no;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+    int r = sscanf(message.c_str(), PLAYERNO INT REMAIN, &player_no, rm);
 
-    if (r >= 2) {
+    if (r >= 1) {
         std::cout << "r " << r << std::endl;
-        std::cout << "fr " << frame << std::endl;
         std::cout << "pn " << player_no << std::endl;
         std::cout << "rm " << rm << std::endl;
-        // TODO evaluate information
+
+        gs.setPlayerActive(true, player_no);
     }
 
 }
 
-void MessageProtocol::evalResponse(std::string message) {
+void MessageProtocol::evalResponse(std::string message, GameState &gs) {
 
     std::cout << "MessageProtocol::evalResponse()\n";
     std::cout << message << std::endl;
 
-    int frame;
     int player_no;
     unsigned int countdown;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER COUNTDOWN_IDENT "%u" REMAIN, &frame, &player_no, &countdown, rm);
+    int r = sscanf(message.c_str(), PLAYERNO INT DELIMITER COUNTDOWN_IDENT "%u" REMAIN, &player_no, &countdown, rm);
 
     if (r >= 3) {
         std::cout << "r " << r << std::endl;
-        std::cout << "fr " << frame << std::endl;
         std::cout << "pn " << player_no << std::endl;
         std::cout << "cd " << countdown << std::endl;
         std::cout << "rm " << rm << std::endl;
@@ -195,7 +190,7 @@ void MessageProtocol::evalResponse(std::string message) {
 
 }
 
-void MessageProtocol::evalPlayerState(std::string message) {
+void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
 
     std::cout << "MessageProtocol::evalPlayerState()\n";
     std::cout << message << std::endl;
@@ -220,7 +215,7 @@ void MessageProtocol::evalPlayerState(std::string message) {
 
 }
 
-void MessageProtocol::evalCollision(std::string message) {
+void MessageProtocol::evalCollision(std::string message, GameState &gs) {
 
     std::cout << "MessageProtocol::evalCollision()\n";
     std::cout << message << std::endl;
@@ -241,7 +236,7 @@ void MessageProtocol::evalCollision(std::string message) {
 
 }
 
-void MessageProtocol::evalFinish(std::string message) {
+void MessageProtocol::evalFinish(std::string message, GameState &gs) {
 
     std::cout << "MessageProtocol::evalFinish()\n";
     std::cout << message << std::endl;

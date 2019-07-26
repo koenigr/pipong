@@ -28,6 +28,7 @@ void GameState::init(int player_no) {
     player_arr[1].init(1, player_self);
     player_arr[2].init(2, player_self);
     player_arr[3].init(3, player_self);
+    player_arr[player_self].setPlayerActive(true);
 
     ball.setAngle(player_self, 26.4);
 
@@ -65,8 +66,10 @@ unsigned int GameState::getFrameNo() const {
     return frame_no;
 }
 
-unsigned int GameState::incrFrameNo() {
-    frame_no += 1;
+unsigned int GameState::incrFrameNo(int actual_state) {
+    if (actual_state == 1) {
+        frame_no += 1;
+    }
     return frame_no;
 }
 

@@ -24,17 +24,17 @@ public:
 
     static std::string createFinish(GameState gs);
 
-    static void evalMessage(int actual_state, std::string message);
+    static void evalMessage(int actual_state, std::string message, GameState &gs);
 
-    static void evalRequest(std::string message);
+    static void evalRequest(std::string message, GameState &gs);
 
-    static void evalResponse(std::string message);
+    static void evalResponse(std::string message, GameState &gs);
 
-    static void evalPlayerState(std::string message);
+    static void evalPlayerState(std::string message, GameState &gs);
 
-    static void evalCollision(std::string message);
+    static void evalCollision(std::string message, GameState &gs);
 
-    static void evalFinish(std::string message);
+    static void evalFinish(std::string message, GameState &gs);
 
 };
 
