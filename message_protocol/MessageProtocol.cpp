@@ -27,7 +27,6 @@
 #define PLAYERNO "PLAYERNO "
 #define POSITION "POSITION "
 #define POINTS "POINTS "
-#define SEQNO "SEQNO "
 #define COUNTDOWN_IDENT "COUNTDOWN "
 
 
@@ -43,7 +42,7 @@ std::string MessageProtocol::createRequest(GameState gs) {
 
     std::string request = x.str();
 
-    std::cout << "MessageProtocol::createRequest() Request: " << request << std::endl;
+    std::cout << "\nMessageProtocol::createRequest: " << request << std::endl;
     //std::cout << "MessageProtocol::createRequest() end\n";
 
     return request;
@@ -55,12 +54,14 @@ std::string MessageProtocol::createResponse(GameState gs) {
 
     std::stringstream x;
     x   << MAIN_HEADER
+        << DELIMITER << RESPONSE_TYPE
         << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << PLAYERNO << gs.getPlayerNo()
         << DELIMITER << COUNTDOWN_IDENT  << gs.getCountdown();
 
     std::string response = x.str();
 
+    std::cout << "\nMessageProtocol::createResponse(): " << response << std::endl;
     //std::cout << "Response creation completed\n";
 
     return response;
@@ -80,6 +81,7 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
 
     std::string player_state = x.str();
 
+    std::cout << "\nMessageProtocol::createPlayerState(): " << player_state << std::endl;
     //std::cout << "Player_state creation completed\n";
 
     return player_state;
@@ -98,6 +100,7 @@ std::string MessageProtocol::createCollision(GameState gs) {
 
     std::string collision = x.str();
 
+    std::cout << "\nMessageProtocol::createCollision(): " << collision << std::endl;
     //std::cout << "Collision creation completed\n";
 
     return collision;
@@ -110,12 +113,13 @@ std::string MessageProtocol::createFinish(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << FINISH_TYPE
-        << DELIMITER << SEQNO << gs.getFrameNo()
+        << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << PLAYERNO << gs.getPlayerNo()
         << DELIMITER << POINTS << gs.getSelf().getPlayerPoints();
 
     std::string finish = x.str();
 
+    std::cout << "\nMessageProtocol::createFinish(): " << finish << std::endl;
     //std::cout << "Finish creation completed\n";
 
     return finish;
@@ -194,20 +198,23 @@ void MessageProtocol::evalResponse(std::string message) {
 void MessageProtocol::evalPlayerState(std::string message) {
 
     std::cout << "MessageProtocol::evalPlayerState()\n";
+    std::cout << message << std::endl;
 
     int frame;
     int player_no;
     int position;
+    int points;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER POSITION INT REMAIN, &frame, &player_no, &position, rm);
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER POSITION INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &position, &points, rm);
 
     if (r >= 3) {
         std::cout << "r " << r << std::endl;
         std::cout << "fr " << frame << std::endl;
         std::cout << "pn " << player_no << std::endl;
         std::cout << "po " << position << std::endl;
+        std::cout << "po " << points << std::endl;
         std::cout << "rm " << rm << std::endl;
     }
 
@@ -216,6 +223,7 @@ void MessageProtocol::evalPlayerState(std::string message) {
 void MessageProtocol::evalCollision(std::string message) {
 
     std::cout << "MessageProtocol::evalCollision()\n";
+    std::cout << message << std::endl;
 
     int frame;
     int player_no;
@@ -236,6 +244,7 @@ void MessageProtocol::evalCollision(std::string message) {
 void MessageProtocol::evalFinish(std::string message) {
 
     std::cout << "MessageProtocol::evalFinish()\n";
+    std::cout << message << std::endl;
 
     int frame;
     int player_no;
@@ -243,7 +252,7 @@ void MessageProtocol::evalFinish(std::string message) {
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &points, rm);
 
     if (r >= 3) {
         std::cout << "r " << r << std::endl;
