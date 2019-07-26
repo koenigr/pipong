@@ -192,17 +192,24 @@ void MessageProtocol::evalResponse(std::string message) {
 }
 
 void MessageProtocol::evalPlayerState(std::string message) {
-    std::string submsg = message;
-    submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(11);
-    std::string playerNo = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(12);
-    std::string position = submsg;
 
-    std::cout << "Frame " << frame << "\n";
-    std::cout << "PlayerNo " << playerNo << "\n";
-    std::cout << "Position " << position << "\n";
+    std::cout << "MessageProtocol::evalPlayerState()\n";
+
+    int frame;
+    int player_no;
+    int position;
+    char rm[BUFSIZE];
+    memset(rm, 0, BUFSIZE);
+
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER POSITION INT REMAIN, &frame, &player_no, &position, rm);
+
+    if (r >= 3) {
+        std::cout << "r " << r << std::endl;
+        std::cout << "fr " << frame << std::endl;
+        std::cout << "pn " << player_no << std::endl;
+        std::cout << "rm " << rm << std::endl;
+    }
+
 }
 
 void MessageProtocol::evalCollision(std::string message) {
