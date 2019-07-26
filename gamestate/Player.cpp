@@ -22,7 +22,7 @@ void Player::init(int player_this, int player_self) {
     player_no = player_this;
     x_axis = (player_no + player_self) % 2;
     oth_axis = ((player_no + player_self) % 4) > 1;
-    active = true;
+    active = false;
 }
 
 int Player::decrPoints() {
@@ -96,5 +96,9 @@ int Player::getPlayerNo() const {
 
 bool Player::setPlayerActive(bool isActive) {
     active = isActive;
+    return active;
+}
+
+bool Player::isActive() const {
     return active;
 }

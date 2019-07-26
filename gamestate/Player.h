@@ -37,6 +37,7 @@ public:
     int getRightEndY() const;
     int getPlayerNo() const;
     bool setPlayerActive(bool isActive);
+    bool isActive() const;
     std::string toString() const;
 };
 
