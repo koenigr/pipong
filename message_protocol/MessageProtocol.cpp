@@ -207,32 +207,51 @@ void MessageProtocol::evalPlayerState(std::string message) {
         std::cout << "r " << r << std::endl;
         std::cout << "fr " << frame << std::endl;
         std::cout << "pn " << player_no << std::endl;
+        std::cout << "po " << position << std::endl;
         std::cout << "rm " << rm << std::endl;
     }
 
 }
 
 void MessageProtocol::evalCollision(std::string message) {
-    std::string submsg = message;
-    submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(11);
-    std::string playerNo = submsg;
 
-    std::cout << "Frame " << frame << "\n";
-    std::cout << "PlayerNo " << playerNo << "\n";
+    std::cout << "MessageProtocol::evalCollision()\n";
+
+    int frame;
+    int player_no;
+    char rm[BUFSIZE];
+    memset(rm, 0, BUFSIZE);
+
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+
+    if (r >= 2) {
+        std::cout << "r " << r << std::endl;
+        std::cout << "fr " << frame << std::endl;
+        std::cout << "pn " << player_no << std::endl;
+        std::cout << "rm " << rm << std::endl;
+    }
+
 }
 
 void MessageProtocol::evalFinish(std::string message) {
-    std::string submsg = message;
-    submsg = submsg.substr(6);
-    std::string frame = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(11);
-    std::string playerNo = submsg.substr(0, submsg.find(DELIMITER));
-    submsg = submsg.substr(9);
-    std::string points = submsg;
 
-    std::cout << "Frame " << frame << "\n";
-    std::cout << "PlayerNo " << playerNo << "\n";
-    std::cout << "Points " << points << "\n";
+    std::cout << "MessageProtocol::evalFinish()\n";
+
+    int frame;
+    int player_no;
+    int points;
+    char rm[BUFSIZE];
+    memset(rm, 0, BUFSIZE);
+
+    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+
+    if (r >= 3) {
+        std::cout << "r " << r << std::endl;
+        std::cout << "fr " << frame << std::endl;
+        std::cout << "pn " << player_no << std::endl;
+        std::cout << "po " << points << std::endl;
+        std::cout << "rm " << rm << std::endl;
+    }
+
+
 }
