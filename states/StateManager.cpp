@@ -11,13 +11,13 @@
 
 // PRIVATE
 
-void StateManager::receive_messages(const UDPSocket &pi_socket) {
+void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
     // std::cout << "\nReceive message\n";
 
     sockaddr_in recv;
     std::string message = pi_socket.receiveMessage();
-    MessageProtocol::evalMessage(actual_state, message);
+    MessageProtocol::evalMessage(actual_state, message, gs);
     recv = pi_socket.getAddressOfReceivedMsg();
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
@@ -38,7 +38,7 @@ void StateManager::update_game_state(GameState &gs) {
 
     std::cout << "\nStart updating gamestate...\n";
 
-    gs.incrFrameNo();
+    gs.incrFrameNo(actual_state);
     std::cout << gs.toString() << "\n";
 
     std::cout << "Gamestate updating completed\n";
@@ -90,7 +90,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
 
     while(gs.getCountdown() > 0) {
 
-        receive_messages(pi_socket);
+        receive_messages(pi_socket, gs);
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 

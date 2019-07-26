@@ -33,7 +33,7 @@ public:
     unsigned int getCountdown();
     void setCountdown(const unsigned int cd);
 
-    int decrPoint();
+    int decrPoints();
     int setPoints(int player_no, int points);
 
     Player getSelf() const;

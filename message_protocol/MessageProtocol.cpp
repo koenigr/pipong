@@ -212,7 +212,8 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
         std::cout << "po " << points << std::endl;
         std::cout << "rm " << rm << std::endl;
 
-        if (gs.getPlayer(player_no).getFrame() < frame) {
+        if (gs.getPlayer(player_no).getFrame() <= frame) {
+            gs.setFrame(1, player_no, frame);
             gs.setPosition(player_no, position);
             gs.setPoints(player_no, points);
         }
