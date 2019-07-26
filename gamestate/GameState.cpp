@@ -50,6 +50,12 @@ int GameState::decrPoint() {
     return player_arr[player_self].decrPoints();
 }
 
+int GameState::setPoints(int player_no, int points) {
+    player_arr[player_no].setPoints(points);
+    return player_arr[player_no].getPoints();
+}
+
+
 Player GameState::getSelf() const {
     return player_arr[player_self];
 }
@@ -82,6 +88,14 @@ unsigned int GameState::setFrame(int const actual_state, int const player_no, un
 
 int GameState::getPlayerNo() const {
     return player_self;
+}
+
+int GameState::setPosition(int player_no, int new_position) {
+    player_arr[player_no].setPosition(new_position);
+    return player_arr[player_no].getPosition();
+}
+int GameState::getPosition(int player_no) const {
+
 }
 
 int GameState::getRound() const {

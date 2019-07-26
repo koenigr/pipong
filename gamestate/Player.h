@@ -13,7 +13,7 @@
 class Player {
 private:
     // playerPos relative to center of display, ie 0 = DISPLAY_SIZE / 2
-    int playerPos;
+    int position;
     int points;
     int player_sequence;// TODO!!!!! long unsigned int?
     // player displayed at 0=x_axis or 1=y_axis
@@ -28,20 +28,27 @@ public:
     Player();
     virtual ~Player();
     void init(int player_this, int player_self);
+    bool setPlayerActive(bool isActive);
+    bool isActive() const;
+
     unsigned int getFrame();
     unsigned int incrFrame();
     unsigned int setFrame(unsigned int const new_frame);
+
     int decrPoints();
-    int getPlayerPos() const;
-    int getPlayerPoints() const;
-    int getSequenceNo() const;
+    int setPoints(int new_points);
+    int getPoints() const;
+
+    int setPosition(int new_position);
+    int getPosition() const;
+
     int getLeftEndX() const;
     int getRightEndX() const;
     int getLeftEndY() const;
     int getRightEndY() const;
+
     int getPlayerNo() const;
-    bool setPlayerActive(bool isActive);
-    bool isActive() const;
+
     std::string toString() const;
 };
 

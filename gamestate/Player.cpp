@@ -16,9 +16,8 @@ Player::Player() {}
 Player::~Player() {}
 
 void Player::init(int player_this, int player_self) {
-    playerPos = 0;
+    position = 0;
     points = INIT_PLAYER_POINTS;
-    player_sequence = 3; // TODO!!!
     player_no = player_this;
     x_axis = (player_no + player_self) % 2;
     oth_axis = ((player_no + player_self) % 4) > 1;
@@ -45,22 +44,28 @@ int Player::decrPoints() {
 	return points;
 }
 
-int Player::getPlayerPos() const {
-    return playerPos;
+int Player::setPoints(int new_points) {
+   points = new_points;
+   return points;
 }
 
-int Player::getPlayerPoints() const {
+int Player::getPoints() const {
     return points;
 }
 
-int Player::getSequenceNo() const {
-    return player_sequence;
+int Player::setPosition(int new_position) {
+    position = new_position;
+    return position;
+}
+
+int Player::getPosition() const {
+    return position;
 }
 
 std::string Player::toString() const {
 
     std::string player_to_string = "Player " + std::to_string(player_no);
-    player_to_string += " position: " + std::to_string(playerPos);
+    player_to_string += " position: " + std::to_string(position);
     player_to_string += " points: " + std::to_string(points);
     player_to_string += " sequence: " + std::to_string(player_sequence);
     player_to_string += " axis: " + std::to_string(x_axis);
@@ -77,7 +82,7 @@ int Player::getLeftEndX() const { // TODO wrong order
     if (!active) {
         return DISPLAY_SIZE*(oth_axis && x_axis);
     }
-    return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(!x_axis)
+    return (DISPLAY_SIZE/2 + position - PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis && x_axis);
 }
 
@@ -85,7 +90,7 @@ int Player::getRightEndX() const {
     if (!active) {
         return DISPLAY_SIZE*!(!oth_axis && x_axis);
     }
-    return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(!x_axis)
+    return (DISPLAY_SIZE/2 + position + PADDLE_WIDTH/2)*(!x_axis)
             +DISPLAY_SIZE*(oth_axis)*(x_axis);
 }
 
@@ -93,7 +98,7 @@ int Player::getLeftEndY() const {
     if (!active) {
         return DISPLAY_SIZE*(oth_axis)*(!x_axis);
     }
-    return (DISPLAY_SIZE/2 + playerPos - PADDLE_WIDTH/2)*(x_axis)
+    return (DISPLAY_SIZE/2 + position - PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis && !x_axis);
 }
 
@@ -101,7 +106,7 @@ int Player::getRightEndY() const {
     if (!active) {
         return DISPLAY_SIZE*!((!oth_axis && !x_axis));
     }
-    return (DISPLAY_SIZE/2 + playerPos + PADDLE_WIDTH/2)*(x_axis)
+    return (DISPLAY_SIZE/2 + position + PADDLE_WIDTH/2)*(x_axis)
             +DISPLAY_SIZE*(oth_axis)*(!x_axis);
 }
 

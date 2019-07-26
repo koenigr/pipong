@@ -8,6 +8,7 @@
 
 int main() {
 
+    std::cout << "Running PlayerTest\n";
     MessageProtocol mp;
     GameState gs;
     int player_self = 2;

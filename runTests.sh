@@ -2,4 +2,8 @@
 
 clear
 
-(cd test_code/message_protocol; ./run.sh)
+echo "RUN MESSAGE TEST"
+(cd test_code/message_protocol/; ./runMessageTest.sh)
+
+echo "RUN PLAYER TEST"
+(cd test_code/message_protocol/; ./runPlayerTest.sh)

@@ -74,8 +74,8 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
         << DELIMITER << PLAYER_STATE_TYPE
         << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << PLAYERNO << gs.getPlayerNo()
-        << DELIMITER << POSITION << gs.getSelf().getPlayerPos()
-        << DELIMITER << POINTS << gs.getSelf().getPlayerPoints();
+        << DELIMITER << POSITION << gs.getSelf().getPosition()
+        << DELIMITER << POINTS << gs.getSelf().getPoints();
 
     std::string player_state = x.str();
 
@@ -113,7 +113,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
         << DELIMITER << FINISH_TYPE
         << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << PLAYERNO << gs.getPlayerNo()
-        << DELIMITER << POINTS << gs.getSelf().getPlayerPoints();
+        << DELIMITER << POINTS << gs.getSelf().getPoints();
 
     std::string finish = x.str();
 
@@ -211,6 +211,11 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
         std::cout << "po " << position << std::endl;
         std::cout << "po " << points << std::endl;
         std::cout << "rm " << rm << std::endl;
+
+        if (gs.getPlayer(player_no).getFrame() < frame) {
+            gs.setPosition(player_no, position);
+            gs.setPoints(player_no, points);
+        }
     }
 
 }
