@@ -23,6 +23,21 @@ void Player::init(int player_this, int player_self) {
     x_axis = (player_no + player_self) % 2;
     oth_axis = ((player_no + player_self) % 4) > 1;
     active = false;
+    frame = 0;
+}
+
+unsigned int Player::getFrame() {
+    return frame;
+}
+
+unsigned int Player::incrFrame() {
+    frame++;
+    return frame;
+}
+
+unsigned int Player::setFrame(unsigned int const new_frame) {
+    frame = new_frame;
+    return frame;
 }
 
 int Player::decrPoints() {

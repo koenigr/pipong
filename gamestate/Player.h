@@ -22,11 +22,15 @@ private:
     int oth_axis;
     int player_no;
     bool active;
+    unsigned int frame;
 
 public:
     Player();
     virtual ~Player();
     void init(int player_this, int player_self);
+    unsigned int getFrame();
+    unsigned int incrFrame();
+    unsigned int setFrame(unsigned int const new_frame);
     int decrPoints();
     int getPlayerPos() const;
     int getPlayerPoints() const;

@@ -19,7 +19,6 @@ private:
     Ball ball;
     Player player_arr[4];
     int player_self;
-    unsigned int frame_no = 0;
     int round = 1;
     unsigned int countdown = COUNTDOWN;
 
@@ -36,7 +35,8 @@ public:
     Player getPlayer(int i) const;
     Ball getBall() const;
     unsigned int getFrameNo() const;
-    unsigned int incrFrameNo(int actual_state);
+    unsigned int incrFrameNo(const int actual_state);
+    unsigned int setFrame(int const actual_state, int const player_no, unsigned int const new_frame);
     int getPlayerNo() const;
     int getRound() const;
     int incrRound();

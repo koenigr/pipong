@@ -63,14 +63,21 @@ Ball GameState::getBall() const {
 }
 
 unsigned int GameState::getFrameNo() const {
-    return frame_no;
+    return getSelf().getFrame();
 }
 
-unsigned int GameState::incrFrameNo(int actual_state) {
+unsigned int GameState::incrFrameNo(int const actual_state) {
     if (actual_state == 1) {
-        frame_no += 1;
+        player_arr[player_self].incrFrame();
     }
-    return frame_no;
+    return getSelf().getFrame();
+}
+
+unsigned int GameState::setFrame(int const actual_state, int const player_no, unsigned int const new_frame) {
+    if (actual_state == 1) {
+        player_arr[player_no].setFrame(new_frame);
+    }
+    return player_arr[player_no].getFrame();
 }
 
 int GameState::getPlayerNo() const {
