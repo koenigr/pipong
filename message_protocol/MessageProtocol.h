@@ -11,6 +11,16 @@
 #include "../gamestate/GameState.h"
 
 class MessageProtocol {
+private:
+
+    static void evalRequest(std::string message, GameState &gs);
+
+    static void evalPlayerState(std::string message, GameState &gs);
+
+    static void evalCollision(std::string message, GameState &gs);
+
+    static void evalFinish(std::string message, GameState &gs);
+
 
 public:
 
@@ -23,14 +33,6 @@ public:
     static std::string createFinish(GameState gs);
 
     static void evalMessage(int actual_state, std::string message, GameState &gs);
-
-    static void evalRequest(std::string message, GameState &gs);
-
-    static void evalPlayerState(std::string message, GameState &gs);
-
-    static void evalCollision(std::string message, GameState &gs);
-
-    static void evalFinish(std::string message, GameState &gs);
 
 };
 

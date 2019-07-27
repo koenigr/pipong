@@ -146,9 +146,16 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
     if (r >= 1) {
         std::cout << "r " << r << std::endl;
         std::cout << "pn " << player_no << std::endl;
+        std::cout << "fr " << frame << std::endl;
+        std::cout << "cd " << countdown << std::endl;
         std::cout << "rm " << rm << std::endl;
 
         gs.setPlayerActive(true, player_no);
+        if (frame >= gs.getPlayer(player_no).getFrame()) {
+            if (gs.getCountdown() < countdown - 1) {
+                gs.setCountdown(countdown);
+            }
+        }
     }
 
 }
