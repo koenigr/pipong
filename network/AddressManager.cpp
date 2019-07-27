@@ -69,21 +69,26 @@ sockaddr_in AddressManager::getBroadcastAddr() const {
 
 
 // TODO do not add oneself
+void AddressManager::addParticipant(const int player_no) {
 
-void AddressManager::addParticipant(sockaddr_in participant) {
-	// TODO check if valid
+    if (player_no > 3) {
+        Tools::error("AddressManager::addParticipant(): Trying to access non-existing participant\n");
+    }
+
+    struct sockaddr_in participant;
+    inet_pton(AF_INET, addr_arr[player_no].c_str(), &(participant.sin_addr));
 	participants.push_back(participant);
-    std::cout << "Number of participants: %u" << participants.size();
+
 }
 
-sockaddr_in AddressManager::getParticipant(int pos) {
-	// TODO check that participant exists
-	return participants[pos];
+void AddressManager::getParticipant(int pos, sockaddr_in &participant) const {
+    if (pos >= participants.size()) {
+        Tools::error("AddressManager::getParticipant(): Trying to get non-existing participant\n");
+    }
+    participant = participants[pos];
 }
 
-int AddressManager::getNumOfParticipants() {
-
-    //std::cout << "Checking number of participants\n";
+int AddressManager::getNumOfParticipants() const {
 
 	return participants.size();
 }

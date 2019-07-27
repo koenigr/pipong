@@ -31,9 +31,9 @@ public:
     sockaddr_in getBroadcastAddr() const;
 	sockaddr_in getOwnAddr();
 	void print_infos();
-	void addParticipant(sockaddr_in participant);
-	sockaddr_in getParticipant(int pos);
-	int getNumOfParticipants();
+    void addParticipant(int const player_no);
+    void getParticipant(int pos, sockaddr_in& participant) const;
+    int getNumOfParticipants() const;
 
 private:
 };

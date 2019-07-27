@@ -10,3 +10,6 @@ echo "RUN PLAYER TEST"
 
 echo "RUN SYNC TEST"
 (cd test_code/message_protocol/; ./runSyncTest.sh)
+
+echo "RUN PART TEST"
+(cd test_code/address_manager/; ./runParticipantsTest.sh)
