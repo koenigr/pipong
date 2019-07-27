@@ -17,8 +17,9 @@ private:
 public:
     int actual_state;
     void init(int player_self, GameState &gs, AddressManager &am, UDPSocket &pi_socket );
+    void waitForStartButtonPress();
     void findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
-    void mainLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
+    void gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
     void showPoints();
 
 };

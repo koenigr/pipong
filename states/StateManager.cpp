@@ -81,6 +81,15 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
     std::cout << "PiPong Initialization complete\n\n";
 }
 
+void StateManager::waitForStartButtonPress() {
+    bool start = false;
+    while (!start) {
+        Display::drawHello();
+        // TODO: Wait for Button
+        // start = true;
+    }
+}
+
 void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nWaiting for peers...\n";
@@ -120,7 +129,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
 }
 
 
-void StateManager::mainLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
+void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
@@ -155,15 +164,8 @@ void StateManager::mainLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
 
 void StateManager::showPoints() {
 
-    actual_state = 2;
+    actual_state = 2; // neccessary?
 
-    std::cout << "\nShow points\n";
-    /*  send FSH
-        display:    Player 1: ... Points
-                    Player 2: ...
+    Display::drawPoints(gs);
 
-        perhaps sort...
-    */
-
-    std::cout << "The End\n";
 }

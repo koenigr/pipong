@@ -2,6 +2,14 @@
 #include "../gamestate/GameState.h"
 #include <iostream>
 
+
+
+
+void Display::drawHello() {
+    std::cout << "Welcome to PiPong:)\n";
+    std::cout << "Please press a button to start synchronization...\n";
+}
+
 void Display::drawPlayer(const GameState gs) {
     std::cout << "Player_self: " << gs.getPlayerNo() << "\n";
     std::cout << "TODO: Player rotate into wrong direction\n";
