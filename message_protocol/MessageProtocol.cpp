@@ -16,18 +16,18 @@
 #define MAIN_HEADER "PIPONG"
 #define DELIMITER ":"
 #define REQUEST_TYPE "REQ"
-#define RESPONSE_TYPE "RSP"
 #define PLAYER_STATE_TYPE "PST"
 #define COLLISION_TYPE "COL"
 #define FINISH_TYPE "FIN"
 
 #define INT " %d"
+#define UINT " %u"
 #define REMAIN "%[\001-\377]"
 #define FRAME "FRAME "
 #define PLAYERNO "PLAYERNO "
 #define POSITION "POSITION "
 #define POINTS "POINTS "
-#define COUNTDOWN_IDENT "COUNTDOWN "
+#define COUNTDOWN "COUNTDOWN "
 
 
 std::string MessageProtocol::createRequest(GameState gs) {
@@ -37,7 +37,9 @@ std::string MessageProtocol::createRequest(GameState gs) {
     std::stringstream x;
     x   << MAIN_HEADER
         << DELIMITER << REQUEST_TYPE
-        << DELIMITER << PLAYERNO << gs.getPlayerNo();
+        << DELIMITER << PLAYERNO << gs.getPlayerNo()
+        << DELIMITER << FRAME << gs.getFrameNo()
+        << DELIMITER << COUNTDOWN << gs.getCountdown();
 
     std::string request = x.str();
 
@@ -45,24 +47,6 @@ std::string MessageProtocol::createRequest(GameState gs) {
     //std::cout << "MessageProtocol::createRequest() end\n";
 
     return request;
-}
-
-std::string MessageProtocol::createResponse(GameState gs) {
-
-    //std::cout << "\nStarting to create response...\n";
-
-    std::stringstream x;
-    x   << MAIN_HEADER
-        << DELIMITER << RESPONSE_TYPE
-        << DELIMITER << PLAYERNO << gs.getPlayerNo()
-        << DELIMITER << COUNTDOWN_IDENT  << gs.getCountdown();
-
-    std::string response = x.str();
-
-    std::cout << "\nMessageProtocol::createResponse(): " << response << std::endl;
-    //std::cout << "Response creation completed\n";
-
-    return response;
 }
 
 std::string MessageProtocol::createPlayerState(GameState gs) {
@@ -136,7 +120,6 @@ void MessageProtocol::evalMessage(int actual_state, std::string message, GameSta
         std::string remaining(rm);
 
         if (type == REQUEST_TYPE && actual_state == 0) evalRequest(remaining, gs);
-        else if (type == RESPONSE_TYPE && actual_state == 0) evalResponse(remaining, gs);
         else if (type == PLAYER_STATE_TYPE && actual_state == 1) evalPlayerState(remaining, gs);
         else if (type == COLLISION_TYPE && actual_state == 1) evalCollision(remaining, gs);
         else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) evalFinish(remaining, gs);
@@ -153,10 +136,12 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
     std::cout << message << std::endl;
 
     int player_no;
+    unsigned int frame;
+    unsigned int countdown;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), PLAYERNO INT REMAIN, &player_no, rm);
+    int r = sscanf(message.c_str(), PLAYERNO INT DELIMITER FRAME UINT DELIMITER COUNTDOWN UINT REMAIN, &player_no, &frame, &countdown, rm);
 
     if (r >= 1) {
         std::cout << "r " << r << std::endl;
@@ -168,41 +153,20 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
 
 }
 
-void MessageProtocol::evalResponse(std::string message, GameState &gs) {
-
-    std::cout << "MessageProtocol::evalResponse()\n";
-    std::cout << message << std::endl;
-
-    int player_no;
-    unsigned int countdown;
-    char rm[BUFSIZE];
-    memset(rm, 0, BUFSIZE);
-
-    int r = sscanf(message.c_str(), PLAYERNO INT DELIMITER COUNTDOWN_IDENT "%u" REMAIN, &player_no, &countdown, rm);
-
-    if (r >= 3) {
-        std::cout << "r " << r << std::endl;
-        std::cout << "pn " << player_no << std::endl;
-        std::cout << "cd " << countdown << std::endl;
-        std::cout << "rm " << rm << std::endl;
-        // TODO evaluate information
-    }
-
-}
 
 void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
 
     std::cout << "MessageProtocol::evalPlayerState()\n";
     std::cout << message << std::endl;
 
-    int frame;
+    unsigned int frame;
     int player_no;
     int position;
     int points;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER POSITION INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &position, &points, rm);
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER POSITION INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &position, &points, rm);
 
     if (r >= 3) {
         std::cout << "r " << r << std::endl;
@@ -226,12 +190,12 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
     std::cout << "MessageProtocol::evalCollision()\n";
     std::cout << message << std::endl;
 
-    int frame;
+    unsigned int frame;
     int player_no;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
 
     if (r >= 2) {
         std::cout << "r " << r << std::endl;
@@ -247,13 +211,13 @@ void MessageProtocol::evalFinish(std::string message, GameState &gs) {
     std::cout << "MessageProtocol::evalFinish()\n";
     std::cout << message << std::endl;
 
-    int frame;
+    unsigned int frame;
     int player_no;
     int points;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME INT DELIMITER PLAYERNO INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &points, rm);
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &points, rm);
 
     if (r >= 3) {
         std::cout << "r " << r << std::endl;

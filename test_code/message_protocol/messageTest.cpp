@@ -22,15 +22,6 @@ int main() {
     std::cout << "request length: " << request.length() << "\n";
     MessageProtocol::evalMessage(0, request, gs);
 
-	// RESPONSE TESTS
-
-    std::string response = MessageProtocol::createResponse(gs);
-    std::cout << "created response: " << response << "\n";
-    std::cout << "response length: " << response.length() << "\n";
-    MessageProtocol::evalMessage(0, response, gs);
-
-    gs.incrFrameNo(0);
-
     // PLAYER TESTS
 
     std::string player_state = MessageProtocol::createPlayerState(gs);

@@ -16,8 +16,6 @@ public:
 
     static std::string createRequest(GameState gs);
 
-    static std::string createResponse(GameState gs);
-
     static std::string createPlayerState(GameState gs);
 
     static std::string createCollision(GameState gs);
@@ -27,8 +25,6 @@ public:
     static void evalMessage(int actual_state, std::string message, GameState &gs);
 
     static void evalRequest(std::string message, GameState &gs);
-
-    static void evalResponse(std::string message, GameState &gs);
 
     static void evalPlayerState(std::string message, GameState &gs);
 

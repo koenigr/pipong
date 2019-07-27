@@ -20,7 +20,7 @@ private:
     Player player_arr[4];
     int player_self;
     int round = 1;
-    unsigned int countdown = COUNTDOWN;
+    unsigned int countdown = COUNTDOWN_START_VAL;
 
     void checkForPaddleCollision();
     void checkForScoringZoneCollision();
