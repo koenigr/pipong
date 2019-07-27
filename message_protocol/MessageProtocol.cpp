@@ -155,8 +155,7 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
 
         if (frame >= gs.getPlayer(player_no).getFrame()) {
 
-            unsigned int cd = countdown - 5;
-            std::cout << cd << "\n";
+            gs.setFrame()
 
             if (gs.getCountdown() < (countdown - 5) && countdown > 5) {
                 std::cout << gs.getCountdown() << " < " << countdown << " - 5\n";

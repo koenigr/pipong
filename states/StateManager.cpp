@@ -136,6 +136,7 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
     actual_state = 1;
 
     gs.resetAllFrames();
+    gs.setCountdown(COUNTDOWN_START_VAL);
 
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
@@ -160,6 +161,13 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
         ms_then = Tools::getms();
 
     }
+    // TODO evaluate collision messages
+    // TODO perhaps make all with a switch:
+    /*
+     * switch(actual_state):
+     *  case 3:... do stuff ... actual_state =4
+     *
+     */
 
     std::cout << "Game finished\n";
 }
@@ -167,8 +175,9 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
 void StateManager::showPoints(GameState &gs) {
 
     actual_state = 2; // neccessary?
-    // TODO evaluate collision messages
 
     Display::drawPoints(gs);
+
+    std::cout << "Press x to start a new game\nPress y to shutdown\n";
 
 }
