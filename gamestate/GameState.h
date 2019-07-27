@@ -43,7 +43,8 @@ public:
 
     unsigned int getFrameNo() const;
     unsigned int incrFrameNo();
-    unsigned int setFrame(int const actual_state, int const player_no, unsigned int const new_frame);
+    unsigned int setFrame(int const player_no, unsigned int const new_frame);
+    unsigned int resetAllFrames();
 
     int getPlayerNo() const;
 

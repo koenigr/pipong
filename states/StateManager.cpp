@@ -135,6 +135,8 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
 
     actual_state = 1;
 
+    gs.resetAllFrames();
+
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 

@@ -80,15 +80,21 @@ unsigned int GameState::getFrameNo() const {
 
 // increment is only needed for own player
 unsigned int GameState::incrFrameNo() {
-        player_arr[player_self].incrFrame();
+
+    player_arr[player_self].incrFrame();
     return getSelf().getFrame();
 }
 
-unsigned int GameState::setFrame(int const actual_state, int const player_no, unsigned int const new_frame) {
-    if (actual_state == 1) {
-        player_arr[player_no].setFrame(new_frame);
-    }
+unsigned int GameState::setFrame(int const player_no, unsigned int const new_frame) {
+
+    player_arr[player_no].setFrame(new_frame);
     return player_arr[player_no].getFrame();
+}
+
+void GameState::resetAllFrames() {
+    for (int i = 0; i < 4; i++) {
+        player_arr[i].setFrame(0);
+    }
 }
 
 int GameState::getPlayerNo() const {
