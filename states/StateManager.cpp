@@ -162,9 +162,10 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
     std::cout << "Game finished\n";
 }
 
-void StateManager::showPoints() {
+void StateManager::showPoints(GameState &gs) {
 
     actual_state = 2; // neccessary?
+    // TODO evaluate collision messages
 
     Display::drawPoints(gs);
 

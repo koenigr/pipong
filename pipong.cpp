@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
 
     state_manager.init(player_self, gs, am, pi_socket);
 
-    state_manager.waitForStartButtonPress();
+    // state_manager.waitForStartButtonPress();
 
     state_manager.findPeers(am, pi_socket, gs);
 
     // state_manager.gameLoop(am, pi_socket, gs);
 
-    state_manager.showPoints();
+    state_manager.showPoints(gs);
 
     return 0;
 }

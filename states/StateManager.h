@@ -20,7 +20,7 @@ public:
     void waitForStartButtonPress();
     void findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
     void gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
-    void showPoints();
+    void showPoints(GameState &gs);
 
 };
 
