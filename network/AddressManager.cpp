@@ -67,6 +67,9 @@ sockaddr_in AddressManager::getBroadcastAddr() const {
     return broadcast_addr;
 }
 
+
+// TODO do not add oneself
+
 void AddressManager::addParticipant(sockaddr_in participant) {
 	// TODO check if valid
 	participants.push_back(participant);

@@ -45,6 +45,12 @@ void GameState::setCountdown(const unsigned int cd) {
     countdown = cd;
 }
 
+void GameState::decrCountdown() {
+    if (countdown > 0) {
+        countdown -= 1;
+    }
+}
+
 // A player knows only his own point in the main loop?????
 int GameState::decrPoints() {
     return player_arr[player_self].decrPoints();
@@ -73,10 +79,8 @@ unsigned int GameState::getFrameNo() const {
 }
 
 // increment is only needed for own player
-unsigned int GameState::incrFrameNo(int const actual_state) {
-    if (actual_state == 1) {
+unsigned int GameState::incrFrameNo() {
         player_arr[player_self].incrFrame();
-    }
     return getSelf().getFrame();
 }
 

@@ -32,6 +32,7 @@ public:
 
     unsigned int getCountdown();
     void setCountdown(const unsigned int cd);
+    void decrCountdown();
 
     int decrPoints();
     int setPoints(int player_no, int points);
@@ -41,7 +42,7 @@ public:
     Ball getBall() const;
 
     unsigned int getFrameNo() const;
-    unsigned int incrFrameNo(const int actual_state);
+    unsigned int incrFrameNo();
     unsigned int setFrame(int const actual_state, int const player_no, unsigned int const new_frame);
 
     int getPlayerNo() const;

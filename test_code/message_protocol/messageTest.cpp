@@ -29,7 +29,7 @@ int main() {
     std::cout << "player_state length: " << player_state.length() << "\n";
     MessageProtocol::evalMessage(1, player_state, gs);
 
-    gs.incrFrameNo(1);
+    gs.incrFrameNo();
 
     // COLLISION TESTS
 
@@ -38,7 +38,7 @@ int main() {
     std::cout << "collision length: " << collision.length() << "\n";
     MessageProtocol::evalMessage(1, collision, gs);
 
-    gs.incrFrameNo(1);
+    gs.incrFrameNo();
 
     // FINISH TESTS
 

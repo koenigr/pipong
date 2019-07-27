@@ -7,3 +7,6 @@ echo "RUN MESSAGE TEST"
 
 echo "RUN PLAYER TEST"
 (cd test_code/message_protocol/; ./runPlayerTest.sh)
+
+echo "RUN SYNC TEST"
+(cd test_code/message_protocol/; ./runSyncTest.sh)

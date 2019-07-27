@@ -28,7 +28,7 @@ int main() {
 
     // Moving player 1
 
-    gs1.incrFrameNo(1);
+    gs1.incrFrameNo();
     gs1.decrPoints();
     gs1.setPosition(1, 5);
 
