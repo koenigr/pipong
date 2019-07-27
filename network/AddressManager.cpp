@@ -77,12 +77,13 @@ void AddressManager::addParticipant(const int player_no) {
 
     struct sockaddr_in participant;
     inet_pton(AF_INET, addr_arr[player_no].c_str(), &(participant.sin_addr));
+    // TODO: port?
 	participants.push_back(participant);
 
 }
 
 void AddressManager::getParticipant(int pos, sockaddr_in &participant) const {
-    if (pos >= participants.size()) {
+    if (pos >= (int) participants.size()) {
         Tools::error("AddressManager::getParticipant(): Trying to get non-existing participant\n");
     }
     participant = participants[pos];

@@ -17,6 +17,21 @@ void Display::drawBall(const GameState gs) {
     std::cout << "Ball " << gs.getBall().toString() << std::endl;
 }
 
+void Display::drawPoints(const GameState gs) {
+
+    for (int i = 0; i < 4; i++) {
+
+        std::cout << "Player " << i << ": ";
+        if (gs.getPlayer(0).isActive()) {
+            std::cout << gs.getPlayer(0).getPoints();
+        } else {
+            std::cout << "x";
+        }
+        std::cout << std::endl;
+
+    }
+}
+
 void Display::drawGameState(const GameState gs) {
     drawPlayer(gs);
     drawBall(gs);
