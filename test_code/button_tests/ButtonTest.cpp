@@ -1,6 +1,8 @@
 #include "../../input/InputManager.cpp"
 #include <iostream>
-#include "../../display/Display.cpp"
+
+
+using namespace GFX;
 
 int main() {
 

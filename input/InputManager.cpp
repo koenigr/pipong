@@ -3,6 +3,7 @@
 #include <cstring>
 #include <mraa.h>
 
+using namespace GFX;
 
 void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
