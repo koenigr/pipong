@@ -5,6 +5,9 @@
 
 using namespace GFX;
 
+int InputManager::ct;
+mraa_gpio_context InputManager::bt_ct;
+
 void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
   while(1) {
