@@ -2,7 +2,9 @@
 #include "../gamestate/GameState.h"
 #include <iostream>
 
+#include <mraa.h>
 
+#include "OLEDDisplay.h"
 
 
 void Display::drawHello() {
