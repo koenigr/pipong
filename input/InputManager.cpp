@@ -1,5 +1,5 @@
 #include "InputManager.h"
-#include "../display/OLEDDisplay.h"
+#include "OLEDDisplay.h"
 #include <cstring>
 #include <mraa.h>
 
