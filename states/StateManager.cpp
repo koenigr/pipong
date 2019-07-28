@@ -84,12 +84,17 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
 }
 
 void StateManager::waitForStartButtonPress() {
+
+    std::cout << "\nStateManager::watForStartButtonPress()...\n";
+
     bool start = false;
     while (!start) {
         Display::drawHello();
         // TODO: Wait for Button
         // start = true;
     }
+
+    std::cout << "Start Button pressed\n";
 }
 
 void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
