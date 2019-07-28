@@ -8,8 +8,12 @@ int main() {
 
     while(true) {
 
-        std::cout << InputManager::startButtonPressed() << std::endl;
-
+        int old = true;
+        int new = InputManager::startButtonPressed();
+        if (old != new) {
+            std::cout << InputManager::startButtonPressed() << std::endl;
+        }
+        old = new;
     }
 
 }
