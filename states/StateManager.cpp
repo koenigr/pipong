@@ -72,6 +72,8 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
 
     gs.init(player_self);
 
+    Display::init();
+
     actual_state = 0;
 
     am.init();

@@ -9,7 +9,9 @@ g++ pipong.cpp \
     gamestate/*.cpp \
     display/*.cpp \
     states/*.cpp \
-    -o PiPong -std=c++11 -Wall -Wextra -Wpedantic 
+    -o PiPong \
+    -std=c++11 -lmraa -pthread \
+    -Wall -Wextra -Wpedantic 
 #-Werror
 
 if [ $? -eq 0 ]; then
