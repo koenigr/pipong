@@ -155,7 +155,7 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
 
         if (frame >= gs.getPlayer(player_no).getFrame()) {
 
-            gs.setFrame()
+            gs.setFrame(player_no, frame);
 
             if (gs.getCountdown() < (countdown - 5) && countdown > 5) {
                 std::cout << gs.getCountdown() << " < " << countdown << " - 5\n";
@@ -190,7 +190,7 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
         std::cout << "rm " << rm << std::endl;
 
         if (gs.getPlayer(player_no).getFrame() <= frame) {
-            gs.setFrame(1, player_no, frame);
+            gs.setFrame(player_no, frame);
             gs.setPosition(player_no, position);
             gs.setPoints(player_no, points);
         }
