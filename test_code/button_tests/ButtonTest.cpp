@@ -1,19 +1,20 @@
 #include "../../input/InputManager.h"
 #include <iostream>
-
+#include "unistd.h"
 
 int main() {
 
     InputManager::init();
 
+    std::cout << "Starting\n";
+
     while(true) {
 
-        int old = true;
-        int new = InputManager::startButtonPressed();
-        if (old != new) {
-            std::cout << InputManager::startButtonPressed() << std::endl;
+        bool pressed = InputManager::startButtonPressed();
+        if (pressed) {
+           std::cout << "Pressed\n";
         }
-        old = new;
+        usleep(100 * 1000);
     }
 
 }
