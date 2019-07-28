@@ -3,8 +3,8 @@
 
 #include <cstdint>
 
-#include "../hut_tests/gfxfont.h"
-#include "../hut_tests/Print.h"
+#include "gfxfont.h"
+#include "Print.h"
 
 namespace GFX {
 
