@@ -8,8 +8,10 @@ class Display
 private:
     static void drawPlayer(const GameState gs);
     static void drawBall(const GameState gs);
+    static void flush();
+    static void draw(char* buf);
 public:
-
+    static void init();
     static void drawHello();
     static void drawGameState(const GameState gs);
     static void drawPoints(const GameState gs);

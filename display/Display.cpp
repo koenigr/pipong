@@ -1,15 +1,47 @@
 #include "Display.h"
 #include "../gamestate/GameState.h"
 #include <iostream>
-
+#include <cstring>
 #include <mraa.h>
 
 #include "OLEDDisplay.h"
 
+using namespace GFX;
+
+OLEDDisplay disp(128, 128);
+
+void Display::init() {
+    disp.setBgColor(COLOR_BLACK);
+    disp.setDrawColor(COLOR_WHITE);
+    disp.clearScreen();
+    disp.enable();
+}
+
+void Display::flush() {
+
+    disp.flush();
+
+}
+
+void Display::draw(char* buf) {
+
+    disp.clearScreen();
+    disp.setCursor(0,0);
+    std::cout << "Display::draw buffer: " << buf << std::endl;
+    disp.print(buf);
+
+}
 
 void Display::drawHello() {
+
+    disp.flush();
     std::cout << "Welcome to PiPong:)\n";
     std::cout << "Please press a button to start synchronization...\n";
+    char buf[BUFSIZE];
+    memset(buf, 0, BUFSIZE);
+    sprintf(buf, "huhuuuu");
+    std::cout << "Check buffer content: " << buf << std::endl;
+    draw(buf);
 }
 
 void Display::drawPlayer(const GameState gs) {

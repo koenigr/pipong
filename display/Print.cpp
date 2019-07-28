@@ -1,4 +1,4 @@
-#include "../hut_tests/Print.h"
+#include "Print.h"
 
 #include <cstring>
 #include <string>

@@ -1,4 +1,4 @@
-#include "../hut_tests/OLEDDisplay.h"
+#include "OLEDDisplay.h"
 
 #include <chrono>
 #include <cstring>

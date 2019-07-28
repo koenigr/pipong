@@ -31,7 +31,7 @@
  POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../hut_tests/Canvas.h"
+#include "Canvas.h"
 
 #include <cstdlib>
 #include <cstring>
