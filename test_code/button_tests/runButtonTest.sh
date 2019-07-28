@@ -1,5 +1,7 @@
 #/bin/bash
 
+clear
+
 g++ 	ButtonTest.cpp \
 	#../../display/Display.cpp \
 	#../../display/Canvas.cpp \

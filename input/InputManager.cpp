@@ -3,10 +3,7 @@
 #include <mraa.h>
 
 
-int ct;
-mraa_gpio_context bt_ct;
-
-void gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
+void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
   while(1) {
 
@@ -17,7 +14,7 @@ void gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
 }
 
-mraa_gpio_context gpio_init(int pin, mraa_gpio_dir_t dir) {
+mraa_gpio_context InputManager::gpio_init(int pin, mraa_gpio_dir_t dir) {
 
     mraa_gpio_context c = mraa_gpio_init(pin);
     gpio_dir(c, dir);
