@@ -35,12 +35,12 @@ void Display::draw(char* buf) {
 void Display::drawHello() {
 
     disp.flush();
-    std::cout << "Welcome to PiPong:)\n";
-    std::cout << "Please press a button to start synchronization...\n";
+    //std::cout << "Welcome to PiPong:)\n";
+    //std::cout << "Please press a button to start synchronization...\n";
     char buf[BUFSIZE];
     memset(buf, 0, BUFSIZE);
-    sprintf(buf, "huhuuuu");
-    std::cout << "Check buffer content: " << buf << std::endl;
+    sprintf(buf, "huhuuuu. Drück den Button, du Depp");
+    //std::cout << "Check buffer content: " << buf << std::endl;
     draw(buf);
 }
 

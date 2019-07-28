@@ -92,8 +92,12 @@ void StateManager::waitForStartButtonPress() {
     bool start = false;
     while (!start) {
         Display::drawHello();
-        // TODO: Wait for Button
-        // start = true;
+        bool pressed = InputManager::startButtonPressed();
+        if (pressed) {
+           std::cout << "Pressed\n";
+           start = true;
+        }
+        usleep(100 * 1000);
     }
 
     std::cout << "Start Button pressed\n";
