@@ -6,7 +6,7 @@
 
 #include <chrono>
 
-#include "OLEDDisplay.h"
+#include "../../input/OLEDDisplay.h"
 
 using namespace GFX;
 
