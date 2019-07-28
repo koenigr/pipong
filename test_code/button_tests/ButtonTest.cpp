@@ -1,5 +1,6 @@
 #include "../../input/InputManager.cpp"
 #include <iostream>
+#include "../../display/Display.cpp"
 
 int main() {
 
