@@ -5,7 +5,8 @@
 class InputManager
 {
 public:
-    InputManager();
+    static void init();
+    static bool startButtonPressed();
 };
 
 #endif // INPUTMANAGER_H

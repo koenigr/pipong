@@ -6,6 +6,7 @@
 #include "../gamestate/GameState.h"
 #include "../Parameters.h"
 #include "../display/Display.h"
+#include "../input/InputManager.h"
 
 #include <iostream>
 
@@ -73,6 +74,7 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
     gs.init(player_self);
 
     Display::init();
+    InputManager::init();
 
     actual_state = 0;
 

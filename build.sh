@@ -9,6 +9,7 @@ g++ pipong.cpp \
     gamestate/*.cpp \
     display/*.cpp \
     states/*.cpp \
+    input/*.cpp \
     -o PiPong \
     -std=c++11 -lmraa -pthread \
     -Wall -Wextra -Wpedantic 
