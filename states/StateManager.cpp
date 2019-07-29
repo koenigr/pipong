@@ -32,7 +32,7 @@ void StateManager::process_input() {
 
     //std::cout << "\nStart processing input...\n";
 
-    GameState::setPosition(GameState::getPlayerNo(), InputManager::getPlayerPosition());
+    GameState::setPosition(gs.getPlayerNo(), InputManager::getPlayerPosition());
 
     //std::cout << "Input processing completed\n";
 }
