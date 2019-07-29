@@ -63,13 +63,15 @@ void Display::drawPlayer(const GameState gs) {
     std::cout << "TODO: Player rotate into wrong direction\n";
     for (int i = 0; i < 4; i++) {
         Player player = gs.getPlayer(i);
-        std::cout << "Player " << i
-                << ": (" << player.getLeftEndX() << "," << player.getLeftEndY() << "),("
-                << player.getRightEndX() << "," << player.getRightEndY() << ")\n";
+        disp.drawLine(player.getLeftEndX(), player.getLeftEndY(), player.getRightEndX(), player.getRightEndY());
+//        std::cout << "Player " << i
+//                << ": (" << player.getLeftEndX() << "," << player.getLeftEndY() << "),("
+//                << player.getRightEndX() << "," << player.getRightEndY() << ")\n";
     }
 }
 
 void Display::drawBall(const GameState gs) {
+    disp.fillCircle(gs.getBall().getPosX(), gs.getBall().getPosY(), B_RAD);
     std::cout << "Ball " << gs.getBall().toString() << std::endl;
 }
 
