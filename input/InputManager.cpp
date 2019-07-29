@@ -8,7 +8,8 @@ using namespace GFX;
 int InputManager::ct;
 mraa_gpio_context InputManager::bt_ct;
 
-#define ADDR_MPU 0x68
+#define ADDR_MPU            0x68
+#define MPU_ACCEL_OUT       0x3B
 
 void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
