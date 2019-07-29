@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstring>
 #include <mraa.h>
+#include <sstream>
 
 #include "../mraa_libs/OLEDDisplay.h"
 
@@ -39,22 +40,23 @@ void Display::drawHello() {
                        "then press the center\nbutton to start\nsynchronization.";
     char buf[BUFSIZE];
     memset(buf, 0, BUFSIZE);
-    sprintf(buf, display_text);
+    sprintf(buf, display_text.c_str());
     //std::cout << "Check buffer content: " << buf << std::endl;
     draw(buf);
 }
 
 void Display::drawWaitForPeers(const GameState gs) {
     disp.flush();
-    std::stringstream s = "Waiting for peers\n";
-    s << "Player 0: " << gs.getPlayer(0).isActive() << \n;
-    s << "Player 1: " << gs.getPlayer(1).isActive() << \n;
-    s << "Player 2: " << gs.getPlayer(2).isActive() << \n;
-    s << "Player 3: " << gs.getPlayer(3).isActive() << \n;
+    std::stringstream s;
+    s << "Waiting for peers\n";
+    s << "Player 0: " << gs.getPlayer(0).isActive() << std::endl;
+    s << "Player 1: " << gs.getPlayer(1).isActive() << std::endl;
+    s << "Player 2: " << gs.getPlayer(2).isActive() << std::endl;
+    s << "Player 3: " << gs.getPlayer(3).isActive() << std::endl;
     std::string display_text = s.str();
     char buf[BUFSIZE];
     memset(buf, 0, BUFSIZE);
-    sprintf(buf, 0, display_text);
+    sprintf(buf, display_text.c_str());
     draw(buf);
 }
 
@@ -83,7 +85,7 @@ void Display::drawPoints(const GameState gs) {
         if (gs.getPlayer(i).isActive()) {
             std::cout << gs.getPlayer(i).getPoints();
         } else {
-            std::cout << "x";
+            std::cout << "-";
         }
         std::cout << std::endl;
 
