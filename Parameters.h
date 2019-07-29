@@ -10,10 +10,10 @@
 
 // General
 #define BUFSIZE 1024
-#define FRAMERATE 1 // 30
+#define FRAMERATE 30 // 30
 #define DISPLAY_SIZE 127
 #define PI 3.14159265
-#define COUNTDOWN_START_VAL 30 // 3 sec?
+#define COUNTDOWN_START_VAL 300 // 3-10 sec?
 
 // Ball
 #define INIT_VELOCITY 0.5 // pixel per frame

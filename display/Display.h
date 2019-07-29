@@ -10,6 +10,7 @@ private:
     static void drawBall(const GameState gs);
     static void flush();
     static void draw(char* buf);
+    static void draw();
 public:
     static void init();
     static void drawHello();
