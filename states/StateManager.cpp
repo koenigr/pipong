@@ -156,7 +156,7 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
     long int ms_then = Tools::getms();
 
     int i = 0;
-    while(i < 10) {
+    while(i < 200) {
 
     //receive_messages();
 

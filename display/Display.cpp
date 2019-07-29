@@ -33,6 +33,13 @@ void Display::draw(char* buf) {
 
 }
 
+void Display::draw() {
+
+    disp.clearScreen();
+    disp.setCursor(0,0);
+
+}
+
 void Display::drawHello() {
 
     disp.flush();
@@ -93,6 +100,8 @@ void Display::drawPoints(const GameState gs) {
 }
 
 void Display::drawGameState(const GameState gs) {
+    flush();
     drawPlayer(gs);
     drawBall(gs);
+    draw();
 }
