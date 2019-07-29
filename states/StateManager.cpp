@@ -45,17 +45,17 @@ void StateManager::update_game_state(GameState &gs) {
     std::cout << "Gamestate updating completed\n";
 }
 
-void StateManager::deploy_game_state(const GameState gs, const AddressManager am, const UDPSocket pi_socket) {
+void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_socket) {
 
     std::cout << "\nStart deploying gamestate..\n";
 
     std::string player_state_msg = MessageProtocol::createPlayerState(gs);
     std::cout << "Player state message: " << player_state_msg;
 
-    for (int i = 0; i < am.getNumOfParticipants(); i++ ) {
+    for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
         sockaddr_in participant;
         Tools::print_address(participant, "StateManager::deploy_game_state: ");
-        am.getParticipant(i, participant);
+        AddressManager::getParticipant(i, participant);
         pi_socket.sendMessage(player_state_msg, participant);
     }
     //pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
@@ -74,7 +74,7 @@ void StateManager::display(const GameState gs) {
 
 // PUBLIC
 
-void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPSocket &pi_socket ) {
+void StateManager::init(int player_self, GameState &gs, UDPSocket &pi_socket ) {
 
     std::cout << "\nInitializing PiPong\n";
 
@@ -85,9 +85,9 @@ void StateManager::init(int player_self, GameState &gs, AddressManager &am, UDPS
 
     actual_state = 0;
 
-    am.init();
+    AddressManager::init();
 
-    pi_socket.init(am.getOwnAddr());
+    pi_socket.init(AddressManager::getOwnAddr());
 
     std::cout << "PiPong Initialization complete\n\n";
 }
@@ -110,7 +110,7 @@ void StateManager::waitForStartButtonPress() {
     std::cout << "Start Button pressed\n";
 }
 
-void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
+void StateManager::findPeers(UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nWaiting for peers...\n";
 
@@ -125,7 +125,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
             std::string request = MessageProtocol::createRequest(gs);
-            pi_socket.sendMessage((char *)request.c_str(), am.getBroadcastAddr()); // TODO send always to fixed IP addresses.
+            pi_socket.sendMessage((char *)request.c_str(), AddressManager::getBroadcastAddr()); // TODO send always to fixed IP addresses.
 
             std::cout << "Countdown: " << gs.getCountdown() << std::endl;
 
@@ -145,7 +145,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
 }
 
 
-void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs) {
+void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
@@ -168,7 +168,7 @@ void StateManager::gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState 
 
             process_input(); // ??
             update_game_state(gs);
-            deploy_game_state(gs, am, pi_socket);
+            deploy_game_state(gs, pi_socket);
             display(gs);
             ms_start = Tools::getms();
             i++;

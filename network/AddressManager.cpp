@@ -16,6 +16,10 @@
 
 std::string AddressManager::addr_arr[4] = {"10.1.1.10", "10.1.1.20", "10.1.1.16", "10.1.1.17"};
 int AddressManager::port = 2222;
+struct sockaddr_in AddressManager::own_addr;
+struct sockaddr_in AddressManager::broadcast_addr;
+std::vector<sockaddr_in> AddressManager::participants;
+
 
 void AddressManager::init() {
 

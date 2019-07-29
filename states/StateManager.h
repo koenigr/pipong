@@ -11,15 +11,15 @@ private:
     void receive_messages(const UDPSocket &pi_socket, GameState &gs);
     void process_input();
     void update_game_state(GameState &gs);
-    void deploy_game_state(const GameState gs, const AddressManager am, const UDPSocket pi_socket);
+    void deploy_game_state(const GameState gs, const UDPSocket pi_socket);
     void display(const GameState gs);
 
 public:
     int actual_state;
-    void init(int player_self, GameState &gs, AddressManager &am, UDPSocket &pi_socket );
+    void init(int player_self, GameState &gs, UDPSocket &pi_socket );
     void waitForStartButtonPress();
-    void findPeers(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
-    void gameLoop(AddressManager &am, UDPSocket &pi_socket, GameState &gs);
+    void findPeers(UDPSocket &pi_socket, GameState &gs);
+    void gameLoop(UDPSocket &pi_socket, GameState &gs);
     void showPoints(GameState &gs);
 
 };
