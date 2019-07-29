@@ -7,6 +7,7 @@ PiPong
 test_code/message_protocol/udp
 test_code/array_tests/PlayerTest
 test_code/array_tests/ObjectTest
+test_code/player_test/PlayerTest
 test_code/ball_tests/BallTest
 test_code/message_protocol/MessageTest
 test_code/udp_connection/udp
