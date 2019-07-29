@@ -51,7 +51,13 @@ void StateManager::deploy_game_state(const GameState gs, const AddressManager am
 
     std::string player_state_msg = MessageProtocol::createPlayerState(gs);
     std::cout << "Player state message: " << player_state_msg;
-    pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
+
+    for (int i = 0; i < am.getNumOfParticipants(); i++ ) {
+        sockaddr_in participant;
+        Tools::print_address(participant, "StateManager::deploy_game_state: ");
+        pi_socket.sendMessage(player_state_msg, am.getParticipant(i, participant));
+    }
+    //pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
 
     std::cout << "Deploying gamestate completed\n";
 }
@@ -132,11 +138,6 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
         ms_then = Tools::getms();
 
     }
-
-//    std::cout << "Left for-loop\n";
-//    char message[] = "New Participant ";
-//    std::cout << "Char message created: " << message << "\n";
-//    Tools::print_address(am.getParticipant(0), message);
 
     std::cout << "Peer connection completed\n";
 
