@@ -77,14 +77,14 @@ void Display::drawPoints(const GameState gs) {
 
     clear();
     std::stringstream s;
-    s << "\n\n\nPress center button\ntofinish";
+    s << "\n\n\nPress center button\ntofinish\n";
     for (int i = 0; i < 4; i++) {
 
         s << "Player " << i << ": ";
         if (gs.getPlayer(i).isActive()) {
-            s << gs.getPlayer(i).getPoints();
+            s << gs.getPlayer(i).getPoints() << std::endl;
         } else {
-            s << "-";
+            s << "-" << std::endl;
         }
 
     }
