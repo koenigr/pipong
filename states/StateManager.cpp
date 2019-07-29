@@ -55,7 +55,8 @@ void StateManager::deploy_game_state(const GameState gs, const AddressManager am
     for (int i = 0; i < am.getNumOfParticipants(); i++ ) {
         sockaddr_in participant;
         Tools::print_address(participant, "StateManager::deploy_game_state: ");
-        pi_socket.sendMessage(player_state_msg, am.getParticipant(i, participant));
+        am.getParticipant(i, participant);
+        pi_socket.sendMessage(player_state_msg, participant);
     }
     //pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
 
