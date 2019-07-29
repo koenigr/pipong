@@ -73,7 +73,7 @@ void Display::drawPlayer(const GameState gs) {
 }
 
 void Display::drawBall(const GameState gs) {
-    disp.fillCircle(gs.getBall().getPosX(), gs.getBall().getPosY(), B_RAD);
+    disp.fillCircle(gs.getBall().getPosX(), gs.getBall().getPosY(), BALL_WIDTH);
     std::cout << "Ball " << gs.getBall().toString() << std::endl;
 }
 
