@@ -28,7 +28,7 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
     // std::cout << "Message received\n";
 }
 
-void StateManager::process_input() {
+void StateManager::process_input(GameState &gs) {
 
     //std::cout << "\nStart processing input...\n";
 
@@ -169,7 +169,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-            process_input(); // ??
+            process_input(gs); // ??
             update_game_state(gs);
             //deploy_game_state(gs, pi_socket);
             display(gs);

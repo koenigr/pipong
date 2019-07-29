@@ -9,7 +9,7 @@ class StateManager
 {
 private:
     void receive_messages(const UDPSocket &pi_socket, GameState &gs);
-    void process_input();
+    void process_input(GameState &gs);
     void update_game_state(GameState &gs);
     void deploy_game_state(const GameState gs, const UDPSocket pi_socket);
     void display(const GameState gs);
