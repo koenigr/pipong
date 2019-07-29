@@ -39,7 +39,7 @@ void Display::drawHello() {
     //std::cout << "Please press a button to start synchronization...\n";
     char buf[BUFSIZE];
     memset(buf, 0, BUFSIZE);
-    sprintf(buf, "huhuuuu. Drück den Button, du Depp");
+    sprintf(buf, "\n\n\nWelcome to PiPong :)\n Please wait until all player are active\nthen press the center button to start synchronization.");
     //std::cout << "Check buffer content: " << buf << std::endl;
     draw(buf);
 }
