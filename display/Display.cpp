@@ -18,17 +18,18 @@ void Display::init() {
     disp.enable();
 }
 
-void Display::flush() {
-
-    disp.flush();
+void Display::clear() {
     disp.clearScreen();
-    disp.setCursor(0,0);
+    disp.setCursor(0,0); // ??
+}
 
+void Display::flush() {
+    disp.flush();
 }
 
 void Display::drawHello() {
 
-    disp.flush();
+    clear();
     std::string display_text = "\n\n\nWelcome to PiPong :)\n Please wait until\nall player are active\n"
                        "then press the center\nbutton to start\nsynchronization.";
     char buf[BUFSIZE];
@@ -36,10 +37,11 @@ void Display::drawHello() {
     sprintf(buf, display_text.c_str());
     //std::cout << "Check buffer content: " << buf << std::endl;
     disp.print(buf);
+    flush();
 }
 
 void Display::drawWaitForPeers(const GameState gs) {
-    disp.flush();
+    clear();
     std::stringstream s;
     s << "Waiting for peers\n";
     s << "Player 0: " << gs.getPlayer(0).isActive() << std::endl;
@@ -51,6 +53,7 @@ void Display::drawWaitForPeers(const GameState gs) {
     memset(buf, 0, BUFSIZE);
     sprintf(buf, display_text.c_str());
     disp.print(buf);
+    flush();
 }
 
 void Display::drawPlayer(const GameState gs) {
@@ -86,7 +89,8 @@ void Display::drawPoints(const GameState gs) {
 }
 
 void Display::drawGameState(const GameState gs) {
-    flush();
+    clear();
     drawPlayer(gs);
     drawBall(gs);
+    flush();
 }
