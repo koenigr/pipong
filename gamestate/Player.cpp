@@ -79,19 +79,23 @@ std::string Player::toString() const {
 }
 
 int Player::getLeftEndX() const { // TODO wrong order
-    return (DISPLAY_SIZE/2 - position - PADDLE_WIDTH /2)*(!x_axis);
+    return (DISPLAY_SIZE/2 - position - PADDLE_WIDTH /2)*(!x_axis)
+            +DISPLAY_SIZE * x_axis * oth_axis;
 }
 
 int Player::getRightEndX() const {
-    return (DISPLAY_SIZE/2 - position + PADDLE_WIDTH /2)*(!x_axis);
+    return (DISPLAY_SIZE/2 - position + PADDLE_WIDTH /2)*(!x_axis)
+            +DISPLAY_SIZE * x_axis * oth_axis;
 }
 
 int Player::getLeftEndY() const {
-    return (DISPLAY_SIZE/2 - position - PADDLE_WIDTH /2)*(x_axis);
+    return (DISPLAY_SIZE/2 - position - PADDLE_WIDTH /2)*(x_axis)
+            +DISPLAY_SIZE * !x_axis * oth_axis;
 }
 
 int Player::getRightEndY() const {
-    return (DISPLAY_SIZE/2 - position + PADDLE_WIDTH /2)*(x_axis);
+    return (DISPLAY_SIZE/2 - position + PADDLE_WIDTH /2)*(x_axis)
+            +DISPLAY_SIZE * !x_axis * oth_axis;
 }
 
 int Player::getPlayerNo() const {
