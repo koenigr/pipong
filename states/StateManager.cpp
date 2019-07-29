@@ -114,6 +114,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
 
         receive_messages(pi_socket, gs);
 
+
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
             std::string request = MessageProtocol::createRequest(gs);
@@ -124,7 +125,7 @@ void StateManager::findPeers(AddressManager &am, UDPSocket &pi_socket, GameState
             gs.decrCountdown();
             gs.incrFrameNo();
             std::cout << gs.getFrameNo() << std::endl;
-
+            Display::drawWaitForPeers(gs);
             ms_start = Tools::getms();
 
         }

@@ -13,6 +13,7 @@ private:
 public:
     static void init();
     static void drawHello();
+    void drawWaitForPeers(const GameState gs);
     static void drawGameState(const GameState gs);
     static void drawPoints(const GameState gs);
 };

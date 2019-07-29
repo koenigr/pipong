@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 
     state_manager.waitForStartButtonPress();
 
-    // state_manager.findPeers(am, pi_socket, gs);
+    state_manager.findPeers(am, pi_socket, gs);
 
     // state_manager.gameLoop(am, pi_socket, gs);
 
