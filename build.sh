@@ -10,6 +10,7 @@ g++ pipong.cpp \
     display/*.cpp \
     states/*.cpp \
     input/*.cpp \
+    mraa_libs/*.cpp \
     -o PiPong \
     -std=c++11 -lmraa -pthread \
     -Wall -Wextra -Wpedantic 
