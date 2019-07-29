@@ -16,6 +16,9 @@ Player::Player() {}
 Player::~Player() {}
 
 void Player::init(int player_this, int player_self) {
+
+    std::cout << "Player:init() start\n";
+
     position = 0;
     points = INIT_PLAYER_POINTS;
     player_no = player_this;
@@ -23,6 +26,8 @@ void Player::init(int player_this, int player_self) {
     oth_axis =  ((player_self <= 1) && (!(player_self % 2) ^ ((player_this % 2) ^ (player_this > 1)))) || ((player_self > 1) &&  (!(player_this % 2)^(player_self % 2)));
     active = false;
     frame = 0;
+
+    std::cout << "Player:init() end\n";
 }
 
 unsigned int Player::getFrame() {
