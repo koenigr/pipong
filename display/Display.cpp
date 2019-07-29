@@ -75,17 +75,29 @@ void Display::drawBall(const GameState gs) {
 
 void Display::drawPoints(const GameState gs) {
 
+    clear();
+    std::stringstream s;
+    s << "\n\n\nPress center button\ntofinish";
     for (int i = 0; i < 4; i++) {
 
-        std::cout << "Player " << i << ": ";
+        s << "Player " << i << ": ";
         if (gs.getPlayer(i).isActive()) {
-            std::cout << gs.getPlayer(i).getPoints();
+            s << gs.getPlayer(i).getPoints();
         } else {
-            std::cout << "-";
+            s << "-";
         }
-        std::cout << std::endl;
 
     }
+    std::string display_text = s.str();
+
+    char buf[BUFSIZE];
+    memset(buf, 0, BUFSIZE);
+    sprintf(buf, display_text.c_str());
+
+    disp.print(buf);
+    flush();
+
+
 }
 
 void Display::drawGameState(const GameState gs) {

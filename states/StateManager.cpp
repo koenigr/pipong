@@ -190,7 +190,17 @@ void StateManager::showPoints(GameState &gs) {
 
     actual_state = 2; // neccessary?
 
-    Display::drawPoints(gs);
+    bool end = false;
+    while (!end) {
+        Display::drawPoints(gs);
+        bool pressed = InputManager::startButtonPressed();
+        if (pressed) {
+           std::cout << "Pressed\n";
+           end = true;
+        }
+        usleep(1000 / FRAMERATE);
+    }
+
 
     std::cout << "Press x to start a new game\nPress y to shutdown\n";
 
