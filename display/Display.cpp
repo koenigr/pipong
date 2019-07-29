@@ -80,8 +80,8 @@ void Display::drawPoints(const GameState gs) {
     for (int i = 0; i < 4; i++) {
 
         std::cout << "Player " << i << ": ";
-        if (gs.getPlayer(0).isActive()) {
-            std::cout << gs.getPlayer(0).getPoints();
+        if (gs.getPlayer(i).isActive()) {
+            std::cout << gs.getPlayer(i).getPoints();
         } else {
             std::cout << "x";
         }
