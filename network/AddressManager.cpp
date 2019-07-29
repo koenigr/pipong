@@ -14,10 +14,8 @@
 
 #include "../tools/Tools.h"
 
-
-AddressManager::~AddressManager() {
-    std::cout << "Address manager destructor called\n";
-}
+std::string AddressManager::addr_arr[4] = {"10.1.1.10", "10.1.1.20", "10.1.1.16", "10.1.1.17"};
+int AddressManager::port = 2222;
 
 void AddressManager::init() {
 
@@ -62,7 +60,7 @@ void AddressManager::createBroadcastAddr() {
 
 }
 
-sockaddr_in AddressManager::getBroadcastAddr() const {
+sockaddr_in AddressManager::getBroadcastAddr() {
 
     return broadcast_addr;
 }
@@ -82,14 +80,14 @@ void AddressManager::addParticipant(const int player_no) {
 
 }
 
-void AddressManager::getParticipant(int pos, sockaddr_in &participant) const {
+void AddressManager::getParticipant(int pos, sockaddr_in &participant) {
     if (pos >= (int) participants.size()) {
         Tools::error("AddressManager::getParticipant(): Trying to get non-existing participant\n");
     }
     participant = participants[pos];
 }
 
-int AddressManager::getNumOfParticipants() const {
+int AddressManager::getNumOfParticipants() {
 
 	return participants.size();
 }

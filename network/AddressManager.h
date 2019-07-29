@@ -14,26 +14,25 @@
 
 class AddressManager {
 private:
-    std::string addr_arr[4] = {"10.1.1.10", "10.1.1.20", "10.1.1.16", "10.1.1.17"};
 
-    int port = 2222;
-    struct sockaddr_in own_addr;
-    struct sockaddr_in broadcast_addr;
-    std::vector<sockaddr_in> participants;
+    static std::string addr_arr[4];
+    static int port;
+    static struct sockaddr_in own_addr;
+    static struct sockaddr_in broadcast_addr;
+    static std::vector<sockaddr_in> participants;
 
-    void createBroadcastAddr();
-    void createOwnAddr();
+    static void createBroadcastAddr();
+    static void createOwnAddr();
 
 
 public:
-    ~AddressManager();
-    void init();
-    sockaddr_in getBroadcastAddr() const;
-	sockaddr_in getOwnAddr();
-	void print_infos();
-    void addParticipant(int const player_no);
-    void getParticipant(int pos, sockaddr_in& participant) const;
-    int getNumOfParticipants() const;
+    static void init();
+    static sockaddr_in getBroadcastAddr();
+    static sockaddr_in getOwnAddr();
+    static void print_infos();
+    static void addParticipant(int const player_no);
+    static void getParticipant(int pos, sockaddr_in& participant);
+    static int getNumOfParticipants();
 
 private:
 };
