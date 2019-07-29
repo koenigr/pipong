@@ -3,10 +3,10 @@
 clear
 
 g++ 	ButtonTest.cpp \
-	../../input/OLEDDisplay.cpp \
-	../../input/Canvas.cpp \
-	../../input/Print.cpp \
-	../../input/InputManager.cpp \
+        ../../mraa_libs/OLEDDisplay.cpp \
+        ../../mraa_libs/Canvas.cpp \
+        ../../mraa_libs/Print.cpp \
+        ../../mraa_libs/InputManager.cpp \
 	-lmraa -std=c++11 -pthread \
 	-o ButtonTest
 

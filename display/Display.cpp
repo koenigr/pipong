@@ -4,7 +4,7 @@
 #include <cstring>
 #include <mraa.h>
 
-#include "OLEDDisplay.h"
+#include "../mraa_libs/OLEDDisplay.h"
 
 using namespace GFX;
 
