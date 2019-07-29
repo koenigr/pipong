@@ -21,20 +21,6 @@ void Display::init() {
 void Display::flush() {
 
     disp.flush();
-
-}
-
-void Display::draw(char* buf) {
-
-    disp.clearScreen();
-    disp.setCursor(0,0);
-    //std::cout << "Display::draw buffer: " << buf << std::endl;
-    disp.print(buf);
-
-}
-
-void Display::draw() {
-
     disp.clearScreen();
     disp.setCursor(0,0);
 
@@ -49,7 +35,7 @@ void Display::drawHello() {
     memset(buf, 0, BUFSIZE);
     sprintf(buf, display_text.c_str());
     //std::cout << "Check buffer content: " << buf << std::endl;
-    draw(buf);
+    disp.print(buf);
 }
 
 void Display::drawWaitForPeers(const GameState gs) {
@@ -64,7 +50,7 @@ void Display::drawWaitForPeers(const GameState gs) {
     char buf[BUFSIZE];
     memset(buf, 0, BUFSIZE);
     sprintf(buf, display_text.c_str());
-    draw(buf);
+    disp.print(buf);
 }
 
 void Display::drawPlayer(const GameState gs) {
@@ -103,5 +89,4 @@ void Display::drawGameState(const GameState gs) {
     flush();
     drawPlayer(gs);
     drawBall(gs);
-    draw();
 }
