@@ -15,7 +15,6 @@ private:
     // playerPos relative to center of display, ie 0 = DISPLAY_SIZE / 2
     int position;
     int points;
-    int player_sequence;// TODO!!!!! long unsigned int?
     // player displayed at 0=x_axis or 1=y_axis
     int x_axis;
     // other axis is at 0=0 or 1=DISPLAY_SIZE
