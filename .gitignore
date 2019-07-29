@@ -14,6 +14,7 @@ test_code/udp_connection/udp
 test_code/compare_broadcast_p2p/udp_send
 test_code/compare_broadcast_p2p/udp_receive
 test_code/hut_tests/SensorTest
+test_code/hut_tests/SensorLCD
 test_code/mraa_hello/PiPong/mraa_hello
 *.o
 pipong.creator.user
