@@ -83,7 +83,7 @@ void Display::drawPoints(const GameState gs) {
         if (gs.getPlayer(i).isActive()) {
             std::cout << gs.getPlayer(i).getPoints();
         } else {
-            std::cout << "x";
+            std::cout << "-";
         }
         std::cout << std::endl;
 
