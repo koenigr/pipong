@@ -97,7 +97,7 @@ void StateManager::waitForStartButtonPress() {
            std::cout << "Pressed\n";
            start = true;
         }
-        usleep(100 * 1000);
+        usleep(1000 / FRAMERATE);
     }
 
     std::cout << "Start Button pressed\n";
