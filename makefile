@@ -21,4 +21,5 @@ $(MAIN): $(OBJS)
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CPPFLAGS)
 
-clean: rm -f core $(MAIN) $(OBJS)
+clean:
+	rm -f core $(MAIN) $(OBJS)
