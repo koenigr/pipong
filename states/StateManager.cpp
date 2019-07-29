@@ -41,6 +41,7 @@ void StateManager::update_game_state(GameState &gs) {
 
     gs.incrFrameNo();
     std::cout << gs.toString() << "\n";
+    gs.updateBall();
 
     std::cout << "Gamestate updating completed\n";
 }
@@ -65,11 +66,11 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
 
 void StateManager::display(const GameState gs) {
 
-    std::cout << "\nStart display...\n";
+    std::cout << "\nStateManager::display() start...\n";
 
     Display::drawGameState(gs);
 
-    std::cout << "Display completed\n";
+    std::cout << "StateManager::display() end\n";
 }
 
 // PUBLIC
@@ -168,7 +169,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
             process_input(); // ??
             update_game_state(gs);
-            deploy_game_state(gs, pi_socket);
+            //deploy_game_state(gs, pi_socket);
             display(gs);
             ms_start = Tools::getms();
             i++;

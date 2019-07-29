@@ -16,7 +16,7 @@
 #define COUNTDOWN_START_VAL 50 // 3-10 sec?
 
 // Ball
-#define INIT_VELOCITY 0.5 // pixel per frame
+#define INIT_VELOCITY 70 // pixel per frame
 #define VELOCITY_INCR 0.5
 #define BALL_WIDTH 10
 

@@ -32,7 +32,7 @@ void GameState::init(int player_no) {
 
     ball.setAngle(player_self, 26.4);
 
-    // std::cout << toString() << std::endl;
+    std::cout << toString() << std::endl;
 
     std::cout << "Gamestate::init() end\n\n";
 }
@@ -132,15 +132,18 @@ std::string GameState::toString() const {
 
 void GameState::updateBall() {
     checkForPaddleCollision();
-    checkForScoringZoneCollision();
+    // checkForScoringZoneCollision();
     ball.updateBall();
 }
 
 void GameState::checkForPaddleCollision() {
     if(ball.getPosY() - BALL_WIDTH <= 1) ball.reflectBall(0);
-    else if(ball.getPosY() + BALL_WIDTH >= 126) ball.reflectBall(1);
+    else if(ball.getPosY() + BALL_WIDTH >= 126) ball.reflectBall(1); // works
     else if(ball.getPosX() - BALL_WIDTH <= 1) ball.reflectBall(2);
-    else if(ball.getPosX() + BALL_WIDTH >= 126) ball.reflectBall(3);
+    else if(ball.getPosX() + BALL_WIDTH >= 126) {
+        ball.reflectBall(3);
+        std::cout << "Should reflect ball\n";
+    }
 }
 
 void GameState::checkForScoringZoneCollision() {
