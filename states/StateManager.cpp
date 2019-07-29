@@ -161,7 +161,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     long int ms_then = Tools::getms();
 
     int i = 0;
-    while(i < 200) {
+    while(i < 500) {
 
     //receive_messages();
 
