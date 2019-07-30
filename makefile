@@ -15,7 +15,7 @@ OBJS = pipong.o  $(STATES)  $(DISPLAY) $(GAMESTATE) $(INPUT) $(MESSAGE_PROTOCOL)
 MAIN = PiPong
 
 
-$(MAIN): $(OBJS)
+$(MAIN): $(OBJS) Parameters.h
 	$(CC) -o $@ $^ $(CPPFLAGS)
 
 %.o: %.c $(DEPS)

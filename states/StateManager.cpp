@@ -39,21 +39,21 @@ void StateManager::process_input(GameState &gs) {
 
 void StateManager::update_game_state(GameState &gs) {
 
-    std::cout << "\nStateManager::update_game_state() start...\n";
+    //std::cout << "\nStateManager::update_game_state() start...\n";
 
     gs.incrFrameNo();
     // std::cout << gs.toString() << "\n";
     gs.updateBall();
 
-    std::cout << "StateManager::update_game_state() end\n";
+    //std::cout << "StateManager::update_game_state() end\n";
 }
 
 void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_socket) {
 
-    std::cout << "\nStart deploying gamestate..\n";
+    //std::cout << "\nStart deploying gamestate..\n";
 
     std::string player_state_msg = MessageProtocol::createPlayerState(gs);
-    std::cout << "Player state message: " << player_state_msg;
+    // std::cout << "Player state message: " << player_state_msg;
 
     for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
         sockaddr_in participant;
@@ -63,16 +63,16 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
     }
     //pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
 
-    std::cout << "Deploying gamestate completed\n";
+    //std::cout << "Deploying gamestate completed\n";
 }
 
 void StateManager::display(const GameState gs) {
 
-    std::cout << "\nStateManager::display() start...\n";
+    //std::cout << "\nStateManager::display() start...\n";
 
     Display::drawGameState(gs);
 
-    std::cout << "StateManager::display() end\n";
+    //std::cout << "StateManager::display() end\n";
 }
 
 // PUBLIC
@@ -165,14 +165,18 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     //receive_messages();
 
-
+        //process_input(gs);
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
-
-            process_input(gs); // ??
+            std::cout << "start gameloop after: " << Tools::getms() - ms_start << std::endl;
+            //process_input(gs); // ??
+            std::cout << "time after process input: " << Tools::getms() - ms_start << std::endl;
             update_game_state(gs);
             //deploy_game_state(gs, pi_socket);
+            std::cout << "time after update gs: " << Tools::getms() - ms_start << std::endl;
             display(gs);
+            std::cout << "time needed for one loop: " << ms_then - ms_start << std::endl;
+           // std::cout << "time after procedure: " << Tools::getms() - ms_start << std::endl;
             ms_start = Tools::getms();
             i++;
 
