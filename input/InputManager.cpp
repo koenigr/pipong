@@ -2,6 +2,7 @@
 #include "../mraa_libs/OLEDDisplay.h"
 #include <cstring>
 #include <mraa.h>
+#include <iostream>
 
 using namespace GFX;
 
@@ -10,6 +11,9 @@ mraa_gpio_context InputManager::bt_ct;
 
 #define ADDR_MPU            0x68
 #define MPU_ACCEL_OUT       0x3B
+
+double min;
+double max;
 
 void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
@@ -57,15 +61,21 @@ void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
     double f = 2.0 / 32768.0;
         std::cout << "f: " << f << std::endl;
         data[0] = decodeS16BE(buf + 0) * f;
-        std::cout << "acceleration inside: " << data[0];
+        std::cout << "acceleration inside: " << data[0] << std::endl;
 }
 
 int InputManager::getPlayerPosition() {
     double accel[3];
+
+    std::cout << "min " << min << " max " << max << std::endl;
+
     mraa_i2c_context i2c = mraa_i2c_init(0);
     mraa_i2c_address(i2c, ADDR_MPU);
     getAccel(i2c, accel);
+    if (accel[0] > max) max = accel[0];
+    if (accel[0] < min) min = accel[0];
     int player_pos;
     player_pos = getPlayerPos(accel[0]);
+    std::cout << "player position: " << player_pos << std::endl;
     return player_pos;
 }
