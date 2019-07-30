@@ -39,13 +39,13 @@ void StateManager::process_input(GameState &gs) {
 
 void StateManager::update_game_state(GameState &gs) {
 
-    std::cout << "\nStart updating gamestate...\n";
+    std::cout << "\nStateManager::update_game_state() start...\n";
 
     gs.incrFrameNo();
-    std::cout << gs.toString() << "\n";
+    // std::cout << gs.toString() << "\n";
     gs.updateBall();
 
-    std::cout << "Gamestate updating completed\n";
+    std::cout << "StateManager::update_game_state() end\n";
 }
 
 void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_socket) {
