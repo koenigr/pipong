@@ -12,7 +12,6 @@ mraa_gpio_context InputManager::bt_ct;
 #define ADDR_MPU            0x68
 #define MPU_ACCEL_OUT       0x3B
 
-<<<<<<< HEAD
 #define MPU_SMPLRT_DIV     0x19
 #define MPU_CONFIG         0x1A
 #define MPU_GYRO_CONFIG    0x1B
@@ -53,10 +52,10 @@ void InputManager::initMPU9250(mraa_i2c_context i2c) {
     usleep(100 * 1000);
 }
 
-=======
 double min;
 double max;
->>>>>>> 23c1c892736a2d4dbf21f0340d35c7a862888845
+int player_min;
+int player_max;
 
 void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
@@ -94,7 +93,7 @@ int16_t InputManager::decodeS16BE(uint8_t *buf) {
 }
 
 int InputManager::getPlayerPos(double accel) {
-  return 63 + 7*(int)(accel*10);
+  return 63 + 100*accel;
 }
 
 void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
@@ -113,12 +112,14 @@ int InputManager::getPlayerPosition() {
     std::cout << "min " << min << " max " << max << std::endl;
 
     mraa_i2c_context i2c = mraa_i2c_init(0);
+    initMPU9250(i2c);
     mraa_i2c_address(i2c, ADDR_MPU);
     getAccel(i2c, accel);
     if (accel[0] > max) max = accel[0];
     if (accel[0] < min) min = accel[0];
     int player_pos;
     player_pos = getPlayerPos(accel[0]);
+    std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
     std::cout << "player position: " << player_pos << std::endl;
     return player_pos;
 }
