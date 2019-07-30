@@ -8,6 +8,8 @@ class InputManager
 private:
     static int ct;
     static mraa_gpio_context bt_ct;
+
+    static void initMPU9250(mraa_i2c_context i2c);
     static int getPlayerPos(double accel);
     static void getAccel(mraa_i2c_context i2c, double *data);
     static int16_t decodeS16BE(uint8_t *buf);
