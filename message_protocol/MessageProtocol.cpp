@@ -134,7 +134,7 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
         }
         else {
             std::cout << "Wrong message type";
-            exit(1);
+            //exit(1);
         }
     }
 }
