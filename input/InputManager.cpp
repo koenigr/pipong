@@ -112,23 +112,16 @@ void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
 }
 
 int InputManager::getPlayerPosition() {
-long int start = Tools::getms();
-std::cout << ">>>>>>>>> start " << start << std::endl;
     double accel[3];
 
     std::cout << "min " << min << " max " << max << std::endl;
 
-std::cout << ">>>>>>>>> after init " << Tools::getms() - start << std::endl;
     getAccel(i2c, accel);
-std::cout << ">>>>>>>>> after get accel " << Tools::getms() - start  << std::endl;
     if (accel[0] > max) max = accel[0];
     if (accel[0] < min) min = accel[0];
     int player_pos;
-std::cout << ">>>>>>>>> before getPlayerPos " << Tools::getms() - start << std::endl;
     player_pos = getPlayerPos(accel[0]);
-std::cout << ">>>>>>>>> after getPlayerPos " << Tools::getms() - start << std::endl;
     std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
     std::cout << "player position: " << player_pos << std::endl;
-std::cout << ">>>>>>>>> after cout " << Tools::getms() - start << std::endl;
     return player_pos;
 }
