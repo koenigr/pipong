@@ -9,6 +9,7 @@ using namespace GFX;
 
 int InputManager::ct;
 mraa_gpio_context InputManager::bt_ct;
+mraa_i2c_context InputManager::i2c;
 
 #define ADDR_MPU            0x68
 #define MPU_ACCEL_OUT       0x3B
@@ -80,7 +81,7 @@ mraa_gpio_context InputManager::gpio_init(int pin, mraa_gpio_dir_t dir) {
 void InputManager::init() {
 
     bt_ct = gpio_init(38, MRAA_GPIO_IN);
-    mraa_i2c_context i2c = mraa_i2c_init(0);
+    i2c = mraa_i2c_init(0);
     initMPU9250(i2c);
     mraa_i2c_address(i2c, ADDR_MPU);
 
