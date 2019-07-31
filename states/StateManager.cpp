@@ -169,7 +169,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
             std::cout << "start gameloop after: " << Tools::getms() - ms_start << std::endl;
-            //process_input(gs); // ??
+            process_input(gs); // ??
             std::cout << "time after process input: " << Tools::getms() - ms_start << std::endl;
             update_game_state(gs);
             //deploy_game_state(gs, pi_socket);

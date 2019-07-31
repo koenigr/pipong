@@ -3,6 +3,7 @@
 #include <cstring>
 #include <mraa.h>
 #include <iostream>
+#include "../tools/Tools.h"
 
 using namespace GFX;
 
@@ -29,10 +30,10 @@ void InputManager::initMPU9250(mraa_i2c_context i2c) {
     uint8_t afs = 0; // 2.0g per 32768.0
 
     // reset
-    mraa_i2c_write_byte_data(i2c, 0x80, MPU_PWR_MGMT_1);
-    usleep(100 * 1000);
+   // mraa_i2c_write_byte_data(i2c, 0x80, MPU_PWR_MGMT_1);
+    //usleep(100 * 1000);
     // sleep off
-    mraa_i2c_write_byte_data(i2c, 0x00, MPU_PWR_MGMT_1);
+   // mraa_i2c_write_byte_data(i2c, 0x00, MPU_PWR_MGMT_1);
     usleep(100 * 1000);
     // auto select clock source, sleep off
     mraa_i2c_write_byte_data(i2c, 0x01, MPU_PWR_MGMT_1);
@@ -107,6 +108,8 @@ void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
 }
 
 int InputManager::getPlayerPosition() {
+long int start = Tools::getms();
+std::cout << ">>>>>>>>> start " << start << std::endl;
     double accel[3];
 
     std::cout << "min " << min << " max " << max << std::endl;
@@ -114,12 +117,17 @@ int InputManager::getPlayerPosition() {
     mraa_i2c_context i2c = mraa_i2c_init(0);
     initMPU9250(i2c);
     mraa_i2c_address(i2c, ADDR_MPU);
+std::cout << ">>>>>>>>> after init " << Tools::getms() - start << std::endl;
     getAccel(i2c, accel);
+std::cout << ">>>>>>>>> after get accel " << Tools::getms() - start  << std::endl;
     if (accel[0] > max) max = accel[0];
     if (accel[0] < min) min = accel[0];
     int player_pos;
+std::cout << ">>>>>>>>> before getPlayerPos " << Tools::getms() - start << std::endl;
     player_pos = getPlayerPos(accel[0]);
+std::cout << ">>>>>>>>> after getPlayerPos " << Tools::getms() - start << std::endl;
     std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
     std::cout << "player position: " << player_pos << std::endl;
+std::cout << ">>>>>>>>> after cout " << Tools::getms() - start << std::endl;
     return player_pos;
 }

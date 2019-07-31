@@ -27,9 +27,9 @@ int main(int argc, char* argv[]) {
 
     state_manager.init(player_self, gs, pi_socket);
 
-    state_manager.waitForStartButtonPress();
+//    state_manager.waitForStartButtonPress();
 
-    state_manager.findPeers(pi_socket, gs);
+//    state_manager.findPeers(pi_socket, gs);
 
     state_manager.gameLoop(pi_socket, gs);
 
