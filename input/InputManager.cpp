@@ -98,7 +98,7 @@ int16_t InputManager::decodeS16BE(uint8_t *buf) {
 }
 
 int InputManager::getPlayerPos(double accel) {
-  return 63 + 100*accel;
+  return 100*accel;
 }
 
 void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
