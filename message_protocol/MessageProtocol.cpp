@@ -7,6 +7,7 @@
 
 #include "MessageProtocol.h"
 #include "../states/StateManager.h"
+#include "../Parameters.h"
 
 #include <iostream>
 #include <string>
@@ -29,7 +30,6 @@
 #define POSITION "POSITION "
 #define POINTS "POINTS "
 #define COUNTDOWN "COUNTDOWN "
-
 
 std::string MessageProtocol::createRequest(GameState gs) {
 
@@ -109,7 +109,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
 }
 
 
-void MessageProtocol::evalMessage(StateManager::States actual_state, std::string message, GameState& gs) {
+void MessageProtocol::evalMessage(std::string message, GameState& gs) {
 
     char tp[4];
     char rm[BUFSIZE];
@@ -119,17 +119,18 @@ void MessageProtocol::evalMessage(StateManager::States actual_state, std::string
 
         std::string type(tp);
         std::string remaining(rm);
+        int actual_state = StateManager::getState();
 
-        if (type == REQUEST_TYPE && actual_state == 0) evalRequest(remaining, gs);
-        else if (type == PLAYER_STATE_TYPE && actual_state == 1) evalPlayerState(remaining, gs);
-        else if (type == COLLISION_TYPE && actual_state == 1) {
+        if (type == REQUEST_TYPE && actual_state == FINDPEERS_STATE) evalRequest(remaining, gs);
+        else if (type == PLAYER_STATE_TYPE && actual_state == GAME_STATE) evalPlayerState(remaining, gs);
+        else if (type == COLLISION_TYPE && actual_state == GAME_STATE) {
             evalCollision(remaining, gs);
-            StateManager::setState(StateManager::States::COLLISION);
+            StateManager::setState(COLLISION_STATE);
         }
 
-        else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) {
+        else if (type == FINISH_TYPE && (actual_state == GAME_STATE || actual_state == COLLISION_STATE)) {
             evalFinish(remaining, gs);
-            StateManager::setState(StateManager::States::FINISH);
+            StateManager::setState(FINISH_STATE);
         }
         else {
             std::cout << "Wrong message type";

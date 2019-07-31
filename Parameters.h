@@ -24,4 +24,10 @@
 #define INIT_PLAYER_POINTS 5
 #define PADDLE_WIDTH 10
 
+// STATES
+#define FINDPEERS_STATE 0
+#define GAME_STATE 1
+#define COLLISION_STATE 2
+#define FINISH_STATE 3
+
 #endif /* PARAMETERS_H_ */

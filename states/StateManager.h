@@ -17,8 +17,8 @@ private:
 
 public:
 
-    enum States {FIND_PEERS, GAME, COLLISION, FINISH};
-    static States actual_state;
+    //enum States {FIND_PEERS, GAME, COLLISION, FINISH};
+    static int actual_state;
 
     static void init(int player_self, GameState &gs, UDPSocket &pi_socket );
     static void waitForStartButtonPress();

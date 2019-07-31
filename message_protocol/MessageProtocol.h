@@ -33,7 +33,7 @@ public:
 
     static std::string createFinish(GameState gs);
 
-    static void evalMessage(StateManager::States actual_state, std::string message, GameState &gs);
+    static void evalMessage(std::string message, GameState &gs);
 
 };
 

@@ -18,7 +18,7 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
     // sockaddr_in recv;
     std::string message = pi_socket.receiveMessage();
-    MessageProtocol::evalMessage(actual_state, message, gs);
+    MessageProtocol::evalMessage(message, gs);
 
 
 //    recv = pi_socket.getAddressOfReceivedMsg();
@@ -84,7 +84,7 @@ void StateManager::init(int player_self, GameState &gs, UDPSocket &pi_socket ) {
 
     std::cout << "\nInitializing PiPong\n";
 
-    setState(States::FIND_PEERS);
+    setState(FINDPEERS_STATE);
 
     gs.init(player_self);
 
@@ -156,7 +156,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
-   setState(States::GAME);
+   setState(GAME_STATE);
 
     gs.resetAllFrames();
     gs.setCountdown(COUNTDOWN_START_VAL);
