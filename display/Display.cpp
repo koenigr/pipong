@@ -59,7 +59,7 @@ void Display::drawWaitForPeers(const GameState gs) {
 void Display::drawPlayer(const GameState gs) {
     for (int i = 0; i < 4; i++) {
         Player player = gs.getPlayer(i);
-        // std::cout << player.toString() << std::endl;
+        std::cout << ">>>>>>>>>>> " << player.toString() << std::endl;
         disp.drawLine(player.getLeftEndX(), player.getLeftEndY(), player.getRightEndX(), player.getRightEndY());
     }
     std::cout << "Display::drawPlayer() end\n";
