@@ -121,6 +121,8 @@ int InputManager::getPlayerPosition() {
     if (accel[0] < min) min = accel[0];
     int player_pos;
     player_pos = getPlayerPos(accel[0]);
+    if (player_pos > player_max) player_max = player_pos;
+    if (player_pos < player_min) player_min = player_pos;
     std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
     std::cout << "player position: " << player_pos << std::endl;
     return player_pos;

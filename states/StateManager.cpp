@@ -31,8 +31,9 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 void StateManager::process_input(GameState &gs) {
 
     //std::cout << "\nStart processing input...\n";
-
-    gs.setPosition(gs.getPlayerNo(), InputManager::getPlayerPosition());
+    int player_pos = InputManager::getPlayerPosition();
+    gs.setPosition(gs.getPlayerNo(), player_pos);
+    std::cout << ">>>>>>>>>> new player pos: " << gs.getPosition() << std::endl;
 
     //std::cout << "Input processing completed\n";
 }
