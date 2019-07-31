@@ -131,12 +131,12 @@ std::string GameState::toString() const {
 }
 
 void GameState::updateBall() {
-    checkForPaddleCollision();
+    checkForReflection();
     // checkForScoringZoneCollision();
     ball.updateBall();
 }
 
-void GameState::checkForPaddleCollision() {
+void GameState::checkForReflection() {
     if(ball.getPosY() - BALL_WIDTH <= 1) ball.reflectBall(0);
     else if(ball.getPosY() + BALL_WIDTH >= 126) ball.reflectBall(1); // works
     else if(ball.getPosX() - BALL_WIDTH <= 1) ball.reflectBall(2);
