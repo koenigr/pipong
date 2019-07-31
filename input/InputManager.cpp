@@ -99,7 +99,7 @@ int InputManager::getPlayerPos(double accel) {
 void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
     uint8_t buf[2];
     memset(buf, 0, sizeof(buf));
-    mraa_i2c_read_bytes_data(i2c, MPU_GYRO_OUT, buf, 2);
+    mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
     double f = 2.0 / 32768.0;
         std::cout << "f: " << f << std::endl;
         data[0] = decodeS16BE(buf + 0) * f;
