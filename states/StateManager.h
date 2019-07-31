@@ -26,8 +26,8 @@ public:
     static void gameLoop(UDPSocket &pi_socket, GameState &gs);
     static void showPoints(GameState &gs);
 
-    static void setState(StateManager::States new_state);
-    static States getState();
+    static void setState(int new_state);
+    static int getState();
 };
 
 #endif // STATE_H

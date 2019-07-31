@@ -203,10 +203,10 @@ void StateManager::showPoints(GameState &gs) {
 
 }
 
-void StateManager::setState(StateManager::States new_state) {
+void StateManager::setState(int new_state) {
     actual_state = new_state;
 }
 
-StateManager::States StateManager::getState() {
+int StateManager::getState() {
     return actual_state;
 }
