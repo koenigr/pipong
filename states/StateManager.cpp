@@ -163,19 +163,13 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     int i = 0;
     while(i < 500) {
 
-    //receive_messages();
-
-        //process_input(gs);
+//    receive_messages();
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
-            std::cout << "start gameloop after: " << Tools::getms() - ms_start << std::endl;
             process_input(gs); // ??
-            std::cout << "time after process input: " << Tools::getms() - ms_start << std::endl;
             update_game_state(gs);
             //deploy_game_state(gs, pi_socket);
-            std::cout << "time after update gs: " << Tools::getms() - ms_start << std::endl;
             display(gs);
-            std::cout << "time needed for one loop: " << ms_then - ms_start << std::endl;
            // std::cout << "time after procedure: " << Tools::getms() - ms_start << std::endl;
             ms_start = Tools::getms();
             i++;
