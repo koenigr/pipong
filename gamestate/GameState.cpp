@@ -130,12 +130,6 @@ std::string GameState::toString() const {
     return s;
 }
 
-void GameState::updateBall() {
-    checkForReflection();
-    // checkForScoringZoneCollision();
-    ball.updateBall();
-}
-
 void GameState::checkForReflection() {
     if(ball.getPosY() - BALL_WIDTH <= 1) ball.reflectBall(0);
     else if(ball.getPosY() + BALL_WIDTH >= 126) ball.reflectBall(1); // works
@@ -145,6 +139,14 @@ void GameState::checkForReflection() {
         std::cout << "Should reflect ball\n";
     }
 }
+
+void GameState::updateBall() {
+    checkForReflection();
+    // checkForScoringZoneCollision();
+    ball.updateBall();
+}
+
+
 
 void GameState::checkForScoringZoneCollision() {
     // TODO: move it to state manager

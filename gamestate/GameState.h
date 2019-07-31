@@ -22,7 +22,7 @@ private:
     int round = 1;
     unsigned int countdown = COUNTDOWN_START_VAL;
 
-    void checkForPaddleCollision();
+    void checkForReflection();
     void checkForScoringZoneCollision();
 
 public:
