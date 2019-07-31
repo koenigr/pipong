@@ -140,17 +140,23 @@ void GameState::checkForReflection() {
     }
 }
 
-void GameState::updateBall() {
-    checkForReflection();
-    // checkForScoringZoneCollision();
-    ball.updateBall();
-}
-
-
 
 void GameState::checkForScoringZoneCollision() {
-    // TODO: move it to state manager
- // ResetBall
+    bool Ycond = ball.getPosY + BALL_WIDTH >= 126;
+    bool XcondR = ball.getPosX() - BALL_WIDTH > getSelf().getRightEndX();
+    bool xcondL = ball.getPosX() + BALL_WIDTH < getSelf().getLeftEndX();
+    if (Ycond && ( XcondR || xcondL)) {
+        // TODO
+        std::cout << "COLLISION\n";
+        ball.resetBall(2); // TODO seed
+    }
+}
+
+void GameState::updateBall() {
+
+    checkForScoringZoneCollision();
+    checkForReflection();
+    ball.updateBall();
 }
 
 void GameState::newRound(const int seed) {

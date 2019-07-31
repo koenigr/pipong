@@ -60,6 +60,8 @@ int Player::getPoints() const {
 
 int Player::setPosition(int new_position) {
     position = new_position;
+    if (position < -63) position = -63;
+    if (position > 127) position = 127;
     return position;
 }
 
