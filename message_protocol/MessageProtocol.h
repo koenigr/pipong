@@ -9,6 +9,7 @@
 #define TEST_CODE_MESSAGE_PROTOCOL_MESSAGEPROTOCOL_H_
 
 #include "../gamestate/GameState.h"
+#include "../states/StateManager.h"
 
 class MessageProtocol {
 private:
@@ -32,7 +33,7 @@ public:
 
     static std::string createFinish(GameState gs);
 
-    static void evalMessage(InputManager::States &actual_state, std::string message, GameState &gs);
+    static void evalMessage(StateManager::States actual_state, std::string message, GameState &gs);
 
 };
 
