@@ -109,7 +109,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
 }
 
 
-void MessageProtocol::evalMessage(States actual_state, std::string message, GameState& gs) {
+void MessageProtocol::evalMessage(StateManager::States actual_state, std::string message, GameState& gs) {
 
     char tp[4];
     char rm[BUFSIZE];
