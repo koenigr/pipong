@@ -31,10 +31,10 @@ void InputManager::initMPU9250(mraa_i2c_context i2c) {
     uint8_t afs = 0; // 2.0g per 32768.0
 
     // reset
-   // mraa_i2c_write_byte_data(i2c, 0x80, MPU_PWR_MGMT_1);
-    //usleep(100 * 1000);
+    mraa_i2c_write_byte_data(i2c, 0x80, MPU_PWR_MGMT_1);
+    usleep(100 * 1000);
     // sleep off
-   // mraa_i2c_write_byte_data(i2c, 0x00, MPU_PWR_MGMT_1);
+    mraa_i2c_write_byte_data(i2c, 0x00, MPU_PWR_MGMT_1);
     usleep(100 * 1000);
     // auto select clock source, sleep off
     mraa_i2c_write_byte_data(i2c, 0x01, MPU_PWR_MGMT_1);

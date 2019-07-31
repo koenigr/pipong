@@ -12,6 +12,8 @@
 
 // PRIVATE
 
+int StateManager::actual_state;
+
 void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
     // std::cout << "\nReceive message\n";
