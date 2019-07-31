@@ -14,7 +14,7 @@ private:
     static int32_t filter_sum;
     static size_t filter_off;
 
-    static int32_t filter(int16_t v);
+    static double filter(int16_t v);
 
     static void initMPU9250(mraa_i2c_context i2c);
     static int getPlayerPos(double accel);
