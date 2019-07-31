@@ -147,7 +147,7 @@ void GameState::checkForScoringZoneCollision() {
     bool xcondL = ball.getPosX() + BALL_WIDTH < getSelf().getLeftEndX();
     if (Ycond && ( XcondR || xcondL)) {
         // TODO
-        std::cout << "COLLISION\n";
+        std::cout << ">>>>>>>>>>>>>>>>>>> COLLISION\n";
         // ball.resetBall(2); // TODO seed
     }
     // TODO
