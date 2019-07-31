@@ -10,6 +10,12 @@ private:
     static mraa_gpio_context bt_ct;
     static mraa_i2c_context i2c;
 
+    static int32_t filter_elements[5];
+    static int32_t filter_sum;
+    static size_t filter_off;
+
+    static int32_t filter(int16_t v);
+
     static void initMPU9250(mraa_i2c_context i2c);
     static int getPlayerPos(double accel);
     static void getAccel(mraa_i2c_context i2c, double *data);

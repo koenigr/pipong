@@ -11,6 +11,10 @@ int InputManager::ct;
 mraa_gpio_context InputManager::bt_ct;
 mraa_i2c_context InputManager::i2c;
 
+int32_t InputManager::filter_elements[5];
+int32_t InputManager::filter_sum;
+size_t InputManager::filter_off;
+
 #define ADDR_MPU            0x68
 #define MPU_ACCEL_OUT       0x3B
 
@@ -101,14 +105,21 @@ int InputManager::getPlayerPos(double accel) {
   return 100*accel;
 }
 
+double InputManager::filter(int16_t v) {
+    int16_t valt = filter_elements[filter_off];
+    filter_elements[filter_off] = v;
+    filter_off = (filter_off + 1) % (sizeof(filter_elements) / sizeof(*filter_elements));
+    filter_sum = filter_sum + v - valt;
+    return filter_sum * (1.0 / (sizeof(filter_elements) / sizeof(*filter_elements)));
+}
+
 void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
-    uint8_t buf[2];
-    memset(buf, 0, sizeof(buf));
+    uint8_t buf[2] = { 0 };
     mraa_i2c_read_bytes_data(i2c, MPU_ACCEL_OUT, buf, 2);
-    double f = 2.0 / 32768.0;
-        std::cout << "f: " << f << std::endl;
-        data[0] = decodeS16BE(buf + 0) * f;
-        std::cout << "acceleration inside: " << data[0] << std::endl;
+    int16_t v = decodeS16BE(buf + 0);
+//        std::cout << "f: " << f << std::endl;
+    data[0] = filter(v) * (2.0 / 32768.0);
+    std::cout << "acceleration inside: " << data[0] << std::endl;
 }
 
 int InputManager::getPlayerPosition() {
