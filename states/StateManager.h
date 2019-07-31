@@ -8,6 +8,8 @@
 class StateManager
 {
 private:
+    enum States {FIND_PEERS, GAME, COLLISION, FINISH};
+    States actual_state = FIND_PEERS;
     void receive_messages(const UDPSocket &pi_socket, GameState &gs);
     void process_input(GameState &gs);
     void update_game_state(GameState &gs);
@@ -15,7 +17,6 @@ private:
     void display(const GameState gs);
 
 public:
-    int actual_state;
     void init(int player_self, GameState &gs, UDPSocket &pi_socket );
     void waitForStartButtonPress();
     void findPeers(UDPSocket &pi_socket, GameState &gs);
