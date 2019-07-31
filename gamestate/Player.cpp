@@ -83,7 +83,8 @@ std::string Player::toString() const {
     return player_to_string;
 }
 
-int Player::getLeftEndX() const { // TODO wrong order
+int Player::getLeftEndX() const {
+    std::cout << " displaysize/2: " << DISPLAY_SIZE/2 << " position: " << position << " PaddleWIdth " << PADDLE_WIDTH / 2 << std::endl;
     if (!isActive()) return DISPLAY_SIZE * x_axis * oth_axis;
     return (DISPLAY_SIZE/2 - position - PADDLE_WIDTH /2)*(!x_axis)
             +DISPLAY_SIZE * x_axis * oth_axis;
