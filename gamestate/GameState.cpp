@@ -148,7 +148,7 @@ void GameState::checkForScoringZoneCollision() {
     if (Ycond && ( XcondR || xcondL)) {
         // TODO
         std::cout << "COLLISION\n";
-        ball.resetBall(2); // TODO seed
+        // ball.resetBall(2); // TODO seed
     }
     // TODO
 }
