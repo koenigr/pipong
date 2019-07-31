@@ -8,21 +8,26 @@
 class StateManager
 {
 private:
-    enum States {FIND_PEERS, GAME, COLLISION, FINISH};
-    States actual_state = FIND_PEERS;
-    void receive_messages(const UDPSocket &pi_socket, GameState &gs);
-    void process_input(GameState &gs);
-    void update_game_state(GameState &gs);
-    void deploy_game_state(const GameState gs, const UDPSocket pi_socket);
-    void display(const GameState gs);
+
+    static void receive_messages(const UDPSocket &pi_socket, GameState &gs);
+    static void process_input(GameState &gs);
+    static void update_game_state(GameState &gs);
+    static void deploy_game_state(const GameState gs, const UDPSocket pi_socket);
+    static void display(const GameState gs);
 
 public:
-    void init(int player_self, GameState &gs, UDPSocket &pi_socket );
-    void waitForStartButtonPress();
-    void findPeers(UDPSocket &pi_socket, GameState &gs);
-    void gameLoop(UDPSocket &pi_socket, GameState &gs);
-    void showPoints(GameState &gs);
 
+    enum States {FIND_PEERS, GAME, COLLISION, FINISH};
+    static States actual_state;
+
+    static void init(int player_self, GameState &gs, UDPSocket &pi_socket );
+    static void waitForStartButtonPress();
+    static void findPeers(UDPSocket &pi_socket, GameState &gs);
+    static void gameLoop(UDPSocket &pi_socket, GameState &gs);
+    static void showPoints(GameState &gs);
+
+    static void setState(StateManager::States new_state);
+    static States getState();
 };
 
 #endif // STATE_H

@@ -16,12 +16,14 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
     // std::cout << "\nReceive message\n";
 
-    sockaddr_in recv;
+    // sockaddr_in recv;
     std::string message = pi_socket.receiveMessage();
     MessageProtocol::evalMessage(actual_state, message, gs);
-    recv = pi_socket.getAddressOfReceivedMsg();
-    char str[INET_ADDRSTRLEN];
-    inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
+
+
+//    recv = pi_socket.getAddressOfReceivedMsg();
+//    char str[INET_ADDRSTRLEN];
+//    inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
 
 
     // std::cout << "Sender address: " << str << "\n";
@@ -82,12 +84,13 @@ void StateManager::init(int player_self, GameState &gs, UDPSocket &pi_socket ) {
 
     std::cout << "\nInitializing PiPong\n";
 
+    setState(States::FIND_PEERS);
+
     gs.init(player_self);
 
     Display::init();
-    InputManager::init();
 
-    actual_state = 0;
+    InputManager::init();
 
     AddressManager::init();
 
@@ -153,7 +156,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
-    actual_state = 1;
+   setState(States::GAME);
 
     gs.resetAllFrames();
     gs.setCountdown(COUNTDOWN_START_VAL);
@@ -164,14 +167,13 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     int i = 0;
     while(i < 500) {
 
-//    receive_messages();
+    receive_messages(pi_socket, gs);
 
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
-            process_input(gs); // ??
+            process_input(gs);
             update_game_state(gs);
-            //deploy_game_state(gs, pi_socket);
+            deploy_game_state(gs, pi_socket);
             display(gs);
-           // std::cout << "time after procedure: " << Tools::getms() - ms_start << std::endl;
             ms_start = Tools::getms();
             i++;
 
@@ -179,20 +181,11 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
         ms_then = Tools::getms();
 
     }
-    // TODO evaluate collision messages
-    // TODO perhaps make all with a switch:
-    /*
-     * switch(actual_state):
-     *  case 3:... do stuff ... actual_state =4
-     *
-     */
 
     std::cout << "Game finished\n";
 }
 
 void StateManager::showPoints(GameState &gs) {
-
-    actual_state = 2; // neccessary?
 
     bool end = false;
     while (!end) {
@@ -208,4 +201,12 @@ void StateManager::showPoints(GameState &gs) {
 
     std::cout << "Press x to start a new game\nPress y to shutdown\n";
 
+}
+
+void StateManager::setState(StateManager::States new_state) {
+    actual_state = new_state;
+}
+
+StateManager::States StateManager::getState() {
+    return actual_state;
 }

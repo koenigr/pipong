@@ -6,6 +6,7 @@
  */
 
 #include "MessageProtocol.h"
+#include "../states/StateManager.h"
 
 #include <iostream>
 #include <string>
@@ -108,7 +109,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
 }
 
 
-void MessageProtocol::evalMessage(int actual_state, std::string message, GameState& gs) {
+void MessageProtocol::evalMessage(InputManager::States &actual_state, std::string message, GameState& gs) {
 
     char tp[4];
     char rm[BUFSIZE];
@@ -121,8 +122,15 @@ void MessageProtocol::evalMessage(int actual_state, std::string message, GameSta
 
         if (type == REQUEST_TYPE && actual_state == 0) evalRequest(remaining, gs);
         else if (type == PLAYER_STATE_TYPE && actual_state == 1) evalPlayerState(remaining, gs);
-        else if (type == COLLISION_TYPE && actual_state == 1) evalCollision(remaining, gs);
-        else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) evalFinish(remaining, gs);
+        else if (type == COLLISION_TYPE && actual_state == 1) {
+            evalCollision(remaining, gs);
+            StateManager::setState(StateManager::States::COLLISION);
+        }
+
+        else if (type == FINISH_TYPE && (actual_state == 1 || actual_state == 2)) {
+            evalFinish(remaining, gs);
+            StateManager::setState(StateManager::States::FINISH);
+        }
         else {
             std::cout << "Wrong message type";
             exit(1);
@@ -199,6 +207,7 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
 }
 
 void MessageProtocol::evalCollision(std::string message, GameState &gs) {
+    // TODO round vergleichen, frame vergleichen
 
     std::cout << "MessageProtocol::evalCollision()\n";
     std::cout << message << std::endl;

@@ -32,7 +32,7 @@ public:
 
     static std::string createFinish(GameState gs);
 
-    static void evalMessage(int actual_state, std::string message, GameState &gs);
+    static void evalMessage(InputManager::States &actual_state, std::string message, GameState &gs);
 
 };
 
