@@ -138,23 +138,22 @@ void GameState::checkForReflection() {
     if(ball.getPosY() - BALL_WIDTH <= 1) {
         if (last_reflection_wall != 0) ball.reflectBall(0);
         last_reflection_wall = 0;
-        std::cout << "GameState::checkForReflection() wall 0\n";
     }
     else if(ball.getPosY() + BALL_WIDTH >= 126) {
-        if (last_reflection_wall != 1) ball.reflectBall(1);
+        if (last_reflection_wall != 1) {
+            ball.reflectBall(1);
+            std::cout << "GameState::checkForReflection() COLLISION ALARM <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
+            checkForScoringZoneCollision();
+        }
         last_reflection_wall = 1;
-        std::cout << "GameState::checkForReflection() wall 1\n";
     }
     else if(ball.getPosX() - BALL_WIDTH <= 1) {
         if (last_reflection_wall != 2) ball.reflectBall(2);
         last_reflection_wall = 2;
-        std::cout << "GameState::checkForReflection() wall 2\n";
     }
     else if(ball.getPosX() + BALL_WIDTH >= 126) {
-        std::cout << "GameState::checkForReflection()";
         if (last_reflection_wall != 3) ball.reflectBall(3);
         last_reflection_wall = 3;
-        std::cout << "GameState::checkForReflection() wall 3\n";
     }
 
     std::cout << "GameState::checkForReflection() end\n";
@@ -168,6 +167,7 @@ void GameState::checkForScoringZoneCollision() {
     if (Ycond && ( XcondR || xcondL)) {
         // TODO
         std::cout << ">>>>>>>>>>>>>>>>>>> COLLISION\n";
+        exit(0);
         // ball.resetBall(2); // TODO seed
     }
     // TODO
@@ -176,7 +176,6 @@ void GameState::checkForScoringZoneCollision() {
 void GameState::updateBall() {
 
     std::cout << "GameState::updateBall() before reflection" << getBall().toString() << std::endl;
-    //checkForScoringZoneCollision();
     checkForReflection();
     std::cout << "GameState::updateBall() between reflection and update" << getBall().toString() << std::endl;
     ball.updateBall();
