@@ -102,6 +102,8 @@ void Ball::reflectBall(int side) {
         std::cout << "Invalid side\n";
         exit(1);
     }
+
+    angle -= 5;
 }
 
 void Ball::updateBall() { // TODO: little deviation?
