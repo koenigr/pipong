@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 
         StateManager::gameLoop(pi_socket, gs);
 
-        // StateManager::showPoints(gs);
+        StateManager::showPoints(gs);
 
    }
 
