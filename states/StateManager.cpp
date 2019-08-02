@@ -178,6 +178,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             deploy_game_state(gs, pi_socket);
             display(gs);
             ms_start = Tools::getms();
+            std::cout << "StateManager::gameLoop() loop no: " << i << std::endl;
             i++;
 
         }
