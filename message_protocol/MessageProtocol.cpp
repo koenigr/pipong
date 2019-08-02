@@ -64,7 +64,7 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
 
     std::string player_state = x.str();
 
-    std::cout << "\nMessageProtocol::createPlayerState(): " << player_state << std::endl;
+    // std::cout << "\nMessageProtocol::createPlayerState(): " << player_state << std::endl;
     //std::cout << "Player_state creation completed\n";
 
     return player_state;
