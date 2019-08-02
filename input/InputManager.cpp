@@ -119,13 +119,13 @@ void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
     int16_t v = decodeS16BE(buf + 0);
 //        std::cout << "f: " << f << std::endl;
     data[0] = filter(v) * (2.0 / 32768.0);
-    std::cout << "acceleration inside: " << data[0] << std::endl;
+    // std::cout << "acceleration inside: " << data[0] << std::endl;
 }
 
 int InputManager::getPlayerPosition() {
     double accel[3];
 
-    std::cout << "min " << min << " max " << max << std::endl;
+    // std::cout << "min " << min << " max " << max << std::endl;
 
     getAccel(i2c, accel);
     if (accel[0] > max) max = accel[0];
@@ -134,7 +134,7 @@ int InputManager::getPlayerPosition() {
     player_pos = getPlayerPos(accel[0]);
     if (player_pos > player_max) player_max = player_pos;
     if (player_pos < player_min) player_min = player_pos;
-    std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
-    std::cout << "player position: " << player_pos << std::endl;
+    // std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
+    // std::cout << "player position: " << player_pos << std::endl;
     return player_pos;
 }
