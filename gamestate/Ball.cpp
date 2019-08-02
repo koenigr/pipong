@@ -13,15 +13,6 @@
 #include "Ball.h"
 #include "../Parameters.h"
 
-Ball::Ball() {
-    pos_x = DISPLAY_SIZE / 2;
-    pos_y = DISPLAY_SIZE / 2;
-    angle = 33.333; //36.4  TODO init random angle
-    velocity = INIT_VELOCITY;
-}
-
-Ball::~Ball() {}
-
 // The ball position is internally stored as float but must be returned as int
 int Ball::getPosX() const {
     return pos_x;

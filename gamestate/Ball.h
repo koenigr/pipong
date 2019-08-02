@@ -12,13 +12,13 @@
 
 class Ball {
 private:
-    float pos_x;
-    float pos_y;
-    float angle;
-    float velocity;
+
+    float pos_x = DISPLAY_SIZE / 2;
+    float pos_y = DISPLAY_SIZE / 2;
+    float angle = 33.333; //36.4  TODO init random angle
+    float velocity = INIT_VELOCITY;
 
 public:
-    Ball();
     int getPosX() const;
     int getPosY() const;
     float getAngle() const;
@@ -31,7 +31,6 @@ public:
     void updateBall();
     void reflectBall(int side);
     std::string toString() const;
-	virtual ~Ball();
 };
 
 #endif /* TEST_CODE_GAMESTATE_BALL_H_ */
