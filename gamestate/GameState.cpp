@@ -32,7 +32,7 @@ void GameState::init(int player_no) {
 
     ball.setAngle(player_self, 26.4);
 
-    std::cout << toString() << std::endl;
+    std::cout << "GameState::init() " << toString() << std::endl;
 
     std::cout << "Gamestate::init() end\n\n";
 }
