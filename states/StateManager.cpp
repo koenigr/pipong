@@ -158,7 +158,7 @@ void StateManager::findPeers(UDPSocket &pi_socket, GameState &gs) {
 
 void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
-    std::cout << "\nStarting game...\n";
+    std::cout << "\nStateManager::gameLoop() start...\n";
 
     setState(GAME_STATE);
 
@@ -186,7 +186,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     }
 
-    std::cout << "Game finished\n";
+    std::cout << "StateManager::gameLoop() end\n";
 }
 
 void StateManager::showPoints(GameState &gs) {
