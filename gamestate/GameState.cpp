@@ -10,6 +10,7 @@
 #include "Player.h"
 #include <string>
 #include "../Parameters.h"
+#include "../states/StateManager.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -167,7 +168,7 @@ void GameState::checkForScoringZoneCollision() {
     if (Ycond && ( XcondR || xcondL)) {
         // TODO
         std::cout << ">>>>>>>>>>>>>>>>>>> COLLISION\n";
-        exit(0);
+        StateManager::setState(COLLISION_STATE);
         // ball.resetBall(2); // TODO seed
     }
     // TODO
@@ -187,6 +188,7 @@ void GameState::newRound(const int seed) {
     incrRound();
     ball.resetBall(seed);
     ball.incrVelocity();
+    player_arr[player_self].decrPoints();
 }
 
 void GameState::setPlayerActive(const bool isActive, const int player_no) {

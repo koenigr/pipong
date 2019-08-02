@@ -168,21 +168,32 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     long int ms_then = Tools::getms();
 
     int i = 0;
-    while(i < 500) {
+    while(gs.getSelf().getPoints() > 0) {
 
-    receive_messages(pi_socket, gs);
+        receive_messages(pi_socket, gs);
 
-        if ((ms_then - ms_start) > 1000/FRAMERATE) {
-            process_input(gs);
-            update_game_state(gs);
-            deploy_game_state(gs, pi_socket);
-            display(gs);
-            ms_start = Tools::getms();
-            std::cout << "StateManager::gameLoop() loop no: " << i << std::endl;
-            i++;
+        switch(actual_state) {
+        case GAME_STATE:
+            if ((ms_then - ms_start) > 1000/FRAMERATE) {
+                process_input(gs);
+                update_game_state(gs);
+                deploy_game_state(gs, pi_socket);
+                display(gs);
+                ms_start = Tools::getms();
+                std::cout << "StateManager::gameLoop() loop no: " << i << std::endl;
+                i++;
 
-        }
-        ms_then = Tools::getms();
+            }
+            break;
+        case COLLISION_STATE:
+            std::cout << "collision state\n";
+            gs.newRound(0); // TODO
+            StateManager::setState(GAME_STATE);
+            break;
+
+    }
+
+    ms_then = Tools::getms();
 
     }
 
@@ -191,6 +202,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
 void StateManager::showPoints(GameState &gs) {
 
+    std::cout << "StateManager::showPoints() " << gs.toString() << std::endl;
     bool end = false;
     while (!end) {
         Display::drawPoints(gs);
