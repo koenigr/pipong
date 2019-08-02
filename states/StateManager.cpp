@@ -105,6 +105,8 @@ void StateManager::waitForStartButtonPress() {
 
     std::cout << "\nStateManager::watForStartButtonPress()...\n";
 
+    // TODO also evaluate sync messages
+
     bool start = false;
     while (!start) {
         Display::drawHello();
@@ -158,7 +160,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     std::cout << "\nStarting game...\n";
 
-   setState(GAME_STATE);
+    setState(GAME_STATE);
 
     gs.resetAllFrames();
     gs.setCountdown(COUNTDOWN_START_VAL);

@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,13 +27,13 @@ int main(int argc, char* argv[]) {
 
 	while(true) { // TODO finish button pressed
 
-    StateManager::waitForStartButtonPress();
+        // StateManager::waitForStartButtonPress();
 
-    StateManager::findPeers(pi_socket, gs);
+        // StateManager::findPeers(pi_socket, gs);
 
-    StateManager::gameLoop(pi_socket, gs);
+        StateManager::gameLoop(pi_socket, gs);
 
-    StateManager::showPoints(gs);
+        // StateManager::showPoints(gs);
 
    }
 
