@@ -103,7 +103,7 @@ void Ball::reflectBall(int side) {
 void Ball::updateBall() {
     pos_x += velocity * sin(angle * PI / 180.0);
     pos_y += velocity * cos(angle * PI / 180.0);
-    ball_frame++;
+    ball_frame += 1;
 //    std::cout << "Ball::updateBall() " << pos_x << "," << pos_y << std::endl;
 }
 
