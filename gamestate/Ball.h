@@ -19,6 +19,7 @@ private:
     float pos_y = DISPLAY_SIZE / 2;
     float angle = 33.333; //36.4  TODO init random angle
     float velocity = INIT_VELOCITY;
+    unsigned int ball_frame = 0;
 
 public:
     Ball();

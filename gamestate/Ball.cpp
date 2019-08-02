@@ -100,9 +100,10 @@ void Ball::reflectBall(int side) {
     angle -= 5;
 }
 
-void Ball::updateBall() { // TODO: little deviation?
+void Ball::updateBall() {
     pos_x += velocity * sin(angle * PI / 180.0);
     pos_y += velocity * cos(angle * PI / 180.0);
+    ball_frame++;
 //    std::cout << "Ball::updateBall() " << pos_x << "," << pos_y << std::endl;
 }
 
@@ -111,6 +112,7 @@ std::string Ball::toString() const {
 
     std::string ball_to_string = "Ball";
 
+    ball_to_string += " ball_frame: " + std::to_string(ball_frame);
     ball_to_string += " posX: " + std::to_string(pos_x);
     ball_to_string += " posY: " + std::to_string(pos_y);
     ball_to_string += " angle: " + std::to_string(angle);

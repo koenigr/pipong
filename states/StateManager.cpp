@@ -132,7 +132,6 @@ void StateManager::findPeers(UDPSocket &pi_socket, GameState &gs) {
 
         receive_messages(pi_socket, gs);
 
-
         if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
             std::string request = MessageProtocol::createRequest(gs);
