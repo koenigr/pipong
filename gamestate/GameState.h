@@ -21,6 +21,7 @@ private:
     int player_self;
     int round = 1;
     unsigned int countdown = COUNTDOWN_START_VAL;
+    int last_reflection_wall = -1;
 
     void checkForReflection();
     void checkForScoringZoneCollision();

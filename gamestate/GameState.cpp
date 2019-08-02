@@ -134,23 +134,26 @@ void GameState::checkForReflection() {
 
     std::cout << "GameState::checkForReflection() start...\n";
 
-    int tolerance = 1;
 
-    if(ball.getPosY() - BALL_WIDTH <= 1 - tolerance) {
-        ball.reflectBall(0);
+    if(ball.getPosY() - BALL_WIDTH <= 1) {
+        if (last_reflection_wall != 0) ball.reflectBall(0);
+        last_reflection_wall = 0;
         std::cout << "GameState::checkForReflection() wall 0\n";
     }
-    else if(ball.getPosY() + BALL_WIDTH >= 126 + tolerance) {
-        ball.reflectBall(1);
+    else if(ball.getPosY() + BALL_WIDTH >= 126) {
+        if (last_reflection_wall != 1) ball.reflectBall(1);
+        last_reflection_wall = 1;
         std::cout << "GameState::checkForReflection() wall 1\n";
     }
-    else if(ball.getPosX() - BALL_WIDTH <= 1 - tolerance) {
-        ball.reflectBall(2);
+    else if(ball.getPosX() - BALL_WIDTH <= 1) {
+        if (last_reflection_wall != 2) ball.reflectBall(2);
+        last_reflection_wall = 2;
         std::cout << "GameState::checkForReflection() wall 2\n";
     }
-    else if(ball.getPosX() + BALL_WIDTH >= 126 + tolerance) {
+    else if(ball.getPosX() + BALL_WIDTH >= 126) {
         std::cout << "GameState::checkForReflection()";
-        ball.reflectBall(3);
+        if (last_reflection_wall != 3) ball.reflectBall(3);
+        last_reflection_wall = 3;
         std::cout << "GameState::checkForReflection() wall 3\n";
     }
 
