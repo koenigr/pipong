@@ -147,6 +147,7 @@ void GameState::checkForReflection() {
         std::cout << "GameState::checkForReflection() wall 2\n";
     }
     else if(ball.getPosX() + BALL_WIDTH >= 126) {
+        std::cout << "GameState::checkForReflection()"
         ball.reflectBall(3);
         std::cout << "GameState::checkForReflection() wall 3\n";
     }
@@ -169,9 +170,12 @@ void GameState::checkForScoringZoneCollision() {
 
 void GameState::updateBall() {
 
+    std::cout << "GameState::updateBall() before reflection" << getSelf().toString() << std::endl;
     //checkForScoringZoneCollision();
     checkForReflection();
+    std::cout << "GameState::updateBall() between reflection and update" << getSelf().toString() << std::endl;
     ball.updateBall();
+    std::cout << "GameState::updateBall() after update" << getSelf().toString() << std::endl;
 }
 
 void GameState::newRound(const int seed) {
