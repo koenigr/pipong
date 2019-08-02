@@ -59,7 +59,7 @@ void Display::drawWaitForPeers(const GameState gs) {
 void Display::drawPlayer(const GameState gs) {
     for (int i = 0; i < 4; i++) {
         Player player = gs.getPlayer(i);
-        std::cout << ">>>>>>>>>>> " << player.toString() << std::endl;
+        // std::cout << ">>>>>>>>>>> " << player.toString() << std::endl;
         disp.drawLine(player.getLeftEndX(), player.getLeftEndY(), player.getRightEndX(), player.getRightEndY());
     }
     std::cout << "Display::drawPlayer() end\n";
@@ -67,7 +67,7 @@ void Display::drawPlayer(const GameState gs) {
 
 void Display::drawBall(const GameState gs) {
     disp.fillCircle(gs.getBall().getPosX(), gs.getBall().getPosY(), BALL_WIDTH);
-    std::cout << "Ball " << gs.getBall().toString() << std::endl;
+    std::cout << "Display::drawBall() Ball " << gs.getBall().toString() << std::endl;
 }
 
 void Display::drawPoints(const GameState gs) {
