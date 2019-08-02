@@ -8,6 +8,8 @@
 #ifndef TEST_CODE_GAMESTATE_BALL_H_
 #define TEST_CODE_GAMESTATE_BALL_H_
 
+#include "../Parameters.h"
+
 #include <string>
 
 class Ball {
@@ -19,6 +21,8 @@ private:
     float velocity = INIT_VELOCITY;
 
 public:
+    Ball();
+    ~Ball();
     int getPosX() const;
     int getPosY() const;
     float getAngle() const;

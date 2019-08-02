@@ -1,5 +1,6 @@
 #include "Display.h"
 #include "../gamestate/GameState.h"
+#include "../gamestate/Ball.h"
 #include <iostream>
 #include <cstring>
 #include <mraa.h>

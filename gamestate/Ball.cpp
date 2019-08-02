@@ -13,6 +13,9 @@
 #include "Ball.h"
 #include "../Parameters.h"
 
+Ball::Ball() {}
+Ball::~Ball() {}
+
 // The ball position is internally stored as float but must be returned as int
 int Ball::getPosX() const {
     return pos_x;
