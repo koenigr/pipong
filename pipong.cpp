@@ -25,9 +25,9 @@ int main(int argc, char* argv[]) {
 
     bool runGame = true;
 
-    while(runGame) {
+    StateManager::init(player_self, gs, pi_socket);
 
-        StateManager::init(player_self, gs, pi_socket);
+    while(runGame) {
 
         StateManager::waitForStartButtonPress();
 

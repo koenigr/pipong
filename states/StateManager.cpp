@@ -86,10 +86,6 @@ void StateManager::init(int player_self, GameState &gs, UDPSocket &pi_socket ) {
 
     std::cout << "\nInitializing PiPong\n";
 
-    setState(FINDPEERS_STATE);
-
-    gs.init(player_self);
-
     Display::init();
 
     InputManager::init();
@@ -102,6 +98,10 @@ void StateManager::init(int player_self, GameState &gs, UDPSocket &pi_socket ) {
 }
 
 void StateManager::waitForStartButtonPress() {
+
+    setState(FINDPEERS_STATE);
+
+    gs.init(player_self);
 
     std::cout << "\nStateManager::waitForStartButtonPress()...\n";
 
