@@ -64,11 +64,6 @@ void InputManager::initMPU9250(mraa_i2c_context i2c) {
     usleep(100 * 1000);
 }
 
-double min;
-double max;
-int player_min;
-int player_max;
-
 void InputManager::gpio_dir(mraa_gpio_context g, mraa_gpio_dir_t dir) {
 
   while(1) {
@@ -158,17 +153,8 @@ void InputManager::getAccel(mraa_i2c_context i2c, double *data) {
 
 int InputManager::getPlayerPosition() {
     double accel[3];
-
-    // std::cout << "min " << min << " max " << max << std::endl;
-
     getAccel(i2c, accel);
-    if (accel[0] > max) max = accel[0];
-    if (accel[0] < min) min = accel[0];
     int player_pos;
     player_pos = getPlayerPos(accel[0]);
-    if (player_pos > player_max) player_max = player_pos;
-    if (player_pos < player_min) player_min = player_pos;
-    // std::cout << "pmin " << player_min << " pmax " << player_max << std::endl;
-    // std::cout << "player position: " << player_pos << std::endl;
     return player_pos;
 }
