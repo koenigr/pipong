@@ -200,17 +200,19 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     std::cout << "StateManager::gameLoop() end\n";
 }
 
-void StateManager::showPoints(GameState &gs) {
+void StateManager::showPoints(GameState &gs, bool &runGame) {
 
     std::cout << "StateManager::showPoints() " << gs.toString() << std::endl;
     bool end = false;
     while (!end) {
         Display::drawPoints(gs);
-        bool pressed = InputManager::startButtonPressed();
-        if (pressed) {
-           std::cout << "Pressed\n";
+        bool restartPressed = InputManager::restartButtonPressed();
+        if (restartPressed) {
            end = true;
         }
+
+        bool exitGame = InputManager::exitButtonPressed();
+        if (exitGame) runGame = true;
         usleep(1000 / FRAMERATE);
     }
 

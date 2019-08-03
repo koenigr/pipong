@@ -8,7 +8,13 @@
 using namespace GFX;
 
 int InputManager::ct;
+int InputManager::up;
+int InputManager::dn;
+
 mraa_gpio_context InputManager::bt_ct;
+mraa_gpio_context InputManager::bt_up;
+mraa_gpio_context InputManager::bt_dn;
+
 mraa_i2c_context InputManager::i2c;
 
 int32_t InputManager::filter_elements[5];
@@ -91,11 +97,36 @@ void InputManager::init() {
 
 }
 
+
+/*
+ *
+ * Buttons
+ *
+ */
+
 bool InputManager::startButtonPressed() {
 
     ct = !mraa_gpio_read(bt_ct);
     return ct;
 }
+
+
+static bool InputManager::restartButtonPressed() {
+    up = !mraa_gpio_read(bt_up);
+    return up;
+}
+
+static bool InputManager::exitButtonPressed() {
+    dn = !mraa_gpio_read(bt_dn);
+    return dn;
+}
+
+
+/*
+ *
+ * Accelerometer
+ *
+ */
 
 int16_t InputManager::decodeS16BE(uint8_t *buf) {
     return (buf[0] << 8) | buf[1];

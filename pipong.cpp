@@ -25,15 +25,17 @@ int main(int argc, char* argv[]) {
 
     StateManager::init(player_self, gs, pi_socket);
 
-	while(true) { // TODO finish button pressed
+    bool runGame = true;
 
-        // StateManager::waitForStartButtonPress();
+    while(runGame) { // TODO finish button pressed
 
-        // StateManager::findPeers(pi_socket, gs);
+        StateManager::waitForStartButtonPress();
+
+        StateManager::findPeers(pi_socket, gs);
 
         StateManager::gameLoop(pi_socket, gs);
 
-        StateManager::showPoints(gs);
+        StateManager::showPoints(gs, runGame);
 
    }
 
