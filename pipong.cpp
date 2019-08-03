@@ -29,13 +29,16 @@ int main(int argc, char* argv[]) {
 
     while(runGame) { // TODO finish button pressed
 
-        StateManager::waitForStartButtonPress();
+        // StateManager::waitForStartButtonPress();
 
         // StateManager::findPeers(pi_socket, gs);
 
-        StateManager::gameLoop(pi_socket, gs);
+//        StateManager::gameLoop(pi_socket, gs);
 
         StateManager::showPoints(gs, runGame);
+
+
+       std::cout << "pipong.cpp finishing gameloop\n";
 
    }
 
