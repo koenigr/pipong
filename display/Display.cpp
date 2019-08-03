@@ -94,8 +94,6 @@ void Display::drawPoints(const GameState gs) {
 
     disp.print(buf);
     flush();
-
-
 }
 
 void Display::drawGameState(const GameState gs) {
