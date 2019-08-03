@@ -82,7 +82,7 @@ void StateManager::display(const GameState gs) {
 
 // PUBLIC
 
-void StateManager::init(int player_self, UDPSocket &pi_socket ) {
+void StateManager::init(UDPSocket &pi_socket ) {
 
     std::cout << "\nInitializing PiPong\n";
 
@@ -97,7 +97,7 @@ void StateManager::init(int player_self, UDPSocket &pi_socket ) {
     std::cout << "PiPong Initialization complete\n\n";
 }
 
-void StateManager::waitForStartButtonPress(GameState &gs) {
+void StateManager::waitForStartButtonPress(int player_self, GameState &gs) {
 
     setState(FINDPEERS_STATE);
 
