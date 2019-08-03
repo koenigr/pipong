@@ -92,7 +92,7 @@ void InputManager::init() {
 
     bt_ct = gpio_init(38, MRAA_GPIO_IN);
     bt_up = gpio_init(36, MRAA_GPIO_IN);
-    bt_up = gpio_init(31, MRAA_GPIO_IN);
+    bt_dn = gpio_init(31, MRAA_GPIO_IN);
 
     i2c = mraa_i2c_init(0);
     initMPU9250(i2c);
