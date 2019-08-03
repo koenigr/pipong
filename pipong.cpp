@@ -25,11 +25,11 @@ int main(int argc, char* argv[]) {
 
     bool runGame = true;
 
-    StateManager::init(player_self, gs, pi_socket);
+    StateManager::init(pi_socket);
 
     while(runGame) {
 
-        StateManager::waitForStartButtonPress(gs);
+        StateManager::waitForStartButtonPress(player_self, gs);
 
         StateManager::findPeers(pi_socket, gs);
 
