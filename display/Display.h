@@ -15,6 +15,7 @@ public:
     static void drawHello();
     static void drawWaitForPeers(const GameState gs);
     static void drawGameState(const GameState gs);
+    static void drawGameState(bool draw_ball, const GameState gs);
     static void drawPoints(const GameState gs);
 };
 

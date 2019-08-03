@@ -102,3 +102,10 @@ void Display::drawGameState(const GameState gs) {
     drawBall(gs);
     flush();
 }
+
+void Display::drawGameState(bool draw_ball, const GameState gs) {
+    clear();
+    drawPlayer(gs);
+    if (draw_ball) drawBall(gs);
+    flush();
+}

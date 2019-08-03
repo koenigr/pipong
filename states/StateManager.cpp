@@ -16,20 +16,8 @@ int StateManager::actual_state;
 
 void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
-    // std::cout << "\nReceive message\n";
-
-    // sockaddr_in recv;
     std::string message = pi_socket.receiveMessage();
     MessageProtocol::evalMessage(message, gs);
-
-
-//    recv = pi_socket.getAddressOfReceivedMsg();
-//    char str[INET_ADDRSTRLEN];
-//    inet_ntop(AF_INET, &(recv.sin_addr), str, INET_ADDRSTRLEN);
-
-
-    // std::cout << "Sender address: " << str << "\n";
-    // std::cout << "Message received\n";
 }
 
 void StateManager::process_input(GameState &gs) {
@@ -78,6 +66,12 @@ void StateManager::display(const GameState gs) {
     Display::drawGameState(gs);
 
     //std::cout << "StateManager::display() end\n";
+}
+
+void StateManager::displayResetBall(const bool draw_ball, const GameState gs) {
+
+    Display::drawGameState(draw_ball, gs);
+
 }
 
 // PUBLIC
@@ -187,9 +181,32 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             break;
         case COLLISION_STATE:
             std::cout << "collision state\n";
-            gs.newRound(0); // TODO
-            StateManager::setState(GAME_STATE);
+            int seed = 0; // TODO number of last collision frame
+            gs.newRound(0); //
+            bool resetLoop = true;
+            bool draw_ball = true;
+
+            while (resetLoop) {
+                int i = 0;
+                int j = 0;
+
+                if ((ms_then - ms_start) > 1000/FRAMERATE) {
+
+                    displayResetBall(draw_ball, gs);
+                    i = ++i % FRAMERATE;
+                    if (i == 0) {
+                        draw_ball = !draw_ball;
+                        j++;
+                    }
+                }
+
+                if (j >= 4) {
+                    StateManager::setState(GAME_STATE);
+                    resetLoop = false;
+                }
+            }
             break;
+
 
     }
 
