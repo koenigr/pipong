@@ -104,10 +104,9 @@ int GameState::getPlayerNo() const {
 
 int GameState::setPosition(int player_no, int new_position) {
     int pos = new_position;
-    if (pos < player_arr[player_no].getPaddleWidth() / 2) pos = player_arr[player_no].getPaddleWidth() / 2;
-    if (pos > DISPLAY_SIZE - player_arr[player_no].getPaddleWidth() / 2) pos = DISPLAY_SIZE - player_arr[player_no].getPaddleWidth() / 2;
-    player_arr[player_no].setPosition(new_position);
-    if (player_arr[player_no].getPosition() < )
+    if (pos < -DISPLAY_SIZE / 2 + player_arr[player_no].getPaddleWidth() / 2) pos = -DISPLAY_SIZE / 2 + player_arr[player_no].getPaddleWidth() / 2;
+    if (pos > DISPLAY_SIZE / 2 - player_arr[player_no].getPaddleWidth() / 2) pos = DISPLAY_SIZE / 2 - player_arr[player_no].getPaddleWidth() / 2;
+    player_arr[player_no].setPosition(pos);
     return player_arr[player_no].getPosition();
 }
 int GameState::getPosition(int player_no) const {
