@@ -25,6 +25,7 @@
 #define PADDLE_WIDTH 30
 
 // STATES
+#define WAIT_STATE -1
 #define FINDPEERS_STATE 0
 #define GAME_STATE 1
 #define COLLISION_STATE 2

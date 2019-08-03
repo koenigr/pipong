@@ -95,21 +95,19 @@ void StateManager::init(UDPSocket &pi_socket ) {
 
 void StateManager::waitForStartButtonPress(int player_self, GameState &gs) {
 
-    setState(FINDPEERS_STATE);
+    setState(WAIT_STATE);
 
     gs.init(player_self);
 
     std::cout << "\nStateManager::waitForStartButtonPress()...\n";
 
-    // TODO also evaluate sync messages
-
-    bool start = false;
-    while (!start) {
+    while (actual_state == WAIT_STATE) {
         Display::drawHello();
         bool pressed = InputManager::startButtonPressed();
+        StateManager::receive_messages(pi_socket, gs);
         if (pressed) {
            std::cout << "Pressed\n";
-           start = true;
+           setState(FINDPEERS_STATE);
         }
         usleep(1000 / FRAMERATE);
     }
