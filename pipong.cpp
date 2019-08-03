@@ -23,15 +23,15 @@ int main(int argc, char* argv[]) {
 
     int player_self = atoi(argv[1]);
 
-    StateManager::init(player_self, gs, pi_socket);
-
     bool runGame = true;
 
-    while(runGame) { // TODO finish button pressed
+    while(runGame) {
 
-        // StateManager::waitForStartButtonPress();
+        StateManager::init(player_self, gs, pi_socket);
 
-        // StateManager::findPeers(pi_socket, gs);
+        StateManager::waitForStartButtonPress();
+
+        StateManager::findPeers(pi_socket, gs);
 
         StateManager::gameLoop(pi_socket, gs);
 
