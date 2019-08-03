@@ -70,6 +70,8 @@ void StateManager::display(const GameState gs) {
 
 void StateManager::displayResetBall(const bool draw_ball, const GameState gs) {
 
+    std::cout << "StateManager::displayResetBall() start ..\n";
+
     Display::drawGameState(draw_ball, gs);
 
 }
@@ -186,27 +188,38 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             bool resetLoop = true;
             bool draw_ball = true;
 
+	int i = 0;
+	int j = 0;
+
             while (resetLoop) {
-                int i = 0;
-                int j = 0;
 
                 if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
+			std::cout << " reset loop " << resetLoop << std::endl;
+			std::cout << " draw ball " << draw_ball << std::endl;
+			std::cout << " i " << i << std::endl;
+			std::cout << " j " << j << std::endl;
+
                     displayResetBall(draw_ball, gs);
-                    i = ++i % FRAMERATE;
+                    i = (i+1) % (FRAMERATE / 4);
                     if (i == 0) {
                         draw_ball = !draw_ball;
                         j++;
                     }
-                }
 
-                if (j >= 4) {
+
+                if (j >= 8) {
                     StateManager::setState(GAME_STATE);
                     resetLoop = false;
                 }
-            }
-            break;
 
+		ms_start = Tools::getms();
+		}
+
+                ms_then = Tools::getms();
+            }
+
+            break;
 
     }
 
