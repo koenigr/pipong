@@ -121,7 +121,10 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
         std::string remaining(rm);
         int actual_state = StateManager::getState();
 
-        if (type == REQUEST_TYPE && ( actual_state == FINDPEERS_STATE || actual_state == WAIT_STATE)) evalRequest(remaining, gs);
+        if (type == REQUEST_TYPE && ( actual_state == FINDPEERS_STATE || actual_state == WAIT_STATE)) {
+            evalRequest(remaining, gs);
+            StateManager::setState(FINDPEERS_STATE);
+        }
         else if (type == PLAYER_STATE_TYPE && actual_state == GAME_STATE) evalPlayerState(remaining, gs);
         else if (type == COLLISION_TYPE && actual_state == GAME_STATE) {
             evalCollision(remaining, gs);
