@@ -104,16 +104,14 @@ void StateManager::waitForStartButtonPress(UDPSocket &pi_socket, int player_self
     while (actual_state == WAIT_STATE) {
         Display::drawHello();
         bool pressed = InputManager::startButtonPressed();
-        std::cout << "state: " << getState() << std::endl;
         StateManager::receive_messages(pi_socket, gs);
         if (pressed) {
-           std::cout << "Pressed\n";
            setState(FINDPEERS_STATE);
         }
         usleep(1000 / FRAMERATE);
     }
 
-    std::cout << "Start Button pressed\n";
+    std::cout << "Start Button pressed or request message received\n";
 }
 
 void StateManager::findPeers(UDPSocket &pi_socket, GameState &gs) {
