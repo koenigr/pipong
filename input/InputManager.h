@@ -7,7 +7,13 @@ class InputManager
 {
 private:
     static int ct;
+    static int up;
+    static int dn;
+
     static mraa_gpio_context bt_ct;
+    static mraa_gpio_context bt_up;
+    static mraa_gpio_context bt_dn;
+
     static mraa_i2c_context i2c;
 
     static int32_t filter_elements[5];
@@ -26,6 +32,9 @@ public:
 
     static void init();
     static bool startButtonPressed();
+    static bool restartButtonPressed();
+    static bool exitButtonPressed();
+
     static int getPlayerPosition();
 };
 

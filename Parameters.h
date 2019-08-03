@@ -22,7 +22,7 @@
 
 // Player
 #define INIT_PLAYER_POINTS 5
-#define PADDLE_WIDTH 10
+#define PADDLE_WIDTH_ 40
 
 // STATES
 #define FINDPEERS_STATE 0

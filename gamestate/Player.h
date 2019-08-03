@@ -23,6 +23,8 @@ private:
     bool active;
     unsigned int frame;
 
+    int paddle_width = PADDLE_WIDTH_;
+
 public:
     Player();
     virtual ~Player();
