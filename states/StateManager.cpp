@@ -209,19 +209,16 @@ void StateManager::showPoints(GameState &gs, bool &runGame) {
         bool restartPressed = InputManager::restartButtonPressed();
         if (restartPressed) {
            std::cout << "restart pressed\n";
-           end = true;
+           // end = true;
         }
 
         bool exitPressed = InputManager::exitButtonPressed();
         if (exitPressed) {
            end = true;
            runGame = false;
-           std::cout << "exit pressed\n";
+           // std::cout << "exit pressed\n";
         }
         usleep(1000 / FRAMERATE);
-        //std::cout << " start " << ct << std::endl;
-        std::cout << " restart " << restartPressed << std::endl;
-       std::cout << " exit " << exitPressed << std::endl;
     }
 
 
