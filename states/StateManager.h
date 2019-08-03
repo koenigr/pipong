@@ -22,7 +22,7 @@ public:
     static int actual_state;
 
     static void init(UDPSocket &pi_socket );
-    static void waitForStartButtonPress(int player_self, GameState &gs);
+    static void waitForStartButtonPress(UDPSocket &pi_socket, int player_self, GameState &gs);
     static void findPeers(UDPSocket &pi_socket, GameState &gs);
     static void gameLoop(UDPSocket &pi_socket, GameState &gs);
     static void showPoints(GameState &gs, bool &runGame);

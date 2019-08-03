@@ -93,7 +93,7 @@ void StateManager::init(UDPSocket &pi_socket ) {
     std::cout << "PiPong Initialization complete\n\n";
 }
 
-void StateManager::waitForStartButtonPress(int player_self, GameState &gs) {
+void StateManager::waitForStartButtonPress(UDPSocket &pi_socket, int player_self, GameState &gs) {
 
     setState(WAIT_STATE);
 
