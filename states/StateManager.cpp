@@ -103,7 +103,7 @@ void StateManager::init(int player_self, GameState &gs, UDPSocket &pi_socket ) {
 
 void StateManager::waitForStartButtonPress() {
 
-    std::cout << "\nStateManager::watForStartButtonPress()...\n";
+    std::cout << "\nStateManager::waitForStartButtonPress()...\n";
 
     // TODO also evaluate sync messages
 
@@ -208,12 +208,20 @@ void StateManager::showPoints(GameState &gs, bool &runGame) {
         Display::drawPoints(gs);
         bool restartPressed = InputManager::restartButtonPressed();
         if (restartPressed) {
+           std::cout << "restart pressed\n";
            end = true;
         }
 
-        bool exitGame = InputManager::exitButtonPressed();
-        if (exitGame) runGame = true;
+        bool exitPressed = InputManager::exitButtonPressed();
+        if (exitPressed) {
+           end = true;
+           runGame = false;
+           std::cout << "exit pressed\n";
+        }
         usleep(1000 / FRAMERATE);
+        //std::cout << " start " << ct << std::endl;
+        std::cout << " restart " << restartPressed << std::endl;
+       std::cout << " exit " << exitPressed << std::endl;
     }
 
 

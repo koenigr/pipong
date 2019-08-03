@@ -111,12 +111,12 @@ bool InputManager::startButtonPressed() {
 }
 
 
-static bool InputManager::restartButtonPressed() {
+bool InputManager::restartButtonPressed() {
     up = !mraa_gpio_read(bt_up);
     return up;
 }
 
-static bool InputManager::exitButtonPressed() {
+bool InputManager::exitButtonPressed() {
     dn = !mraa_gpio_read(bt_dn);
     return dn;
 }
