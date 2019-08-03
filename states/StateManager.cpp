@@ -220,10 +220,6 @@ void StateManager::showPoints(GameState &gs, bool &runGame) {
         }
         usleep(1000 / FRAMERATE);
     }
-
-
-    std::cout << "Press x to start a new game\nPress y to shutdown\n";
-
 }
 
 void StateManager::setState(int new_state) {
