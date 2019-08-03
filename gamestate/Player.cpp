@@ -69,6 +69,14 @@ int Player::getPosition() const {
     return position;
 }
 
+void Player::decrPaddleWidth() {
+    if (paddle_width > 10) paddle_width -= 5;
+}
+
+int Player::getPaddleWidth() const {
+    return paddle_width;
+}
+
 std::string Player::toString() const {
 
     std::string player_to_string = "Player " + std::to_string(player_no);

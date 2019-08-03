@@ -184,7 +184,7 @@ void GameState::updateBall() {
 }
 
 void GameState::newRound(const int seed) {
-    // TODO
+    // TODO paddle width. decrPoints bei Player nur, wenn er verloren hat
     incrRound();
     ball.resetBall(seed);
     ball.incrVelocity();

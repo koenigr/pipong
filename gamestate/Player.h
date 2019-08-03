@@ -43,6 +43,9 @@ public:
     int setPosition(int new_position);
     int getPosition() const;
 
+    void decrPaddleWidth();
+    int getPaddleWidth() const;
+
     int getLeftEndX() const;
     int getRightEndX() const;
     int getLeftEndY() const;
