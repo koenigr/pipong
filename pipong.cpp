@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 
         StateManager::waitForStartButtonPress();
 
-        StateManager::findPeers(pi_socket, gs);
+        // StateManager::findPeers(pi_socket, gs);
 
         StateManager::gameLoop(pi_socket, gs);
 
