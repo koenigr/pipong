@@ -8,6 +8,8 @@
 #ifndef TEST_CODE_GAMESTATE_PLAYER_H_
 #define TEST_CODE_GAMESTATE_PLAYER_H_
 
+#include "../Parameters.h"
+
 #include <string>
 
 class Player {
@@ -23,7 +25,7 @@ private:
     bool active;
     unsigned int frame;
 
-    int paddle_width = PADDLE_WIDTH_;
+    int paddle_width = PADDLE_WIDTH;
 
 public:
     Player();
