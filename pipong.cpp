@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 
     while(runGame) {
 
-        StateManager::waitForStartButtonPress();
+        StateManager::waitForStartButtonPress(gs);
 
         StateManager::findPeers(pi_socket, gs);
 
