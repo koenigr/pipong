@@ -194,6 +194,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             bool resetLoop = true;
             bool draw_ball = true;
 
+            gs.newRound(0);
             int i = 0;
             int j = 0;
 
@@ -221,7 +222,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
                     if (j >= 8) {
                         StateManager::setState(GAME_STATE);
                         resetLoop = false;
-                        gs.newRound(0);
                     }
 
                     ms_start = Tools::getms();
