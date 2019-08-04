@@ -222,6 +222,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
                     if (j >= 8) {
                         StateManager::setState(GAME_STATE);
                         resetLoop = false;
+                        std::cout << ">>>>>>>>>>>>>>>>>>>>RESET LOOP\n";
                     }
 
                     ms_start = Tools::getms();
