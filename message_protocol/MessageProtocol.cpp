@@ -163,8 +163,8 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
 //        std::cout << "rm " << rm << std::endl;
 
         gs.setPlayerActive(true, player_no);
+        AddressManager::addParticipant(player_no);
         std::cout << "MessageProtocol::evalRequest() numOfParticipants: " << AddressManager::getNumOfParticipants() << std::endl;
-        // TODO AddressManager, add participant
 
         if (frame >= gs.getPlayer(player_no).getFrame()) {
 
