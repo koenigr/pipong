@@ -70,6 +70,7 @@ void AddressManager::addParticipant(const int player_no) {
     inet_pton(AF_INET, addr_arr[player_no].c_str(), &(participant.sin_addr));
     // TODO: port?
     participant.sin_port = htons(port);
+    Tools::print_address(participant, "AddressManager::addPartcipant");
 	participants.push_back(participant);
 
 }
