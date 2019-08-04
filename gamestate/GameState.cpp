@@ -118,6 +118,7 @@ int GameState::getRound() const {
 }
 
 int GameState::incrRound() {
+    round += 1;
     return round;
 }
 
