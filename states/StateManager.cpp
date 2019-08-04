@@ -121,6 +121,8 @@ void StateManager::findPeers(UDPSocket &pi_socket, GameState &gs) {
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
+    std::cout << "Countdown " << gs.getCountdown() << std::endl;
+
     while(gs.getCountdown() > 0) {
 
         receive_messages(pi_socket, gs);
