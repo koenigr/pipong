@@ -139,7 +139,6 @@ void GameState::checkForReflection() {
 
     std::cout << "GameState::checkForReflection() start...\n";
 
-
     if(ball.getPosY() - BALL_WIDTH <= 1) {
         if (last_reflection_wall != 0) ball.reflectBall(0);
         last_reflection_wall = 0;
@@ -148,7 +147,7 @@ void GameState::checkForReflection() {
         if (last_reflection_wall != 1) {
             ball.reflectBall(1);
             std::cout << "GameState::checkForReflection() COLLISION ALARM <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
-            checkForScoringZoneCollision();
+            //checkForScoringZoneCollision();
         }
         last_reflection_wall = 1;
     }
@@ -179,12 +178,8 @@ void GameState::checkForScoringZoneCollision() {
 }
 
 void GameState::updateBall() {
-
-    std::cout << "GameState::updateBall() before reflection" << getBall().toString() << std::endl;
     checkForReflection();
-    std::cout << "GameState::updateBall() between reflection and update" << getBall().toString() << std::endl;
     ball.updateBall();
-    std::cout << "GameState::updateBall() after update" << getBall().toString() << std::endl;
 }
 
 void GameState::newRound(const int seed) {

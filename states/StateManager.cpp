@@ -23,29 +23,20 @@ void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
 void StateManager::process_input(GameState &gs) {
 
-    //std::cout << "\nStart processing input...\n";
     int player_pos = InputManager::getPlayerPosition();
     gs.setPosition(gs.getPlayerNo(), player_pos);
-    //std::cout << ">>>>>>>>>> new player pos: " << gs.getPosition(gs.getPlayerNo()) << std::endl;
-
-    //std::cout << "Input processing completed\n";
 }
 
 void StateManager::update_game_state(GameState &gs) {
 
-    //std::cout << "\nStateManager::update_game_state() start...\n";
-
     gs.incrFrameNo();
-    // std::cout << gs.toString() << "\n";
     gs.updateBall();
 
-    //std::cout << "StateManager::update_game_state() end\n";
 }
 
 void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_socket) {
 
     std::string player_state_msg = MessageProtocol::createPlayerState(gs);
-    // std::cout << "Player state message: " << player_state_msg;
 
     for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
         sockaddr_in participant;
@@ -172,11 +163,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     int i = 0;
     while(gs.getSelf().getPoints() > 0) {
 
-        std::cout << "KHLKJHLKJHLKJ" << getState() << std::endl;
-
         receive_messages(pi_socket, gs);
-
-        std::cout << "KHLKJHLKJHLKJ" << getState() << std::endl;
 
         switch(actual_state) {
         case GAME_STATE:

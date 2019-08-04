@@ -10,7 +10,7 @@
 
 // General
 #define BUFSIZE 1024
-#define FRAMERATE 30 // 30
+#define FRAMERATE 2 // 30
 #define DISPLAY_SIZE 127
 #define PI 3.14159265
 #define COUNTDOWN_START_VAL 50 // 3-10 sec?
