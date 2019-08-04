@@ -37,9 +37,6 @@ void AddressManager::createOwnAddr() {
     own_addr.sin_family = AF_INET;
     own_addr.sin_addr.s_addr = INADDR_ANY;
     own_addr.sin_port = htons(port);
-
-    //char m[] = "Own ";
-    //Tools::print_address(own_addr, m);
 }
 
 sockaddr_in AddressManager::getOwnAddr() {
@@ -49,19 +46,11 @@ sockaddr_in AddressManager::getOwnAddr() {
 
 void AddressManager::createBroadcastAddr() {
 
-    //std::cout << "Create broadcast address\n";
-
     bzero((char *) &broadcast_addr, sizeof(broadcast_addr));
     broadcast_addr.sin_family = AF_INET;
     broadcast_addr.sin_addr.s_addr = inet_addr("10.1.1.255");
     //broadcast_addr.sin_addr.s_addr = INADDR_BROADCAST;
     broadcast_addr.sin_port = htons(port);
-
-    //char m[] = "Broadcast ";
-    //Tools::print_address(broadcast_addr, m);
-
-    //std::cout << "broadcast address created\n";
-
 }
 
 sockaddr_in AddressManager::getBroadcastAddr() {
@@ -80,6 +69,7 @@ void AddressManager::addParticipant(const int player_no) {
     struct sockaddr_in participant;
     inet_pton(AF_INET, addr_arr[player_no].c_str(), &(participant.sin_addr));
     // TODO: port?
+    participant.sin_port = htons(port);
 	participants.push_back(participant);
 
 }
