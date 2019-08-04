@@ -75,7 +75,7 @@ void AddressManager::addParticipant(const int player_no) {
     Tools::print_address(participant, "AddressManager::addPartcipant");
     Tools::print_address(broadcast_addr, "AddressManager::addParticipant");
 	participants.push_back(participant);
-
+    std::cout << "AddressManager::addParticipant numOfParticipants" << participants.size() << std::endl;
 }
 
 void AddressManager::getParticipant(int pos, sockaddr_in &participant) {
