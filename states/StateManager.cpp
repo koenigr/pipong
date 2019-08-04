@@ -191,7 +191,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
         case COLLISION_STATE:
             std::cout << "collision state\n";
             int seed = 0; // TODO number of last collision frame
-            gs.newRound(0); //
             bool resetLoop = true;
             bool draw_ball = true;
 
@@ -222,6 +221,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
                     if (j >= 8) {
                         StateManager::setState(GAME_STATE);
                         resetLoop = false;
+                        gs.newRound(0);
                     }
 
                     ms_start = Tools::getms();
