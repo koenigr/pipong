@@ -176,6 +176,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
         switch(actual_state) {
         case GAME_STATE:
+            std::cout << "gameloop state\n";
             if ((ms_then - ms_start) > 1000/FRAMERATE) {
                 process_input(gs);
                 update_game_state(gs);

@@ -231,6 +231,9 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
         std::cout << "pn " << player_no << std::endl;
         std::cout << "rm " << rm << std::endl;
 
+        std::cout << "evalCollision round " << round << std::endl;
+        std::cout << "evalCollision gs.round " << gs.getRound() << std::endl;
+
         if (round == gs.getRound()) {
             StateManager::setState(COLLISION_STATE);
         }
