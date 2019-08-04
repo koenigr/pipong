@@ -51,9 +51,9 @@ float Ball::setAngle(int player_self, float new_angle) {
     angle = new_angle;
     switch (player_self) {
     case 0:
+        angle += 180.0;
         break;
     case 1:
-        angle += 180.0;
         break;
     case 2:
         angle += 270.0;
