@@ -172,7 +172,11 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     int i = 0;
     while(gs.getSelf().getPoints() > 0) {
 
+        std::cout << "KHLKJHLKJHLKJ" << getState() << std::endl;
+
         receive_messages(pi_socket, gs);
+
+        std::cout << "KHLKJHLKJHLKJ" << getState() << std::endl;
 
         switch(actual_state) {
         case GAME_STATE:
@@ -221,10 +225,10 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
 
                     if (j >= 8) {
-                        StateManager::setState(GAME_STATE);
+                        setState(GAME_STATE);
                         resetLoop = false;
                         std::cout << ">>>>>>>>>>>>>>>>>>>>RESET LOOP\n";
-                        std::cout << ">>>>>>>>>>>>>>>>>>>>Gamestate: " << StateManager::getState() << std::endl;
+                        std::cout << ">>>>>>>>>>>>>>>>>>>>Gamestate: " << getState() << std::endl;
                     }
 
                     ms_start = Tools::getms();
