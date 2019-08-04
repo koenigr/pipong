@@ -45,8 +45,8 @@ void Display::drawWaitForPeers(const GameState gs) {
     clear();
     std::stringstream s;
     s << "Waiting for peers\n";
-    s << "Player 0: ";
     for (int i = 0; i <= 3; i++) {
+        s << "Player " << i << ": ";
         if (gs.getPlayer(i).isActive()) {s << "active";}
         else {s << "-";}
         s << std::endl;
