@@ -9,6 +9,7 @@
 #include "../input/InputManager.h"
 
 #include <iostream>
+#include <cstring>
 
 // PRIVATE
 
@@ -48,7 +49,7 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
 
     for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
         sockaddr_in participant;
-        bzero((char *) &participant, sizeof(participant));
+        memset((char *) &participant, 0, sizeof(participant));
         Tools::print_address(participant, "StateManager::deploy_game_state: ");
         AddressManager::getParticipant(i, participant);
         pi_socket.sendMessage(player_state_msg, participant);
