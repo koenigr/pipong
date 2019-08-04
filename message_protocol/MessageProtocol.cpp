@@ -227,7 +227,7 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
         std::cout << "pn " << player_no << std::endl;
         std::cout << "rm " << rm << std::endl;
 
-        StateManager::setState(COLLISION_STATE;
+        StateManager::setState(COLLISION_STATE);
     }
 
 }
