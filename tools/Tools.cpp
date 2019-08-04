@@ -39,7 +39,7 @@ void Tools::print_address(struct sockaddr_in addr, std::string message) {
     char str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
     std::cout   << "Address: " << message << str
-                << "Port: " << addr.sin_port << std::endl
+                << "Port: " << addr.sin_port
                 << "Family: " << addr.sin_family << std::endl;
 
     //std::cout << "Tools::print_address end\n";

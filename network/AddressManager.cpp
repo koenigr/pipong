@@ -71,6 +71,7 @@ void AddressManager::addParticipant(const int player_no) {
     // TODO: port?
     participant.sin_port = htons(port);
     Tools::print_address(participant, "AddressManager::addPartcipant");
+    Tools::print_address(broadcast_addr, "AddressManager::addParticipant");
 	participants.push_back(participant);
 
 }
