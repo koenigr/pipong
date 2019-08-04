@@ -110,7 +110,7 @@ void StateManager::waitForStartButtonPress(UDPSocket &pi_socket, int player_self
         if (pressed) {
            setState(FINDPEERS_STATE);
         }
-        usleep(1000 / FRAMERATE);
+        //usleep(1000 / FRAMERATE);
     }
 
     std::cout << "Start Button pressed or request message received\n";
