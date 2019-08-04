@@ -43,8 +43,6 @@ void StateManager::update_game_state(GameState &gs) {
 
 void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_socket) {
 
-    //std::cout << "\nStart deploying gamestate..\n";
-
     std::string player_state_msg = MessageProtocol::createPlayerState(gs);
     // std::cout << "Player state message: " << player_state_msg;
 
@@ -54,9 +52,6 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
         AddressManager::getParticipant(i, participant);
         pi_socket.sendMessage(player_state_msg, participant);
     }
-    //pi_socket.sendMessage(player_state_msg, am.getBroadcastAddr());
-
-    //std::cout << "Deploying gamestate completed\n";
 }
 
 void StateManager::display(const GameState gs) {
