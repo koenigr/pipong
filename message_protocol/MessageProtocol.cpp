@@ -30,6 +30,7 @@
 #define POSITION "POSITION "
 #define POINTS "POINTS "
 #define COUNTDOWN "COUNTDOWN "
+#define ROUND "ROUND "
 
 std::string MessageProtocol::createRequest(GameState gs) {
 
@@ -78,6 +79,7 @@ std::string MessageProtocol::createCollision(GameState gs) {
     x   << MAIN_HEADER
         << DELIMITER  << COLLISION_TYPE
         << DELIMITER << FRAME << gs.getFrameNo()
+        << DELIMITER << ROUND << gs.getRound()
         << DELIMITER << PLAYERNO << gs.getPlayerNo();
     // TODO random angle
 
@@ -213,21 +215,25 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
     std::cout << message << std::endl;
 
     unsigned int frame;
+    int round;
     int player_no;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER ROUND INT DELIMITER PLAYERNO INT REMAIN, &frame, &round, &player_no, rm);
 
-    if (r >= 2) {
+    if (r >= 3) {
 
         // TODO eval everything
         std::cout << "r " << r << std::endl;
         std::cout << "fr " << frame << std::endl;
+        std::cout << "round " << round << std::endl;
         std::cout << "pn " << player_no << std::endl;
         std::cout << "rm " << rm << std::endl;
 
-        StateManager::setState(COLLISION_STATE);
+        if (round == gs.getRound()) {
+            StateManager::setState(COLLISION_STATE);
+        }
     }
 
 }
