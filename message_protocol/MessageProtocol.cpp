@@ -130,7 +130,6 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
         else if (type == PLAYER_STATE_TYPE && actual_state == GAME_STATE) evalPlayerState(remaining, gs);
         else if (type == COLLISION_TYPE && actual_state == GAME_STATE) {
             evalCollision(remaining, gs);
-            StateManager::setState(COLLISION_STATE);
         }
 
         else if (type == FINISH_TYPE && (actual_state == GAME_STATE || actual_state == COLLISION_STATE)) {
