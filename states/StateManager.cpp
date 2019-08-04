@@ -55,9 +55,8 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
     }
 }
 
-void StateManager::deploy_collision_state(const GameState gs, const UDPSocket pi_socket) {
+void StateManager::deploy_collision_state(std::string collision_state_msg, const GameState gs, const UDPSocket pi_socket) {
 
-    std::string collision_state_msg = MessageProtocol::createCollision(gs);
     std::cout << "Collision state message: " << collision_state_msg;
 
     for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
@@ -190,6 +189,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             break;
         case COLLISION_STATE:
             std::cout << "collision state\n";
+            std::string collision_state_msg = MessageProtocol::createCollision(gs);
             int seed = 0; // TODO number of last collision frame
             bool resetLoop = true;
             bool draw_ball = true;
@@ -203,7 +203,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
                     // TODO sync??
 
-                    deploy_collision_state(gs, pi_socket);
+                    deploy_collision_state(collision_state_msg, gs, pi_socket);
 
                     std::cout << " reset loop " << resetLoop << std::endl;
                     std::cout << " draw ball " << draw_ball << std::endl;
