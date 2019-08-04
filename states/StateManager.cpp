@@ -16,8 +16,6 @@ int StateManager::actual_state;
 
 void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
-    std::cout << "StateManager::receive_messages() \n";
-
     std::string message = pi_socket.receiveMessage();
     MessageProtocol::evalMessage(message, gs);
 }
