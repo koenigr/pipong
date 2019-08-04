@@ -113,6 +113,8 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
 
     std::cout << "MessageProtocol::evalMessage() start...\n";
 
+    std::cout << message << std::endl;
+
     char tp[4];
     char rm[BUFSIZE];
     int r = sscanf(message.c_str(), MAIN_HEADER DELIMITER "%3s" DELIMITER REMAIN, tp, rm);
