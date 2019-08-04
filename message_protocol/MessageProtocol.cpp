@@ -156,15 +156,10 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
     int r = sscanf(message.c_str(), PLAYERNO INT DELIMITER FRAME UINT DELIMITER COUNTDOWN UINT REMAIN, &player_no, &frame, &countdown, rm);
 
     if (r >= 1) {
-//        std::cout << "r " << r << std::endl;
-//        std::cout << "pn " << player_no << std::endl;
-//        std::cout << "fr " << frame << std::endl;
-//        std::cout << "cd " << countdown << std::endl;
-//        std::cout << "rm " << rm << std::endl;
-
-        gs.setPlayerActive(true, player_no);
-
-        if (player_no != gs.getPlayerNo()) AddressManager::addParticipant(player_no);
+        if (!gs.getPlayer(player_no).isActive()) {
+            AddressManager::addParticipant(player_no);
+            gs.setPlayerActive(true, player_no);
+        }
         std::cout << "MessageProtocol::evalRequest() numOfParticipants: " << AddressManager::getNumOfParticipants() << std::endl;
 
         if (frame >= gs.getPlayer(player_no).getFrame()) {
@@ -177,7 +172,6 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
             }
         }
     }
-
 }
 
 
