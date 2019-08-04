@@ -98,6 +98,8 @@ void StateManager::waitForStartButtonPress(UDPSocket &pi_socket, int player_self
     setState(WAIT_STATE);
 
     gs.init(player_self);
+    gs.resetAllFrames();
+    gs.setCountdown(COUNTDOWN_START_VAL);
 
     std::cout << "\nStateManager::waitForStartButtonPress()...\n";
 
@@ -155,9 +157,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     std::cout << "\nStateManager::gameLoop() start...\n";
 
     setState(GAME_STATE);
-
-    gs.resetAllFrames();
-    gs.setCountdown(COUNTDOWN_START_VAL);
 
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
