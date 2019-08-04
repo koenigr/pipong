@@ -51,8 +51,20 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
         sockaddr_in participant;
         memset((char *) &participant, 0, sizeof(participant));
         AddressManager::getParticipant(i, participant);
-        Tools::print_address(participant, "StateManager::deploy_game_state: ");
         pi_socket.sendMessage(player_state_msg, participant);
+    }
+}
+
+void StateManager::deploy_collision_state(const GameState gs, const UDPSocket pi_socket) {
+
+    std::string collision_state_msg = MessageProtocol::createCollision(gs);
+    std::cout << "Collision state message: " << collision_state_msg;
+
+    for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
+        sockaddr_in participant;
+        memset((char *) &participant, 0, sizeof(participant));
+        AddressManager::getParticipant(i, participant);
+        pi_socket.sendMessage(collision_state_msg, participant);
     }
 }
 
@@ -183,17 +195,21 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             bool resetLoop = true;
             bool draw_ball = true;
 
-	int i = 0;
-	int j = 0;
+            int i = 0;
+            int j = 0;
 
             while (resetLoop) {
 
                 if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-			std::cout << " reset loop " << resetLoop << std::endl;
-			std::cout << " draw ball " << draw_ball << std::endl;
-			std::cout << " i " << i << std::endl;
-			std::cout << " j " << j << std::endl;
+                    // TODO sync??
+
+                    deploy_collision_state(gs, pi_socket);
+
+                    std::cout << " reset loop " << resetLoop << std::endl;
+                    std::cout << " draw ball " << draw_ball << std::endl;
+                    std::cout << " i " << i << std::endl;
+                    std::cout << " j " << j << std::endl;
 
                     displayResetBall(draw_ball, gs);
                     i = (i+1) % (FRAMERATE / 4);
@@ -203,13 +219,13 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
                     }
 
 
-                if (j >= 8) {
-                    StateManager::setState(GAME_STATE);
-                    resetLoop = false;
-                }
+                    if (j >= 8) {
+                        StateManager::setState(GAME_STATE);
+                        resetLoop = false;
+                    }
 
-		ms_start = Tools::getms();
-		}
+                    ms_start = Tools::getms();
+                }
 
                 ms_then = Tools::getms();
             }

@@ -220,10 +220,14 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
     int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT REMAIN, &frame, &player_no, rm);
 
     if (r >= 2) {
+
+        // TODO eval everything
         std::cout << "r " << r << std::endl;
         std::cout << "fr " << frame << std::endl;
         std::cout << "pn " << player_no << std::endl;
         std::cout << "rm " << rm << std::endl;
+
+        StateManager::setState(COLLISION_STATE;
     }
 
 }

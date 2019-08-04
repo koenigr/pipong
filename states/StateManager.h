@@ -13,6 +13,7 @@ private:
     static void process_input(GameState &gs);
     static void update_game_state(GameState &gs);
     static void deploy_game_state(const GameState gs, const UDPSocket pi_socket);
+    static void deploy_collision_state(const GameState gs, const UDPSocket pi_socket);
     static void display(const GameState gs);
     static void displayResetBall(const bool draw_ball, const GameState gs);
 
