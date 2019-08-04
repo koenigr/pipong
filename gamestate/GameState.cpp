@@ -169,12 +169,9 @@ void GameState::checkForScoringZoneCollision() {
     bool XcondR = ball.getPosX() - BALL_WIDTH > getSelf().getRightEndX();
     bool xcondL = ball.getPosX() + BALL_WIDTH < getSelf().getLeftEndX();
     if (Ycond && ( XcondR || xcondL)) {
-        // TODO
         std::cout << ">>>>>>>>>>>>>>>>>>> COLLISION\n";
         StateManager::setState(COLLISION_STATE);
-        // ball.resetBall(2); // TODO seed
     }
-    // TODO
 }
 
 void GameState::updateBall() {
@@ -185,7 +182,7 @@ void GameState::updateBall() {
 void GameState::newRound(const int seed) {
     // TODO paddle width. decrPoints bei Player nur, wenn er verloren hat
     incrRound();
-    ball.resetBall(seed);
+    ball.resetBall(player_self, seed);
     ball.incrVelocity();
     player_arr[player_self].decrPoints();
 }

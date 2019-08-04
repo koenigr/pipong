@@ -167,7 +167,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
         switch(actual_state) {
         case GAME_STATE:
-            std::cout << "gameloop state\n";
             if ((ms_then - ms_start) > 1000/FRAMERATE) {
                 process_input(gs);
                 update_game_state(gs);
@@ -180,7 +179,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             }
             break;
         case COLLISION_STATE:
-            std::cout << "collision state\n";
             std::string collision_state_msg = MessageProtocol::createCollision(gs);
             int seed = 0; // TODO number of last collision frame
             bool resetLoop = true;

@@ -34,11 +34,12 @@ float Ball::getVelocity() const {
     return velocity;
 }
 
-void Ball::resetBall(const int seed) {
+void Ball::resetBall(const int player_self, const int seed) {
     pos_x = DISPLAY_SIZE / 2;
     pos_y = DISPLAY_SIZE / 2;
     srand(seed);
     angle = rand() * 360.0 / RAND_MAX;
+    setAngle(player_self, angle);
 }
 
 float Ball::incrVelocity() {
@@ -50,7 +51,6 @@ float Ball::setAngle(int player_self, float new_angle) {
     angle = new_angle;
     switch (player_self) {
     case 0:
-        angle += 0.0;
         break;
     case 1:
         angle += 180.0;
