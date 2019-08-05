@@ -75,7 +75,7 @@ void Display::drawPoints(const GameState gs) {
 
     clear();
     std::stringstream s;
-    s << "\n\n\nPress center button\ntofinish\n";
+    s << "\n\n\nPress\nup button\nto restart\ndn button\nto finish\n";
     for (int i = 0; i < 4; i++) {
 
         s << "Player " << i << ": ";
