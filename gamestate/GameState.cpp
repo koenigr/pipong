@@ -153,7 +153,7 @@ void GameState::checkForReflection(UDPSocket &pi_socket) {
     if(ball.getPosY() + BALL_WIDTH >= 126) {
         if (last_reflection_wall != 0) {
             ball.reflectBall(0);
-            std::string reflect_msg = MessageProtocol::createCollision(*this);
+            std::string reflect_msg = MessageProtocol::createReflect(*this);
             //checkForScoringZoneCollision();
             if(StateManager::getState() == GAME_STATE) {
                 for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
