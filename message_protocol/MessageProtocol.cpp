@@ -220,7 +220,7 @@ void MessageProtocol::evalReflect(std::string message, GameState &gs) {
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER BALLPOSX INT DELIMITER BALLPOSY INT DELIMITER BALLANG FLOAT REMAIN, &player_no, &ball_frame, &posx, &posy, &ballang, rm);
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER BALLPOSX INT DELIMITER BALLPOSY INT DELIMITER BALLANG FLOAT REMAIN, &ball_frame, &player_no, &posx, &posy, &ballang, rm);
 
     std::cout << "r " << r << std::endl;
     if (r >= 6) {
