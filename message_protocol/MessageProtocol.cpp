@@ -216,7 +216,7 @@ void MessageProtocol::evalReflect(std::string message, GameState &gs) {
     int player_no;
     int posx;
     int posy;
-    int ballang;
+    float ballang;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
