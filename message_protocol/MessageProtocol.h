@@ -18,6 +18,8 @@ private:
 
     static void evalPlayerState(std::string message, GameState &gs);
 
+    static void evalReflect(std::string message, GameState &gs);
+
     static void evalCollision(std::string message, GameState &gs);
 
     static void evalFinish(std::string message, GameState &gs);
@@ -28,6 +30,8 @@ public:
     static std::string createRequest(GameState gs);
 
     static std::string createPlayerState(GameState gs);
+
+    static std::string createReflect(GameState gs);
 
     static std::string createCollision(GameState gs);
 
