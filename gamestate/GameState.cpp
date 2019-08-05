@@ -172,6 +172,7 @@ void GameState::checkForScoringZoneCollision() {
     if (Ycond && ( XcondR || xcondL)) {
         StateManager::last_collision_frame = getFrameNo();
         StateManager::setState(COLLISION_STATE);
+        player_arr[player_self].decrPoints();
     }
 }
 
@@ -181,11 +182,9 @@ void GameState::updateBall() {
 }
 
 void GameState::newRound(const int seed) {
-    // TODO paddle width. decrPoints bei Player nur, wenn er verloren hat
     incrRound();
     ball.resetBall(player_self, seed);
     ball.incrVelocity();
-    player_arr[player_self].decrPoints();
 }
 
 void GameState::setPlayerActive(const bool isActive, const int player_no) {
