@@ -246,6 +246,7 @@ void StateManager::showPoints(UDPSocket &pi_socket, GameState &gs, bool &runGame
         if (exitPressed) {
            end = true;
            runGame = false;
+           StateManager::setState(WAIT_STATE);
            std::cout << "exit pressed\n";
         }
         usleep(1000 / FRAMERATE);
