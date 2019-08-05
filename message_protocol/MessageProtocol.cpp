@@ -8,6 +8,7 @@
 #include "MessageProtocol.h"
 #include "../states/StateManager.h"
 #include "../Parameters.h"
+#include "../gamestate/Ball.h"
 
 #include <iostream>
 #include <string>
