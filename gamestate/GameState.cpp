@@ -142,7 +142,16 @@ void GameState::checkForReflection() {
     if(ball.getPosY() + BALL_WIDTH >= 126) {
         if (last_reflection_wall != 0) {
             ball.reflectBall(0);
+            std::string reflect_msg = MessageProtocol::createCollision(this);
             //checkForScoringZoneCollision();
+            if(StateManager::getState() == GAME_STATE) {
+                for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
+                    sockaddr_in participant;
+                    memset((char *) &participant, 0, sizeof(participant));
+                    AddressManager::getParticipant(i, participant);
+                    pi_socket.sendMessage(reflect_msg, participant);
+                }
+            }
         }
         last_reflection_wall = 0;
     }
@@ -185,6 +194,7 @@ void GameState::updateBall() {
 void GameState::newRound(const int seed) {
     incrRound();
     ball.resetBall(player_self, seed);
+    ball
 }
 
 void GameState::setPlayerActive(const bool isActive, const int player_no) {

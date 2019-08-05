@@ -19,11 +19,13 @@
 #define DELIMITER ":"
 #define REQUEST_TYPE "REQ"
 #define PLAYER_STATE_TYPE "PST"
+#define REFLECT_TYPE "RFL"
 #define COLLISION_TYPE "COL"
 #define FINISH_TYPE "FIN"
 
 #define INT " %d"
 #define UINT " %u"
+#define FLOAT " %f"
 #define REMAIN "%[\001-\377]"
 #define FRAME "FRAME "
 #define PLAYERNO "PLAYERNO "
@@ -32,6 +34,9 @@
 #define COUNTDOWN "COUNTDOWN "
 #define ROUND "ROUND "
 #define COLLFRAME "COLLFRAME "
+#define BALLPOSX "BALLPOSX "
+#define BALLPOSY "BALLPOSY "
+#define BALLANG "BALLANG "
 
 std::string MessageProtocol::createRequest(GameState gs) {
 
@@ -67,6 +72,22 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
     std::string player_state = x.str();
 
     return player_state;
+}
+
+std::string MessageProtocol::createReflect(GameState gs) {
+
+    std::stringstream x;
+    x   << MAIN_HEADER
+        << DELIMITER << PLAYER_STATE_TYPE
+        << DELIMITER << FRAME << gs.getBall().getBallFrame();
+        << DELIMITER << PLAYERNO << gs.getPlayerNo()
+        << DELIMITER << BALLPOSX << gs.getBall().getPosX()
+        << DELIMITER << BALLPOSY << gs.getBall().getPosY()
+        << DELIMITER << BALLANG <<  gs.getBall().getAngle();
+
+    std::string reflect = x.str();
+
+    return reflect;
 }
 
 std::string MessageProtocol::createCollision(GameState gs) {
@@ -156,7 +177,6 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
             gs.setFrame(player_no, frame);
 
             if (gs.getCountdown() < (countdown - 5) && countdown > 5) {
-                std::cout << gs.getCountdown() << " < " << countdown << " - 5\n";
                 gs.setCountdown(countdown);
             }
         }
@@ -165,9 +185,6 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
 
 
 void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
-
-    std::cout << "MessageProtocol::evalPlayerState()\n";
-    std::cout << message << std::endl;
 
     unsigned int frame;
     int player_no;
@@ -179,12 +196,6 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
     int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER POSITION INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &position, &points, rm);
 
     if (r >= 3) {
-        std::cout << "r " << r << std::endl;
-        std::cout << "fr " << frame << std::endl;
-        std::cout << "pn " << player_no << std::endl;
-        std::cout << "po " << position << std::endl;
-        std::cout << "po " << points << std::endl;
-        std::cout << "rm " << rm << std::endl;
 
         if (gs.getPlayer(player_no).getFrame() <= frame) {
             gs.setFrame(player_no, frame);
@@ -195,11 +206,31 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
 
 }
 
+void MessageProtocol::evalReflect(std::string message, GameState &gs) {
+
+    unsigned int ball_frame;
+    int player_no;
+    int posx;
+    int posy;
+    int ballang;
+    char rm[BUFSIZE];
+    memset(rm, 0, BUFSIZE);
+
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER BALLPOSX INT DELIMITER BALLPOSY INT DELIMITER BALLANG FLOAT REMAIN, &ball_frame, &posx, &posy, &ballang, rm);
+
+    if (r >= 6) {
+
+        if (gs.getBall().getBallFrame() < ball_frame + 5) {
+            gs.getBall().setAngle(player_no, ballang);
+            gs.getBall().setPosX(posx);
+            gs.getBall().setPosY(posy);
+        }
+    }
+
+}
+
 void MessageProtocol::evalCollision(std::string message, GameState &gs) {
     // TODO round vergleichen, frame vergleichen
-
-    std::cout << "MessageProtocol::evalCollision()\n";
-    std::cout << message << std::endl;
 
     unsigned int frame;
     int round;
@@ -212,18 +243,7 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
 
     if (r >= 3) {
 
-        // TODO eval everything
-        std::cout << "r " << r << std::endl;
-        std::cout << "fr " << frame << std::endl;
-        std::cout << "round " << round << std::endl;
-        std::cout << "pn " << player_no << std::endl;
-        std::cout << "rm " << rm << std::endl;
-
-        std::cout << "evalCollision round " << round << std::endl;
-        std::cout << "evalCollision gs.round " << gs.getRound() << std::endl;
-
         if (round == gs.getRound()) {
-            std::cout << "MessageProtocol::evalCollision set collision state\n";
             StateManager::last_collision_frame = collframe;
             StateManager::setState(COLLISION_STATE);
         }

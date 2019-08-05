@@ -110,6 +110,10 @@ void Ball::updateBall() {
     if (ball_frame % 150 == 0) incrVelocity();
 }
 
+unsigned int Ball::getBallFrame() {
+    return ball_frame;
+}
+
 
 std::string Ball::toString() const {
 

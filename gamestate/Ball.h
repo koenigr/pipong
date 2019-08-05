@@ -36,6 +36,7 @@ public:
     float setAngle(int player_self, float new_angle);
     void updateBall();
     void reflectBall(int side);
+    unsigned int getBallFrame();
     std::string toString() const;
 };
 

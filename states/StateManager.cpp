@@ -61,16 +61,10 @@ void StateManager::deploy_collision_state(std::string collision_state_msg, const
 
 void StateManager::display(const GameState gs) {
 
-    //std::cout << "\nStateManager::display() start...\n";
-
     Display::drawGameState(gs);
-
-    //std::cout << "StateManager::display() end\n";
 }
 
 void StateManager::displayResetBall(const bool draw_ball, const GameState gs) {
-
-    std::cout << "StateManager::displayResetBall() start ..\n";
 
     Display::drawGameState(draw_ball, gs);
 
@@ -176,7 +170,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
                 deploy_game_state(gs, pi_socket);
                 display(gs);
                 ms_start = Tools::getms();
-                std::cout << "StateManager::gameLoop() loop no: " << i << std::endl;
                 i++;
 
             }
@@ -195,18 +188,12 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
                 if ((ms_then - ms_start) > 1000/FRAMERATE) {
 
-                    // TODO sync??
-
                     deploy_collision_state(collision_state_msg, gs, pi_socket);
 
-                    std::cout << " last collision frame " << last_collision_frame << std::endl;
-                    std::cout << " reset loop " << resetLoop << std::endl;
-                    std::cout << " draw ball " << draw_ball << std::endl;
-                    std::cout << " i " << i << std::endl;
-                    std::cout << " j " << j << std::endl;
-
                     displayResetBall(draw_ball, gs);
+
                     i = (i+1) % (FRAMERATE / 4);
+
                     if (i == 0) {
                         draw_ball = !draw_ball;
                         j++;
@@ -216,8 +203,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
                     if (j >= 8) {
                         setState(GAME_STATE);
                         resetLoop = false;
-                        std::cout << ">>>>>>>>>>>>>>>>>>>>RESET LOOP\n";
-                        std::cout << ">>>>>>>>>>>>>>>>>>>>Gamestate: " << getState() << std::endl;
                     }
 
                     ms_start = Tools::getms();
