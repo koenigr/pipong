@@ -202,6 +202,9 @@ void GameState::checkForReflection(UDPSocket &pi_socket) {
 
 
 void GameState::checkForScoringZoneCollision() {
+
+    std::cout << "GameState::checkForScoringZoneCollision()\n";
+
     bool Ycond = ball.getPosY() + BALL_WIDTH >= 126;
     bool XcondR = ball.getPosX() - BALL_WIDTH > getSelf().getRightEndX();
     bool xcondL = ball.getPosX() + BALL_WIDTH < getSelf().getLeftEndX();
