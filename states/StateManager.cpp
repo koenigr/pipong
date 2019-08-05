@@ -202,6 +202,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
                     deploy_collision_state(collision_state_msg, gs, pi_socket);
 
+                    std::cout << " last collision frame " << last_collision_frame << std::endl;
                     std::cout << " reset loop " << resetLoop << std::endl;
                     std::cout << " draw ball " << draw_ball << std::endl;
                     std::cout << " i " << i << std::endl;
