@@ -21,7 +21,7 @@
 #define BALL_WIDTH 10
 
 // Player
-#define INIT_PLAYER_POINTS 5
+#define INIT_PLAYER_POINTS 3
 #define PADDLE_WIDTH 30
 
 // STATES

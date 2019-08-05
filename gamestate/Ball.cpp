@@ -46,6 +46,7 @@ float Ball::getVelocity() const {
 
 void Ball::resetVelocity() {
     velocity = INIT_VELOCITY;
+    incrVelocity();
 }
 
 void Ball::resetBall(const int player_self, const int seed) {
