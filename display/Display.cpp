@@ -65,12 +65,10 @@ void Display::drawPlayer(const GameState gs) {
         // std::cout << ">>>>>>>>>>> " << player.toString() << std::endl;
         disp.drawLine(player.getLeftEndX(), player.getLeftEndY(), player.getRightEndX(), player.getRightEndY());
     }
-    std::cout << "Display::drawPlayer() end\n";
 }
 
 void Display::drawBall(const GameState gs) {
     disp.fillCircle(gs.getBall().getPosX(), gs.getBall().getPosY(), BALL_WIDTH);
-    std::cout << "Display::drawBall() Ball " << gs.getBall().toString() << std::endl;
 }
 
 void Display::drawPoints(const GameState gs) {

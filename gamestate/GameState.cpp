@@ -156,6 +156,7 @@ void GameState::checkForReflection(UDPSocket &pi_socket) {
             std::string reflect_msg = MessageProtocol::createReflect(*this);
             //checkForScoringZoneCollision();
             if(StateManager::getState() == GAME_STATE) {
+                std::cout << "checkForReflection REFLECT\n";
                 for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
                     sockaddr_in participant;
                     memset((char *) &participant, 0, sizeof(participant));
