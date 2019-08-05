@@ -23,7 +23,7 @@ private:
     unsigned int countdown = COUNTDOWN_START_VAL;
     int last_reflection_wall = -1;
 
-    void checkForReflection();
+    void checkForReflection(UDPSocket &pi_socket);
     void checkForScoringZoneCollision();
 
 public:
@@ -57,7 +57,7 @@ public:
     void newRound(const int seed);
 
     std::string toString() const;
-    void updateBall();
+    void updateBall(UDPSocket &pi_socket);
 };
 
 #endif /* TEST_CODE_GAMESTATE_GAMESTATE_H_ */

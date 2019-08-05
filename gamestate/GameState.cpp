@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <sstream>
+#include <cstring>
 
 GameState::~GameState() {
     //std::cout << "!!!!!!!!!!!!!!!    GameState destructor called\n";
@@ -135,14 +136,14 @@ std::string GameState::toString() const {
     return s;
 }
 
-void GameState::checkForReflection() {
+void GameState::checkForReflection(UDPSocket &pi_socket) {
 
     std::cout << "GameState::checkForReflection() start...\n";
 
     if(ball.getPosY() + BALL_WIDTH >= 126) {
         if (last_reflection_wall != 0) {
             ball.reflectBall(0);
-            std::string reflect_msg = MessageProtocol::createCollision(this);
+            std::string reflect_msg = MessageProtocol::createCollision(*this);
             //checkForScoringZoneCollision();
             if(StateManager::getState() == GAME_STATE) {
                 for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
@@ -186,8 +187,8 @@ void GameState::checkForScoringZoneCollision() {
     }
 }
 
-void GameState::updateBall() {
-    checkForReflection();
+void GameState::updateBall(UDPSocket &pi_socket) {
+    checkForReflection(pi_socket);
     ball.updateBall();
 }
 

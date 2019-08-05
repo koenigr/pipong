@@ -28,10 +28,10 @@ void StateManager::process_input(GameState &gs) {
     gs.setPosition(gs.getPlayerNo(), player_pos);
 }
 
-void StateManager::update_game_state(GameState &gs) {
+void StateManager::update_game_state(UDPSocket &pi_socket, GameState &gs) {
 
     gs.incrFrameNo();
-    gs.updateBall();
+    gs.updateBall(pi_socket);
 
 }
 

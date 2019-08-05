@@ -11,7 +11,7 @@ private:
 
     static void receive_messages(const UDPSocket &pi_socket, GameState &gs);
     static void process_input(GameState &gs);
-    static void update_game_state(GameState &gs);
+    static void update_game_state(UDPSocket &pi_socket, GameState &gs);
     static void deploy_game_state(const GameState gs, const UDPSocket pi_socket);
     static void deploy_collision_state(std::string collision_state_msg, const GameState gs, const UDPSocket pi_socket);
     static void display(const GameState gs);
