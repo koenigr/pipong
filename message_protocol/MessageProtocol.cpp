@@ -223,7 +223,7 @@ void MessageProtocol::evalReflect(std::string message, GameState &gs) {
     int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER BALLPOSX INT DELIMITER BALLPOSY INT DELIMITER BALLANG FLOAT REMAIN, &player_no, &ball_frame, &posx, &posy, &ballang, rm);
 
     if (r >= 6) {
-
+        std::cout << gs.getBall().getBallFrame() << " " << ball_frame << std::endl;
         if (gs.getBall().getBallFrame() < ball_frame + 2) {
             gs.setBallPos(posx, posy, player_no);
             gs.setBallAngle(ballang, player_no);
