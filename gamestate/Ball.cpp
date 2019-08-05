@@ -53,6 +53,7 @@ void Ball::resetBall(const int player_self, const int seed) {
     angle = rand() * 360.0 / RAND_MAX;
     setAngle(player_self, angle);
     resetVelocity();
+    incrVelocity();
 }
 
 float Ball::incrVelocity() {
