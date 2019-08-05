@@ -34,7 +34,7 @@ void GameState::init(int player_no) {
     player_arr[3].init(3, player_self);
     player_arr[player_self].setPlayerActive(true);
 
-    ball.setAngle(player_self, 26.3);
+    ball.setAngle(player_self, 22.2);
 
     std::cout << "GameState::init() " << toString() << std::endl;
 
@@ -170,15 +170,15 @@ void GameState::checkForReflection(UDPSocket &pi_socket) {
         if (last_reflection_wall != 0) {
             ball.reflectBall(0);
             std::string reflect_msg = MessageProtocol::createReflect(*this);
-            //checkForScoringZoneCollision();
-            if(StateManager::getState() == GAME_STATE) {
-                std::cout << "checkForReflection REFLECT\n";
-                for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
-                    sockaddr_in participant;
-                    memset((char *) &participant, 0, sizeof(participant));
-                    AddressManager::getParticipant(i, participant);
-                    pi_socket.sendMessage(reflect_msg, participant);
-                }
+            checkForScoringZoneCollision();
+//            if(StateManager::getState() == GAME_STATE) {
+//                std::cout << "checkForReflection REFLECT\n";
+//                for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
+//                    sockaddr_in participant;
+//                    memset((char *) &participant, 0, sizeof(participant));
+//                    AddressManager::getParticipant(i, participant);
+//                    pi_socket.sendMessage(reflect_msg, participant);
+//                }
             }
         }
         last_reflection_wall = 0;
