@@ -122,6 +122,7 @@ void Ball::updateBall() {
     pos_y += velocity * cos(angle * PI / 180.0);
     ball_frame += 1;
     if (ball_frame % 100 == 0) incrVelocity();
+    std::cout << "Ball:updateBall " << toString() << std::endl;
 }
 
 unsigned int Ball::getBallFrame() {
