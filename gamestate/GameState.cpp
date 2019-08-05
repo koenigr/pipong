@@ -77,9 +77,9 @@ Ball GameState::getBall() const {
     return ball;
 }
 
-void GameState::setBallPos(int posx, int posy, int player_out) {
-    ball.setPosX(posx);
-    ball.setPosY(posy);
+void GameState::setBallPos(int posX, int posY, int player_out) {
+    ball.setPosX(posX);
+    ball.setPosY(posY);
 }
 
 void GameState::setBallAngle(float angle, int player_out) {
