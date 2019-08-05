@@ -79,7 +79,7 @@ std::string MessageProtocol::createReflect(GameState gs) {
 
     std::stringstream x;
     x   << MAIN_HEADER
-        << DELIMITER << PLAYER_STATE_TYPE
+        << DELIMITER << REFLECT_TYPE
         << DELIMITER << FRAME << gs.getBall().getBallFrame()
         << DELIMITER << PLAYERNO << gs.getPlayerNo()
         << DELIMITER << BALLPOSX << gs.getBall().getPosX()
