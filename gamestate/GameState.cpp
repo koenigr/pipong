@@ -84,7 +84,7 @@ void GameState::setBallPos(int posX, int posY, int player_out) {
 }
 
 void GameState::setBallAngle(float angle, int player_out) {
-    switch(player_out)
+    switch(player_out) {
     case 0:
         angle = fmod(360.0 + angle - 180.0, 360.0);
         break;
@@ -99,6 +99,8 @@ void GameState::setBallAngle(float angle, int player_out) {
     default:
         std::cout << "wrong player number";
         break;
+    }
+    angle += 5.0;
     ball.setAngle(player_self, angle);
 }
 
