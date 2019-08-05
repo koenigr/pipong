@@ -43,6 +43,9 @@ public:
     Player getPlayer(int i) const;
     Ball getBall() const;
 
+    void setBallPos(int posx, int posy, int player_out);
+    void setBallAngle(float angle, int player_out);
+
     unsigned int getFrameNo() const;
     unsigned int incrFrameNo();
     unsigned int setFrame(int const player_no, unsigned int const new_frame);

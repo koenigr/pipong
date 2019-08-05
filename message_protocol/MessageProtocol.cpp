@@ -222,9 +222,8 @@ void MessageProtocol::evalReflect(std::string message, GameState &gs) {
     if (r >= 6) {
 
         if (gs.getBall().getBallFrame() < ball_frame + 5) {
-            gs.getBall().setAngle(player_no, ballang);
-            gs.getBall().setPosX(posx);
-            gs.getBall().setPosY(posy);
+            gs.setBallPos(posx, posy, player_no);
+            gs.setBallAngle(ballang, player_no);
         }
     }
 

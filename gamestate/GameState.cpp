@@ -77,6 +77,15 @@ Ball GameState::getBall() const {
     return ball;
 }
 
+void GameState::setBallPos(int posx, int posy, int player_out) {
+    ball.setPosX(posx);
+    ball.setPosY(posy);
+}
+
+void GameState::setBallAngle(float angle, int player_out) {
+    ball.setAngle(player_self, angle);
+}
+
 unsigned int GameState::getFrameNo() const {
     return getSelf().getFrame();
 }
