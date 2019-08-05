@@ -140,13 +140,15 @@ void GameState::checkForReflection() {
     std::cout << "GameState::checkForReflection() start...\n";
 
     if(ball.getPosY() + BALL_WIDTH >= 126) {
-        if (last_reflection_wall != 0) ball.reflectBall(0);
+        if (last_reflection_wall != 0) {
+            ball.reflectBall(0);
+            checkForScoringZoneCollision();
+        }
         last_reflection_wall = 0;
     }
     else if(ball.getPosY() - BALL_WIDTH <= 1) {
         if (last_reflection_wall != 1) {
             ball.reflectBall(1);
-            checkForScoringZoneCollision();
         }
         last_reflection_wall = 1;
     }
