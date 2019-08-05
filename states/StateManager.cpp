@@ -166,7 +166,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
         case GAME_STATE:
             if ((ms_then - ms_start) > 1000/FRAMERATE) {
                 process_input(gs);
-                update_game_state(gs);
+                update_game_state(pi_socket, gs);
                 deploy_game_state(gs, pi_socket);
                 display(gs);
                 ms_start = Tools::getms();
