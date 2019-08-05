@@ -66,15 +66,10 @@ std::string MessageProtocol::createPlayerState(GameState gs) {
 
     std::string player_state = x.str();
 
-    // std::cout << "\nMessageProtocol::createPlayerState(): " << player_state << std::endl;
-    //std::cout << "Player_state creation completed\n";
-
     return player_state;
 }
 
 std::string MessageProtocol::createCollision(GameState gs) {
-
-    //std::cout << "\nStarting to create collision message...\n";
 
     std::stringstream x;
     x   << MAIN_HEADER
@@ -83,12 +78,8 @@ std::string MessageProtocol::createCollision(GameState gs) {
         << DELIMITER << ROUND << gs.getRound()
         << DELIMITER << COLLFRAME << StateManager::last_collision_frame
         << DELIMITER << PLAYERNO << gs.getPlayerNo();
-    // TODO random angle
 
     std::string collision = x.str();
-
-    std::cout << "\nMessageProtocol::createCollision(): " << collision << std::endl;
-    //std::cout << "Collision creation completed\n";
 
     return collision;
 }
@@ -107,7 +98,7 @@ std::string MessageProtocol::createFinish(GameState gs) {
     std::string finish = x.str();
 
     std::cout << "\nMessageProtocol::createFinish(): " << finish << std::endl;
-    //std::cout << "Finish creation completed\n";
+
 
     return finish;
 }
@@ -140,15 +131,11 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
         }
         else {
             std::cout << "Wrong message type";
-            //exit(1);
         }
     }
 }
 
 void MessageProtocol::evalRequest(std::string message, GameState& gs) {
-
-    std::cout << "MessageProtocol::evalRequest()\n";
-    std::cout << message << std::endl;
 
     int player_no;
     unsigned int frame;
@@ -163,7 +150,6 @@ void MessageProtocol::evalRequest(std::string message, GameState& gs) {
             AddressManager::addParticipant(player_no);
             gs.setPlayerActive(true, player_no);
         }
-        std::cout << "MessageProtocol::evalRequest() numOfParticipants: " << AddressManager::getNumOfParticipants() << std::endl;
 
         if (frame >= gs.getPlayer(player_no).getFrame()) {
 
@@ -247,9 +233,6 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
 
 void MessageProtocol::evalFinish(std::string message, GameState &gs) {
 
-    std::cout << "MessageProtocol::evalFinish()\n";
-    std::cout << message << std::endl;
-
     unsigned int frame;
     int player_no;
     int points;
@@ -259,11 +242,8 @@ void MessageProtocol::evalFinish(std::string message, GameState &gs) {
     int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER POINTS INT REMAIN, &frame, &player_no, &points, rm);
 
     if (r >= 3) {
-        std::cout << "r " << r << std::endl;
-        std::cout << "fr " << frame << std::endl;
-        std::cout << "pn " << player_no << std::endl;
-        std::cout << "po " << points << std::endl;
-        std::cout << "rm " << rm << std::endl;
+
+        gs.setPoints(player_no, points);
     }
 
 

@@ -28,6 +28,7 @@ public:
     int getPosY() const;
     float getAngle() const;
     float getVelocity() const;
+    void resetVelocity();
     void resetBall(const int player_self, const int seed);
     int setPosX(int posX);
     int setPosY(int posY);

@@ -34,13 +34,17 @@ float Ball::getVelocity() const {
     return velocity;
 }
 
+void Ball::resetVelocity() {
+    velocity = INIT_VELOCITY;
+}
+
 void Ball::resetBall(const int player_self, const int seed) {
     pos_x = DISPLAY_SIZE / 2;
     pos_y = DISPLAY_SIZE / 2;
     srand(seed);
     angle = rand() * 360.0 / RAND_MAX;
     setAngle(player_self, angle);
-    incrVelocity();
+    resetVelocity();
 }
 
 float Ball::incrVelocity() {
@@ -103,7 +107,7 @@ void Ball::updateBall() {
     pos_x += velocity * sin(angle * PI / 180.0);
     pos_y += velocity * cos(angle * PI / 180.0);
     ball_frame += 1;
-    if (ball_frame % 100 == 0) incrVelocity();
+    if (ball_frame % 150 == 0) incrVelocity();
 }
 
 
