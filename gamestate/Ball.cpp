@@ -85,7 +85,7 @@ void Ball::reflectBall(int side) {
         angle = fmod(360 + 180 - angle, 360);
         break;
     case 1:
-        angle = fmod(angle + 360, 360);
+        angle = fmod(360 + 180 - angle, 360);
         break;
     case 2:
         angle = fmod(360 - angle, 360);
