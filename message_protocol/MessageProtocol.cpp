@@ -223,6 +223,13 @@ void MessageProtocol::evalReflect(std::string message, GameState &gs) {
     int r = sscanf(message.c_str(), FRAME UINT DELIMITER PLAYERNO INT DELIMITER BALLPOSX INT DELIMITER BALLPOSY INT DELIMITER BALLANG FLOAT REMAIN, &ball_frame, &player_no, &posx, &posy, &ballang, rm);
 
     std::cout << "r " << r << std::endl;
+    std::cout << "bf " << ball_frame << std::endl;
+    std::cout << " pno " << player_no << std::endl;
+    std::cout << "posx " << posx << std::endl;
+    std::cout << "posy "  << posy << std::endl;
+    std::cout << "ballang " << ballang << std::endl;
+
+
     if (r >= 6) {
         std::cout << gs.getBall().getBallFrame() << " " << ball_frame << std::endl;
         if (gs.getBall().getBallFrame() < ball_frame + 2) {
