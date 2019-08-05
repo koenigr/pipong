@@ -210,6 +210,8 @@ void MessageProtocol::evalPlayerState(std::string message, GameState &gs) {
 
 void MessageProtocol::evalReflect(std::string message, GameState &gs) {
 
+    std::cout << "reflect message: " << message << std::endl;
+
     unsigned int ball_frame;
     int player_no;
     int posx;
