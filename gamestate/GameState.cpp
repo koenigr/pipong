@@ -179,7 +179,7 @@ void GameState::checkForReflection(UDPSocket &pi_socket) {
 //                    AddressManager::getParticipant(i, participant);
 //                    pi_socket.sendMessage(reflect_msg, participant);
 //                }
-            }
+//            }
         }
         last_reflection_wall = 0;
     }
