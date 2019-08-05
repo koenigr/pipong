@@ -143,6 +143,7 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
             StateManager::setState(FINDPEERS_STATE);
         }
         else if (type == PLAYER_STATE_TYPE && actual_state == GAME_STATE) evalPlayerState(remaining, gs);
+        else if (type == REFLECT_TYPE && actual_state == GAME_STATE) evalReflect(message, gs);
         else if (type == COLLISION_TYPE && actual_state == GAME_STATE) {
             evalCollision(remaining, gs);
         }
@@ -221,7 +222,7 @@ void MessageProtocol::evalReflect(std::string message, GameState &gs) {
 
     if (r >= 6) {
 
-        if (gs.getBall().getBallFrame() < ball_frame + 5) {
+        if (gs.getBall().getBallFrame() < ball_frame + 2) {
             gs.setBallPos(posx, posy, player_no);
             gs.setBallAngle(ballang, player_no);
         }
