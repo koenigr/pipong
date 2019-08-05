@@ -157,7 +157,7 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
 
     int i = 0;
 
-    while(gs.getSelf().getPoints() > 0) {
+    while(gs.getSelf().getPoints() > 0 && !(StateManager::getState() == FINISH_STATE)) {
         receive_messages(pi_socket, gs);
 
         switch(actual_state) {
