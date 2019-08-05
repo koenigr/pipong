@@ -26,6 +26,14 @@ int Ball::getPosY() const {
     return pos_y;
 }
 
+int Ball::setPosX(int posX) {
+    pos_x = posX;
+}
+
+int Ball::setPosY(int posY) {
+    pos_y = posY;
+}
+
 float Ball::getAngle() const {
     return angle;
 }
