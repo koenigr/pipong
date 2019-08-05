@@ -79,23 +79,50 @@ float Ball::setAngle(int player_self, float new_angle) {
  * +-0-+
  */
 void Ball::reflectBall(int side) {
+    std::cout << "angle before " << angle << std::endl;
     switch (side) {
     case 0:
+        angle -= 180.0;
+        angle = fmod(angle + 360, 360);
+        if (angle > 95.0) angle += 5.0;
+        else if (angle < 85.0) angle -= 5.0;
         angle = fmod(360 + 180 - angle, 360);
+        angle += 180.0;
+        angle = fmod(angle + 360, 360);
+        //angle = fmod(360 + 180 - angle, 360);
         break;
     case 1:
         angle = fmod(360 + 180 - angle, 360);
+        if (angle > 95.0) angle += 5.0;
+        else if (angle < 85.0) angle -= 5.0;
+        angle = fmod(angle + 360, 360);
         break;
     case 2:
-        angle = fmod(360 - angle, 360);
+        angle -= 270.0;
+        angle = fmod(angle + 360, 360);
+        if (angle > 95.0) angle += 5.0;
+        else if (angle < 85.0) angle -= 5.0;
+        angle = fmod(360 + 180 - angle, 360);
+        angle += 270.0;
+        angle = fmod(angle + 360, 360);
+        //angle = fmod(360 - angle, 360);
         break;
     case 3:
-        angle = fmod(360 - angle, 360);
+        angle -= 90.0;
+        angle = fmod(angle + 360, 360);
+        if (angle > 95.0) angle += 5.0;
+        else if (angle < 85.0) angle -= 5.0;
+        angle = fmod(360 + 180 - angle, 360);
+        angle += 90.0;
+        angle = fmod(angle + 360, 360);
+        //angle = fmod(360 - angle, 360);
         break;
     default:
         std::cout << "Invalid side\n";
         exit(1);
     }
+
+    std::cout << "angle after " << angle << std::endl;
 }
 
 void Ball::updateBall() {
