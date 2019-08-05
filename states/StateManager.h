@@ -27,7 +27,7 @@ public:
     static void waitForStartButtonPress(UDPSocket &pi_socket, int player_self, GameState &gs);
     static void findPeers(UDPSocket &pi_socket, GameState &gs);
     static void gameLoop(UDPSocket &pi_socket, GameState &gs);
-    static void showPoints(GameState &gs, bool &runGame);
+    static void showPoints(UDPSocket &pi_socket, GameState &gs, bool &runGame);
 
     static void setState(int new_state);
     static int getState();

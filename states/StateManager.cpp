@@ -220,11 +220,21 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     std::cout << "StateManager::gameLoop() end\n";
 }
 
-void StateManager::showPoints(GameState &gs, bool &runGame) {
+void StateManager::showPoints(UDPSocket &pi_socket, GameState &gs, bool &runGame) {
+
+    setState(FINISH_STATE);
 
     std::cout << "StateManager::showPoints() " << gs.toString() << std::endl;
     bool end = false;
+    std::string finish_msg = MessageProtocol::createFinish(gs);
     while (!end) {
+        for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
+            sockaddr_in participant;
+            memset((char *) &participant, 0, sizeof(participant));
+            AddressManager::getParticipant(i, participant);
+            pi_socket.sendMessage(finish_msg, participant);
+        }
+        receive_messages(pi_socket, gs);
         Display::drawPoints(gs);
         bool restartPressed = InputManager::restartButtonPressed();
         if (restartPressed) {
