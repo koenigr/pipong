@@ -31,7 +31,7 @@ void GameState::init(int player_no) {
     player_arr[3].init(3, player_self);
     player_arr[player_self].setPlayerActive(true);
 
-    ball.setAngle(player_self, 0.0); // TODO 26.3
+    ball.setAngle(player_self, 26.3);
 
     std::cout << "GameState::init() " << toString() << std::endl;
 
