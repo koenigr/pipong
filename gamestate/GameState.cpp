@@ -165,8 +165,10 @@ std::string GameState::toString() const {
 }
 
 void GameState::checkForReflection(UDPSocket &pi_socket) {
-
+        std::cout << "last reflection wall " << last_reflection_wall << std::endl;
     if(ball.getPosY() + BALL_WIDTH >= 126) {
+        std::cout << "GameState checkForReflection " << ball.getPosY() << std::endl;
+
         if (last_reflection_wall != 0) {
             ball.reflectBall(0);
             //std::string reflect_msg = MessageProtocol::createReflect(*this);
