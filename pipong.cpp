@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
         StateManager::gameLoop(pi_socket, gs);
 
-        StateManager::showPoints(gs, runGame);
+        StateManager::showPoints(pi_socket, gs, runGame);
 
 
        std::cout << "pipong.cpp finishing gameloop\n";
