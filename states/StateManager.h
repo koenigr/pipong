@@ -21,6 +21,7 @@ public:
 
     //enum States {FIND_PEERS, GAME, COLLISION, FINISH};
     static int actual_state;
+    static int last_collision_frame;
 
     static void init(UDPSocket &pi_socket );
     static void waitForStartButtonPress(UDPSocket &pi_socket, int player_self, GameState &gs);

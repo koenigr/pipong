@@ -14,6 +14,7 @@
 // PRIVATE
 
 int StateManager::actual_state;
+int StateManager::last_collision_frame;
 
 void StateManager::receive_messages(const UDPSocket &pi_socket, GameState &gs) {
 
@@ -160,6 +161,8 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     long int ms_start = Tools::getms();
     long int ms_then = Tools::getms();
 
+    last_collision_frame = 0;
+
     int i = 0;
 
     while(gs.getSelf().getPoints() > 0) {
@@ -183,11 +186,11 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
             break;
         case COLLISION_STATE:
             std::string collision_state_msg = MessageProtocol::createCollision(gs);
-            int seed = 0; // TODO number of last collision frame
+            int seed = last_collision_frame;
             bool resetLoop = true;
             bool draw_ball = true;
 
-            gs.newRound(0);
+            gs.newRound(seed);
             int i = 0;
             int j = 0;
 

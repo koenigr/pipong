@@ -146,8 +146,7 @@ void GameState::checkForReflection() {
     else if(ball.getPosY() - BALL_WIDTH <= 1) {
         if (last_reflection_wall != 1) {
             ball.reflectBall(1);
-            std::cout << "GameState::checkForReflection() COLLISION ALARM <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
-            //checkForScoringZoneCollision();
+            checkForScoringZoneCollision();
         }
         last_reflection_wall = 1;
     }
@@ -169,7 +168,7 @@ void GameState::checkForScoringZoneCollision() {
     bool XcondR = ball.getPosX() - BALL_WIDTH > getSelf().getRightEndX();
     bool xcondL = ball.getPosX() + BALL_WIDTH < getSelf().getLeftEndX();
     if (Ycond && ( XcondR || xcondL)) {
-        std::cout << ">>>>>>>>>>>>>>>>>>> COLLISION\n";
+        StateManager::last_collision_frame = getFrameNo();
         StateManager::setState(COLLISION_STATE);
     }
 }

@@ -40,6 +40,7 @@ void Ball::resetBall(const int player_self, const int seed) {
     srand(seed);
     angle = rand() * 360.0 / RAND_MAX;
     setAngle(player_self, angle);
+    incrVelocity();
 }
 
 float Ball::incrVelocity() {
@@ -83,23 +84,15 @@ void Ball::reflectBall(int side) {
     switch (side) {
     case 0:
         angle = fmod(360 + 180 - angle, 360);
-        if (angle < 90.0 && angle > 10.0) angle -= 5.0;
-        else if (angle < 350.0) angle += 5.0;
         break;
     case 1:
         angle = fmod(360 + 180 - angle, 360);
-        if (angle < 170.0) angle += 5.0;
-        else if (angle > 190.0) angle -= 5.0;
         break;
     case 2:
         angle = fmod(360 - angle, 360);
-        if (angle < 80.0) angle += 5.0;
-        else if (angle > 100.0) angle -= 5.0;
         break;
     case 3:
         angle = fmod(360 - angle, 360);
-        if (angle < 260.0) angle += 5.0;
-        else if (angle > 280.0) angle -= 5.0;
         break;
     default:
         std::cout << "Invalid side\n";

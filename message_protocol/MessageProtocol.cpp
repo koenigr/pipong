@@ -31,6 +31,7 @@
 #define POINTS "POINTS "
 #define COUNTDOWN "COUNTDOWN "
 #define ROUND "ROUND "
+#define COLLFRAME "COLLFRAME "
 
 std::string MessageProtocol::createRequest(GameState gs) {
 
@@ -80,6 +81,7 @@ std::string MessageProtocol::createCollision(GameState gs) {
         << DELIMITER  << COLLISION_TYPE
         << DELIMITER << FRAME << gs.getFrameNo()
         << DELIMITER << ROUND << gs.getRound()
+        << DELIMITER << COLLFRAME << StateManager::last_collision_frame
         << DELIMITER << PLAYERNO << gs.getPlayerNo();
     // TODO random angle
 
@@ -215,11 +217,12 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
 
     unsigned int frame;
     int round;
+    int collframe;
     int player_no;
     char rm[BUFSIZE];
     memset(rm, 0, BUFSIZE);
 
-    int r = sscanf(message.c_str(), FRAME UINT DELIMITER ROUND INT DELIMITER PLAYERNO INT REMAIN, &frame, &round, &player_no, rm);
+    int r = sscanf(message.c_str(), FRAME UINT DELIMITER ROUND INT DELIMITER COLLFRAME INT DELIMITER PLAYERNO INT REMAIN, &frame, &round, &collframe, &player_no, rm);
 
     if (r >= 3) {
 
@@ -235,6 +238,7 @@ void MessageProtocol::evalCollision(std::string message, GameState &gs) {
 
         if (round == gs.getRound()) {
             std::cout << "MessageProtocol::evalCollision set collision state\n";
+            StateManager::last_collision_frame = collframe;
             StateManager::setState(COLLISION_STATE);
         }
     }
