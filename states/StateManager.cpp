@@ -166,9 +166,6 @@ void StateManager::gameLoop(UDPSocket &pi_socket, GameState &gs) {
     int i = 0;
 
     while(gs.getSelf().getPoints() > 0) {
-
-        std::cout << "Angle " << gs.getBall().getAngle() << std::endl;
-
         receive_messages(pi_socket, gs);
 
         switch(actual_state) {
