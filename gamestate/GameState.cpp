@@ -11,6 +11,7 @@
 #include <string>
 #include "../Parameters.h"
 #include "../states/StateManager.h"
+#include "../network/UDPSocket.h"
 
 #include <stdio.h>
 #include <iostream>
