@@ -196,7 +196,6 @@ void GameState::updateBall(UDPSocket &pi_socket) {
 void GameState::newRound(const int seed) {
     incrRound();
     ball.resetBall(player_self, seed);
-    ball
 }
 
 void GameState::setPlayerActive(const bool isActive, const int player_no) {
