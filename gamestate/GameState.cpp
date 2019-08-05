@@ -17,6 +17,7 @@
 #include <iostream>
 #include <sstream>
 #include <cstring>
+#include "math.h"
 
 GameState::~GameState() {
     //std::cout << "!!!!!!!!!!!!!!!    GameState destructor called\n";
@@ -83,6 +84,21 @@ void GameState::setBallPos(int posX, int posY, int player_out) {
 }
 
 void GameState::setBallAngle(float angle, int player_out) {
+    switch(player_out)
+    case 0:
+        angle = fmod(360.0 + angle - 180.0, 360.0);
+        break;
+    case 1:
+        break;
+    case 2:
+        angle = fmod(360.0 + angle - 90.0, 360.0);
+        break;
+    case 3:
+        angle = fmod(360.0 + angle - 270.0, 360.0);
+        break;
+    default:
+        std::cout << "wrong player number";
+        break;
     ball.setAngle(player_self, angle);
 }
 
