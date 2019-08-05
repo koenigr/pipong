@@ -153,7 +153,6 @@ void MessageProtocol::evalMessage(std::string message, GameState& gs) {
             StateManager::setState(FINISH_STATE);
         }
         else {
-            std::cout << "Wrong message type";
         }
     }
 }
