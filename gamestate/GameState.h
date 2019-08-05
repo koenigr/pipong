@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Ball.h"
 #include "../Parameters.h"
+#include "../network/UDPSocket.h"
 
 class GameState {
 private:
