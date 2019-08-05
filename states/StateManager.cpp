@@ -49,8 +49,6 @@ void StateManager::deploy_game_state(const GameState gs, const UDPSocket pi_sock
 
 void StateManager::deploy_collision_state(std::string collision_state_msg, const GameState gs, const UDPSocket pi_socket) {
 
-    std::cout << "Collision state message: " << collision_state_msg;
-
     for (int i = 0; i < AddressManager::getNumOfParticipants(); i++ ) {
         sockaddr_in participant;
         memset((char *) &participant, 0, sizeof(participant));

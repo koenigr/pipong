@@ -115,7 +115,7 @@ void Ball::updateBall() {
     pos_x += velocity * sin(angle * PI / 180.0);
     pos_y += velocity * cos(angle * PI / 180.0);
     ball_frame += 1;
-    if (ball_frame % 150 == 0) incrVelocity();
+    if (ball_frame % 100 == 0) incrVelocity();
 }
 
 unsigned int Ball::getBallFrame() {
