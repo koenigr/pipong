@@ -224,6 +224,7 @@ void GameState::updateBall(UDPSocket &pi_socket) {
 }
 
 void GameState::newRound(const int seed) {
+    last_reflection_wall = -1;
     incrRound();
     ball.resetBall(player_self, seed);
 }
